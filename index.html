@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motorcycle Tracker</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/LOGO.png">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="navbar">
+      <div class="logo-block">
+        <div class="logo-mark">MT</div>
+        <div class="logo-text">
+          <span>Motorcycle</span>
+          <span>Tracker</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#tracker-preview">Our Bikes</a>
+        <a href="#services">Services</a>
+        <a href="#about">About Us</a>
+      </nav>
+
+      <a href="#tracker-preview" class="nav-button">Start</a>
+    </header>
+
+    <main class="hero-section">
+      <div class="side-panel left-panel">
+        <div class="side-top">
+          <span class="side-title active-link">Bikes</span>
+          <span class="dot"></span>
+        </div>
+        <a href="#services">Services</a>
+        <a href="#about">About Us</a>
+      </div>
+
+      <section class="hero-content">
+        <p class="hero-label">Motorcycle Tracker</p>
+
+        <h1 class="background-word top-word">MOTORCYCLE</h1>
+        <h1 class="background-word bottom-word">TRACKER</h1>
+
+        <div class="hero-main">
+          <div class="hero-left">
+            <h2>FIND YOUR<br>MOTORBIKE</h2>
+            <p>
+              Explore motorcycles by brand and category. Start with a clean selection
+              flow and build your garage later.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#tracker-preview" class="primary-btn">Select Motorcycle</a>
+              <a href="#about" class="secondary-btn">Learn More</a>
+            </div>
+          </div>
+
+          <div class="hero-image-wrap">
+            <img src="images/HomePageBike.png" alt="Red motorcycle" class="hero-bike" />
+          </div>
+
+          <div class="hero-right">
+            <div class="counter-box">
+              <span class="current-count">01</span>
+              <span class="divider">/12</span>
+              <span class="count-label">BIKES</span>
+            </div>
+
+            <div class="spec-box">
+              <h3>Homepage Goal</h3>
+              <p>
+                This first screen acts as the front page of the project. The user lands
+                here first, then moves into the tracker to choose a brand, category, and
+                eventually see filtered results.
+              </p>
+              <a href="#tracker-preview" class="spec-link">ENTER TRACKER</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="side-panel right-panel">
+        <div class="right-dots">
+          <span class="dot-line active"></span>
+          <span class="dot-line"></span>
+          <span class="dot-line"></span>
+          <span class="dot-line"></span>
+        </div>
+      </div>
+    </main>
+
+    <section class="tracker-preview" id="tracker-preview">
+      <div class="preview-header">
+        <p class="section-tag">NEXT STEP</p>
+        <h2>Tracker Selection Page Comes After This</h2>
+        <p class="section-text">
+          After this homepage, the next page or section should let the user choose brand,
+          category, and view bike cards from your filtered JavaScript data.
+        </p>
+      </div>
+
+      <div class="preview-cards">
+        <div class="preview-card">
+          <span>01</span>
+          <h3>Choose Brand</h3>
+          <p>Kawasaki, Suzuki, Yamaha, Honda, Ducati, BMW, and more.</p>
+        </div>
+
+        <div class="preview-card">
+          <span>02</span>
+          <h3>Pick Category</h3>
+          <p>Sport, SuperSport, HyperSport, Cruiser.</p>
+        </div>
+
+        <div class="preview-card">
+          <span>03</span>
+          <h3>View Results</h3>
+          <p>Show matching motorcycles with image, year, model, and price.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section" id="services">
+      <div class="info-box">
+        <p class="section-tag">SERVICES</p>
+        <h2>What this project will do</h2>
+        <p>
+          This site is being built as a motorcycle tracker where users can browse bikes,
+          filter by brand and category, and later store bikes in a garage-style view.
+        </p>
+      </div>
+    </section>
+
+    <section class="info-section" id="about">
+      <div class="info-box">
+        <p class="section-tag">ABOUT</p>
+        <h2>Built for selection first</h2>
+        <p>
+          The point of this design is to make the homepage feel premium while keeping the
+          real logic focused on the tracker engine you already built in JavaScript.
+        </p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
