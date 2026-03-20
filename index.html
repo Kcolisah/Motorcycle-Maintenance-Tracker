@@ -12,6 +12,7 @@
 </head>
 <body>
   <div class="page-shell">
+    <!--Navigation bar-->
     <header class="navbar">
       <div class="logo-block">
         <div class="logo-mark">MT</div>
@@ -22,23 +23,24 @@
       </div>
 
       <nav class="nav-links">
-        <a href="#" class="active">Home</a>
-        <a href="#tracker-preview">Our Bikes</a>
-        <a href="#services">Services</a>
+        <a href="#" class="active" id="top-home-link">Home</a>
         <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
       </nav>
 
       <a href="#tracker-preview" class="nav-button">Start</a>
     </header>
-
-    <main class="hero-section">
+    
+    <!---Side-panel
+    Note: Might need to change description due to it being the same value as the nav-bar--> 
+        <main class="hero-section">
       <div class="side-panel left-panel">
         <div class="side-top">
-          <span class="side-title active-link">Bikes</span>
+          <a href="#" class="side-title active-link" id="side-home-link">Home</a>
           <span class="dot"></span>
         </div>
-        <a href="#services">Services</a>
         <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
       </div>
 
       <section class="hero-content">
@@ -49,104 +51,218 @@
 
         <div class="hero-main">
           <div class="hero-left">
-            <h2>FIND YOUR<br>MOTORBIKE</h2>
-            <p>
-              Explore motorcycles by brand and category. Start with a clean selection
-              flow and build your garage later.
-            </p>
+            <div id="hero-default-left">
+              <h2>FIND YOUR<br>MOTORCYCLE</h2>
+              <p>
+                Explore motorcycles by brand and category. Start with a clean selection
+                flow and build your garage later.
+              </p>
 
-            <div class="hero-actions">
-              <a href="#tracker-preview" class="primary-btn">Select Motorcycle</a>
-              <a href="#about" class="secondary-btn">Learn More</a>
+              <div class="hero-actions">
+                <button id="select-motorcycle-btn" class="primary-btn" type="button">Select Motorcycle</button>
+                <a href="#tracker-flow" class="secondary-btn">Learn More</a>
+              </div>
+            </div>
+
+              <!--brand-seletion-hidden
+              goal: hide it while minimizing the number of html files (we need to try to run everynew section in the same page.)-->
+            <div id="hero-brand-left" hidden>
+              <h2 id="hero-stage-title">SELECT YOUR<br>BRAND</h2>
+              <p id="hero-stage-description">
+                Browse all motorcycle brands directly from the homepage. Move through the
+                list without scrolling, then continue into categories and motorcycles.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#tracker-preview" class="primary-btn" id="hero-open-tracker-link">Open Full Tracker</a>
+                <button id="back-home-btn" class="secondary-btn" type="button">Back</button>
+              </div>
             </div>
           </div>
 
           <div class="hero-image-wrap">
-            <img src="images/HomePageBike.png" alt="Red motorcycle" class="hero-bike" />
+            <div id="hero-bike-stage" class="hero-stage-panel">
+              <img src="images/HomePageBike.png" alt="Red motorcycle" class="hero-bike" />
+            </div>
+
+            <div id="hero-brand-stage" class="hero-stage-panel hero-brand-stage" hidden>
+              <div class="hero-brand-grid" id="hero-brand-grid"></div>
+
+              <div class="hero-brand-controls">
+                <button id="hero-brand-prev" class="hero-brand-nav" type="button">Prev</button>
+                <button id="hero-brand-next" class="hero-brand-nav" type="button">Next</button>
+              </div>
+            </div>
+
+            <div id="hero-category-stage" class="hero-stage-panel hero-category-stage" hidden>
+              <div class="hero-category-grid" id="hero-category-grid"></div>
+
+              <div class="hero-category-controls">
+                <button id="hero-category-back" class="hero-brand-nav" type="button">Back to Brands</button>
+              </div>
+            </div>
+
+            <div id="hero-motorcycle-stage" class="hero-stage-panel hero-category-stage" hidden>
+              <div class="hero-category-grid" id="hero-motorcycle-grid"></div>
+
+              <div class="hero-category-controls">
+                <button id="hero-motorcycle-back" class="hero-brand-nav" type="button">Back to Categories</button>
+              </div>
+            </div>
           </div>
 
           <div class="hero-right">
-            <div class="counter-box">
-              <span class="current-count">01</span>
-              <span class="divider">/12</span>
-              <span class="count-label">BIKES</span>
+            <div class="counter-box" id="hero-counter-box" hidden>
+              <span id="current-count" class="current-count">01</span>
+              <span id="divider-count" class="divider">/12</span>
+              <span id="count-label" class="count-label">BIKES</span>
+              <button id="hero-counter-next" class="hero-counter-arrow" type="button" hidden>&laquo;</button>
             </div>
 
             <div class="spec-box">
-              <h3>Homepage Goal</h3>
-              <p>
+              <h3 id="spec-title">Homepage Goal</h3>
+              <p id="spec-text">
                 This first screen acts as the front page of the project. The user lands
                 here first, then moves into the tracker to choose a brand, category, and
                 eventually see filtered results.
               </p>
-              <a href="#tracker-preview" class="spec-link">ENTER TRACKER</a>
+              <a id="spec-link" href="#tracker-preview" class="spec-link">ENTER TRACKER</a>
             </div>
           </div>
         </div>
       </section>
 
       <div class="side-panel right-panel">
-        <div class="right-dots">
+        <div class="right-dots" id="hero-page-dots" hidden>
           <span class="dot-line active"></span>
-          <span class="dot-line"></span>
           <span class="dot-line"></span>
           <span class="dot-line"></span>
         </div>
       </div>
     </main>
 
-    <section class="tracker-preview" id="tracker-preview">
-      <div class="preview-header">
-        <p class="section-tag">NEXT STEP</p>
-        <h2>Tracker Selection Page Comes After This</h2>
-        <p class="section-text">
-          After this homepage, the next page or section should let the user choose brand,
-          category, and view bike cards from your filtered JavaScript data.
-        </p>
+    <section class="tracker-steps-section reveal-section">
+        <div class="tracker-steps-header">
+        <p class="section-tag">TRACKER FLOW</p>
+        <h2>How it works</h2>
       </div>
 
-      <div class="preview-cards">
-        <div class="preview-card">
-          <span>01</span>
-          <h3>Choose Brand</h3>
-          <p>Kawasaki, Suzuki, Yamaha, Honda, Ducati, BMW, and more.</p>
+      <div class="tracker-steps-grid">
+        <div class="tracker-step-card">
+          <span class="tracker-step-number">01</span>
+          <h3>Select your brand</h3>
+          <p>Choose the motorcycle brand you want to explore first.</p>
         </div>
 
-        <div class="preview-card">
-          <span>02</span>
-          <h3>Pick Category</h3>
-          <p>Sport, SuperSport, HyperSport, Cruiser.</p>
+        <div class="tracker-step-card">
+          <span class="tracker-step-number">02</span>
+          <h3>Pick a category</h3>
+          <p>Only valid categories for that brand will be shown.</p>
         </div>
 
-        <div class="preview-card">
-          <span>03</span>
-          <h3>View Results</h3>
-          <p>Show matching motorcycles with image, year, model, and price.</p>
+        <div class="tracker-step-card">
+          <span class="tracker-step-number">03</span>
+          <h3>View motorcycles</h3>
+          <p>See the motorcycles available for that brand and category.</p>
         </div>
       </div>
     </section>
 
-    <section class="info-section" id="services">
-      <div class="info-box">
-        <p class="section-tag">SERVICES</p>
-        <h2>What this project will do</h2>
-        <p>
-          This site is being built as a motorcycle tracker where users can browse bikes,
-          filter by brand and category, and later store bikes in a garage-style view.
-        </p>
+    <section class="tracker-section reveal-section" id="tracker-preview">
+      <div class="tracker-header">
+        <p class="section-tag">SELECT MOTORCYCLE</p>
+        <h2>Choose Your Brand</h2>
       </div>
+
+      <div id="brand-container" class="brand-container">
+        <div class="brand-card" onclick="selectBrand('Aprilia')">
+          <img src="images/Aprilia/Aprilia_Logo.png" alt="Aprilia">
+          <span>Aprilia</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('BMW')">
+          <img src="images/BMW/BMW_Logo.png" alt="BMW">
+          <span>BMW</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Ducati')">
+          <img src="images/Ducati/Ducati_Logo.png" alt="Ducati">
+          <span>Ducati</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Harley')">
+          <img src="images/Harley/Harley_Logo.png" alt="Harley">
+          <span>Harley</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Honda')">
+          <img src="images\Honda\Honda_Logo.png" alt="Honda">
+          <span>Honda</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Indian')">
+          <img src="images/Indian/Indian_Logo.png" alt="Indian">
+          <span>Indian</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Kawasaki')">  
+          <img src="images/Kawasaki/Kawasaki_Logo.png" alt="Kawasaki">
+          <span>Kawasaki</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('KTM')">
+          <img src="images/KTM/KTM_Logo.png" alt="KTM">
+          <span>KTM</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Suzuki')">
+          <img src="images\Suzuki\Suzuki_logo.png" alt="Suzuki">
+          <span>Suzuki</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Triumph')">
+          <img src="images/Triumph/Triumph_Logo.png" alt="Triumph">
+          <span>Triumph</span>
+        </div>
+
+        <div class="brand-card" onclick="selectBrand('Yamaha')">
+          <img src="images/Yamaha/Yamaha_Logo.png" alt="Yamaha">
+          <span>Yamaha</span>
+        </div>
+      </div>
+
+      <div id="category-container" class="category-container" hidden>
+        <h3>Select Category</h3>
+
+        <div class="category-button-row" id="category-button-row"></div>
+      </div>
+
+      <div id="bike-results" class="bike-results"></div>
     </section>
 
-    <section class="info-section" id="about">
+    <section class="info-section reveal-section" id="about">
       <div class="info-box">
-        <p class="section-tag">ABOUT</p>
+        <p class="section-tag">ABOUT US</p>
         <h2>Built for selection first</h2>
         <p>
           The point of this design is to make the homepage feel premium while keeping the
-          real logic focused on the tracker engine you already built in JavaScript.
+          real logic focused on the tracker engine I already built in JavaScript.
+        </p>
+      </div>
+    </section>
+
+    <section class="info-section" id="contact">
+      <div class="info-box">
+        <p class="section-tag">CONTACT</p>
+        <h2>Get in touch</h2>
+        <p>
+          This section can later hold my contact details, project links, or a simple
+          contact form.
         </p>
       </div>
     </section>
   </div>
+
+  <script src="JavaScript/data.js"></script>
 </body>
 </html>
