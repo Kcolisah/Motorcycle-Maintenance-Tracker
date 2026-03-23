@@ -74,7 +74,7 @@ let currentFilteredBikes = [];
 let heroBrandStartIndex = 0;
 let heroStage = "home";
 
-const heroBrandsPerPage = 4;
+const heroBrandsPerPage = 4; // Adjust this number to show more or fewer brands per page in the hero section
 
 const brandContainer = document.getElementById("brand-container");
 const categoryContainer = document.getElementById("category-container");
@@ -145,11 +145,11 @@ const brandLogoMap = {
   BMW: "images/BMW/BMW_Logo.png",
   Ducati: "images/Ducati/Ducati_Logo.png",
   Harley: "images/Harley/Harley_Logo.png",
-  Honda: "images\Honda\Honda_Logo.png",
+  Honda: "images/Honda/Honda_Logo.png",
   Indian: "images/Indian/Indian_Logo.png",
   Kawasaki: "images/Kawasaki/Kawasaki_Logo.png",
   KTM: "images/KTM/KTM_Logo.png",
-  Suzuki: "images\Suzuki\Suzuki_logo.png",
+  Suzuki: "images/Suzuki/Suzuki_logo.png",
   Triumph: "images/Triumph/Triumph_Logo.png",
   Yamaha: "images/Yamaha/Yamaha_Logo.png"
 };
