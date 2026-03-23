@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motorcycle Tracker | Bikes</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/LOGO.png">
+</head>
+<body>
+  <div class="page-shell bikes-page-shell">
+    <header class="navbar">
+      <div class="logo-block">
+        <div class="logo-mark">MT</div>
+        <div class="logo-text">
+          <span>Motorcycle</span>
+          <span>Tracker</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+      </nav>
+
+      <button type="button" class="nav-button" id="backToHomeBtn">Back</button>
+    </header>
+
+    <main class="hero-section bikes-hero-section">
+      <div class="side-panel left-panel">
+        <div class="side-top">
+          <a href="index.html" class="side-title active-link">Home</a>
+          <span class="dot"></span>
+        </div>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <section class="hero-content bikes-content">
+        <section class="bikes-display-grid">
+          <div class="bikes-grid-line bikes-grid-line-1"></div>
+          <div class="bikes-grid-line bikes-grid-line-2"></div>
+          <div class="bikes-grid-line bikes-grid-line-3"></div>
+
+          <div class="bikes-top-label">Motorcycle Tracker</div>
+
+          <div class="bikes-brand-mini">
+            <h3 id="miniBrand">Honda</h3>
+            <p id="miniCategory">SuperSport</p>
+          </div>
+
+          <div class="bikes-main-copy">
+            <h1 class="bikes-main-title">
+              <span id="brandLine">HONDA</span>
+              <span id="seriesLine">CBR 1000RR</span>
+            </h1>
+
+            <div class="bikes-specs-block">
+              <h4>Specs</h4>
+              <p id="specEngine">Engine: Not added yet</p>
+              <p id="specHorsepower">Horsepower: Not added yet</p>
+              <p id="specWeight">Weight: Not added yet</p>
+              <p id="specZeroSixty">0–60 mph: Not added yet</p>
+              <p id="specTopSpeed">Top Speed: Not added yet</p>
+            </div>
+
+            <button id="maintainBtn" class="bikes-maintain-btn" type="button">MAINTAIN &gt;</button>
+          </div>
+
+          <div class="bikes-hero-visual">
+            <img id="featuredBikeImage" src="images/Honda/SuperSport/Honda_CBR_1000RR.jpg" alt="Selected Motorcycle">
+            <p id="featuredBikeCaption">Honda CBR 1000RR</p>
+          </div>
+
+          <aside class="bikes-right-panel">
+            <div class="bikes-count-wrap">
+              <span id="currentIndex" class="bikes-count-current">01</span>
+              <span class="bikes-count-divider">/</span>
+              <span id="totalCount" class="bikes-count-total">02</span>
+              <p>BIKES</p>
+            </div>
+
+            <div class="bikes-spec-summary">
+              <h3>Specification</h3>
+              <p><strong>Brand:</strong> <span id="summaryBrand">Honda</span></p>
+              <p><strong>Category:</strong> <span id="summaryCategory">SuperSport</span></p>
+              <p><strong>Year:</strong> <span id="summaryYear">2026</span></p>
+              <p><strong>Price:</strong> $<span id="summaryPrice">16,999</span></p>
+            </div>
+
+            <div class="bikes-preview-title">VIEW MORE •</div>
+            <div id="previewList" class="bikes-preview-list"></div>
+          </aside>
+
+          <div class="bikes-gallery-label">Gallery</div>
+        </section>
+      </section>
+
+      <div class="side-panel right-panel">
+        <div class="right-dots">
+          <span class="dot-line active"></span>
+          <span class="dot-line"></span>
+          <span class="dot-line"></span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="JavaScript/data.js"></script>
+  <script src="JavaScript/bikes.js"></script>
+</body>
+</html>

@@ -1,69 +1,69 @@
 const motorcycles = [
-  { id: 1, brand: "Aprilia", category: "Sport", model: "Aprilia RS457", year: 2026, price: 6799, image: "Sport/Aprilia_RS457.jpg" },
-  { id: 2, brand: "Aprilia", category: "Sport", model: "Aprilia RS660", year: 2026, price: 11299, image: "Sport/Aprilia_RS660.jpg" },
-  { id: 3, brand: "Aprilia", category: "SuperSport", model: "Aprilia RSV4", year: 2026, price: 18999, image: "SuperSport/Aprilia_RSV4.jpg" },
+  { id: 1, brand: "Aprilia", category: "Sport", model: "Aprilia RS457", year: 2026, price: 6799, image: "images/Aprilia/Sport/Aprilia_RS457.png" },
+  { id: 2, brand: "Aprilia", category: "Sport", model: "Aprilia RS660", year: 2026, price: 11299, image: "images/Aprilia/Sport/Aprilia_RS660.png" },
+  { id: 3, brand: "Aprilia", category: "SuperSport", model: "Aprilia RSV4", year: 2026, price: 18999, image: "images/Aprilia/SuperSport/Aprilia_RSV4.png" },
 
-  { id: 4, brand: "BMW", category: "Sport", model: "BMW G310RR", year: 2026, price: 4000, image: "Sport/BMW_G310RR.jpg" },
-  { id: 5, brand: "BMW", category: "Sport", model: "BMW F900R", year: 2026, price: 8995, image: "Sport/BMW_F900R.jpg" },
-  { id: 6, brand: "BMW", category: "SuperSport", model: "BMW S1000RR", year: 2026, price: 26405, image: "SuperSport/BMW_S1000RR.jpg" },
-  { id: 7, brand: "BMW", category: "HyperSport", model: "BMW M1000RR", year: 2026, price: 35000, image: "HyperSport/BMW_M1000RR.jpg" },
+  { id: 4, brand: "BMW", category: "Sport", model: "BMW G310RR", year: 2026, price: 4000, image: "images/BMW/Sport/BMW_G310RR.png" },
+  { id: 5, brand: "BMW", category: "Sport", model: "BMW F900R", year: 2026, price: 8995, image: "images/BMW/Sport/BMW_F900R.png" },
+  { id: 6, brand: "BMW", category: "SuperSport", model: "BMW S1000RR", year: 2026, price: 26405, image: "images/BMW/SuperSport/BMW_S1000RR.png" },
+  { id: 7, brand: "BMW", category: "HyperSport", model: "BMW M1000RR", year: 2026, price: 35000, image: "images/BMW/HyperSport/BMW_M1000RR.png" },
 
-  { id: 8, brand: "Ducati", category: "Sport", model: "Ducati SuperSport 950", year: 2026, price: 18395, image: "Sport/Ducati_SuperSport_950.jpg" },
-  { id: 9, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V2", year: 2026, price: 16995, image: "SuperSport/Ducati_Panigale_V2.jpg" },
-  { id: 10, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V4", year: 2026, price: 27795, image: "SuperSport/Ducati_Panigale_V4.jpg" },
-  { id: 11, brand: "Ducati", category: "HyperSport", model: "Ducati Streetfighter V4", year: 2026, price: 29295, image: "HyperSport/Ducati_Streetfighter_V4.jpg" },
+  { id: 8, brand: "Ducati", category: "Sport", model: "Ducati SuperSport 950", year: 2026, price: 18395, image: "images/Ducati/Sport/Ducati_SuperSport_950.png" },
+  { id: 9, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V2", year: 2026, price: 16995, image: "images/Ducati/SuperSport/Ducati_Panigale_V2.png" },
+  { id: 10, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V4", year: 2026, price: 27795, image: "images/Ducati/SuperSport/Ducati_Panigale_V4.png" },
+  { id: 11, brand: "Ducati", category: "HyperSport", model: "Ducati Streetfighter V4", year: 2026, price: 29295, image: "images/Ducati/HyperSport/Ducati_Streetfighter_V4.png" },
 
-  { id: 12, brand: "Harley", category: "Cruiser", model: "Harley Iron 993", year: 2026, price: 10499, image: "Cruiser/Harley_Iron_993.jpg" },
-  { id: 13, brand: "Harley", category: "Cruiser", model: "Harley Low Rider S", year: 2026, price: 18999, image: "Cruiser/Harley_Low_Rider_S.jpg" },
-  { id: 14, brand: "Harley", category: "Cruiser", model: "Harley Sportster S", year: 2026, price: 15999, image: "Cruiser/Harley_Sportster_S.jpg" },
+  { id: 12, brand: "Harley", category: "Cruiser", model: "Harley Iron 993", year: 2026, price: 10499, image: "images/Harley/Cruiser/Harley_Iron_993.png" },
+  { id: 13, brand: "Harley", category: "Cruiser", model: "Harley Low Rider S", year: 2026, price: 18999, image: "images/Harley/Cruiser/Harley_Low_Rider_S.png" },
+  { id: 14, brand: "Harley", category: "Cruiser", model: "Harley Sportster S", year: 2026, price: 15999, image: "images/Harley/Cruiser/Harley_Sportster_S.png" },
 
-  { id: 15, brand: "Honda", category: "Sport", model: "Honda CBR 500R", year: 2026, price: 6399, image: "Sport/Honda_CBR_500R.jpg" },
-  { id: 16, brand: "Honda", category: "Sport", model: "Honda CBR 650R", year: 2026, price: 9799, image: "Sport/Honda_CBR_650R.jpg" },
-  { id: 17, brand: "Honda", category: "SuperSport", model: "Honda CBR 600RR", year: 2026, price: 12499, image: "SuperSport/Honda_CBR_600RR.jpg" },
-  { id: 18, brand: "Honda", category: "SuperSport", model: "Honda CBR 1000RR", year: 2026, price: 16999, image: "SuperSport/Honda_CBR_1000RR.jpg" },
+  { id: 15, brand: "Honda", category: "Sport", model: "Honda CBR 500R", year: 2026, price: 6399, image: "images/Honda/Sport/Honda_CBR_500R.png" },
+  { id: 16, brand: "Honda", category: "Sport", model: "Honda CBR 650R", year: 2026, price: 9799, image: "images/Honda/Sport/Honda_CBR_650R.png" },
+  { id: 17, brand: "Honda", category: "SuperSport", model: "Honda CBR 600RR", year: 2026, price: 12499, image: "images/Honda/SuperSport/Honda_CBR_600RR.png" },
+  { id: 18, brand: "Honda", category: "SuperSport", model: "Honda CBR 1000RR", year: 2026, price: 16999, image: "images/Honda/SuperSport/Honda_CBR_1000RR.png" },
 
-  { id: 19, brand: "Indian", category: "Cruiser", model: "Indian Chief", year: 2026, price: 14999, image: "Cruiser/Indian_Chief.jpg" },
-  { id: 20, brand: "Indian", category: "Cruiser", model: "Indian Scout", year: 2026, price: 12999, image: "Cruiser/Indian_Scout.jpg" },
+  { id: 19, brand: "Indian", category: "Cruiser", model: "Indian Chief", year: 2026, price: 14999, image: "images/Indian/Cruiser/Indian_Chief.png" },
+  { id: 20, brand: "Indian", category: "Cruiser", model: "Indian Scout", year: 2026, price: 12999, image: "images/Indian/Cruiser/Indian_Scout.png" },
 
-  { id: 21, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 500R", year: 2026, price: 5399, image: "Sport/Kawasaki_Ninja_500R.jpg" },
-  { id: 22, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 650R", year: 2026, price: 7599, image: "Sport/Kawasaki_Ninja_650R.jpg" },
-  { id: 23, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX6R", year: 2026, price: 11599, image: "SuperSport/Kawasaki_Ninja_ZX_6R.png" },
-  { id: 24, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX 10R", year: 2026, price: 16999, image: "SuperSport/Kawasaki_Ninja_ZX_10R.png" },
-  { id: 25, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki-Ninja ZX14R", year: 2025, price: 17599, image: "HyperSport/Kawasaki_Ninja_ZX_14R.jpg" },
-  { id: 26, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2", year: 2026, price: 34400, image: "HyperSport/Kawasaki_Ninja_H2.jpg" },
-  { id: 27, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2R", year: 2026, price: 62100, image: "HyperSport/Kawasaki_Ninja_H2R.jpg" },
+  { id: 21, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 500R", year: 2026, price: 5399, image: "images/Kawasaki/Sport/Kawasaki_Ninja_500R.png" },
+  { id: 22, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 650R", year: 2026, price: 7599, image: "images/Kawasaki/Sport/Kawasaki_Ninja_650R.png" },
+  { id: 23, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX6R", year: 2026, price: 11599, image: "images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png" },
+  { id: 24, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX 10R", year: 2026, price: 16999, image: "images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_10R.png" },
+  { id: 25, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki-Ninja ZX14R", year: 2025, price: 17599, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_ZX_14R.png" },
+  { id: 26, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2", year: 2026, price: 34400, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_H2.png" },
+  { id: 27, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2R", year: 2026, price: 62100, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_H2R.png" },
 
-  { id: 28, brand: "KTM", category: "Sport", model: "KTM RC390", year: 2026, price: 5899, image: "Sport/KTM_RC390.jpg" },
-  { id: 29, brand: "KTM", category: "HyperSport", model: "KTM RC8C", year: 2026, price: 41499, image: "HyperSport/KTM_RC8C.jpeg" },
+  { id: 28, brand: "KTM", category: "Sport", model: "KTM RC390", year: 2026, price: 5899, image: "images/KTM/Sport/KTM_RC390.png" },
+  { id: 29, brand: "KTM", category: "HyperSport", model: "KTM RC8C", year: 2026, price: 41499, image: "images/KTM/HyperSport/KTM_RC8C.png" },
 
-  { id: 30, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 250R", year: 2026, price: 5149, image: "Sport/Suzuki_GSX_250R.jpg" },
-  { id: 31, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 8R", year: 2026, price: 9699, image: "Sport/Suzuki_GSX_8R.jpg" },
-  { id: 32, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 600R", year: 2026, price: 12199, image: "SuperSport/Suzuki_GSX_600R.jpg" },
-  { id: 33, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 750R", year: 2026, price: 13249, image: "SuperSport/Suzuki_GSX_750R.jpg" },
-  { id: 34, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 1000R", year: 2026, price: 18645, image: "SuperSport/Suzuki_GSX_1000R.jpg" },
-  { id: 35, brand: "Suzuki", category: "HyperSport", model: "Suzuki GSX Hayabusa", year: 2026, price: 19499, image: "HyperSport/Suzuki_GSX_Hayabusa.png" },
+  { id: 30, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 250R", year: 2026, price: 5149, image: "images/Suzuki/Sport/Suzuki_GSX_250R.png" },
+  { id: 31, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 8R", year: 2026, price: 9699, image: "images/Suzuki/Sport/Suzuki_GSX_8R.png" },
+  { id: 32, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 600R", year: 2026, price: 12199, image: "images/Suzuki/SuperSport/Suzuki_GSX_600R.png" },
+  { id: 33, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 750R", year: 2026, price: 13249, image: "images/Suzuki/SuperSport/Suzuki_GSX_750R.png" },
+  { id: 34, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 1000R", year: 2026, price: 18645, image: "images/Suzuki/SuperSport/Suzuki_GSX_1000R.png" },
+  { id: 35, brand: "Suzuki", category: "HyperSport", model: "Suzuki GSX Hayabusa", year: 2026, price: 19499, image: "images/Suzuki/HyperSport/Suzuki_GSX_Hayabusa.png" },
 
-  { id: 36, brand: "Triumph", category: "Sport", model: "Triumph Daytona 660", year: 2026, price: 9395, image: "Sport/Triumph_Daytona_660.png" },
-  { id: 37, brand: "Triumph", category: "Sport", model: "Triumph Speed Triple_RR", year: 2026, price: 21495, image: "Sport/Triumph_Speed_Triple_RR.jpg" },
-  { id: 38, brand: "Triumph", category: "SuperSport", model: "Triumph Daytona 765", year: 2026, price: 9395, image: "SuperSport/Triumph_Daytona_765.jpg" },
-  { id: 39, brand: "Triumph", category: "SuperSport", model: "Triumph Speed Triple 1200 RS", year: 2026, price: 21545, image: "SuperSport/Triumph_Speed_Triple_1200_RS.png" },
+  { id: 36, brand: "Triumph", category: "Sport", model: "Triumph Daytona 660", year: 2026, price: 9395, image: "images/Triumph/Sport/Triumph_Daytona_660.png" },
+  { id: 37, brand: "Triumph", category: "Sport", model: "Triumph Speed Triple_RR", year: 2026, price: 21495, image: "images/Triumph/Sport/Triumph_Speed_Triple_RR.png" },
+  { id: 38, brand: "Triumph", category: "SuperSport", model: "Triumph Daytona 765", year: 2026, price: 9395, image: "images/Triumph/SuperSport/Triumph_Daytona_765.png" },
+  { id: 39, brand: "Triumph", category: "SuperSport", model: "Triumph Speed Triple 1200 RS", year: 2026, price: 21545, image: "images/Triumph/SuperSport/Triumph_Speed_Triple_1200_RS.png" },
 
-  { id: 40, brand: "Yamaha", category: "Sport", model: "Yamaha R3", year: 2026, price: 5499, image: "Sport/Yamaha_R3.jpg" },
-  { id: 41, brand: "Yamaha", category: "Sport", model: "Yamaha R7", year: 2026, price: 9399, image: "Sport/Yamaha_R7.jpg" },
-  { id: 42, brand: "Yamaha", category: "SuperSport", model: "Yamaha R6", year: 2026, price: 13499, image: "SuperSport/Yamaha_R6.jpg" },
-  { id: 43, brand: "Yamaha", category: "SuperSport", model: "Yamaha R1", year: 2026, price: 19199, image: "SuperSport/Yamaha_R1.jpg" }
+  { id: 40, brand: "Yamaha", category: "Sport", model: "Yamaha R3", year: 2026, price: 5499, image: "images/Yamaha/Sport/Yamaha_R3.png" },
+  { id: 41, brand: "Yamaha", category: "Sport", model: "Yamaha R7", year: 2026, price: 9399, image: "images/Yamaha/Sport/Yamaha_R7.png" },
+  { id: 42, brand: "Yamaha", category: "SuperSport", model: "Yamaha R6", year: 2026, price: 13499, image: "images/Yamaha/SuperSport/Yamaha_R6.png" },
+  { id: 43, brand: "Yamaha", category: "SuperSport", model: "Yamaha R1", year: 2026, price: 19199, image: "images/Yamaha/SuperSport/Yamaha_R1.png" }
 ];
 
 function filterByBrand(bikes, brand) {
-  return bikes.filter(bike => bike.brand === brand);
+  return bikes.filter((bike) => bike.brand === brand);
 }
 
 function filterByCategory(bikes, category) {
-  return bikes.filter(bike => bike.category === category);
+  return bikes.filter((bike) => bike.category === category);
 }
 
 function filterByBrandAndCategory(bikes, brand, category) {
-  return bikes.filter(bike => bike.brand === brand && bike.category === category);
+  return bikes.filter((bike) => bike.brand === brand && bike.category === category);
 }
 
 let selectedBrand = "";
@@ -74,7 +74,7 @@ let currentFilteredBikes = [];
 let heroBrandStartIndex = 0;
 let heroStage = "home";
 
-const heroBrandsPerPage = 4; // Adjust this number to show more or fewer brands per page in the hero section
+const heroBrandsPerPage = 4;
 
 const brandContainer = document.getElementById("brand-container");
 const categoryContainer = document.getElementById("category-container");
@@ -154,10 +154,28 @@ const brandLogoMap = {
   Yamaha: "images/Yamaha/Yamaha_Logo.png"
 };
 
-const allBrands = [...new Set(motorcycles.map(bike => bike.brand))];
+const allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
 
 function formatPrice(price) {
   return `$${price.toLocaleString()}`;
+}
+
+function smoothScrollToElement(element) {
+  if (!element) {
+    return;
+  }
+
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function openBikeShowcase(bike) {
+  localStorage.setItem("selectedBrand", bike.brand);
+  localStorage.setItem("selectedCategory", bike.category);
+  localStorage.setItem("selectedBikeModel", bike.model);
+  window.location.href = "bikes.html";
 }
 
 function showHeroNavigationUI() {
@@ -188,7 +206,7 @@ function clearFadeClasses() {
     heroBrandStage,
     heroCategoryStage,
     heroMotorcycleStage
-  ].forEach(element => {
+  ].forEach((element) => {
     if (!element) return;
     element.classList.remove("hero-fade-in", "hero-fade-out");
   });
@@ -231,14 +249,14 @@ function updateHeroBrandNavState() {
 }
 
 function setActiveBrandUI(brand) {
-  document.querySelectorAll(".brand-card").forEach(card => {
+  document.querySelectorAll(".brand-card").forEach((card) => {
     const cardBrand = card.getAttribute("onclick")?.match(/'([^']+)'/)?.[1];
     card.classList.toggle("active", cardBrand === brand);
   });
 }
 
 function setActiveHeroBrandCard(brand) {
-  document.querySelectorAll(".hero-brand-card").forEach(card => {
+  document.querySelectorAll(".hero-brand-card").forEach((card) => {
     card.classList.toggle("active", card.dataset.brand === brand);
   });
 }
@@ -248,7 +266,7 @@ function setActiveCategoryUI(category) {
     return;
   }
 
-  categoryContainer.querySelectorAll("button").forEach(button => {
+  categoryContainer.querySelectorAll("button").forEach((button) => {
     button.classList.toggle("active", button.textContent.trim() === category);
   });
 }
@@ -261,7 +279,7 @@ function renderTrackerCategories(brand) {
   const categories = getAvailableCategoriesForBrand(brand);
   categoryButtonRow.innerHTML = "";
 
-  categories.forEach(category => {
+  categories.forEach((category) => {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = category;
@@ -275,8 +293,8 @@ function renderTrackerCategories(brand) {
 function getAvailableCategoriesForBrand(brand) {
   return [...new Set(
     motorcycles
-      .filter(bike => bike.brand === brand)
-      .map(bike => bike.category)
+      .filter((bike) => bike.brand === brand)
+      .map((bike) => bike.category)
   )];
 }
 
@@ -289,7 +307,7 @@ function renderHeroBrands() {
 
   const visibleBrands = allBrands.slice(heroBrandStartIndex, heroBrandStartIndex + heroBrandsPerPage);
 
-  visibleBrands.forEach(brand => {
+  visibleBrands.forEach((brand) => {
     const button = document.createElement("button");
     button.className = "hero-brand-card";
     button.type = "button";
@@ -321,7 +339,7 @@ function renderHeroCategories(brand) {
   const categories = getAvailableCategoriesForBrand(brand);
   heroCategoryGrid.innerHTML = "";
 
-  categories.forEach(category => {
+  categories.forEach((category) => {
     const button = document.createElement("button");
     button.className = "hero-category-card";
     button.type = "button";
@@ -345,20 +363,21 @@ function renderHeroMotorcycles(brand, category) {
   const bikes = filterByBrandAndCategory(motorcycles, brand, category);
   heroMotorcycleGrid.innerHTML = "";
 
-  bikes.forEach(bike => {
+  bikes.forEach((bike) => {
     const button = document.createElement("button");
     button.className = "hero-motorcycle-card";
     button.type = "button";
 
     button.innerHTML = `
-      <img src="images/${bike.image}" alt="${bike.model}">
+      <img src="${bike.image}" alt="${bike.model}">
       <span>${bike.model}</span>
     `;
 
     button.addEventListener("click", () => {
       selectedMotorcycle = bike;
-      document.querySelectorAll(".hero-motorcycle-card").forEach(card => card.classList.remove("active"));
+      document.querySelectorAll(".hero-motorcycle-card").forEach((card) => card.classList.remove("active"));
       button.classList.add("active");
+      openBikeShowcase(bike);
     });
 
     heroMotorcycleGrid.appendChild(button);
@@ -458,10 +477,10 @@ function enterHeroMotorcycleMode(brand, category) {
     heroMotorcycleStage.classList.add("hero-fade-in");
 
     heroStageTitle.innerHTML = `${brand.toUpperCase()}<br>${category.toUpperCase()}`;
-    heroStageDescription.textContent = `Select one of the available ${category} motorcycles for ${brand}. This is the final stage for now.`;
+    heroStageDescription.textContent = `Select one of the available ${category} motorcycles for ${brand}. Click any bike to open its full showcase page.`;
 
     specTitle.textContent = `${brand} ${category}`;
-    specText.textContent = `Select one of the available ${category} motorcycles for ${brand}. This is the final stage for now.`;
+    specText.textContent = `Select one of the available ${category} motorcycles for ${brand}. Click any bike to open its full showcase page.`;
     specLink.textContent = `VIEW ${brand.toUpperCase()} ${category.toUpperCase()}`;
     specLink.setAttribute("href", "#tracker-preview");
     heroOpenTrackerLink.textContent = "Open Full Tracker";
@@ -514,10 +533,10 @@ function resetToHomeState() {
     bikeResults.innerHTML = "";
   }
 
-  document.querySelectorAll(".brand-card").forEach(card => card.classList.remove("active"));
-  document.querySelectorAll(".hero-brand-card").forEach(card => card.classList.remove("active"));
-  document.querySelectorAll(".hero-category-card").forEach(card => card.classList.remove("active"));
-  document.querySelectorAll(".hero-motorcycle-card").forEach(card => card.classList.remove("active"));
+  document.querySelectorAll(".brand-card").forEach((card) => card.classList.remove("active"));
+  document.querySelectorAll(".hero-brand-card").forEach((card) => card.classList.remove("active"));
+  document.querySelectorAll(".hero-category-card").forEach((card) => card.classList.remove("active"));
+  document.querySelectorAll(".hero-motorcycle-card").forEach((card) => card.classList.remove("active"));
 
   heroPageDots.forEach((dot, index) => {
     dot.classList.toggle("active", index === 0);
@@ -595,6 +614,12 @@ function selectBrand(brand) {
   if (bikeResults) {
     bikeResults.innerHTML = `<p class="result-empty">Select a category for ${brand}.</p>`;
   }
+
+  setTimeout(() => {
+    if (categoryContainer && !categoryContainer.hidden) {
+      smoothScrollToElement(categoryContainer);
+    }
+  }, 120);
 }
 
 function selectCategory(category) {
@@ -610,7 +635,14 @@ function selectCategory(category) {
   currentBikeIndex = 0;
 
   renderBikes(currentFilteredBikes);
+
+  setTimeout(() => {
+    if (bikeResults) {
+      smoothScrollToElement(bikeResults);
+    }
+  }, 120);
 }
+
 
 function renderBikes(bikes) {
   bikeResults.innerHTML = "";
@@ -644,7 +676,7 @@ function renderFeaturedBike(bikes, index) {
         </div>
 
         <div class="feature-bike-center">
-          <img class="feature-bike-image" src="images/${bike.image}" alt="${bike.model}">
+          <img class="feature-bike-image" src="${bike.image}" alt="${bike.model}">
         </div>
 
         <div class="feature-spec-right">
@@ -653,15 +685,7 @@ function renderFeaturedBike(bikes, index) {
           <p><strong>Category:</strong> ${bike.category}</p>
           <p><strong>Year:</strong> ${bike.year}</p>
           <p><strong>Price:</strong> ${formatPrice(bike.price)}</p>
-          <a href="#tracker-preview" class="feature-link">VIEW MORE</a>
-
-          <div class="feature-thumbs">
-            ${bikes.map((item, thumbIndex) => `
-              <button class="feature-thumb ${thumbIndex === index ? "active" : ""}" type="button" onclick="showBikeAtIndex(${thumbIndex})">
-                <img src="images/${item.image}" alt="${item.model}">
-              </button>
-            `).join("")}
-          </div>
+          <button class="feature-link-button" type="button" onclick="openSelectedBikeByIndex(${index})">VIEW MORE</button>
         </div>
       </div>
 
@@ -671,6 +695,14 @@ function renderFeaturedBike(bikes, index) {
           <span class="feature-counter-divider">/${String(total).padStart(2, "0")}</span>
           <span class="feature-counter-label">BIKES</span>
         </div>
+
+        <div class="feature-thumbs">
+          ${bikes.map((item, thumbIndex) => `
+            <button class="feature-thumb ${thumbIndex === index ? "active" : ""}" type="button" onclick="showBikeAtIndex(${thumbIndex})">
+              <img src="${item.image}" alt="${item.model}">
+            </button>
+          `).join("")}
+        </div>
       </div>
     </div>
   `;
@@ -679,6 +711,15 @@ function renderFeaturedBike(bikes, index) {
 function showBikeAtIndex(index) {
   currentBikeIndex = index;
   renderFeaturedBike(currentFilteredBikes, currentBikeIndex);
+}
+
+function openSelectedBikeByIndex(index) {
+  const bike = currentFilteredBikes[index];
+  if (!bike) {
+    return;
+  }
+
+  openBikeShowcase(bike);
 }
 
 if (selectMotorcycleBtn) {
@@ -710,7 +751,7 @@ if (heroCounterNext) {
 }
 
 if (topHomeLink) {
-  topHomeLink.addEventListener("click", event => {
+  topHomeLink.addEventListener("click", (event) => {
     event.preventDefault();
     resetToHomeState();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -718,7 +759,7 @@ if (topHomeLink) {
 }
 
 if (sideHomeLink) {
-  sideHomeLink.addEventListener("click", event => {
+  sideHomeLink.addEventListener("click", (event) => {
     event.preventDefault();
     resetToHomeState();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -742,7 +783,46 @@ if (heroOpenTrackerLink) {
 }
 
 resetToHomeState();
+restoreTrackerStateOnLoad();
 
 window.selectBrand = selectBrand;
 window.selectCategory = selectCategory;
 window.showBikeAtIndex = showBikeAtIndex;
+window.openSelectedBikeByIndex = openSelectedBikeByIndex;
+
+
+function restoreTrackerStateOnLoad() {
+  const shouldRestore = localStorage.getItem("restoreTrackerState") === "true";
+  if (!shouldRestore) {
+    return;
+  }
+
+  localStorage.removeItem("restoreTrackerState");
+
+  const storedBrand = localStorage.getItem("selectedBrand");
+  const storedCategory = localStorage.getItem("selectedCategory");
+
+  if (!storedBrand) {
+    return;
+  }
+
+  if (trackerSection) {
+    trackerSection.hidden = false;
+  }
+
+  selectedBrand = storedBrand;
+  selectBrand(storedBrand);
+
+  setTimeout(() => {
+    if (storedCategory) {
+      selectedCategory = storedCategory;
+      selectCategory(storedCategory);
+    }
+
+    setTimeout(() => {
+      if (trackerSection) {
+        smoothScrollToElement(trackerSection);
+      }
+    }, 180);
+  }, 160);
+}

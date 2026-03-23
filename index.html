@@ -12,7 +12,6 @@
 </head>
 <body>
   <div class="page-shell">
-    <!--Navigation bar-->
     <header class="navbar">
       <div class="logo-block">
         <div class="logo-mark">MT</div>
@@ -30,10 +29,8 @@
 
       <a href="#tracker-preview" class="nav-button">Start</a>
     </header>
-    
-    <!---Side-panel
-    Note: Might need to change description due to it being the same value as the nav-bar--> 
-        <main class="hero-section">
+
+    <main class="hero-section">
       <div class="side-panel left-panel">
         <div class="side-top">
           <a href="#" class="side-title active-link" id="side-home-link">Home</a>
@@ -64,8 +61,6 @@
               </div>
             </div>
 
-              <!--brand-seletion-hidden
-              goal: hide it while minimizing the number of html files (we need to try to run everynew section in the same page.)-->
             <div id="hero-brand-left" hidden>
               <h2 id="hero-stage-title">SELECT YOUR<br>BRAND</h2>
               <p id="hero-stage-description">
@@ -141,8 +136,8 @@
       </div>
     </main>
 
-    <section class="tracker-steps-section reveal-section">
-        <div class="tracker-steps-header">
+    <section class="tracker-steps-section reveal-section" id="tracker-flow">
+      <div class="tracker-steps-header">
         <p class="section-tag">TRACKER FLOW</p>
         <h2>How it works</h2>
       </div>
@@ -196,7 +191,7 @@
         </div>
 
         <div class="brand-card" onclick="selectBrand('Honda')">
-          <img src="images\Honda\Honda_Logo.png" alt="Honda">
+          <img src="images/Honda/Honda_Logo.png" alt="Honda">
           <span>Honda</span>
         </div>
 
@@ -205,7 +200,7 @@
           <span>Indian</span>
         </div>
 
-        <div class="brand-card" onclick="selectBrand('Kawasaki')">  
+        <div class="brand-card" onclick="selectBrand('Kawasaki')">
           <img src="images/Kawasaki/Kawasaki_Logo.png" alt="Kawasaki">
           <span>Kawasaki</span>
         </div>
@@ -216,7 +211,7 @@
         </div>
 
         <div class="brand-card" onclick="selectBrand('Suzuki')">
-          <img src="images\Suzuki\Suzuki_logo.png" alt="Suzuki">
+          <img src="images/Suzuki/Suzuki_logo.png" alt="Suzuki">
           <span>Suzuki</span>
         </div>
 
@@ -233,7 +228,6 @@
 
       <div id="category-container" class="category-container" hidden>
         <h3>Select Category</h3>
-
         <div class="category-button-row" id="category-button-row"></div>
       </div>
 
