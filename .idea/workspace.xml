@@ -4,54 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30574938-8f46-4adc-90fa-bb9f76c5c8c2" name="Changes" comment="Add Motorcycle tracker Project">
-      <change beforePath="$PROJECT_DIR$/CSS/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaScript/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/JavaScript/data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Aprilia/Sport/Aprilia_RS660.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Aprilia/SuperSport/Aprilia_RSV4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/BMW/HyperSport/BMW_M1000RR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/BMW/Sport/BMW_F900R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/BMW/Sport/BMW_G310RR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/BMW/SuperSport/BMW_S1000RR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Ducati/HyperSport/Ducati_Streetfighter_V4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Ducati/Sport/Ducati_SuperSport_950.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Ducati/SuperSport/Ducati_Panigale_V2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Ducati/SuperSport/Ducati_Panigale_V4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Harley/Cruiser/Harley_Iron_993.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Harley/Cruiser/Harley_Low_Rider_S.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Harley/Cruiser/Harley_Sportster_S.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Honda/Sport/Honda_CBR_500R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Honda/Sport/Honda_CBR__650R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Honda/SuperSport/Honda_CBR_1000RR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Honda/SuperSport/Honda_CBR_600RR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Indian/Cruiser/Indian_Chief.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Indian/Cruiser/Indian_Scout.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/KTM/HyperSport/KTM_RC8C.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/KTM/Sport/KTM_RC390.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/HyperSport/Kawasaki_Ninja_H2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/HyperSport/Kawasaki_Ninja_H2R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/HyperSport/Kawasaki_Ninja_H2R_Front.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/HyperSport/Kawasaki_Ninja_ZX_14R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/Kawasaki_H2.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/Sport/Kawasaki_Ninja_500R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/Sport/Kawasaki_Ninja_650R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_10R.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_10R.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Suzuki/HyperSport/Suzuki_GSX_Hayabusa.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Suzuki/HyperSport/Suzuki_GSX_Hayabusa.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Suzuki/Sport/Suzuki_GSX_250R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Suzuki/Sport/Suzuki_GSX_8R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Suzuki/SuperSport/Suzuki_GSX_1000R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Suzuki/SuperSport/Suzuki_GSX_600R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Suzuki/SuperSport/Suzuki_GSX_750R.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Triumph/Sport/Triumph_Daytona_660.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Triumph/Sport/Triumph_Daytona_660.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Triumph/Sport/Triumph_Speed_Triple_RR.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Triumph/SuperSport/Triumph_Daytona_765.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Triumph/SuperSport/Triumph_Speed_Triple_1200_RS.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Triumph/SuperSport/Triumph_Speed_Triple_1200_RS.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Yamaha/Sport/Yamaha_R3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Yamaha/Sport/Yamaha_R7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Yamaha/SuperSport/Yamaha_R1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Yamaha/SuperSport/Yamaha_R6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    <list default="true" id="30574938-8f46-4adc-90fa-bb9f76c5c8c2" name="Changes" comment="feat: dynamic bike page + image format update&#10;&#10;- switched images to .png and updated paths&#10;- added bikes.html view-more page&#10;- connected bikes.js for dynamic bike rendering&#10;- implemented specs array and display per selection">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +84,7 @@
       <workItem from="1773947987704" duration="1620000" />
       <workItem from="1773950408149" duration="1135000" />
       <workItem from="1774088933498" duration="36000" />
+      <workItem from="1774293509500" duration="597000" />
     </task>
     <task id="LOCAL-00001" summary="Add Motorcycle tracker Project">
       <option name="closed" value="true" />
@@ -155,7 +110,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773949650484</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: dynamic bike page + image format update&#10;&#10;- switched images to .png and updated paths&#10;- added bikes.html view-more page&#10;- connected bikes.js for dynamic bike rendering&#10;- implemented specs array and display per selection">
+      <option name="closed" value="true" />
+      <created>1774293747341</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1774293747341</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: dynamic bike page + image format update&#10;&#10;- switched images to .png and updated paths&#10;- added bikes.html view-more page&#10;- connected bikes.js for dynamic bike rendering&#10;- implemented specs array and display per selection">
+      <option name="closed" value="true" />
+      <created>1774293760701</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774293760701</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +145,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Motorcycle tracker Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Motorcycle tracker Project" />
+    <MESSAGE value="feat: dynamic bike page + image format update&#10;&#10;- switched images to .png and updated paths&#10;- added bikes.html view-more page&#10;- connected bikes.js for dynamic bike rendering&#10;- implemented specs array and display per selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: dynamic bike page + image format update&#10;&#10;- switched images to .png and updated paths&#10;- added bikes.html view-more page&#10;- connected bikes.js for dynamic bike rendering&#10;- implemented specs array and display per selection" />
   </component>
 </project>
