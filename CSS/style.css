@@ -128,39 +128,81 @@ button {
 .left-panel {
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 40px 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 18px;
 }
 
-.side-top {
+.side-icon-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.side-icon-link {
+  width: 56px;
+  min-height: 56px;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
+  overflow: hidden;
+  color: #d0d0d0;
+  background: rgba(255, 255, 255, 0.02);
+  transition: width 0.3s ease, transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
-.active-link {
-  font-size: 18px;
-  font-weight: 700;
+.side-icon-link:hover,
+.side-icon-link.active {
+  width: 160px;
   color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  background: #ffffff;
-  border-radius: 50%;
+.side-icon-link.active {
+  box-shadow: 0 0 20px rgba(255, 42, 42, 0.08);
 }
 
-.left-panel a {
-  color: #c0c0c0;
-  font-size: 16px;
-  margin-top: 18px;
+.side-icon-svg {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.left-panel a:hover {
-  color: #ffffff;
+.side-icon-svg svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
+
+.side-icon-text {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.side-icon-link:hover .side-icon-text,
+.side-icon-link.active .side-icon-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 
 .right-panel {
   border-left: 1px solid rgba(255, 255, 255, 0.08);
@@ -209,6 +251,41 @@ button {
   z-index: 6;
 }
 
+.hero-label-animated {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+}
+
+.hero-label-animated span {
+  display: block;
+  letter-spacing: 5px;
+  animation: heroLabelRain 0.9s ease both;
+}
+
+.hero-label-animated span:last-child {
+  color: #ff2a2a;
+  text-shadow:
+    0 0 8px rgba(255, 42, 42, 0.24),
+    0 0 18px rgba(255, 42, 42, 0.12);
+  animation-delay: 0.16s;
+}
+
+@keyframes heroLabelRain {
+  from {
+    opacity: 0;
+    transform: translateY(-28px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 .background-word {
   position: absolute;
   left: 50%;
@@ -222,6 +299,7 @@ button {
   user-select: none;
   pointer-events: none;
   z-index: 1;
+  animation: heroBackgroundFloat 7s ease-in-out infinite;
 }
 
 .top-word {
@@ -230,6 +308,17 @@ button {
 
 .bottom-word {
   top: 320px;
+  animation-delay: 0.9s;
+}
+
+@keyframes heroBackgroundFloat {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-12px);
+  }
 }
 
 .hero-main {
@@ -360,6 +449,17 @@ button {
   position: relative;
   z-index: 3;
   filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.75));
+  animation: heroBikeLift 4.8s ease-in-out infinite;
+}
+
+@keyframes heroBikeLift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .hero-brand-stage,
@@ -493,6 +593,7 @@ button {
   align-items: flex-end;
   min-height: 620px;
   padding-right: 10px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .counter-box {
@@ -542,6 +643,22 @@ button {
   max-width: 310px;
   text-align: right;
 }
+
+.hero-section.home-mode {
+  grid-template-columns: 110px 1fr 0;
+}
+
+.hero-section.home-mode .hero-right {
+  justify-content: flex-end;
+}
+
+.hero-section.home-mode .counter-box,
+.hero-section.home-mode .right-panel {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 
 .spec-box h3 {
   color: #ff2a2a;
@@ -1035,6 +1152,20 @@ button {
     order: 1;
   }
 
+  .left-panel {
+    align-items: flex-start;
+    padding: 24px 16px;
+  }
+
+  .side-icon-link,
+  .side-icon-link.active {
+    width: 56px;
+  }
+
+  .side-icon-text {
+    display: none;
+  }
+
   .hero-image-wrap {
     order: 2;
     min-height: auto;
@@ -1208,6 +1339,15 @@ button {
   .nav-button {
     width: 100%;
     text-align: center;
+  }
+
+  .left-panel {
+    display: none;
+  }
+
+  .hero-section,
+  .hero-section.home-mode {
+    grid-template-columns: 1fr;
   }
 
   .background-word {

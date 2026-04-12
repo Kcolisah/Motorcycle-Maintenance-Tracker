@@ -27,21 +27,59 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <a href="#tracker-preview" class="nav-button">Start</a>
+      <a href="#tracker-flow" class="nav-button" id="nav-help-link">Help</a>
     </header>
 
-    <main class="hero-section">
+    <main class="hero-section home-mode" id="hero-root">
       <div class="side-panel left-panel">
-        <div class="side-top">
-          <a href="#" class="side-title active-link" id="side-home-link">Home</a>
-          <span class="dot"></span>
+        <div class="side-icon-rail">
+          <a href="#" class="side-icon-link active" id="side-home-link" aria-label="Home">
+            <span class="side-icon-svg" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 11.5 12 4l9 7.5"></path>
+                <path d="M6 10.5V20h12v-9.5"></path>
+              </svg>
+            </span>
+            <span class="side-icon-text">Home</span>
+          </a>
+
+          <a href="#tracker-flow" class="side-icon-link" id="side-flow-link" aria-label="Help">
+            <span class="side-icon-svg" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M9.4 9.2a2.8 2.8 0 1 1 4.6 2.1c-.9.7-1.5 1.2-1.5 2.4"></path>
+                <path d="M12 17.4h.01"></path>
+              </svg>
+            </span>
+            <span class="side-icon-text">Help</span>
+          </a>
+
+          <a href="#tracker-preview" class="side-icon-link" id="side-tracker-link" aria-label="Tracker">
+            <span class="side-icon-svg" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 7h16"></path>
+                <path d="M6 7V5.5A1.5 1.5 0 0 1 7.5 4h9A1.5 1.5 0 0 1 18 5.5V7"></path>
+                <path d="M5 7v9.5A2.5 2.5 0 0 0 7.5 19h9a2.5 2.5 0 0 0 2.5-2.5V7"></path>
+                <path d="M9 12h6"></path>
+              </svg>
+            </span>
+            <span class="side-icon-text">Tracker</span>
+          </a>
+
+          <a href="#contact" class="side-icon-link" id="side-contact-link" aria-label="Contact">
+            <span class="side-icon-svg" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 7h16v10H4z"></path>
+                <path d="m4 8 8 6 8-6"></path>
+              </svg>
+            </span>
+            <span class="side-icon-text">Contact</span>
+          </a>
         </div>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
       </div>
 
       <section class="hero-content">
-        <p class="hero-label">Motorcycle Tracker</p>
+        <div class="hero-label hero-label-animated" aria-label="Motorcycle Tracker"><span>Motorcycle</span><span>Tracker</span></div>
 
         <h1 class="background-word top-word">MOTORCYCLE</h1>
         <h1 class="background-word bottom-word">TRACKER</h1>
