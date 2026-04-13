@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" href="images/LOGO.png">
 </head>
-<body>
-  <div class="page-shell">
+<body class="home-page">
+  <div class="page-shell home-page-shell home-state" id="home-page-shell">
     <header class="navbar">
       <div class="logo-block">
         <div class="logo-mark">MT</div>
@@ -23,67 +23,84 @@
 
       <nav class="nav-links">
         <a href="#" class="active" id="top-home-link">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
+        <a href="#tracker-preview">Tracker</a>
+        <a href="#garage-preview">Garage</a>
       </nav>
 
-      <a href="#tracker-flow" class="nav-button" id="nav-help-link">Help</a>
+      <a href="#tracker-flow" class="nav-button">Help</a>
     </header>
 
-    <main class="hero-section home-mode" id="hero-root">
+    <main class="hero-section">
       <div class="side-panel left-panel">
         <div class="side-icon-rail">
-          <a href="#" class="side-icon-link active" id="side-home-link" aria-label="Home">
+          <a href="#garage-preview" class="side-icon-link active" id="side-garage-link" aria-label="Garage">
             <span class="side-icon-svg" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 11.5 12 4l9 7.5"></path>
-                <path d="M6 10.5V20h12v-9.5"></path>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10.5 12 4l9 6.5"></path>
+                <path d="M5 10v9h14v-9"></path>
+                <path d="M9 19v-5h6v5"></path>
               </svg>
             </span>
-            <span class="side-icon-text">Home</span>
+            <span class="side-icon-text">Garage</span>
           </a>
 
-          <a href="#tracker-flow" class="side-icon-link" id="side-flow-link" aria-label="Help">
+          <a href="#tracker-preview" class="side-icon-link" id="side-compare-link" aria-label="Compare">
             <span class="side-icon-svg" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M9.4 9.2a2.8 2.8 0 1 1 4.6 2.1c-.9.7-1.5 1.2-1.5 2.4"></path>
-                <path d="M12 17.4h.01"></path>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 5v14"></path>
+                <path d="M17 5v14"></path>
+                <path d="M4 9h6"></path>
+                <path d="M14 15h6"></path>
               </svg>
             </span>
-            <span class="side-icon-text">Help</span>
+            <span class="side-icon-text">Compare</span>
           </a>
 
-          <a href="#tracker-preview" class="side-icon-link" id="side-tracker-link" aria-label="Tracker">
+          <a href="#updates-preview" class="side-icon-link" id="side-updates-link" aria-label="Updates">
             <span class="side-icon-svg" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 7h16"></path>
-                <path d="M6 7V5.5A1.5 1.5 0 0 1 7.5 4h9A1.5 1.5 0 0 1 18 5.5V7"></path>
-                <path d="M5 7v9.5A2.5 2.5 0 0 0 7.5 19h9a2.5 2.5 0 0 0 2.5-2.5V7"></path>
-                <path d="M9 12h6"></path>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3a7 7 0 0 0-7 7v3.5L3.8 16a1 1 0 0 0 .8 1.6h14.8a1 1 0 0 0 .8-1.6L19 13.5V10a7 7 0 0 0-7-7Z"></path>
+                <path d="M9.5 20a2.5 2.5 0 0 0 5 0"></path>
               </svg>
             </span>
-            <span class="side-icon-text">Tracker</span>
-          </a>
-
-          <a href="#contact" class="side-icon-link" id="side-contact-link" aria-label="Contact">
-            <span class="side-icon-svg" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 7h16v10H4z"></path>
-                <path d="m4 8 8 6 8-6"></path>
-              </svg>
-            </span>
-            <span class="side-icon-text">Contact</span>
+            <span class="side-icon-text">Updates</span>
           </a>
         </div>
       </div>
 
       <section class="hero-content">
-        <div class="hero-label hero-label-animated" aria-label="Motorcycle Tracker"><span>Motorcycle</span><span>Tracker</span></div>
+        <p class="hero-label">Motorcycle Tracker</p>
 
         <h1 class="background-word top-word">MOTORCYCLE</h1>
         <h1 class="background-word bottom-word">TRACKER</h1>
 
+        <div class="brand-marquee" aria-hidden="true">
+          <div class="brand-marquee-track">
+            <span>APRILIA</span>
+            <span>BMW</span>
+            <span>DUCATI</span>
+            <span>HARLEY</span>
+            <span>HONDA</span>
+            <span>INDIAN</span>
+            <span>KAWASAKI</span>
+            <span>KTM</span>
+            <span>SUZUKI</span>
+            <span>TRIUMPH</span>
+            <span>YAMAHA</span>
+
+            <span>APRILIA</span>
+            <span>BMW</span>
+            <span>DUCATI</span>
+            <span>HARLEY</span>
+            <span>HONDA</span>
+            <span>INDIAN</span>
+            <span>KAWASAKI</span>
+            <span>KTM</span>
+            <span>SUZUKI</span>
+            <span>TRIUMPH</span>
+            <span>YAMAHA</span>
+          </div>
+        </div>
         <div class="hero-main">
           <div class="hero-left">
             <div id="hero-default-left">
@@ -114,10 +131,15 @@
           </div>
 
           <div class="hero-image-wrap">
-            <div id="hero-bike-stage" class="hero-stage-panel">
-              <img src="images/HomePageBike.png" alt="Red motorcycle" class="hero-bike" />
+          <div id="hero-bike-stage" class="hero-stage-panel">
+            <div class="hero-bike-aura"></div>
+            <div class="hero-bike-rings" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
-
+            <img src="images/HomePageBike.png" alt="Red motorcycle" class="hero-bike" />
+          </div>
             <div id="hero-brand-stage" class="hero-stage-panel hero-brand-stage" hidden>
               <div class="hero-brand-grid" id="hero-brand-grid"></div>
 
@@ -270,6 +292,28 @@
       </div>
 
       <div id="bike-results" class="bike-results"></div>
+    </section>
+
+    <section class="info-section reveal-section" id="garage-preview">
+      <div class="info-box">
+        <p class="section-tag">GARAGE</p>
+        <h2>Save bikes you want to come back to</h2>
+        <p>
+          This area can become the user's saved garage so they can compare favorites,
+          revisit specs, and track the bikes they care about most.
+        </p>
+      </div>
+    </section>
+
+    <section class="info-section reveal-section" id="updates-preview">
+      <div class="info-box">
+        <p class="section-tag">UPDATES</p>
+        <h2>Keep the experience fresh</h2>
+        <p>
+          Use this area later for new arrivals, latest comparisons, featured releases,
+          or maintenance reminders so the homepage stays useful after the first visit.
+        </p>
+      </div>
     </section>
 
     <section class="info-section reveal-section" id="about">

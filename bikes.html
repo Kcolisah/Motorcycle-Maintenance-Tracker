@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" href="images/LOGO.png">
 </head>
-<body>
+<body class="bikes-page">
   <div class="page-shell bikes-page-shell">
     <header class="navbar">
       <div class="logo-block">
@@ -23,21 +23,49 @@
 
       <nav class="nav-links">
         <a href="index.html">Home</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact</a>
+        <a href="index.html#tracker-preview">Tracker</a>
+        <a href="index.html#garage-preview">Garage</a>
       </nav>
 
-      <button type="button" class="nav-button" id="backToHomeBtn">Back</button>
+      <a href="index.html#tracker-preview" class="nav-button" id="backToHomeBtn">Back to Tracker</a>
     </header>
 
     <main class="hero-section bikes-hero-section">
       <div class="side-panel left-panel">
-        <div class="side-top">
-          <a href="index.html" class="side-title active-link">Home</a>
-          <span class="dot"></span>
+        <div class="side-icon-rail">
+          <a href="index.html#garage-preview" class="side-icon-link active" aria-label="Garage">
+            <span class="side-icon-svg" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10.5 12 4l9 6.5"></path>
+                <path d="M5 10v9h14v-9"></path>
+                <path d="M9 19v-5h6v5"></path>
+              </svg>
+            </span>
+            <span class="side-icon-text">Garage</span>
+          </a>
+
+          <a href="index.html#tracker-preview" class="side-icon-link" aria-label="Compare">
+            <span class="side-icon-svg" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 5v14"></path>
+                <path d="M17 5v14"></path>
+                <path d="M4 9h6"></path>
+                <path d="M14 15h6"></path>
+              </svg>
+            </span>
+            <span class="side-icon-text">Compare</span>
+          </a>
+
+          <a href="index.html#updates-preview" class="side-icon-link" aria-label="Updates">
+            <span class="side-icon-svg" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3a7 7 0 0 0-7 7v3.5L3.8 16a1 1 0 0 0 .8 1.6h14.8a1 1 0 0 0 .8-1.6L19 13.5V10a7 7 0 0 0-7-7Z"></path>
+                <path d="M9.5 20a2.5 2.5 0 0 0 5 0"></path>
+              </svg>
+            </span>
+            <span class="side-icon-text">Updates</span>
+          </a>
         </div>
-        <a href="#">About Us</a>
-        <a href="#">Contact</a>
       </div>
 
       <section class="hero-content bikes-content">
@@ -101,11 +129,7 @@
       </section>
 
       <div class="side-panel right-panel">
-        <div class="right-dots">
-          <span class="dot-line active"></span>
-          <span class="dot-line"></span>
-          <span class="dot-line"></span>
-        </div>
+        <div class="right-dots" id="bike-page-dots"></div>
       </div>
     </main>
   </div>

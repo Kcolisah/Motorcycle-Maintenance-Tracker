@@ -121,6 +121,7 @@ const heroOpenTrackerLink = document.getElementById("hero-open-tracker-link");
 const topHomeLink = document.getElementById("top-home-link");
 const sideHomeLink = document.getElementById("side-home-link");
 const revealSections = document.querySelectorAll(".reveal-section");
+const homePageShell = document.getElementById("home-page-shell");
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -179,6 +180,10 @@ function openBikeShowcase(bike) {
 }
 
 function showHeroNavigationUI() {
+  if (homePageShell) {
+    homePageShell.classList.remove("home-state");
+  }
+
   if (heroCounterBox) {
     heroCounterBox.hidden = false;
   }
@@ -189,6 +194,10 @@ function showHeroNavigationUI() {
 }
 
 function hideHeroNavigationUI() {
+  if (homePageShell) {
+    homePageShell.classList.add("home-state");
+  }
+
   if (heroCounterBox) {
     heroCounterBox.hidden = true;
   }
@@ -643,7 +652,6 @@ function selectCategory(category) {
   }, 120);
 }
 
-
 function renderBikes(bikes) {
   bikeResults.innerHTML = "";
 
@@ -789,7 +797,6 @@ window.selectBrand = selectBrand;
 window.selectCategory = selectCategory;
 window.showBikeAtIndex = showBikeAtIndex;
 window.openSelectedBikeByIndex = openSelectedBikeByIndex;
-
 
 function restoreTrackerStateOnLoad() {
   const shouldRestore = localStorage.getItem("restoreTrackerState") === "true";

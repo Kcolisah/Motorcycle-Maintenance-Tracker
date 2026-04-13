@@ -18,6 +18,7 @@ const totalCount = document.getElementById("totalCount");
 const previewList = document.getElementById("previewList");
 const maintainBtn = document.getElementById("maintainBtn");
 const backToHomeBtn = document.getElementById("backToHomeBtn");
+const bikePageDots = document.getElementById("bike-page-dots");
 
 const brandAccentMap = {
   Aprilia: "#ff2b2b",
@@ -393,6 +394,34 @@ function getRelatedBikes() {
   );
 }
 
+function renderBikeDots(relatedBikes) {
+  if (!bikePageDots) {
+    return;
+  }
+
+  bikePageDots.innerHTML = "";
+
+  relatedBikes.forEach((bike, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "dot-line";
+
+    if (bike.id === currentBike.id) {
+      dot.classList.add("active");
+    }
+
+    dot.setAttribute("aria-label", `View ${bike.model}`);
+
+    dot.addEventListener("click", () => {
+      currentBike = bike;
+      localStorage.setItem("selectedBikeModel", bike.model);
+      renderBike();
+    });
+
+    bikePageDots.appendChild(dot);
+  });
+}
+
 function renderPreviews() {
   const relatedBikes = getRelatedBikes();
   previewList.innerHTML = "";
@@ -428,6 +457,7 @@ function renderPreviews() {
   const currentPosition = relatedBikes.findIndex((bike) => bike.id === currentBike.id);
   currentIndex.textContent = String(currentPosition + 1).padStart(2, "0");
   totalCount.textContent = String(relatedBikes.length).padStart(2, "0");
+  renderBikeDots(relatedBikes);
 }
 
 function renderBike() {
@@ -468,4 +498,5 @@ backToHomeBtn.addEventListener("click", () => {
   localStorage.setItem("restoreTrackerState", "true");
   window.location.href = "index.html#tracker-preview";
 });
+
 renderBike();
