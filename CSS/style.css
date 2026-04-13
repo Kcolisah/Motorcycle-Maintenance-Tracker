@@ -1872,3 +1872,358 @@ button.dot-line:hover {
     transform: none;
   }
 }
+@media (max-width: 900px) {
+  .home-page .hero-section,
+  .bikes-page .hero-section {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page .left-panel,
+  .bikes-page .left-panel {
+    display: flex !important;
+    border-right: none;
+    padding: 0 16px 14px;
+    justify-content: center;
+  }
+
+  .home-page .right-panel,
+  .bikes-page .right-panel {
+    display: none !important;
+  }
+
+  .home-page .side-icon-rail,
+  .bikes-page .side-icon-rail {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .home-page .side-icon-link,
+  .home-page .side-icon-link:hover,
+  .home-page .side-icon-link.active,
+  .bikes-page .side-icon-link,
+  .bikes-page .side-icon-link:hover,
+  .bikes-page .side-icon-link.active {
+    width: auto;
+    min-width: auto;
+    padding: 10px 12px;
+    transform: none;
+    border-radius: 14px;
+  }
+
+  .home-page .side-icon-text,
+  .bikes-page .side-icon-text {
+    opacity: 1;
+    transform: none;
+  }
+
+  .home-page .navbar,
+  .bikes-page .navbar {
+    gap: 16px;
+    padding: 20px 16px;
+    align-items: center;
+  }
+
+  .home-page .logo-block,
+  .bikes-page .logo-block {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .home-page .nav-links,
+  .bikes-page .nav-links {
+    width: 100%;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .home-page .nav-button,
+  .bikes-page .nav-button {
+    width: auto;
+    min-width: 180px;
+    align-self: center;
+    padding: 12px 18px;
+  }
+
+  .home-page .hero-content {
+    padding: 8px 16px 28px;
+  }
+
+  .home-page .brand-marquee {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    display: block;
+    margin: 4px 0 18px;
+    opacity: 0.75;
+    overflow: hidden;
+  }
+
+  .home-page .brand-marquee-track {
+    gap: 22px;
+    animation-duration: 18s;
+  }
+
+  .home-page .brand-marquee-track span {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .home-page .hero-main {
+    min-height: auto;
+    padding-top: 0;
+    gap: 20px;
+  }
+
+  .home-page .hero-left,
+  .home-page .hero-right {
+    width: 100%;
+    max-width: none;
+  }
+
+  .home-page .hero-left h2 {
+    font-size: clamp(34px, 9vw, 48px);
+    margin-bottom: 12px;
+    line-height: 1.02;
+  }
+
+  .home-page .hero-left p {
+    max-width: none;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+
+  .home-page .hero-actions {
+    width: 100%;
+    max-width: none;
+  }
+
+  .home-page .primary-btn,
+  .home-page .secondary-btn {
+    width: 100%;
+  }
+
+  .home-page .hero-image-wrap {
+    min-height: auto;
+    margin: 4px 0;
+  }
+
+  .home-page .hero-bike-stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+  }
+
+  .home-page .hero-bike {
+    width: 100%;
+    max-width: 300px;
+    max-height: 220px;
+  }
+
+  .home-page .hero-bike-rings,
+  .home-page .hero-bike-aura {
+    display: none;
+  }
+
+  .home-page .spec-box {
+    width: 100%;
+    max-width: none;
+    text-align: left;
+    margin-top: 4px;
+  }
+
+  .home-page .spec-box h3 {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .home-page .spec-box p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .home-page .hero-label {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .home-page .background-word {
+    display: none;
+  }
+
+  .bikes-page .bikes-content {
+    padding: 10px 16px 28px;
+  }
+
+  .bikes-page .bikes-display-grid {
+    min-height: auto;
+    padding: 70px 0 20px;
+  }
+
+  .bikes-page .bikes-top-label {
+    font-size: 14px;
+    top: 14px;
+  }
+
+  .bikes-page .bikes-brand-mini {
+    position: static;
+    margin-bottom: 14px;
+    padding: 0 6px;
+  }
+
+  .bikes-page .bikes-main-copy {
+    position: static;
+    width: 100%;
+    margin-top: 0;
+    padding: 0 6px;
+  }
+
+  .bikes-page .bikes-main-title {
+    margin-bottom: 16px;
+  }
+
+  .bikes-page .bikes-main-title #brandLine {
+    font-size: clamp(36px, 11vw, 50px);
+  }
+
+  .bikes-page .bikes-main-title #seriesLine {
+    font-size: clamp(28px, 8vw, 38px);
+  }
+
+  .bikes-page .bikes-specs-block p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .bikes-page .bikes-maintain-btn {
+    margin-top: 14px;
+  }
+
+  .bikes-page .bikes-hero-visual {
+    position: static;
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    margin: 18px 0 14px;
+  }
+
+  .bikes-page .bikes-hero-visual img {
+    max-width: 100%;
+    max-height: 240px;
+  }
+
+  .bikes-page .bikes-hero-visual p {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .bikes-page .bikes-right-panel {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  .bikes-page .bikes-count-wrap {
+    text-align: left;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+
+  .bikes-page .bikes-count-current {
+    font-size: 48px;
+  }
+
+  .bikes-page .bikes-count-divider,
+  .bikes-page .bikes-count-total {
+    font-size: 22px;
+  }
+
+  .bikes-page .bikes-count-wrap p {
+    font-size: 16px;
+    margin: 0 0 4px;
+  }
+
+  .bikes-page .bikes-spec-summary {
+    text-align: left;
+    margin-bottom: 18px;
+  }
+
+  .bikes-page .bikes-spec-summary h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .bikes-page .bikes-spec-summary p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .bikes-page .bikes-preview-title {
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .bikes-page .bikes-preview-list {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 8px;
+  }
+
+  .bikes-page .bikes-preview-card {
+    flex: 0 0 140px;
+    height: 96px;
+  }
+
+  .bikes-page .bikes-preview-card span {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-page .nav-links,
+  .bikes-page .nav-links {
+    gap: 14px;
+  }
+
+  .home-page .nav-button,
+  .bikes-page .nav-button {
+    width: 100%;
+  }
+
+  .home-page .brand-marquee {
+    margin: 2px 0 14px;
+  }
+
+  .home-page .brand-marquee-track {
+    animation-duration: 14s;
+  }
+
+  .home-page .hero-left h2 {
+    font-size: 32px;
+  }
+
+  .bikes-page .bikes-main-title #brandLine {
+    font-size: 34px;
+  }
+
+  .bikes-page .bikes-main-title #seriesLine {
+    font-size: 26px;
+  }
+
+  .bikes-page .bikes-preview-card {
+    flex: 0 0 128px;
+  }
+}
