@@ -1,3 +1,6 @@
+/* =========================
+   RESET / BASE
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +22,9 @@ body {
   color: #ffffff;
 }
 
+/* =========================
+   PAGE BACKGROUNDS
+========================= */
 body.home-page {
   background: #000000;
 }
@@ -26,7 +32,6 @@ body.home-page {
 body.bikes-page {
   background: #000000;
 }
-
 
 a {
   text-decoration: none;
@@ -129,6 +134,9 @@ button {
 .brand-marquee-track span:nth-child(11n + 9) { color: rgba(74, 163, 255, 0.38); }
 .brand-marquee-track span:nth-child(11n + 10) { color: rgba(255, 255, 255, 0.3); }
 .brand-marquee-track span:nth-child(11n + 11) { color: rgba(74, 163, 255, 0.38); }
+/* =========================
+   NAVBAR
+========================= */
 .navbar {
   width: 100%;
   min-height: 100px;
@@ -213,6 +221,9 @@ button {
   border-color: rgba(255, 255, 255, 0.28);
 }
 
+/* =========================
+   MAIN LAYOUT / SIDE PANELS
+========================= */
 .hero-section {
   min-height: calc(100vh - 100px);
   display: grid;
@@ -341,6 +352,9 @@ button.dot-line:hover {
   display: none !important;
 }
 
+/* =========================
+   HOME HERO SECTION
+========================= */
 .hero-content {
   position: relative;
   overflow: hidden;
@@ -732,6 +746,9 @@ button.dot-line:hover {
   transform: translateY(-1px);
 }
 
+/* =========================
+   HOME CONTENT SECTIONS
+========================= */
 .tracker-steps-section,
 .tracker-section,
 .info-section {
@@ -1126,6 +1143,9 @@ button.dot-line:hover {
   background: #050505;
 }
 
+/* =========================
+   RESPONSIVE: LARGE TABLET / SMALL DESKTOP
+========================= */
 @media (max-width: 1400px) {
   .hero-main {
     grid-template-columns: 0.95fr 1.3fr 0.9fr;
@@ -1140,6 +1160,9 @@ button.dot-line:hover {
   }
 }
 
+/* =========================
+   REVEAL ANIMATION
+========================= */
 .reveal-section {
   opacity: 0;
   transform: translateY(90px) scale(0.985);
@@ -1156,7 +1179,11 @@ button.dot-line:hover {
   transform: translateY(0) scale(1);
   filter: blur(0);
 }
-@media (max-width: 1180px) {
+/* =========================
+   RESPONSIVE: MOBILE / TABLET
+========================= */
+/* Shared layout breakpoint fix */
+@media (max-width: 900px) {
   .hero-section {
     grid-template-columns: 1fr;
   }
@@ -1348,6 +1375,9 @@ button.dot-line:hover {
   }
 }
 
+/* =========================
+   RESPONSIVE: SMALL MOBILE
+========================= */
 @media (max-width: 600px) {
   .nav-links {
     gap: 14px;
@@ -1410,7 +1440,9 @@ button.dot-line:hover {
   }
 }
 
-
+/* =========================
+   KEYFRAMES
+========================= */
 @keyframes ambientShift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -1429,8 +1461,9 @@ button.dot-line:hover {
   }
 }
 
-/* Bikes.HTML.CSS*/
-/* Bikes.HTML.CSS */
+/* =========================
+   BIKE PAGE
+========================= */
 .bikes-page-shell {
   min-height: 100vh;
   background: #000;
@@ -1441,7 +1474,6 @@ button.dot-line:hover {
 .bikes-page-shell::after {
   display: none;
 }
-
 
 .bikes-hero-section {
   min-height: calc(100vh - 100px);
@@ -1741,7 +1773,7 @@ button.dot-line:hover {
   }
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .bikes-hero-section {
     grid-template-columns: 1fr;
   }
@@ -1802,11 +1834,15 @@ button.dot-line:hover {
   }
 }
 
+/* Bike page mobile stack */
 @media (max-width: 900px) {
   .bikes-content {
     padding: 10px 20px 32px;
   }
 }
+/* =========================
+   BUTTON / SMALL UTILITIES
+========================= */
 .feature-link-button {
   display: inline-block;
   margin-top: 20px;
@@ -1835,7 +1871,7 @@ button.dot-line:hover {
   width: 116px;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .hero-section {
     grid-template-columns: 116px 1fr 0;
   }
@@ -1851,6 +1887,7 @@ button.dot-line:hover {
   }
 }
 
+/* Side icon mobile row */
 @media (max-width: 900px) {
   .side-icon-rail {
     flex-direction: row;
@@ -1872,6 +1909,7 @@ button.dot-line:hover {
     transform: none;
   }
 }
+/* Home + bike page phone overrides */
 @media (max-width: 900px) {
   .home-page .hero-section,
   .bikes-page .hero-section {
@@ -2192,6 +2230,7 @@ button.dot-line:hover {
   }
 }
 
+/* Extra small phone tweaks */
 @media (max-width: 600px) {
   .home-page .nav-links,
   .bikes-page .nav-links {
