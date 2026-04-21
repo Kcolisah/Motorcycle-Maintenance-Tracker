@@ -1,33 +1,44 @@
-# Motorcycle-Maintenance-Tracker
-A web application for exploring motorcycles by brand and category, featuring a JavaScript filtering system and an in-progress Java Spring Boot backend for RESTful data handling.
+<h1 align="left">Motorcycle Maintenance Tracker</h1>
 
+<p align="left">
+A motorcycle management web application designed to help users explore motorcycles, organize a personal garage, and track maintenance workflows.
+</p>
 
-This project implements a filtering engine using JavaScript and is being extended into a backend-driven system using Java and Spring Boot, where motorcycle data will be served through RESTful API endpoints.
+<p align="left">
+The current version focuses on a clean frontend experience built with HTML, CSS, and JavaScript. The project is being expanded into a backend-supported system using Java Spring Boot and RESTful APIs.
+</p>
 
-🔧 Features
+<br>
 
-Filter motorcycles by brand and category
+## Features
 
-Structured data model for motorcycles (brand, model, year, price)
+- Browse motorcycles by brand and category
+- Filter motorcycle listings with modular JavaScript logic
+- View structured motorcycle data such as brand, model, year, and price
+- Support a clean user flow for motorcycle selection and garage-based interactions
+- Built with future backend and database integration in mind
 
-Clean UI for selection and results display
+## In Progress
 
-Modular filtering logic for scalability
+- Spring Boot backend for motorcycle data delivery
+- REST API endpoints for motorcycle filtering and retrieval
+- Backend integration between frontend and server-side logic
+- Database support for persistent storage and future garage / maintenance tracking
 
-🚧 In Progress
+## Tech Stack
 
-Spring Boot REST API (GET /motorcycles, filtering endpoints)
+**Frontend**
+- HTML
+- CSS
+- JavaScript
 
-Backend integration with frontend
+**Backend (In Progress)**
+- Java
+- Spring Boot
 
-Database support for persistent storage
+**Planned Database**
+- PostgreSQL
 
-🧠 Tech Stack
+## Project Goal
 
-HTML, CSS, JavaScript
-
-Java (Spring Boot – in progress)
-
-🎯 Goal
-
-To evolve this project into a full backend-supported application that demonstrates API design, data handling, and scalable system structure.
+To evolve this project into a full backend-supported application that demonstrates API design, structured data handling, and scalable project architecture.
