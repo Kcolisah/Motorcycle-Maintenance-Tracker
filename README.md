@@ -42,3 +42,10 @@ The current version focuses on a clean frontend experience built with HTML, CSS,
 ## Project Goal
 
 To evolve this project into a full backend-supported application that demonstrates API design, structured data handling, and scalable project architecture.
+
+## Architecture (Planned Backend)
+
+- Spring Boot REST API
+- PostgreSQL database
+- User authentication (garage ownership)
+- Scalable data model replacing static JS arrays
