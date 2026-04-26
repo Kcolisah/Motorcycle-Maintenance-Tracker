@@ -24,7 +24,7 @@
       <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="index.html#tracker-preview">Tracker</a>
-        <a href="index.html#garage-preview">Garage</a>
+        <a href="garage.html">Garage</a>
       </nav>
 
       <a href="index.html#tracker-preview" class="nav-button" id="backToHomeBtn">Back to Tracker</a>
@@ -33,7 +33,7 @@
     <main class="hero-section bikes-hero-section">
       <div class="side-panel left-panel">
         <div class="side-icon-rail">
-          <a href="index.html#garage-preview" class="side-icon-link active" aria-label="Garage">
+          <a href="garage.html" class="side-icon-link active" aria-label="Garage">
             <span class="side-icon-svg" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 10.5 12 4l9 6.5"></path>
@@ -41,6 +41,8 @@
                 <path d="M9 19v-5h6v5"></path>
               </svg>
             </span>
+
+            <span class="side-garage-count-badge garage-count-badge" data-garage-count>0</span>
             <span class="side-icon-text">Garage</span>
           </a>
 
@@ -138,6 +140,7 @@
   </div>
 
   <script src="JavaScript/data.js"></script>
+  <script src="JavaScript/garageBadge.js"></script>
   <script src="JavaScript/bikes.js"></script>
 </body>
 </html>
