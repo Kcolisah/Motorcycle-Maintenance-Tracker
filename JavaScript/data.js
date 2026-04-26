@@ -1,4 +1,4 @@
-const motorcycles = [
+let motorcycles = [
   { id: 1, brand: "Aprilia", category: "Sport", model: "Aprilia RS457", year: 2026, price: 6799, image: "images/Aprilia/Sport/Aprilia_RS457.png" },
   { id: 2, brand: "Aprilia", category: "Sport", model: "Aprilia RS660", year: 2026, price: 11299, image: "images/Aprilia/Sport/Aprilia_RS660.png" },
   { id: 3, brand: "Aprilia", category: "SuperSport", model: "Aprilia RSV4", year: 2026, price: 18999, image: "images/Aprilia/SuperSport/Aprilia_RSV4.png" },
@@ -155,7 +155,40 @@ const brandLogoMap = {
   Yamaha: "images/Yamaha/Yamaha_Logo.png"
 };
 
-const allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
+let allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
+
+const API_BASE_URL = "http://localhost:8080/api";
+
+function normalizeMotorcycleFromApi(bike) {
+  return {
+    id: bike.id,
+    brand: bike.brand,
+    category: bike.category,
+    model: bike.model,
+    year: bike.year,
+    price: bike.price,
+    image: bike.imageUrl || bike.image_url || bike.image
+  };
+}
+
+async function loadMotorcyclesFromApi() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/motorcycles`);
+
+    if (!response.ok) {
+      throw new Error(`Backend returned ${response.status}`);
+    }
+
+    const backendMotorcycles = await response.json();
+
+    motorcycles = backendMotorcycles.map(normalizeMotorcycleFromApi);
+    allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
+
+    console.log("Loaded motorcycles from Spring Boot backend:", motorcycles);
+  } catch (error) {
+    console.warn("Using static data.js motorcycles because backend was not available:", error);
+  }
+}
 
 function formatPrice(price) {
   return `$${price.toLocaleString()}`;
@@ -790,8 +823,12 @@ if (heroOpenTrackerLink) {
   });
 }
 
-resetToHomeState();
-restoreTrackerStateOnLoad();
+if (homePageShell) {
+  loadMotorcyclesFromApi().finally(() => {
+    resetToHomeState();
+    restoreTrackerStateOnLoad();
+  });
+}
 
 window.selectBrand = selectBrand;
 window.selectCategory = selectCategory;
