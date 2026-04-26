@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motorcycle Tracker | Garage</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/LOGO.png">
+</head>
+
+<body class="garage-page">
+  <div class="page-shell garage-page-shell">
+    <header class="navbar">
+      <div class="logo-block">
+        <div class="logo-mark">MT</div>
+        <div class="logo-text">
+          <span>Motorcycle</span>
+          <span>Tracker</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#tracker-preview">Tracker</a>
+        <a href="garage.html" class="active">Garage</a>
+        <a href="maintenance.html">Maintenance</a>
+      </nav>
+
+      <a href="index.html#tracker-preview" class="nav-button">Add Motorcycle</a>
+    </header>
+
+    <main class="garage-layout">
+      <aside class="garage-sidebar">
+        <p class="garage-kicker">Your Collection</p>
+        <h1>My Garage</h1>
+        <p>
+          Motorcycles saved from the tracker appear here. Use this garage as the base
+          for future maintenance records and service history.
+        </p>
+
+        <div class="garage-stat-stack">
+          <div class="garage-stat-card">
+            <span>Total Bikes</span>
+            <strong id="totalBikesCount">0</strong>
+          </div>
+
+          <div class="garage-stat-card">
+            <span>Total Mileage</span>
+            <strong id="totalMileageCount">0 mi</strong>
+          </div>
+
+          <div class="garage-stat-card">
+            <span>Maintenance Due</span>
+            <strong id="maintenanceDueCount">0</strong>
+          </div>
+        </div>
+      </aside>
+
+      <section class="garage-main">
+        <div class="garage-main-header">
+          <div>
+            <p class="garage-kicker">Backend Garage</p>
+            <h2>Saved Motorcycles</h2>
+          </div>
+
+          <button id="refreshGarageBtn" class="garage-secondary-btn" type="button">
+            Refresh
+          </button>
+        </div>
+
+        <div id="garageMessage" class="garage-message"></div>
+
+        <div id="garageLoadingState" class="garage-loading-state">
+          Loading garage...
+        </div>
+
+        <div id="garageEmptyState" class="garage-empty-state">
+          <h3>No motorcycles saved yet.</h3>
+          <p>
+            Go back to the tracker, open a bike page, and click
+            <strong>Add to Garage</strong>.
+          </p>
+          <a href="index.html#tracker-preview" class="garage-primary-link">
+            Browse Motorcycles
+          </a>
+        </div>
+
+        <div id="garageList" class="garage-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="JavaScript/garage.js"></script>
+</body>
+</html>
