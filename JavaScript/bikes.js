@@ -384,7 +384,7 @@ function getSelectedBike() {
   return motorcycles.find((bike) => bike.brand === "Honda" && bike.category === "SuperSport") || motorcycles[0];
 }
 
-let currentBike = getSelectedBike();
+let currentBike = null;
 
 function getRelatedBikes() {
   return motorcycles.filter(
@@ -499,4 +499,18 @@ backToHomeBtn.addEventListener("click", () => {
   window.location.href = "index.html#tracker-preview";
 });
 
-renderBike();
+function initializeBikePage() {
+  if (typeof loadMotorcyclesFromApi === "function") {
+    loadMotorcyclesFromApi().finally(() => {
+      currentBike = getSelectedBike();
+      renderBike();
+    });
+
+    return;
+  }
+
+  currentBike = getSelectedBike();
+  renderBike();
+}
+
+initializeBikePage();
