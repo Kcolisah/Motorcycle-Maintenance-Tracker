@@ -3243,3 +3243,35 @@ button.dot-line:hover {
   top: 6px;
   right: 6px;
 }
+/* =========================
+   BIKE PAGE GARAGE ACTION
+========================= */
+.bikes-add-garage-btn {
+  width: 100%;
+  margin: 28px 0 18px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--brand-accent, #ff2b2b);
+  color: var(--brand-accent, #ff2b2b);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.bikes-add-garage-btn:hover {
+  background: var(--brand-accent, #ff2b2b);
+  color: #050505;
+  transform: translateY(-2px);
+}
+
+.bikes-add-garage-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
