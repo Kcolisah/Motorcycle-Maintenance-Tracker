@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Contact | Motorcycle Tracker</title>
+
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,6 +15,7 @@
   />
   <link rel="icon" href="images/LOGO.png" />
 </head>
+
 <body>
   <div class="page-shell contact-page-shell">
     <header class="navbar">
@@ -30,22 +33,22 @@
         <a href="contact.html" class="active">Contact</a>
       </nav>
 
-        <a href="garage.html" class="nav-garage-btn" aria-label="Garage">
-          <svg
-            class="garage-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M3 10.5 12 4l9 6.5"></path>
-            <path d="M5 10v9h14v-9"></path>
-            <path d="M9 19v-5h6v5"></path>
-          </svg>
+      <a href="garage.html" class="nav-garage-btn" aria-label="Garage">
+        <svg
+          class="garage-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M3 10.5 12 4l9 6.5"></path>
+          <path d="M5 10v9h14v-9"></path>
+          <path d="M9 19v-5h6v5"></path>
+        </svg>
 
-          <span class="garage-count-badge" data-garage-count>0</span>
-          <span>GARAGE</span>
-        </a>
-      </header>
+        <span class="garage-count-badge" data-garage-count>0</span>
+        <span>GARAGE</span>
+      </a>
+    </header>
 
     <main class="contact-main">
       <section class="contact-hero reveal-section">
@@ -57,7 +60,9 @@
           <div class="contact-hero-grid">
             <div class="contact-copy">
               <p class="section-tag">GET IN TOUCH</p>
+
               <h1>QUESTIONS, FEEDBACK, OR PROJECT SUPPORT</h1>
+
               <p class="contact-lead">
                 Use this page to send a message about Motorcycle Tracker, report an issue,
                 or ask a general question about the project.
@@ -77,28 +82,53 @@
             </div>
 
             <div class="contact-form-wrap">
-              <form class="contact-form">
+              <form id="contactForm" class="contact-form">
                 <div class="contact-field">
-                  <label for="name">Name</label>
-                  <input type="text" id="name" name="name" placeholder="Your name" />
+                  <label for="contactName">Name</label>
+                  <input
+                    type="text"
+                    id="contactName"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                  />
                 </div>
 
                 <div class="contact-field">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="Your email" />
+                  <label for="contactEmail">Email</label>
+                  <input
+                    type="email"
+                    id="contactEmail"
+                    name="email"
+                    placeholder="Your email"
+                    required
+                  />
                 </div>
 
                 <div class="contact-field">
-                  <label for="subject">Subject</label>
-                  <input type="text" id="subject" name="subject" placeholder="What is this about?" />
+                  <label for="contactSubject">Subject</label>
+                  <input
+                    type="text"
+                    id="contactSubject"
+                    name="subject"
+                    placeholder="What is this about?"
+                    required
+                  />
                 </div>
 
                 <div class="contact-field">
-                  <label for="message">Message</label>
-                  <textarea id="message" name="message" placeholder="Write your message here"></textarea>
+                  <label for="contactMessage">Message</label>
+                  <textarea
+                    id="contactMessage"
+                    name="message"
+                    placeholder="Write your message here"
+                    required
+                  ></textarea>
                 </div>
 
-                <button type="submit" class="primary-btn contact-submit-btn">Send Message</button>
+                <button type="submit" class="primary-btn contact-submit-btn">
+                  Send Message
+                </button>
               </form>
             </div>
           </div>
@@ -113,6 +143,7 @@
     const revealOnScroll = () => {
       revealSections.forEach((section) => {
         const rect = section.getBoundingClientRect();
+
         if (rect.top < window.innerHeight - 100) {
           section.classList.add("revealed");
         }
@@ -122,6 +153,32 @@
     window.addEventListener("scroll", revealOnScroll);
     window.addEventListener("load", revealOnScroll);
   </script>
+
+  <script>
+    const contactForm = document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const subject = document.getElementById("contactSubject").value.trim();
+      const message = document.getElementById("contactMessage").value.trim();
+
+      const recipientEmail = "Kcolisah@gmail.com";
+
+      const emailSubject = encodeURIComponent(`Motorcycle Tracker Contact: ${subject}`);
+
+      const emailBody = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Email: ${email}\n\n` +
+        `Message:\n${message}`
+      );
+
+      window.location.href = `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
+    });
+  </script>
+
   <script src="JavaScript/garageBadge.js"></script>
 </body>
 </html>
