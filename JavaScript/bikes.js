@@ -1,3 +1,4 @@
+const addToGarageBtn = document.getElementById("addToGarageBtn");
 const featuredBikeImage = document.getElementById("featuredBikeImage");
 const featuredBikeCaption = document.getElementById("featuredBikeCaption");
 const brandLine = document.getElementById("brandLine");
@@ -513,4 +514,44 @@ function initializeBikePage() {
   renderBike();
 }
 
+async function addCurrentBikeToGarage() {
+  if (!currentBike || !currentBike.id) {
+    alert("No motorcycle selected.");
+    return;
+  }
+
+  addToGarageBtn.disabled = true;
+  addToGarageBtn.textContent = "ADDING...";
+
+  try {
+    const response = await fetch(`http://localhost:8080/api/garage/${currentBike.id}`, {
+      method: "POST"
+    });
+
+    if (response.status === 409) {
+      alert("This motorcycle is already in your garage, or your garage is full.");
+      return;
+    }
+
+    if (!response.ok) {
+      throw new Error(`Backend returned ${response.status}`);
+    }
+
+    alert(`${currentBike.model} added to garage.`);
+
+    if (typeof window.loadGarageBadgeCount === "function") {
+      window.loadGarageBadgeCount();
+    }
+  } catch (error) {
+    console.error("Failed to add motorcycle to garage:", error);
+    alert("Could not add motorcycle to garage. Make sure the backend is running.");
+  } finally {
+    addToGarageBtn.disabled = false;
+    addToGarageBtn.textContent = "ADD TO GARAGE +";
+  }
+}
+
+if (addToGarageBtn) {
+  addToGarageBtn.addEventListener("click", addCurrentBikeToGarage);
+}
 initializeBikePage();
