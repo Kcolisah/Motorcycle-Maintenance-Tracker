@@ -502,9 +502,25 @@ async function addCurrentBikeToGarage(showSuccessMessage = true) {
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/api/garage/${currentBike.id}`, {
-      method: "POST"
-    });
+    const mileageInput = prompt("Enter current mileage for this motorcycle:", "0");
+
+    if (mileageInput === null) {
+      return false;
+    }
+
+    const currentMileage = Number(mileageInput);
+
+    if (Number.isNaN(currentMileage) || currentMileage < 0) {
+      alert("Please enter a valid mileage number.");
+      return false;
+    }
+
+    const response = await fetch(
+      `http://localhost:8080/api/garage/${currentBike.id}?currentMileage=${currentMileage}`,
+      {
+        method: "POST"
+      }
+    );
 
     if (response.status === 409) {
       if (showSuccessMessage) {
