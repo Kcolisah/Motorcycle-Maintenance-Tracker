@@ -49,6 +49,14 @@ function hideMaintenanceMessage() {
   maintenanceMessage.style.display = "none";
 }
 
+async function getBackendErrorText(response) {
+  try {
+    return await response.text();
+  } catch (error) {
+    return "No backend error body returned.";
+  }
+}
+
 function formatDate(dateValue) {
   if (!dateValue) {
     return "No due date";
@@ -88,7 +96,8 @@ async function loadSelectedGarageBike() {
     const response = await fetch(`${API_BASE_URL}/garage`);
 
     if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
+      const errorText = await getBackendErrorText(response);
+      throw new Error(`Backend returned ${response.status}: ${errorText}`);
     }
 
     const garageItems = await response.json();
@@ -121,11 +130,15 @@ async function loadSelectedGarageBike() {
 
 function clearTaskColumns() {
   Object.values(statusColumns).forEach((column) => {
-    column.innerHTML = "";
+    if (column) {
+      column.innerHTML = "";
+    }
   });
 
   Object.values(statusCounts).forEach((count) => {
-    count.textContent = "0";
+    if (count) {
+      count.textContent = "0";
+    }
   });
 }
 
@@ -215,6 +228,11 @@ function renderTasks(tasks) {
     const count = statusCounts[status];
     const taskGroup = groupedTasks[status];
 
+    if (!column || !count) {
+      console.error(`Missing maintenance column or count for status: ${status}`);
+      return;
+    }
+
     count.textContent = taskGroup.length;
 
     if (taskGroup.length === 0) {
@@ -242,7 +260,8 @@ async function loadTasks() {
     const response = await fetch(`${API_BASE_URL}/garage/${garageId}/tasks`);
 
     if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
+      const errorText = await getBackendErrorText(response);
+      throw new Error(`Backend returned ${response.status}: ${errorText}`);
     }
 
     const tasks = await response.json();
@@ -291,7 +310,8 @@ async function createTask(event) {
     });
 
     if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
+      const errorText = await getBackendErrorText(response);
+      throw new Error(`Backend returned ${response.status}: ${errorText}`);
     }
 
     maintenanceTaskForm.reset();
@@ -319,7 +339,8 @@ async function updateTaskStatus(taskId, nextStatus) {
     });
 
     if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
+      const errorText = await getBackendErrorText(response);
+      throw new Error(`Backend returned ${response.status}: ${errorText}`);
     }
 
     await loadTasks();
@@ -336,7 +357,8 @@ async function deleteTask(taskId) {
     });
 
     if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
+      const errorText = await getBackendErrorText(response);
+      throw new Error(`Backend returned ${response.status}: ${errorText}`);
     }
 
     await loadTasks();
