@@ -3275,3 +3275,356 @@ button.dot-line:hover {
   opacity: 0.55;
   transform: none;
 }
+
+/* =========================
+   MAINTENANCE PAGE
+========================= */
+.maintenance-page {
+  background: #030303;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+.maintenance-page-shell {
+  min-height: 100vh;
+  padding: 34px 44px 60px;
+}
+
+.maintenance-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 34px;
+  margin-top: 54px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 34px;
+}
+
+.maintenance-sidebar {
+  min-height: 650px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.maintenance-kicker {
+  margin: 0 0 12px;
+  color: #ff2b2b;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.maintenance-sidebar h1,
+.maintenance-main-header h2 {
+  margin: 0;
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.maintenance-sidebar p {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.maintenance-bike-card {
+  margin-top: 34px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.maintenance-bike-card span {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.maintenance-bike-card strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.maintenance-bike-card p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.maintenance-sidebar-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.maintenance-back-link,
+.maintenance-secondary-btn,
+.maintenance-primary-btn,
+.maintenance-task-action,
+.maintenance-delete-btn {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.maintenance-back-link,
+.maintenance-secondary-btn,
+.maintenance-primary-btn {
+  padding: 14px 18px;
+  text-align: center;
+}
+
+.maintenance-back-link:hover,
+.maintenance-secondary-btn:hover,
+.maintenance-task-action:hover {
+  border-color: #ff2b2b;
+  color: #ff2b2b;
+}
+
+.maintenance-primary-btn {
+  background: #ff2b2b;
+  border-color: #ff2b2b;
+  color: #050505;
+}
+
+.maintenance-primary-btn:hover {
+  transform: translateY(-2px);
+}
+
+.maintenance-primary-btn:disabled,
+.maintenance-secondary-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.maintenance-main {
+  min-height: 650px;
+}
+
+.maintenance-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.maintenance-message {
+  display: none;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 43, 43, 0.45);
+  background: rgba(255, 43, 43, 0.08);
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.maintenance-message.success {
+  border-color: rgba(39, 255, 132, 0.45);
+  background: rgba(39, 255, 132, 0.08);
+  color: #7cffae;
+}
+
+.maintenance-task-form {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.maintenance-form-row {
+  display: grid;
+  gap: 8px;
+}
+
+.maintenance-form-row-full {
+  grid-column: 1 / -1;
+}
+
+.maintenance-form-row label {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.maintenance-form-row input,
+.maintenance-form-row textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 13px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.maintenance-form-row input:focus,
+.maintenance-form-row textarea:focus {
+  border-color: #ff2b2b;
+}
+
+.maintenance-loading-state {
+  padding: 26px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.maintenance-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.maintenance-column {
+  min-height: 360px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.maintenance-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.maintenance-column-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.maintenance-column-header span {
+  min-width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 43, 43, 0.12);
+  color: #ff6b6b;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.maintenance-task-list {
+  display: grid;
+  gap: 12px;
+}
+
+.maintenance-task-card {
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(0, 0, 0, 0.26);
+}
+
+.maintenance-task-card h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.maintenance-task-card p {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.maintenance-task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.maintenance-task-meta span {
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.maintenance-task-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.maintenance-task-action,
+.maintenance-delete-btn {
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.maintenance-delete-btn:hover {
+  border-color: #ff2b2b;
+  background: #ff2b2b;
+  color: #050505;
+}
+
+.maintenance-empty-note {
+  padding: 18px;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+  .maintenance-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .maintenance-sidebar {
+    min-height: auto;
+  }
+
+  .maintenance-status-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .maintenance-page-shell {
+    padding: 24px 18px 44px;
+  }
+
+  .maintenance-task-form {
+    grid-template-columns: 1fr;
+  }
+}

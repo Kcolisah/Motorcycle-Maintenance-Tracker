@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Maintenance | Motorcycle Tracker</title>
+
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" href="images/LOGO.png" />
+</head>
+
+<body class="maintenance-page">
+  <div class="page-shell maintenance-page-shell">
+    <header class="navbar">
+      <div class="logo-block">
+        <div class="logo-mark">MT</div>
+        <div class="logo-text">
+          <span>MOTORCYCLE</span>
+          <span>Tracker</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#tracker-preview">Tracker</a>
+        <a href="garage.html">Garage</a>
+        <a href="maintenance.html" class="active">Maintenance</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a href="garage.html" class="nav-garage-btn" aria-label="Garage">
+        <svg
+          class="garage-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M3 10.5 12 4l9 6.5"></path>
+          <path d="M5 10v9h14v-9"></path>
+          <path d="M9 19v-5h6v5"></path>
+        </svg>
+
+        <span class="garage-count-badge" data-garage-count>0</span>
+        <span>GARAGE</span>
+      </a>
+    </header>
+
+    <main class="maintenance-layout">
+      <aside class="maintenance-sidebar">
+        <p class="maintenance-kicker">Service Workflow</p>
+        <h1>Maintenance</h1>
+
+        <p>
+          Track maintenance tasks for a motorcycle saved in your garage.
+          Add work items, update progress, and keep service history organized.
+        </p>
+
+        <div class="maintenance-bike-card">
+          <span>Selected Motorcycle</span>
+          <strong id="selectedGarageBikeName">No bike selected</strong>
+          <p id="selectedGarageBikeMeta">
+            Open a motorcycle from the garage to manage its maintenance tasks.
+          </p>
+        </div>
+
+        <div class="maintenance-sidebar-actions">
+          <a href="garage.html" class="maintenance-back-link">Back to Garage</a>
+          <a href="index.html#tracker-preview" class="maintenance-back-link">Browse Bikes</a>
+        </div>
+      </aside>
+
+      <section class="maintenance-main">
+        <div class="maintenance-main-header">
+          <div>
+            <p class="maintenance-kicker">Task Board</p>
+            <h2>Service Tasks</h2>
+          </div>
+
+          <button id="refreshTasksBtn" class="maintenance-secondary-btn" type="button">
+            Refresh
+          </button>
+        </div>
+
+        <div id="maintenanceMessage" class="maintenance-message"></div>
+
+        <form id="maintenanceTaskForm" class="maintenance-task-form">
+          <div class="maintenance-form-row">
+            <label for="taskTitle">Task Title</label>
+            <input id="taskTitle" name="title" type="text" placeholder="Oil change" required />
+          </div>
+
+          <div class="maintenance-form-row">
+            <label for="taskDueDate">Due Date</label>
+            <input id="taskDueDate" name="dueDate" type="date" />
+          </div>
+
+          <div class="maintenance-form-row maintenance-form-row-full">
+            <label for="taskDescription">Description</label>
+            <textarea
+              id="taskDescription"
+              name="description"
+              rows="4"
+              placeholder="Change oil and filter, inspect chain tension..."
+            ></textarea>
+          </div>
+
+          <button id="createTaskBtn" class="maintenance-primary-btn" type="submit">
+            Add Task
+          </button>
+        </form>
+
+        <div id="maintenanceLoadingState" class="maintenance-loading-state">
+          Loading maintenance tasks...
+        </div>
+
+        <div class="maintenance-status-grid">
+          <section class="maintenance-column">
+            <div class="maintenance-column-header">
+              <h3>Pending</h3>
+              <span id="pendingCount">0</span>
+            </div>
+
+            <div id="pendingTasks" class="maintenance-task-list"></div>
+          </section>
+
+          <section class="maintenance-column">
+            <div class="maintenance-column-header">
+              <h3>In Progress</h3>
+              <span id="inProgressCount">0</span>
+            </div>
+
+            <div id="inProgressTasks" class="maintenance-task-list"></div>
+          </section>
+
+          <section class="maintenance-column">
+            <div class="maintenance-column-header">
+              <h3>Done</h3>
+              <span id="doneCount">0</span>
+            </div>
+
+            <div id="doneTasks" class="maintenance-task-list"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="JavaScript/garageBadge.js"></script>
+  <script src="JavaScript/maintenance.js"></script>
+</body>
+</html>
