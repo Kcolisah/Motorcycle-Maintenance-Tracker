@@ -8,7 +8,7 @@ This project began as a static HTML, CSS, and JavaScript frontend using local Ja
 
 ## Live Demo
 
-**Frontend:** https://motorcycle-maintenance-tracker.pages.dev  
+**Frontend:** https://motorcycle.olysa.app  
 **Backend API:** https://api.olysa.app/api/motorcycles
 
 > Custom frontend domain target: `https://motorcycle.olysa.app`
