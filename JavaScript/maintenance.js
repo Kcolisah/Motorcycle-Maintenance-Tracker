@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "https://api.olysa.app/api";
 
 const selectedGarageBikeName = document.getElementById("selectedGarageBikeName");
 const selectedGarageBikeMeta = document.getElementById("selectedGarageBikeMeta");

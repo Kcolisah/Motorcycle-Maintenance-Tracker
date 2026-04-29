@@ -516,7 +516,7 @@ async function addCurrentBikeToGarage(showSuccessMessage = true) {
     }
 
     const response = await fetch(
-      `http://localhost:8080/api/garage/${currentBike.id}?currentMileage=${currentMileage}`,
+      `hhttps://api.olysa.app/api/garage/${currentBike.id}?currentMileage=${currentMileage}`,
       {
         method: "POST"
       }

@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "https://api.olysa.app/api";
 
 const garageList = document.getElementById("garageList");
 const garageMessage = document.getElementById("garageMessage");

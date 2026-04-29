@@ -1,5 +1,5 @@
 (() => {
-  const GARAGE_BADGE_API_BASE_URL = "http://localhost:8080/api";
+  const GARAGE_BADGE_API_BASE_URL = "https://api.olysa.app/api";
 
   async function loadGarageBadgeCount() {
     const badges = document.querySelectorAll("[data-garage-count]");
