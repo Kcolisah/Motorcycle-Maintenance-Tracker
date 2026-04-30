@@ -1625,12 +1625,26 @@ img {
   color: #fff;
 }
 
+.garage-page,
+.maintenance-page {
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .garage-page .page-shell,
 .maintenance-page .page-shell,
 .garage-page-shell,
 .maintenance-page-shell {
+  min-height: 100dvh;
+  height: auto;
   overflow-x: hidden;
   overflow-y: visible;
+}
+
+.garage-page .page-shell::before,
+.garage-page .page-shell::after {
+  display: none;
 }
 
 .garage-page-shell,
@@ -2438,9 +2452,21 @@ img {
 }
 
 @media (max-width: 680px) {
-  .garage-page-shell,
+  .garage-page-shell {
+    padding: 20px 14px calc(110px + env(safe-area-inset-bottom));
+  }
+
   .maintenance-page-shell {
     padding: 20px 14px 36px;
+  }
+
+  .garage-layout {
+    margin-top: 24px;
+    padding-bottom: 70px;
+  }
+
+  .garage-list {
+    padding-bottom: 80px;
   }
 
   .garage-sidebar,
