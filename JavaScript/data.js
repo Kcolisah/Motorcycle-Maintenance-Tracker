@@ -157,7 +157,7 @@ const brandLogoMap = {
 
 let allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
 
-const API_BASE_URL = "https://api.olysa.app/api";
+`${API_BASE_URL}/garage/${currentBike.id}?currentMileage=${currentMileage}`
 
 function normalizeMotorcycleFromApi(bike) {
   return {
