@@ -2723,3 +2723,61 @@ img {
     max-height: 125px;
   }
 }
+
+
+html {
+  min-height: 100%;
+  height: auto;
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
+body {
+  min-height: 100svh;
+  height: auto;
+  overflow-x: clip;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+.page-shell,
+.home-page-shell,
+.bikes-page-shell,
+.garage-page-shell,
+.maintenance-page-shell,
+.about-page-shell,
+.contact-page-shell {
+  height: auto;
+  min-height: 100svh;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.garage-page,
+.maintenance-page {
+  height: auto;
+  min-height: 100svh;
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .hero-section,
+  .bikes-hero-section,
+  .about-hero,
+  .contact-hero,
+  .feature-bike-layout,
+  .feature-main,
+  .bikes-display-grid {
+    height: auto;
+    min-height: auto;
+    overflow-y: visible;
+  }
+
+  .hero-content,
+  .bikes-content {
+    height: auto;
+    min-height: auto;
+    overflow-y: visible;
+  }
+}
