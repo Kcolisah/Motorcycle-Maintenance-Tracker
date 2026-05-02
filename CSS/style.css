@@ -19,15 +19,21 @@
 }
 
 html {
+  height: auto;
+  min-height: 100%;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
   min-width: 320px;
-  min-height: 100vh;
+  height: auto;
+  min-height: 100svh;
   overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", sans-serif;
@@ -59,7 +65,7 @@ img {
 
 .page-shell {
   position: relative;
-  min-height: 100dvh;
+  min-height: 100svh;
   overflow-x: hidden;
   overflow-y: visible;
   background:
@@ -404,7 +410,7 @@ img {
 }
 
 .hero-section {
-  min-height: calc(100vh - 100px);
+  min-height: calc(100svh - 100px);
   display: grid;
   grid-template-columns: 132px 1fr 80px;
 }
@@ -1168,7 +1174,7 @@ img {
 .bikes-display-grid {
   position: relative;
   min-height: 760px;
-  height: 100%;
+  height: auto;
   overflow: hidden;
   border-block: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -1460,9 +1466,9 @@ img {
 .about-hero,
 .contact-hero {
   position: relative;
-  min-height: calc(100vh - 100px);
-  padding: 70px 60px 90px;
-  overflow: hidden;
+  min-height: auto;
+  padding: 64px 60px 80px;
+  overflow: visible;
   border-block: 1px solid rgba(255, 255, 255, 0.08);
   background:
     linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
@@ -1523,13 +1529,13 @@ img {
 }
 
 .about-hero-grid {
-  margin-top: 80px;
+  margin-top: 64px;
   grid-template-columns: 1.15fr 0.85fr;
-  min-height: 540px;
+  min-height: auto;
 }
 
 .contact-hero-grid {
-  margin-top: 80px;
+  margin-top: 64px;
   grid-template-columns: 1fr 0.95fr;
   align-items: start;
 }
@@ -1681,7 +1687,8 @@ img {
 
 .garage-page,
 .maintenance-page {
-  min-height: 100dvh;
+  height: auto;
+  min-height: 100svh;
   overflow-x: hidden;
   overflow-y: auto;
   background: #030303;
@@ -1693,8 +1700,8 @@ img {
 .garage-page-shell,
 .maintenance-page-shell {
   width: 100%;
-  min-height: 100dvh;
   height: auto;
+  min-height: 100svh;
   overflow-x: hidden;
   overflow-y: visible;
 }
@@ -2265,6 +2272,9 @@ img {
 
   .hero-section,
   .bikes-hero-section {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
     grid-template-columns: 1fr;
   }
 
@@ -2305,6 +2315,9 @@ img {
 
   .hero-content,
   .bikes-content {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
     padding: 10px 16px 28px;
   }
 
@@ -2390,13 +2403,15 @@ img {
   .about-values-section,
   .about-author-section,
   .contact-hero {
-    padding: 70px 20px;
+    padding: 56px 20px;
   }
 
   .feature-bike-layout,
   .feature-main {
-    grid-template-columns: 1fr;
+    height: auto;
     min-height: auto;
+    overflow: visible;
+    grid-template-columns: 1fr;
   }
 
   .feature-side-left,
@@ -2432,7 +2447,9 @@ img {
   }
 
   .bikes-display-grid {
+    height: auto;
     min-height: auto;
+    overflow: visible;
     padding: 70px 0 20px;
   }
 
@@ -2525,7 +2542,7 @@ img {
 
   .about-hero-grid,
   .contact-hero-grid {
-    margin-top: 50px;
+    margin-top: 32px;
     min-height: auto;
   }
 
@@ -2541,6 +2558,13 @@ img {
   .contact-hero-bg {
     font-size: clamp(64px, 14vw, 120px);
   }
+
+  .reveal-section {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
 }
 
 @media (max-width: 720px) {
@@ -2550,23 +2574,20 @@ img {
 }
 
 @media (max-width: 680px) {
-  .garage-page-shell {
-    padding: 20px 14px calc(110px + env(safe-area-inset-bottom));
-  }
-
+  .garage-page-shell,
   .maintenance-page-shell {
-    padding: 20px 14px calc(140px + env(safe-area-inset-bottom));
+    padding: 20px 14px calc(48px + env(safe-area-inset-bottom));
   }
 
   .garage-layout,
   .maintenance-layout {
     margin-top: 24px;
-    padding-bottom: 80px;
+    padding-bottom: 0;
   }
 
   .garage-list,
   .maintenance-status-grid {
-    padding-bottom: 80px;
+    padding-bottom: 0;
   }
 
   .garage-sidebar,
@@ -2721,63 +2742,5 @@ img {
   .garage-card-image {
     height: 125px;
     max-height: 125px;
-  }
-}
-
-
-html {
-  min-height: 100%;
-  height: auto;
-  overflow-x: clip;
-  overflow-y: auto;
-}
-
-body {
-  min-height: 100svh;
-  height: auto;
-  overflow-x: clip;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-}
-
-.page-shell,
-.home-page-shell,
-.bikes-page-shell,
-.garage-page-shell,
-.maintenance-page-shell,
-.about-page-shell,
-.contact-page-shell {
-  height: auto;
-  min-height: 100svh;
-  overflow-x: clip;
-  overflow-y: visible;
-}
-
-.garage-page,
-.maintenance-page {
-  height: auto;
-  min-height: 100svh;
-  overflow-y: auto;
-}
-
-@media (max-width: 900px) {
-  .hero-section,
-  .bikes-hero-section,
-  .about-hero,
-  .contact-hero,
-  .feature-bike-layout,
-  .feature-main,
-  .bikes-display-grid {
-    height: auto;
-    min-height: auto;
-    overflow-y: visible;
-  }
-
-  .hero-content,
-  .bikes-content {
-    height: auto;
-    min-height: auto;
-    overflow-y: visible;
   }
 }
