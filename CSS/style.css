@@ -22,7 +22,7 @@ html {
   height: auto;
   min-height: 100%;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: auto;
 }
 
@@ -30,13 +30,19 @@ body {
   min-width: 320px;
   height: auto;
   min-height: 100svh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: clip;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 a {
@@ -66,7 +72,7 @@ img {
 .page-shell {
   position: relative;
   min-height: 100svh;
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: visible;
   background:
     linear-gradient(115deg, rgba(255, 42, 42, 0.05), transparent 26%),
@@ -1464,12 +1470,10 @@ img {
 }
 
 .about-page-shell {
-  height: 100svh;
+  height: auto;
   min-height: 100svh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .about-page-shell .reveal-section {
@@ -1710,8 +1714,8 @@ img {
 .maintenance-page {
   height: auto;
   min-height: 100svh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: clip;
+  overflow-y: visible;
   background: #030303;
   color: #fff;
 }
@@ -1723,7 +1727,7 @@ img {
   width: 100%;
   height: auto;
   min-height: 100svh;
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: visible;
 }
 
@@ -2269,18 +2273,17 @@ img {
 
 @media (max-width: 900px) {
   .maintenance-page {
-    height: 100svh;
+    height: auto;
     min-height: 100svh;
-    overflow: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   .maintenance-page-shell {
-    height: 100svh;
+    height: auto;
     min-height: 100svh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   .maintenance-layout,
@@ -2786,5 +2789,75 @@ img {
   .garage-card-image {
     height: 125px;
     max-height: 125px;
+  }
+}
+
+/* INDEX-MAINTENANCE-SCROLL-FIX-20260502 */
+
+@media (max-width: 900px) {
+  .home-page,
+  .home-page-shell {
+    height: auto;
+    min-height: 100svh;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .home-page .hero-section {
+    display: block;
+  }
+
+  .home-page .hero-content {
+    padding: 8px 16px 32px;
+  }
+
+  .home-page .hero-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .home-page .hero-actions {
+    width: 100%;
+    display: grid;
+    gap: 12px;
+  }
+
+  .home-page .primary-btn,
+  .home-page .secondary-btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 18px;
+    overflow: visible;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .home-page .primary-btn {
+    background: #fff;
+    border-color: #fff;
+    color: #050505;
+  }
+
+  .home-page .secondary-btn {
+    background: transparent;
+    color: #fff;
+  }
+
+  .home-page .brand-marquee {
+    overflow: hidden;
+  }
+
+  .home-page .hero-left,
+  .home-page .hero-right,
+  .home-page .spec-box {
+    min-width: 0;
+  }
+
+  .home-page .spec-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    overflow: visible;
   }
 }
