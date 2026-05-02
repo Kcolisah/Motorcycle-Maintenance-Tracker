@@ -54,6 +54,8 @@ let motorcycles = [
   { id: 43, brand: "Yamaha", category: "SuperSport", model: "Yamaha R1", year: 2026, price: 19199, image: "images/Yamaha/SuperSport/Yamaha_R1.png" }
 ];
 
+const MOTORCYCLE_API_BASE_URL = "https://api.olysa.app/api";
+
 function filterByBrand(bikes, brand) {
   return bikes.filter((bike) => bike.brand === brand);
 }
@@ -157,7 +159,6 @@ const brandLogoMap = {
 
 let allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
 
-`${API_BASE_URL}/garage/${currentBike.id}?currentMileage=${currentMileage}`
 
 function normalizeMotorcycleFromApi(bike) {
   return {
@@ -173,7 +174,7 @@ function normalizeMotorcycleFromApi(bike) {
 
 async function loadMotorcyclesFromApi() {
   try {
-    const response = await fetch(`${API_BASE_URL}/motorcycles`);
+    const response = await fetch(`${MOTORCYCLE_API_BASE_URL}/motorcycles`);
 
     if (!response.ok) {
       throw new Error(`Backend returned ${response.status}`);
