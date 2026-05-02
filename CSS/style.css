@@ -1463,6 +1463,27 @@ img {
   background: #000;
 }
 
+.about-page-shell {
+  height: 100svh;
+  min-height: 100svh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.about-page-shell .reveal-section {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: none;
+}
+
+.about-main {
+  min-height: auto;
+  overflow: visible;
+}
+
 .about-hero,
 .contact-hero {
   position: relative;
@@ -2247,6 +2268,29 @@ img {
 }
 
 @media (max-width: 900px) {
+  .maintenance-page {
+    height: 100svh;
+    min-height: 100svh;
+    overflow: hidden;
+  }
+
+  .maintenance-page-shell {
+    height: 100svh;
+    min-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  .maintenance-layout,
+  .maintenance-main,
+  .maintenance-sidebar {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+
   .navbar {
     flex-direction: column;
     padding: 24px 20px;
