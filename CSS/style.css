@@ -2871,15 +2871,15 @@ img {
   margin: 0 auto;
   overflow: hidden;
   border-radius: 28px;
-  background: #050505;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+  background: transparent;
 }
 
-.hero-3d-bike-frame {
+.hero-3d-bike {
   width: 100%;
   height: 100%;
   display: block;
-  border: 0;
+  background: transparent;
+  --poster-color: transparent;
 }
 
 @media (max-width: 900px) {
