@@ -2861,3 +2861,44 @@ img {
     overflow: visible;
   }
 }
+
+
+/* HOMEPAGE 3D BIKE HERO */
+
+.hero-3d-stage {
+  width: min(100%, 860px);
+  height: 520px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #050505;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+}
+
+.hero-3d-bike-frame {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .home-page .hero-3d-stage {
+    width: 100%;
+    height: 340px;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-page .hero-3d-stage {
+    height: 280px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-page .hero-3d-stage {
+    height: 240px;
+  }
+}
