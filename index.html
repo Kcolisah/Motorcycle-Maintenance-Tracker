@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Motorcycle Tracker</title>
-  <link rel="stylesheet" href="CSS/style.css?v=index-maintenance-fix-20260502" />
+  <link rel="stylesheet" href="CSS/style.css?v=homepage-3d-bike-20260504" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" href="images/LOGO.png">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
+
 <body class="home-page">
   <div class="page-shell home-page-shell home-state" id="home-page-shell">
     <header class="navbar">
@@ -26,21 +28,22 @@
         <a href="about.html">About Us</a>
         <a href="contact.html">Contact</a>
       </nav>
-        <a href="garage.html" class="nav-garage-btn" aria-label="Garage">
-          <svg
-            class="garage-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M3 10.5 12 4l9 6.5"></path>
-            <path d="M5 10v9h14v-9"></path>
-            <path d="M9 19v-5h6v5"></path>
-          </svg>
-        
-          <span class="garage-count-badge" data-garage-count>0</span>
-          <span>GARAGE</span>
-        </a>
+
+      <a href="garage.html" class="nav-garage-btn" aria-label="Garage">
+        <svg
+          class="garage-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M3 10.5 12 4l9 6.5"></path>
+          <path d="M5 10v9h14v-9"></path>
+          <path d="M9 19v-5h6v5"></path>
+        </svg>
+
+        <span class="garage-count-badge" data-garage-count>0</span>
+        <span>GARAGE</span>
+      </a>
     </header>
 
     <main class="hero-section">
@@ -103,6 +106,7 @@
             <span>YAMAHA</span>
           </div>
         </div>
+
         <div class="hero-main">
           <div class="hero-left">
             <div id="hero-default-left">
@@ -132,33 +136,7 @@
             </div>
           </div>
 
-          
-            <div id="hero-brand-stage" class="hero-stage-panel hero-brand-stage" hidden>
-              <div class="hero-brand-grid" id="hero-brand-grid"></div>
-
-              <div class="hero-brand-controls">
-                <button id="hero-brand-prev" class="hero-brand-nav" type="button">Prev</button>
-                <button id="hero-brand-next" class="hero-brand-nav" type="button">Next</button>
-              </div>
-            </div>
-
-            <div id="hero-category-stage" class="hero-stage-panel hero-category-stage" hidden>
-              <div class="hero-category-grid" id="hero-category-grid"></div>
-
-              <div class="hero-category-controls">
-                <button id="hero-category-back" class="hero-brand-nav" type="button">Back to Brands</button>
-              </div>
-            </div>
-
-            <div id="hero-motorcycle-stage" class="hero-stage-panel hero-category-stage" hidden>
-              <div class="hero-category-grid" id="hero-motorcycle-grid"></div>
-
-              <div class="hero-category-controls">
-                <button id="hero-motorcycle-back" class="hero-brand-nav" type="button">Back to Categories</button>
-              </div>
-            </div>
-          </div>
-                      <div class="hero-image-wrap">
+          <div class="hero-image-wrap">
             <div id="hero-bike-stage" class="hero-stage-panel hero-3d-stage">
               <model-viewer
                 class="hero-3d-bike"
@@ -199,7 +177,7 @@
               </div>
             </div>
           </div>
-        
+
           <div class="hero-right">
             <div class="counter-box" id="hero-counter-box" hidden>
               <span id="current-count" class="current-count">01</span>
@@ -328,18 +306,15 @@
       <div id="bike-results" class="bike-results"></div>
     </section>
 
-
     <section class="info-section reveal-section" id="updates-preview">
       <div class="info-box">
         <p class="section-tag">UPDATES</p>
         <h2>Keep the experience fresh</h2>
       </div>
     </section>
-
-
   </div>
 
   <script src="JavaScript/data.js?v=index-fix-20260502"></script>
-  <script src="JavaScript/garageBadge.js"></script>  
+  <script src="JavaScript/garageBadge.js"></script>
 </body>
 </html>
