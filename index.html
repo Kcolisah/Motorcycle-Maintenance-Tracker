@@ -158,7 +158,48 @@
               </div>
             </div>
           </div>
+                      <div class="hero-image-wrap">
+            <div id="hero-bike-stage" class="hero-stage-panel hero-3d-stage">
+              <model-viewer
+                class="hero-3d-bike"
+                src="assets/models/ducati_panigale_v4.glb"
+                alt="3D Ducati Panigale V4 motorcycle"
+                auto-rotate
+                camera-controls
+                disable-zoom
+                shadow-intensity="1"
+                exposure="1"
+                camera-orbit="35deg 75deg 6m"
+                field-of-view="30deg">
+              </model-viewer>
+            </div>
 
+            <div id="hero-brand-stage" class="hero-stage-panel hero-brand-stage" hidden>
+              <div class="hero-brand-grid" id="hero-brand-grid"></div>
+
+              <div class="hero-brand-controls">
+                <button id="hero-brand-prev" class="hero-brand-nav" type="button">Prev</button>
+                <button id="hero-brand-next" class="hero-brand-nav" type="button">Next</button>
+              </div>
+            </div>
+
+            <div id="hero-category-stage" class="hero-stage-panel hero-category-stage" hidden>
+              <div class="hero-category-grid" id="hero-category-grid"></div>
+
+              <div class="hero-category-controls">
+                <button id="hero-category-back" class="hero-brand-nav" type="button">Back to Brands</button>
+              </div>
+            </div>
+
+            <div id="hero-motorcycle-stage" class="hero-stage-panel hero-category-stage" hidden>
+              <div class="hero-category-grid" id="hero-motorcycle-grid"></div>
+
+              <div class="hero-category-controls">
+                <button id="hero-motorcycle-back" class="hero-brand-nav" type="button">Back to Categories</button>
+              </div>
+            </div>
+          </div>
+        
           <div class="hero-right">
             <div class="counter-box" id="hero-counter-box" hidden>
               <span id="current-count" class="current-count">01</span>
