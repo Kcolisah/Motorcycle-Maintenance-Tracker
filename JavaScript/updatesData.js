@@ -1,4 +1,4 @@
-const updates = [
+window.updates = [
   {
     id: "homepage-3d-bike",
     title: "3D Motorcycle Homepage Prototype",
