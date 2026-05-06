@@ -1,9 +1,14 @@
-const updatesTrigger = document.getElementById("update-trigger");
-const updatesPopover = document.getElementById("update-popover");
-const updatesPopoverList = document.getElementById("update-popover-list");
+document.addEventListener("DOMContentLoaded", () => {
+  const updatesTrigger = document.getElementById("updates-trigger");
+  const updatesPopover = document.getElementById("updates-popover");
+  const updatesPopoverList = document.getElementById("updates-popover-list");
 
-function renderHomepageUpdates() {
-  if (!updatesPopoverList) return;
+  if (!updatesTrigger || !updatesPopover || !updatesPopoverList) {
+    console.error("Updates widget elements are missing.");
+    return;
+  }
+
+  const updates = window.updates || [];
 
   updatesPopoverList.innerHTML = updates
     .slice(0, 3)
@@ -17,16 +22,18 @@ function renderHomepageUpdates() {
       `;
     })
     .join("");
-}
 
-function toggleUpdatesPopover() {
-  if (!updatesPopover) return;
+  updatesTrigger.addEventListener("click", (event) => {
+    event.stopPropagation();
+    updatesPopover.hidden = !updatesPopover.hidden;
+  });
 
-  updatesPopover.hidden = !updatesPopover.hidden;
-}
+  document.addEventListener("click", (event) => {
+    const clickedInsideUpdates =
+      updatesPopover.contains(event.target) || updatesTrigger.contains(event.target);
 
-if (updatesTrigger) {
-  updatesTrigger.addEventListener("click", toggleUpdatesPopover);
-}
-
-renderHomepageUpdates();
+    if (!clickedInsideUpdates) {
+      updatesPopover.hidden = true;
+    }
+  });
+});
