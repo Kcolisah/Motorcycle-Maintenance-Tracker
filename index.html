@@ -61,7 +61,8 @@
             <span class="side-icon-text">Compare</span>
           </a>
 
-          <a href="#updates-preview" class="side-icon-link" id="side-updates-link" aria-label="Updates">
+          <div class="updates-menu-wrap">
+          <button class="side-icon-link updates-trigger" id="updates-trigger" type="button" aria-label="Updates">
             <span class="side-icon-svg" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 3a7 7 0 0 0-7 7v3.5L3.8 16a1 1 0 0 0 .8 1.6h14.8a1 1 0 0 0 .8-1.6L19 13.5V10a7 7 0 0 0-7-7Z"></path>
@@ -69,7 +70,17 @@
               </svg>
             </span>
             <span class="side-icon-text">Updates</span>
-          </a>
+          </button>
+
+          <div class="updates-popover" id="updates-popover" hidden>
+            <div class="updates-popover-header">
+              <span>Latest Updates</span>
+              <a href="updates.html">See all</a>
+            </div>
+
+            <div class="updates-popover-list" id="updates-popover-list"></div>
+          </div>
+        </div>
         </div>
       </div>
 
@@ -315,6 +326,8 @@
   </div>
 
   <script src="JavaScript/data.js?v=index-fix-20260502"></script>
+  <script src="JavaScript/updatesData.js"></script>
+  <script src="JavaScript/updatesWidget.js"></script>
   <script src="JavaScript/garageBadge.js"></script>
 </body>
 </html>
