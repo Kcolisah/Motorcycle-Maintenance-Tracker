@@ -2862,7 +2862,7 @@ img {
   }
 }
 
-/* INDEX ONLY — EGGSHELL / IRON GREY REFINEMENT */
+/* INDEX ONLY — EGGSHELL / IRON GREY + 3D / UPDATES FIX */
 /* Scope: index.html only because the homepage body uses class="home-page".
    Background stays black. Red accents stay red. Brand marquee colors stay untouched. */
 
@@ -2872,37 +2872,41 @@ img {
   color: #e0e0ce;
 }
 
-/* Main homepage surface */
+/* Homepage surface */
 
 .home-page .hero-content {
   background:
     radial-gradient(circle at 52% 48%, rgba(224, 224, 206, 0.035), transparent 28%),
     radial-gradient(circle at 54% 52%, rgba(255, 43, 43, 0.045), transparent 24%),
-    linear-gradient(180deg, #000 0%, #000 100%);
+    #000;
 }
 
 /* 3D bike size fix */
 
 .home-page .hero-image-wrap {
-  min-height: 680px;
+  min-height: 700px;
+  overflow: visible;
 }
 
 .home-page .hero-3d-stage {
-  width: min(100%, 1180px);
-  height: 720px;
+  width: min(100%, 1240px);
+  height: 740px;
   margin: 0 auto;
   overflow: visible;
   border-radius: 28px;
   background: transparent;
+  position: relative;
+  z-index: 4;
 }
 
+.home-page .hero-3d-stage model-viewer,
 .home-page .hero-3d-bike {
   width: 100%;
   height: 100%;
   display: block;
   background: transparent;
   --poster-color: transparent;
-  transform: scale(1.75);
+  transform: scale(2.15);
   transform-origin: center;
   filter: drop-shadow(0 30px 42px rgba(0, 0, 0, 0.78));
 }
@@ -2946,7 +2950,7 @@ img {
   color: #050505;
 }
 
-/* Side rails */
+/* Side rail */
 
 .home-page .left-panel,
 .home-page .right-panel {
@@ -3007,7 +3011,7 @@ img {
   color: var(--accent);
 }
 
-/* Homepage sections below the hero */
+/* Homepage sections below hero */
 
 .home-page .tracker-steps-section,
 .home-page .tracker-section,
@@ -3043,24 +3047,98 @@ img {
   color: rgba(224, 224, 206, 0.68);
 }
 
-/* Updates popover, homepage only */
+/* Updates popover fix */
+
+.home-page .updates-menu-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 200;
+}
+
+.home-page .updates-popover[hidden] {
+  display: none !important;
+}
 
 .home-page .updates-popover {
-  border-color: rgba(71, 71, 71, 0.9);
+  position: absolute;
+  left: 76px;
+  top: 0;
+  width: 360px;
+  max-width: calc(100vw - 140px);
+  padding: 18px;
+  border: 1px solid rgba(71, 71, 71, 0.9);
+  border-radius: 22px;
   background: rgba(0, 0, 0, 0.97);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.72);
+  z-index: 999;
+}
+
+.home-page .updates-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.home-page .updates-popover-header span {
+  color: #e0e0ce;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.home-page .updates-popover-header a {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.home-page .updates-popover-list {
+  display: grid;
+  gap: 10px;
 }
 
 .home-page .updates-popover-item {
-  border-color: rgba(71, 71, 71, 0.85);
+  display: block;
+  padding: 14px;
+  border: 1px solid rgba(71, 71, 71, 0.85);
+  border-radius: 16px;
   background: rgba(224, 224, 206, 0.018);
+  transition: 0.25s ease;
+}
+
+.home-page .updates-popover-item:hover {
+  border-color: rgba(255, 43, 43, 0.42);
+  transform: translateY(-2px);
+}
+
+.home-page .updates-popover-item span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .home-page .updates-popover-item strong {
+  display: block;
+  margin-bottom: 6px;
   color: #e0e0ce;
+  font-size: 14px;
+  line-height: 1.25;
 }
 
 .home-page .updates-popover-item p {
   color: rgba(224, 224, 206, 0.68);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 /* Mobile homepage adjustments */
@@ -3072,12 +3150,21 @@ img {
 
   .home-page .hero-3d-stage {
     width: 100%;
-    height: 410px;
+    height: 420px;
     overflow: visible;
   }
 
+  .home-page .hero-3d-stage model-viewer,
   .home-page .hero-3d-bike {
-    transform: scale(1.42);
+    transform: scale(1.5);
+  }
+
+  .home-page .updates-popover {
+    left: 50%;
+    top: 64px;
+    transform: translateX(-50%);
+    width: min(92vw, 360px);
+    max-width: min(92vw, 360px);
   }
 
   .home-page .hero-label {
@@ -3098,21 +3185,23 @@ img {
 
 @media (max-width: 600px) {
   .home-page .hero-3d-stage {
-    height: 320px;
+    height: 330px;
   }
 
+  .home-page .hero-3d-stage model-viewer,
   .home-page .hero-3d-bike {
-    transform: scale(1.28);
+    transform: scale(1.32);
   }
 }
 
 @media (max-width: 420px) {
   .home-page .hero-3d-stage {
-    height: 270px;
+    height: 280px;
   }
 
+  .home-page .hero-3d-stage model-viewer,
   .home-page .hero-3d-bike {
-    transform: scale(1.18);
+    transform: scale(1.2);
   }
 }
 
