@@ -1912,7 +1912,29 @@ img {
     line-height: 1.8;
   }
 }
+/* About page plain carbon black background override */
 
+.about-page-shell,
+.about-main,
+.about-page-shell .navbar,
+.about-page-shell .about-hero,
+.about-page-shell .about-values-section,
+.about-page-shell .about-author-section {
+  background: #191919;
+}
+
+.about-page-shell .about-hero::before,
+.about-page-shell .about-hero::after {
+  display: none;
+}
+
+.about-page-shell .about-hero {
+  border-block: 1px solid rgba(208, 83, 83, 0.18);
+}
+
+.about-page-shell .navbar {
+  border-bottom: 1px solid rgba(208, 83, 83, 0.18);
+}
 /* End About page refinement */
 
 
