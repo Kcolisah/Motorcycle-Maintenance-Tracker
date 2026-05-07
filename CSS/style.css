@@ -2899,6 +2899,24 @@ img {
   z-index: 4;
 }
 
+.home-page .hero-image-wrap::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 118px;
+  width: min(72%, 760px);
+  height: 96px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(255, 43, 43, 0.18), transparent 34%),
+    radial-gradient(ellipse, rgba(0, 0, 0, 0.9), transparent 72%);
+  filter: blur(18px);
+  opacity: 0.95;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .home-page .hero-3d-stage model-viewer,
 .home-page .hero-3d-bike {
   width: 100%;
@@ -2906,9 +2924,12 @@ img {
   display: block;
   background: transparent;
   --poster-color: transparent;
-  transform: scale(2.15);
+  transform: scale(1.85);
   transform-origin: center;
-  filter: drop-shadow(0 30px 42px rgba(0, 0, 0, 0.78));
+  filter:
+    drop-shadow(0 42px 48px rgba(0, 0, 0, 0.92))
+    drop-shadow(0 16px 22px rgba(0, 0, 0, 0.8))
+    drop-shadow(0 0 22px rgba(255, 43, 43, 0.12));
 }
 
 /* Navbar / logo */
