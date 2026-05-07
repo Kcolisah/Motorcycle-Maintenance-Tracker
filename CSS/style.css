@@ -5,17 +5,23 @@
 }
 
 :root {
-  --bg: #000;
-  --bg-soft: #050505;
-  --panel: rgba(255, 255, 255, 0.025);
-  --panel-strong: rgba(255, 255, 255, 0.04);
-  --line: rgba(255, 255, 255, 0.09);
-  --line-strong: rgba(255, 255, 255, 0.18);
-  --text: #fff;
-  --muted: rgba(255, 255, 255, 0.68);
-  --muted-soft: rgba(255, 255, 255, 0.52);
-  --accent: #ff2b2b;
-  --accent-soft: rgba(255, 43, 43, 0.12);
+  --bg: #050504;
+  --bg-soft: #0c0c0a;
+
+  --panel: rgba(224, 224, 206, 0.035);
+  --panel-strong: rgba(224, 224, 206, 0.065);
+
+  --line: rgba(224, 224, 206, 0.10);
+  --line-strong: rgba(224, 224, 206, 0.20);
+
+  --text: #e0e0ce;
+  --muted: rgba(224, 224, 206, 0.68);
+  --muted-soft: rgba(224, 224, 206, 0.48);
+
+  --accent: #858373;
+  --accent-soft: rgba(133, 131, 115, 0.18);
+  --accent-strong: #f2af29;
+  --danger: #ad343e;
 }
 
 html {
@@ -37,35 +43,6 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", sans-serif;
-}
-
-.app {
-  min-height: 100vh;
-}
-
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 0.8fr 1.6fr;
-  align-items: center;
-  gap: 32px;
-  padding: 48px;
-}
-
-.hero-copy h1 {
-  color: #ff2b2b;
-  font-size: 72px;
-  line-height: 0.95;
-}
-
-.hero-bike-viewer {
-  width: 100%;
-  height: 700px;
-}
-
-.hero-model-viewer {
-  width: 100%;
-  height: 100%;
 }
 
 body::-webkit-scrollbar {
@@ -2895,12 +2872,13 @@ img {
 /* HOMEPAGE 3D BIKE HERO */
 
 .hero-3d-stage {
-  width: min(100%, 860px);
-  height: 520px;
+  width: min(100%, 960px);
+  height: 600px;
   margin: 0 auto;
   overflow: hidden;
   border-radius: 28px;
   background: transparent;
+  filter: drop-shadow(0 34px 60px rgba(0, 0, 0, 0.75));
 }
 
 .hero-3d-bike {
@@ -2914,21 +2892,21 @@ img {
 @media (max-width: 900px) {
   .home-page .hero-3d-stage {
     width: 100%;
-    height: 340px;
+    height: 380px;
     border-radius: 22px;
   }
 }
 
 @media (max-width: 600px) {
   .home-page .hero-3d-stage {
-    height: 280px;
+    height: 300px;
     border-radius: 18px;
   }
 }
 
 @media (max-width: 420px) {
   .home-page .hero-3d-stage {
-    height: 240px;
+    height: 250px;
   }
 }
 
@@ -3166,3 +3144,232 @@ img {
   }
 }
 
+/* HOME LUXURY FRONT PAGE REFINEMENT */
+
+.home-page,
+.home-page-shell {
+  background:
+    radial-gradient(circle at 54% 42%, rgba(133, 131, 115, 0.16), transparent 34%),
+    radial-gradient(circle at 76% 28%, rgba(242, 175, 41, 0.06), transparent 22%),
+    linear-gradient(180deg, #050504 0%, #030303 100%);
+  color: var(--text);
+}
+
+.home-page-shell::before,
+.home-page-shell::after {
+  display: none;
+}
+
+.home-page .navbar {
+  min-height: 96px;
+  padding: 28px 44px;
+}
+
+.home-page .logo-mark {
+  border-color: rgba(224, 224, 206, 0.42);
+  color: var(--text);
+  background: rgba(224, 224, 206, 0.025);
+}
+
+.home-page .logo-text span:first-child {
+  color: var(--text);
+}
+
+.home-page .logo-text span:last-child,
+.home-page .nav-links a {
+  color: var(--muted);
+}
+
+.home-page .nav-links a:hover,
+.home-page .nav-links a.active {
+  color: var(--text);
+}
+
+.home-page .nav-garage-btn {
+  border-color: rgba(224, 224, 206, 0.16);
+  background: rgba(224, 224, 206, 0.045);
+  color: var(--text);
+}
+
+.home-page .nav-garage-btn:hover {
+  border-color: rgba(224, 224, 206, 0.36);
+  background: rgba(224, 224, 206, 0.08);
+}
+
+.home-page .nav-garage-btn:hover .garage-icon {
+  color: var(--accent-strong);
+}
+
+.home-page .garage-count-badge {
+  background: var(--danger);
+  color: #fff;
+}
+
+.home-page .left-panel,
+.home-page .right-panel {
+  border-color: rgba(224, 224, 206, 0.08);
+}
+
+.home-page .side-icon-link {
+  border-color: rgba(224, 224, 206, 0.10);
+  color: rgba(224, 224, 206, 0.66);
+  background: rgba(224, 224, 206, 0.028);
+}
+
+.home-page .side-icon-link:hover,
+.home-page .side-icon-link.active {
+  color: var(--text);
+  border-color: rgba(224, 224, 206, 0.24);
+  background: rgba(224, 224, 206, 0.07);
+}
+
+.home-page .hero-label {
+  color: var(--accent-strong);
+  letter-spacing: 1.4px;
+  text-shadow: none;
+}
+
+.home-page .background-word {
+  color: rgba(224, 224, 206, 0.035);
+  letter-spacing: 2px;
+}
+
+.home-page .hero-left h2 {
+  color: var(--text);
+  text-shadow: none;
+  letter-spacing: -1px;
+}
+
+.home-page .hero-left p,
+.home-page .spec-box p {
+  color: var(--muted);
+}
+
+.home-page .primary-btn {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.home-page .primary-btn:hover {
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+  color: var(--bg);
+}
+
+.home-page .secondary-btn {
+  border-color: rgba(224, 224, 206, 0.22);
+  color: var(--text);
+  background: transparent;
+}
+
+.home-page .secondary-btn:hover {
+  border-color: var(--accent-strong);
+  color: var(--accent-strong);
+}
+
+.home-page .hero-image-wrap::before {
+  background:
+    radial-gradient(circle, rgba(224, 224, 206, 0.08), transparent 58%),
+    radial-gradient(circle, rgba(133, 131, 115, 0.10), transparent 68%);
+}
+
+.home-page .spec-box h3 {
+  color: var(--accent-strong);
+  text-shadow: none;
+}
+
+.home-page .spec-link {
+  color: var(--text);
+}
+
+.home-page .spec-link::after {
+  background: var(--accent-strong);
+}
+
+.home-page .brand-marquee {
+  opacity: 0.44;
+}
+
+.home-page .brand-marquee-track span {
+  color: rgba(224, 224, 206, 0.26);
+}
+
+.home-page .brand-marquee-track span:nth-child(11n + 1),
+.home-page .brand-marquee-track span:nth-child(11n + 3),
+.home-page .brand-marquee-track span:nth-child(11n + 5),
+.home-page .brand-marquee-track span:nth-child(11n + 6),
+.home-page .brand-marquee-track span:nth-child(11n + 7) {
+  color: rgba(224, 224, 206, 0.24);
+}
+
+.home-page .brand-marquee-track span:nth-child(11n + 2),
+.home-page .brand-marquee-track span:nth-child(11n + 9),
+.home-page .brand-marquee-track span:nth-child(11n + 11) {
+  color: rgba(133, 131, 115, 0.54);
+}
+
+.home-page .brand-marquee-track span:nth-child(11n + 4),
+.home-page .brand-marquee-track span:nth-child(11n + 8) {
+  color: rgba(242, 175, 41, 0.44);
+}
+
+.home-page .tracker-steps-section,
+.home-page .tracker-section,
+.home-page .info-section {
+  background: var(--bg-soft);
+  border-top-color: rgba(224, 224, 206, 0.10);
+}
+
+.home-page .tracker-steps-header h2,
+.home-page .tracker-header h2,
+.home-page .info-box h2 {
+  color: var(--text);
+}
+
+.home-page .tracker-step-card,
+.home-page .brand-card {
+  border-color: rgba(224, 224, 206, 0.10);
+  background: rgba(224, 224, 206, 0.035);
+}
+
+.home-page .tracker-step-card:hover,
+.home-page .brand-card:hover,
+.home-page .brand-card.active {
+  border-color: rgba(242, 175, 41, 0.40);
+  background: rgba(224, 224, 206, 0.055);
+}
+
+.home-page .updates-popover {
+  border-color: rgba(224, 224, 206, 0.16);
+  background: rgba(5, 5, 4, 0.97);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.72);
+}
+
+.home-page .updates-popover-header a,
+.home-page .updates-popover-item span {
+  color: var(--accent-strong);
+}
+
+.home-page .updates-popover-item {
+  border-color: rgba(224, 224, 206, 0.10);
+  background: rgba(224, 224, 206, 0.035);
+}
+
+.home-page .updates-popover-item:hover {
+  border-color: rgba(242, 175, 41, 0.42);
+}
+
+@media (max-width: 900px) {
+  .home-page .navbar {
+    padding: 24px 20px;
+  }
+
+  .home-page .hero-left h2 {
+    font-size: clamp(38px, 11vw, 54px);
+  }
+
+  .home-page .hero-label {
+    text-align: left;
+  }
+}
