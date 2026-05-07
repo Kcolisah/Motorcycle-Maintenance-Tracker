@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Updates | Motorcycle Tracker</title>
+  <link rel="stylesheet" href="CSS/style.css?v=updates-page-20260506" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/LOGO.png">
+</head>
+
+<body class="updates-page">
+  <div class="page-shell updates-page-shell">
+    <header class="navbar">
+      <div class="logo-block">
+        <div class="logo-mark">MT</div>
+        <div class="logo-text">
+          <span>Motorcycle</span>
+          <span>Tracker</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a href="garage.html" class="nav-garage-btn" aria-label="Garage">
+        <svg
+          class="garage-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M3 10.5 12 4l9 6.5"></path>
+          <path d="M5 10v9h14v-9"></path>
+          <path d="M9 19v-5h6v5"></path>
+        </svg>
+
+        <span class="garage-count-badge" data-garage-count>0</span>
+        <span>GARAGE</span>
+      </a>
+    </header>
+
+    <main class="updates-layout">
+      <aside class="updates-sidebar">
+        <p class="section-tag">PROJECT UPDATES</p>
+        <h1>Updates</h1>
+        <p>
+          Track new features, experiments, and improvements added to the Motorcycle Tracker.
+        </p>
+
+        <div class="updates-list" id="updates-list"></div>
+      </aside>
+
+      <section class="updates-detail-panel" id="updates-detail-panel">
+        <p class="section-tag" id="update-detail-category">UPDATE</p>
+        <h2 id="update-detail-title">Select an update</h2>
+        <p class="updates-detail-date" id="update-detail-date"></p>
+        <p class="updates-detail-body" id="update-detail-body">
+          Choose an update from the left to view the full details.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="JavaScript/updatesData.js?v=updates-page-20260506"></script>
+  <script src="JavaScript/updatesPage.js?v=updates-page-20260506"></script>
+  <script src="JavaScript/garageBadge.js"></script>
+</body>
+</html>
