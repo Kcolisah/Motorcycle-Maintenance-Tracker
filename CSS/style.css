@@ -1,3 +1,5 @@
+/*1. base*/
+
 * {
   margin: 0;
   padding: 0;
@@ -68,6 +70,8 @@ svg {
 img {
   display: block;
 }
+
+/*2. shared layout*/
 
 .page-shell {
   position: relative;
@@ -373,6 +377,8 @@ img {
   filter: blur(0);
 }
 
+/*3. animations*/
+
 @keyframes ambientShift {
   to {
     transform: translate3d(0, -12px, 0) scale(1.03);
@@ -403,7 +409,7 @@ img {
   }
 }
 
-/* Home */
+/*4. home page*/
 
 .home-page,
 .home-page-shell {
@@ -918,7 +924,7 @@ img {
   background: #fff;
 }
 
-/* Shared content sections */
+/*5. shared content sections*/
 
 .tracker-steps-section,
 .tracker-section,
@@ -1043,7 +1049,7 @@ img {
   background: rgba(255, 255, 255, 0.06);
 }
 
-/* Feature bike section */
+/*6. feature bike section*/
 
 .feature-bike-layout {
   min-height: 760px;
@@ -1157,7 +1163,7 @@ img {
   object-fit: contain;
 }
 
-/* Bikes page */
+/*7. bikes page*/
 
 .bikes-page,
 .bikes-page-shell {
@@ -1460,7 +1466,7 @@ img {
   font-size: 15px;
 }
 
-/* About and contact */
+/*8. about and contact*/
 
 .about-page-shell,
 .about-main,
@@ -1707,12 +1713,8 @@ img {
   margin-top: 8px;
   border: 0;
 }
-/* About page refinement */
-/* About palette only:
-   #191919 Carbon Black
-   #D05353 Lobster Pink
-   #E58F65 Tangerine Dream
-*/
+
+/*9. about page*/
 
 .about-page-shell,
 .about-main {
@@ -1725,7 +1727,6 @@ img {
   display: none;
 }
 
-/* About navbar only */
 .about-page-shell .navbar {
   background: #191919;
   border-bottom: 1px solid rgba(208, 83, 83, 0.22);
@@ -1751,7 +1752,6 @@ img {
   color: #e58f65;
 }
 
-/* About hero grid area */
 .about-page-shell .about-hero {
   min-height: calc(100svh - 100px);
   display: flex;
@@ -1779,7 +1779,6 @@ img {
   color: rgba(208, 83, 83, 0.055);
 }
 
-/* Hero content */
 .about-page-shell .about-hero-grid {
   width: 100%;
   margin-top: 0;
@@ -1805,7 +1804,6 @@ img {
   line-height: 1.9;
 }
 
-/* Right card */
 .about-page-shell .about-highlight-card {
   max-width: 390px;
   padding: 34px;
@@ -1826,7 +1824,6 @@ img {
   color: rgba(208, 83, 83, 0.78);
 }
 
-/* Lower About sections */
 .about-page-shell .about-values-section,
 .about-page-shell .about-author-section {
   background:
@@ -1868,7 +1865,6 @@ img {
     #191919;
 }
 
-/* About buttons */
 .about-page-shell .primary-btn {
   border-color: #d05353;
   background: #d05353;
@@ -2116,7 +2112,6 @@ img {
     line-height: 1.75;
   }
 }
-/* About page plain carbon black background override */
 
 .about-page-shell,
 .about-main,
@@ -2139,14 +2134,42 @@ img {
 .about-page-shell .navbar {
   border-bottom: 1px solid rgba(208, 83, 83, 0.18);
 }
-/* End About page refinement */
 
+/*mobile*/
 
+@media (max-width: 900px) {
+  .about-page-shell .tracker-steps-grid,
+  .about-page-shell .about-values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
 
+  .about-page-shell .tracker-step-card,
+  .about-page-shell .about-value-card {
+    min-height: 230px;
+    padding: 28px;
+  }
 
+  .about-page-shell .tracker-step-card h3,
+  .about-page-shell .about-value-card h3 {
+    font-size: 26px;
+    line-height: 1.15;
+  }
 
+  .about-page-shell .tracker-step-card p,
+  .about-page-shell .about-value-card p {
+    font-size: 19px;
+    line-height: 1.65;
+  }
+}
 
-/* Garage and maintenance */
+@media (max-width: 520px) {
+  .about-page-shell .tracker-steps-grid,
+  .about-page-shell .about-values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/*10. garage and maintenance*/
 
 .garage-page,
 .maintenance-page {
@@ -2596,7 +2619,7 @@ img {
   line-height: 1.6;
 }
 
-/* Responsive */
+/*11. responsive*/
 
 @media (max-width: 1400px) {
   .hero-main {
@@ -3230,7 +3253,7 @@ img {
   }
 }
 
-/* INDEX-MAINTENANCE-SCROLL-FIX-20260502 */
+/*12. index scroll fix*/
 
 @media (max-width: 900px) {
   .home-page,
@@ -3300,9 +3323,7 @@ img {
   }
 }
 
-/* INDEX ONLY — FINAL HOMEPAGE POLISH */
-/* Scope: index.html only because the homepage body uses class="home-page".
-   Background stays black. Red accents stay red. Brand marquee colors stay untouched. */
+/*13. index homepage polish*/
 
 .home-page,
 .home-page-shell {
@@ -3490,8 +3511,6 @@ img {
   color: rgba(224, 224, 206, 0.68);
 }
 
-/* Homepage updates popover only */
-
 .home-page .updates-menu-wrap {
   position: relative;
   display: flex;
@@ -3646,8 +3665,7 @@ img {
   }
 }
 
-/* UPDATES PAGE — FULL PAGE STYLING */
-/* Scope: updates.html only because the page body uses class="updates-page". */
+/*14. updates page*/
 
 .updates-page,
 .updates-page .page-shell,
@@ -3827,9 +3845,7 @@ img {
   }
 }
 
-/* INDEX MOBILE — BRAND GRID POLISH */
-/* Makes the Choose Your Brand section feel like a premium mobile/tablet product grid.
-   Scope: homepage/index only. */
+/*15. index mobile brand grid*/
 
 @media (max-width: 1100px) {
   .home-page .tracker-section {
@@ -3933,4 +3949,3 @@ img {
     min-height: 170px;
   }
 }
-
