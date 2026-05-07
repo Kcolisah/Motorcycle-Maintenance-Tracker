@@ -1724,30 +1724,27 @@ img {
 
 /* About navbar only */
 .about-page-shell .navbar {
-  background:
-    linear-gradient(135deg, rgba(154, 143, 151, 0.24), rgba(115, 111, 114, 0.12)),
-    #000;
-  border-bottom: 1px solid rgba(195, 186, 186, 0.14);
+  background: #9A8F97;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
 }
-
 .about-page-shell .logo-mark {
-  border-color: rgba(195, 186, 186, 0.5);
-  color: #e9e3e6;
-  background: rgba(233, 227, 230, 0.025);
+  border-color: rgba(0, 0, 0, 0.35);
+  color: #050505;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .about-page-shell .logo-text span:first-child {
-  color: #e9e3e6;
+  color: #050505;
 }
 
 .about-page-shell .logo-text span:last-child,
 .about-page-shell .nav-links a {
-  color: rgba(233, 227, 230, 0.72);
+  color: rgba(5, 5, 5, 0.72);
 }
 
 .about-page-shell .nav-links a:hover,
 .about-page-shell .nav-links a.active {
-  color: #e9e3e6;
+  color: #000;
 }
 
 /* About hero: full first-screen grid area */
