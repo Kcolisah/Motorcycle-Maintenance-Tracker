@@ -3388,3 +3388,111 @@ img {
     font-size: 38px;
   }
 }
+
+/* INDEX MOBILE — BRAND GRID POLISH */
+/* Makes the Choose Your Brand section feel like a premium mobile/tablet product grid.
+   Scope: homepage/index only. */
+
+@media (max-width: 1100px) {
+  .home-page .tracker-section {
+    padding: 96px 64px 120px;
+    background: #000;
+  }
+
+  .home-page .tracker-header {
+    max-width: 980px;
+  }
+
+  .home-page .tracker-header .section-tag {
+    margin-bottom: 18px;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+
+  .home-page .tracker-header h2 {
+    max-width: 720px;
+    color: #e0e0ce;
+    font-size: clamp(42px, 7vw, 58px);
+    letter-spacing: -1.5px;
+  }
+
+  .home-page .brand-container {
+    max-width: 980px;
+    margin: 48px auto 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 32px;
+  }
+
+  .home-page .brand-card {
+    min-height: 198px;
+    padding: 28px 22px;
+    border: 1px solid rgba(71, 71, 71, 0.92);
+    background:
+      radial-gradient(circle at 50% 34%, rgba(224, 224, 206, 0.045), transparent 34%),
+      linear-gradient(180deg, rgba(224, 224, 206, 0.024), rgba(224, 224, 206, 0.008));
+  }
+
+  .home-page .brand-card:hover,
+  .home-page .brand-card.active {
+    border-color: rgba(255, 43, 43, 0.42);
+    background:
+      radial-gradient(circle at 50% 34%, rgba(255, 43, 43, 0.08), transparent 34%),
+      linear-gradient(180deg, rgba(255, 43, 43, 0.045), rgba(224, 224, 206, 0.012));
+  }
+
+  .home-page .brand-card img {
+    width: 148px;
+    height: 82px;
+    object-fit: contain;
+  }
+
+  .home-page .brand-card span {
+    margin-top: 6px;
+    color: #e0e0ce;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-page .tracker-section {
+    padding: 80px 28px 96px;
+  }
+
+  .home-page .brand-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .home-page .brand-card {
+    min-height: 178px;
+    padding: 24px 16px;
+  }
+
+  .home-page .brand-card img {
+    width: 128px;
+    height: 74px;
+  }
+
+  .home-page .brand-card span {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 460px) {
+  .home-page .tracker-section {
+    padding: 70px 18px 86px;
+  }
+
+  .home-page .brand-container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .home-page .brand-card {
+    min-height: 170px;
+  }
+}
+
