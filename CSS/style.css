@@ -2861,3 +2861,258 @@ img {
     overflow: visible;
   }
 }
+
+/* INDEX ONLY — EGGSHELL / IRON GREY REFINEMENT */
+/* Scope: index.html only because the homepage body uses class="home-page".
+   Background stays black. Red accents stay red. Brand marquee colors stay untouched. */
+
+.home-page,
+.home-page-shell {
+  background: #000;
+  color: #e0e0ce;
+}
+
+/* Main homepage surface */
+
+.home-page .hero-content {
+  background:
+    radial-gradient(circle at 52% 48%, rgba(224, 224, 206, 0.035), transparent 28%),
+    radial-gradient(circle at 54% 52%, rgba(255, 43, 43, 0.045), transparent 24%),
+    linear-gradient(180deg, #000 0%, #000 100%);
+}
+
+/* 3D bike size fix */
+
+.home-page .hero-image-wrap {
+  min-height: 680px;
+}
+
+.home-page .hero-3d-stage {
+  width: min(100%, 1180px);
+  height: 720px;
+  margin: 0 auto;
+  overflow: visible;
+  border-radius: 28px;
+  background: transparent;
+}
+
+.home-page .hero-3d-bike {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent;
+  --poster-color: transparent;
+  transform: scale(1.75);
+  transform-origin: center;
+  filter: drop-shadow(0 30px 42px rgba(0, 0, 0, 0.78));
+}
+
+/* Navbar / logo */
+
+.home-page .logo-mark {
+  border-color: #474747;
+  color: #e0e0ce;
+  background: rgba(224, 224, 206, 0.018);
+}
+
+.home-page .logo-text span:first-child {
+  color: #e0e0ce;
+}
+
+.home-page .logo-text span:last-child,
+.home-page .nav-links a {
+  color: rgba(224, 224, 206, 0.68);
+}
+
+.home-page .nav-links a:hover,
+.home-page .nav-links a.active {
+  color: #e0e0ce;
+}
+
+/* Garage button */
+
+.home-page .nav-garage-btn {
+  border-color: rgba(71, 71, 71, 0.9);
+  background: rgba(224, 224, 206, 0.018);
+}
+
+.home-page .nav-garage-btn:hover {
+  border-color: rgba(224, 224, 206, 0.28);
+  background: rgba(224, 224, 206, 0.045);
+}
+
+.home-page .garage-count-badge {
+  background: var(--accent);
+  color: #050505;
+}
+
+/* Side rails */
+
+.home-page .left-panel,
+.home-page .right-panel {
+  border-color: rgba(71, 71, 71, 0.9);
+}
+
+.home-page .side-icon-link {
+  border-color: rgba(71, 71, 71, 0.85);
+  color: rgba(224, 224, 206, 0.7);
+  background: linear-gradient(180deg, rgba(224, 224, 206, 0.026), rgba(224, 224, 206, 0.012));
+}
+
+.home-page .side-icon-link:hover,
+.home-page .side-icon-link.active {
+  color: #e0e0ce;
+  border-color: rgba(224, 224, 206, 0.28);
+  background: linear-gradient(180deg, rgba(224, 224, 206, 0.07), rgba(224, 224, 206, 0.026));
+}
+
+/* Hero typography */
+
+.home-page .hero-label,
+.home-page .hero-left h2,
+.home-page .spec-box h3 {
+  color: var(--accent);
+}
+
+.home-page .hero-left p,
+.home-page .spec-box p {
+  color: rgba(224, 224, 206, 0.7);
+}
+
+.home-page .background-word {
+  color: rgba(224, 224, 206, 0.038);
+}
+
+/* Buttons */
+
+.home-page .primary-btn {
+  border-color: #e0e0ce;
+  background: #e0e0ce;
+  color: #000;
+}
+
+.home-page .primary-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.home-page .secondary-btn {
+  border-color: #474747;
+  color: #e0e0ce;
+}
+
+.home-page .secondary-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Homepage sections below the hero */
+
+.home-page .tracker-steps-section,
+.home-page .tracker-section,
+.home-page .info-section {
+  background: #000;
+  border-top-color: rgba(71, 71, 71, 0.9);
+}
+
+.home-page .tracker-step-card,
+.home-page .brand-card {
+  border-color: rgba(71, 71, 71, 0.85);
+  background:
+    linear-gradient(180deg, rgba(224, 224, 206, 0.026), rgba(224, 224, 206, 0.012));
+}
+
+.home-page .tracker-step-card:hover,
+.home-page .brand-card:hover,
+.home-page .brand-card.active {
+  border-color: rgba(255, 42, 42, 0.38);
+  background:
+    linear-gradient(180deg, rgba(255, 43, 43, 0.055), rgba(224, 224, 206, 0.018));
+}
+
+.home-page .tracker-step-card h3,
+.home-page .brand-card span,
+.home-page .tracker-steps-header h2,
+.home-page .tracker-header h2,
+.home-page .info-box h2 {
+  color: #e0e0ce;
+}
+
+.home-page .tracker-step-card p {
+  color: rgba(224, 224, 206, 0.68);
+}
+
+/* Updates popover, homepage only */
+
+.home-page .updates-popover {
+  border-color: rgba(71, 71, 71, 0.9);
+  background: rgba(0, 0, 0, 0.97);
+}
+
+.home-page .updates-popover-item {
+  border-color: rgba(71, 71, 71, 0.85);
+  background: rgba(224, 224, 206, 0.018);
+}
+
+.home-page .updates-popover-item strong {
+  color: #e0e0ce;
+}
+
+.home-page .updates-popover-item p {
+  color: rgba(224, 224, 206, 0.68);
+}
+
+/* Mobile homepage adjustments */
+
+@media (max-width: 900px) {
+  .home-page .hero-image-wrap {
+    min-height: auto;
+  }
+
+  .home-page .hero-3d-stage {
+    width: 100%;
+    height: 410px;
+    overflow: visible;
+  }
+
+  .home-page .hero-3d-bike {
+    transform: scale(1.42);
+  }
+
+  .home-page .hero-label {
+    text-align: left;
+  }
+
+  .home-page .primary-btn {
+    background: #e0e0ce;
+    border-color: #e0e0ce;
+    color: #050505;
+  }
+
+  .home-page .secondary-btn {
+    border-color: #474747;
+    color: #e0e0ce;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-page .hero-3d-stage {
+    height: 320px;
+  }
+
+  .home-page .hero-3d-bike {
+    transform: scale(1.28);
+  }
+}
+
+@media (max-width: 420px) {
+  .home-page .hero-3d-stage {
+    height: 270px;
+  }
+
+  .home-page .hero-3d-bike {
+    transform: scale(1.18);
+  }
+}
+
