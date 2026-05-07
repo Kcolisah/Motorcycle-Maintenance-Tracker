@@ -6,21 +6,22 @@
 
 :root {
   --bg: #050504;
-  --bg-soft: #0c0c0a;
+  --bg-soft: #0b0b0a;
 
   --panel: rgba(224, 224, 206, 0.035);
-  --panel-strong: rgba(224, 224, 206, 0.065);
+  --panel-strong: rgba(224, 224, 206, 0.06);
 
-  --line: rgba(224, 224, 206, 0.10);
-  --line-strong: rgba(224, 224, 206, 0.20);
+  --line: rgba(224, 224, 206, 0.09);
+  --line-strong: rgba(224, 224, 206, 0.18);
 
   --text: #e0e0ce;
   --muted: rgba(224, 224, 206, 0.68);
   --muted-soft: rgba(224, 224, 206, 0.48);
 
-  --accent: #858373;
-  --accent-soft: rgba(133, 131, 115, 0.18);
-  --accent-strong: #f2af29;
+  --accent: #ad343e;
+  --accent-soft: rgba(173, 52, 62, 0.14);
+
+  --iron: #474747;
   --danger: #ad343e;
 }
 
