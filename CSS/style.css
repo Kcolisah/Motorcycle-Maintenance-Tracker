@@ -3026,3 +3026,142 @@ img {
     width: min(92vw, 340px);
   }
 }
+
+/* UPDATES PAGE */
+
+.updates-page,
+.updates-page-shell {
+  background: #000;
+}
+
+.updates-page-shell::before,
+.updates-page-shell::after {
+  display: none;
+}
+
+.updates-layout {
+  width: 100%;
+  max-width: 1450px;
+  margin: 54px auto 0;
+  padding: 34px 44px 80px;
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.updates-sidebar,
+.updates-detail-panel {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.updates-sidebar {
+  min-height: 680px;
+  padding: 32px;
+}
+
+.updates-sidebar h1 {
+  margin-bottom: 18px;
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.updates-sidebar > p:not(.section-tag) {
+  color: rgba(255, 255, 255, 0.66);
+  line-height: 1.7;
+}
+
+.updates-list {
+  margin-top: 32px;
+  display: grid;
+  gap: 14px;
+}
+
+.updates-list-item {
+  width: 100%;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  text-align: left;
+  transition: 0.25s ease;
+}
+
+.updates-list-item:hover,
+.updates-list-item.active {
+  border-color: rgba(255, 43, 43, 0.48);
+  transform: translateY(-2px);
+}
+
+.updates-list-item span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.updates-list-item strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.updates-list-item p {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.updates-detail-panel {
+  min-height: 680px;
+  padding: 46px;
+}
+
+.updates-detail-panel h2 {
+  max-width: 760px;
+  margin-bottom: 16px;
+  color: #fff;
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 900;
+  line-height: 1.02;
+}
+
+.updates-detail-date {
+  margin-bottom: 34px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.updates-detail-body {
+  max-width: 800px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 18px;
+  line-height: 1.85;
+}
+
+@media (max-width: 900px) {
+  .updates-layout {
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+    padding: 24px 18px 60px;
+  }
+
+  .updates-sidebar,
+  .updates-detail-panel {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .updates-sidebar h1 {
+    font-size: 38px;
+  }
+}
