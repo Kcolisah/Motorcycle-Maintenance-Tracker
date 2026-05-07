@@ -206,44 +206,31 @@ img { display: block; }
 .bikes-preview-card img { width: 100%; height: 100%; object-fit: contain; }
 .bikes-preview-card span { position: absolute; left: 8px; right: 8px; bottom: 6px; color: rgba(255, 255, 255, 0.88); font-size: 11px; font-weight: 700; text-align: center; }
 .bikes-gallery-label { left: 12px; bottom: 24px; color: rgba(255, 255, 255, 0.9); font-size: 15px; }
-/*8. about and contact*/
-.about-page-shell, .about-main, .contact-page-shell, .contact-main { background: #000; }
+/*8. about base*/
+.about-page-shell, .about-main { background: #000; }
 .about-page-shell { height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; }
 .about-page-shell .reveal-section { opacity: 1; transform: none; filter: none; transition: none; }
 .about-main { min-height: auto; overflow: visible; }
-.about-hero, .contact-hero { position: relative; min-height: auto; padding: 64px 60px 80px; overflow: visible; border-block: 1px solid rgba(255, 255, 255, 0.08); background: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 60%), #000; background-size: 60px 60px, 60px 60px, 100% 100%, auto; }
-.about-hero::before, .contact-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.06), transparent 40%), radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.04), transparent 50%); filter: blur(40px); opacity: 0.6; animation: contactGlowMove 12s ease-in-out infinite alternate; }
-.about-hero-bg, .contact-hero-bg { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); color: rgba(255, 255, 255, 0.035); font-size: clamp(100px, 16vw, 260px); font-weight: 900; letter-spacing: 6px; white-space: nowrap; pointer-events: none; user-select: none; z-index: 1; }
-.contact-hero-bg { top: 50%; font-size: clamp(100px, 15vw, 240px); }
-.about-hero-inner, .contact-hero-inner { position: relative; z-index: 2; max-width: 1300px; margin: 0 auto; }
-.about-hero-grid, .contact-hero-grid, .about-author-wrap { display: grid; gap: 42px; align-items: center; }
+.about-hero { position: relative; min-height: auto; padding: 64px 60px 80px; overflow: visible; border-block: 1px solid rgba(255, 255, 255, 0.08); background: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 60%), #000; background-size: 60px 60px, 60px 60px, 100% 100%, auto; }
+.about-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.06), transparent 40%), radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.04), transparent 50%); filter: blur(40px); opacity: 0.6; animation: contactGlowMove 12s ease-in-out infinite alternate; }
+.about-hero-bg { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); color: rgba(255, 255, 255, 0.035); font-size: clamp(100px, 16vw, 260px); font-weight: 900; letter-spacing: 6px; white-space: nowrap; pointer-events: none; user-select: none; z-index: 1; }
+.about-hero-inner { position: relative; z-index: 2; max-width: 1300px; margin: 0 auto; }
+.about-hero-grid, .about-author-wrap { display: grid; gap: 42px; align-items: center; }
 .about-hero-grid { margin-top: 64px; grid-template-columns: 1.15fr 0.85fr; min-height: auto; }
-.contact-hero-grid { margin-top: 64px; grid-template-columns: 1fr 0.95fr; align-items: start; }
-.about-hero-left h1, .contact-copy h1 { max-width: 760px; margin-bottom: 24px; font-size: clamp(42px, 5vw, 78px); line-height: 0.95; }
-.contact-copy h1 { max-width: 680px; font-size: clamp(40px, 5vw, 74px); }
-.about-lead, .contact-lead { max-width: 540px; margin-bottom: 30px; font-size: 18px; }
+.about-hero-left h1 { max-width: 760px; margin-bottom: 24px; font-size: clamp(42px, 5vw, 78px); line-height: 0.95; }
+.about-lead { max-width: 540px; margin-bottom: 30px; font-size: 18px; }
 .about-hero-right { display: flex; justify-content: flex-end; }
 .about-highlight-card { width: 100%; max-width: 360px; padding: 32px; }
 .about-highlight-card h3 { margin-bottom: 16px; color: var(--accent); font-size: 28px; font-weight: 800; }
 .about-info-grid, .about-author-wrap { grid-template-columns: 1.1fr 0.9fr; }
-.about-info-side, .contact-mini-info { display: grid; gap: 22px; }
-.contact-mini-info { max-width: 430px; gap: 18px; }
-.about-mini-card, .about-value-card, .about-author-card, .contact-info-card { padding: 28px; background: linear-gradient(180deg, #101010, #0b0b0b); }
-.contact-info-card { padding: 24px; }
+.about-info-side { display: grid; gap: 22px; }
+.about-mini-card, .about-value-card, .about-author-card { padding: 28px; background: linear-gradient(180deg, #101010, #0b0b0b); }
 .about-values-heading { margin-bottom: 44px; }
-.about-author-left p, .about-mini-card p, .about-value-card p, .about-author-card p, .about-highlight-card p, .contact-info-card p { color: #bcbcbc; font-size: 16px; line-height: 1.75; }
+.about-author-left p, .about-mini-card p, .about-value-card p, .about-author-card p, .about-highlight-card p { color: #bcbcbc; font-size: 16px; line-height: 1.75; }
 .about-author-left p { margin-bottom: 16px; }
 .about-author-card .primary-btn { margin-top: 22px; }
-.contact-form-wrap, .contact-field input, .contact-field textarea { width: 100%; }
-.contact-form { padding: 34px; border: 1px solid rgba(255, 255, 255, 0.08); background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)); }
-.contact-field { margin-bottom: 18px; display: flex; flex-direction: column; }
-.contact-field label { margin-bottom: 10px; color: #d8d8d8; font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-.contact-field input, .contact-field textarea { padding: 16px 18px; border: 1px solid rgba(255, 255, 255, 0.12); outline: 0; background: #0a0a0a; color: #fff; font-size: 15px; transition: 0.25s ease; }
-.contact-field input:focus, .contact-field textarea:focus { border-color: rgba(255, 255, 255, 0.55); box-shadow: 0 0 0 1px rgba(255, 42, 42, 0.18); }
-.contact-field textarea { min-height: 180px; resize: vertical; }
-.contact-submit-btn { margin-top: 8px; border: 0; }
-/*9. about page*/
-.about-page-shell, .about-main { background: #191919; color: #d05353; }
+
+/*9. about page*/.about-page-shell, .about-main { background: #191919; color: #d05353; }
 .about-page-shell::before, .about-page-shell::after { display: none; }
 .about-page-shell .navbar { background: #191919; border-bottom: 1px solid rgba(208, 83, 83, 0.22); }
 .about-page-shell .logo-mark { border-color: rgba(208, 83, 83, 0.5); color: #d05353; background: rgba(208, 83, 83, 0.06); }
@@ -323,53 +310,135 @@ img { display: block; }
   .about-page-shell .tracker-step-card h3, .about-page-shell .about-mini-card h3, .about-page-shell .about-value-card h3, .about-page-shell .about-author-card h3 { font-size: 23px; }
   .about-page-shell .tracker-step-card p, .about-page-shell .about-mini-card p, .about-page-shell .about-value-card p, .about-page-shell .about-author-card p { font-size: 17px; }
 }
-/*10. garage and maintenance*/
-.garage-page, .maintenance-page { height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; background: #030303; color: #fff; }
-.garage-page .page-shell, .maintenance-page .page-shell, .garage-page-shell, .maintenance-page-shell { width: 100%; height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; }
+
+/*9. contact page*/
+.contact-page-shell, .contact-main { background: #090c02; color: #bbc5aa; }
+.contact-page-shell::before, .contact-page-shell::after { display: none; }
+.contact-page-shell .navbar { background: #090c02; border-bottom: 1px solid rgba(187, 197, 170, 0.18); }
+.contact-page-shell .logo-mark { border-color: rgba(187, 197, 170, 0.45); color: #dde2c6; background: rgba(187, 197, 170, 0.06); }
+.contact-page-shell .logo-text span:first-child { color: #dde2c6; }
+.contact-page-shell .logo-text span:last-child, .contact-page-shell .nav-links a { color: rgba(187, 197, 170, 0.74); }
+.contact-page-shell .nav-links a:hover, .contact-page-shell .nav-links a.active { color: #a72608; }
+.contact-page-shell .nav-garage-btn { border-color: rgba(187, 197, 170, 0.28); background: rgba(187, 197, 170, 0.035); color: #dde2c6; }
+.contact-page-shell .nav-garage-btn:hover { border-color: rgba(167, 38, 8, 0.55); color: #a72608; }
+.contact-page-shell .garage-count-badge { background: #a72608; color: #dde2c6; }
+.contact-page-shell .contact-hero { min-height: calc(100svh - 100px); display: flex; align-items: center; padding: 74px 60px 96px; border-block: 1px solid rgba(187, 197, 170, 0.16); background: #090c02; }
+.contact-page-shell .contact-hero::before, .contact-page-shell .contact-hero::after { display: none; }
+.contact-page-shell .contact-hero-bg { color: rgba(187, 197, 170, 0.04); }
+.contact-page-shell .contact-hero-inner { width: 100%; }
+.contact-page-shell .hero-label { color: #a72608; }
+.contact-page-shell .section-tag { color: #bbc5aa; }
+.contact-page-shell .contact-hero-grid { margin-top: 62px; grid-template-columns: 0.95fr 1.05fr; gap: 56px; align-items: start; }
+.contact-page-shell .contact-copy h1 { color: #a72608; max-width: 760px; font-size: clamp(42px, 5vw, 74px); line-height: 0.96; text-shadow: 0 0 20px rgba(167, 38, 8, 0.16); }
+.contact-page-shell .contact-lead { max-width: 560px; color: rgba(187, 197, 170, 0.82); font-size: 18px; line-height: 1.85; }
+.contact-page-shell .contact-mini-info { margin-top: 34px; }
+.contact-page-shell .contact-info-card { border: 1px solid rgba(187, 197, 170, 0.18); background: linear-gradient(180deg, rgba(187, 197, 170, 0.07), rgba(187, 197, 170, 0.018)), #090c02; }
+.contact-page-shell .contact-info-card h3 { color: #dde2c6; }
+.contact-page-shell .contact-info-card p { color: rgba(187, 197, 170, 0.78); }
+.contact-page-shell .contact-form { border: 1px solid rgba(187, 197, 170, 0.28); background: #dde2c6; box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34); }
+.contact-page-shell .contact-field label { color: #090c02; }
+.contact-page-shell .contact-field input, .contact-page-shell .contact-field textarea { border: 1px solid rgba(9, 12, 2, 0.2); background: rgba(9, 12, 2, 0.04); color: #090c02; }
+.contact-page-shell .contact-field input::placeholder, .contact-page-shell .contact-field textarea::placeholder { color: rgba(9, 12, 2, 0.48); }
+.contact-page-shell .contact-field input:focus, .contact-page-shell .contact-field textarea:focus { border-color: #a72608; box-shadow: 0 0 0 2px rgba(167, 38, 8, 0.16); }
+.contact-page-shell .contact-submit-btn { width: 100%; border-color: #a72608; background: #a72608; color: #dde2c6; }
+.contact-page-shell .contact-submit-btn:hover { border-color: #090c02; background: #090c02; color: #dde2c6; }
+@media (max-width: 900px) {
+  .contact-page-shell .navbar { min-height: auto; padding: 34px 22px 32px; flex-direction: column; justify-content: center; gap: 22px; background: #090c02; }
+  .contact-page-shell .logo-block { justify-content: center; }
+  .contact-page-shell .logo-mark { width: 64px; height: 64px; }
+  .contact-page-shell .nav-links { width: 100%; justify-content: center; gap: 24px; }
+  .contact-page-shell .nav-links a { font-size: 20px; }
+  .contact-page-shell .nav-garage-btn { width: auto; min-width: 200px; height: 76px; justify-content: center; gap: 14px; padding: 0 28px; border-radius: 28px; }
+  .contact-page-shell .nav-garage-btn > span:last-child { opacity: 1; transform: none; color: #dde2c6; font-size: 18px; letter-spacing: 2px; }
+  .contact-page-shell .contact-hero { min-height: auto; display: block; padding: 76px 30px 86px; background: #090c02; }
+  .contact-page-shell .contact-hero-grid { grid-template-columns: 1fr; gap: 34px; margin-top: 44px; }
+  .contact-page-shell .hero-label { text-align: center; }
+  .contact-page-shell .section-tag { font-size: 12px; letter-spacing: 5px; }
+  .contact-page-shell .contact-copy h1 { font-size: clamp(34px, 9vw, 46px); line-height: 1.05; }
+  .contact-page-shell .contact-lead { font-size: 17px; line-height: 1.65; }
+  .contact-page-shell .contact-mini-info { gap: 18px; }
+  .contact-page-shell .contact-info-card { padding: 26px; }
+  .contact-page-shell .contact-info-card h3 { font-size: 24px; }
+  .contact-page-shell .contact-info-card p { font-size: 17px; line-height: 1.6; }
+  .contact-page-shell .contact-form { padding: 28px; }
+}
+@media (max-width: 520px) {
+  .contact-page-shell .contact-hero { padding: 70px 26px 78px; }
+  .contact-page-shell .contact-copy h1 { font-size: clamp(32px, 9vw, 42px); }
+  .contact-page-shell .contact-lead { font-size: 17px; }
+  .contact-page-shell .contact-form { padding: 24px; }
+}
+
+/*10. garage page*/
+.garage-page { height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; background: #030303; color: #fff; }
+.garage-page .page-shell, .garage-page-shell { width: 100%; height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; }
 .garage-page .page-shell::before, .garage-page .page-shell::after { display: none; }
-.garage-page-shell, .maintenance-page-shell { padding: 34px 44px 60px; }
-.garage-layout, .maintenance-layout { width: 100%; max-width: 1500px; margin: 54px auto 0; padding-top: 34px; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 34px; align-items: start; border-top: 1px solid rgba(255, 255, 255, 0.08); }
-.garage-sidebar, .maintenance-sidebar, .garage-loading-state, .garage-empty-state, .maintenance-loading-state, .maintenance-column, .maintenance-task-form, .maintenance-task-card, .garage-card, .garage-stat-card, .maintenance-bike-card { border: 1px solid var(--line); background: var(--panel); }
-.garage-sidebar, .maintenance-sidebar { min-height: 620px; padding: 32px; }
-.maintenance-sidebar { min-height: 650px; }
-.garage-sidebar h1, .garage-main-header h2, .maintenance-sidebar h1, .maintenance-main-header h2 { margin: 0; font-size: 38px; font-weight: 900; letter-spacing: -1px; }
-.garage-sidebar p, .maintenance-sidebar p { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.garage-page-shell { padding: 34px 44px 60px; }
+.garage-layout { width: 100%; max-width: 1500px; margin: 54px auto 0; padding-top: 34px; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 34px; align-items: start; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.garage-sidebar, .garage-loading-state, .garage-empty-state, .garage-card, .garage-stat-card { border: 1px solid var(--line); background: var(--panel); }
+.garage-sidebar { min-height: 620px; padding: 32px; }
+.garage-sidebar h1, .garage-main-header h2 { margin: 0; font-size: 38px; font-weight: 900; letter-spacing: -1px; }
+.garage-sidebar p { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 .garage-stat-stack { margin-top: 34px; display: grid; gap: 14px; }
-.garage-stat-card, .maintenance-bike-card { padding: 20px; background: rgba(255, 255, 255, 0.03); }
-.maintenance-bike-card { margin-top: 34px; padding: 22px; }
-.garage-stat-card span, .garage-card-detail span, .maintenance-bike-card span, .maintenance-form-row label { display: block; color: var(--muted-soft); font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+.garage-stat-card { padding: 20px; background: rgba(255, 255, 255, 0.03); }
+.garage-stat-card span, .garage-card-detail span { display: block; color: var(--muted-soft); font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
 .garage-stat-card strong { display: block; margin-top: 8px; font-size: 28px; font-weight: 900; }
-.maintenance-bike-card span { margin-bottom: 10px; }
-.maintenance-bike-card strong { display: block; font-size: 22px; font-weight: 900; }
-.maintenance-bike-card p { margin-top: 10px; color: rgba(255, 255, 255, 0.58); font-size: 13px; line-height: 1.6; }
-.maintenance-sidebar-actions { margin-top: 24px; display: grid; gap: 12px; }
-.garage-main, .maintenance-main, .garage-list, .garage-card, .garage-card-info { min-width: 0; }
-.garage-main, .maintenance-main { min-height: 620px; }
-.garage-main-header, .maintenance-main-header { justify-content: space-between; gap: 24px; margin-bottom: 24px; }
-.garage-secondary-btn, .garage-primary-link, .garage-card-action, .garage-delete-btn, .maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn, .maintenance-task-action, .maintenance-delete-btn { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
-.garage-secondary-btn, .garage-primary-link, .maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn { padding: 14px 18px; }
-.maintenance-primary-btn { border-color: var(--accent); background: var(--accent); color: #050505; }
-.maintenance-primary-btn:disabled, .maintenance-secondary-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
-.garage-message, .maintenance-message { display: none; margin-bottom: 18px; padding: 14px 16px; border: 1px solid rgba(255, 43, 43, 0.45); background: rgba(255, 43, 43, 0.08); color: #ff6b6b; font-size: 13px; font-weight: 700; }
-.maintenance-message.success { border-color: rgba(39, 255, 132, 0.45); background: rgba(39, 255, 132, 0.08); color: #7cffae; }
-.garage-loading-state, .garage-empty-state, .maintenance-loading-state { padding: 42px; color: rgba(255, 255, 255, 0.7); }
+.garage-main, .garage-list, .garage-card, .garage-card-info { min-width: 0; }
+.garage-main { min-height: 620px; }
+.garage-main-header { justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.garage-secondary-btn, .garage-primary-link, .garage-card-action, .garage-delete-btn { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.garage-secondary-btn, .garage-primary-link { padding: 14px 18px; }
+.garage-message { display: none; margin-bottom: 18px; padding: 14px 16px; border: 1px solid rgba(255, 43, 43, 0.45); background: rgba(255, 43, 43, 0.08); color: #ff6b6b; font-size: 13px; font-weight: 700; }
+.garage-loading-state, .garage-empty-state { padding: 42px; color: rgba(255, 255, 255, 0.7); }
 .garage-empty-state { display: none; }
 .garage-empty-state h3 { margin-bottom: 12px; color: #fff; font-size: 26px; font-weight: 900; }
 .garage-empty-state p { max-width: 520px; margin-bottom: 24px; line-height: 1.7; }
-.garage-list, .maintenance-task-list { display: grid; gap: 18px; }
+.garage-list { display: grid; gap: 18px; }
 .garage-card { display: grid; grid-template-columns: 210px minmax(0, 1fr) auto; align-items: center; gap: 24px; padding: 20px; transition: 0.25s ease; }
 .garage-card:hover { border-color: rgba(255, 43, 43, 0.5); transform: translateY(-2px); }
 .garage-card-image-wrap { height: 126px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 60%); }
 .garage-card-image { width: 100%; height: 126px; max-height: 126px; object-fit: contain; }
 .garage-card-info h3 { margin-bottom: 8px; overflow-wrap: anywhere; font-size: 22px; font-weight: 900; }
-.garage-card-meta, .maintenance-task-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; color: rgba(255, 255, 255, 0.62); font-size: 13px; font-weight: 700; }
+.garage-card-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; color: rgba(255, 255, 255, 0.62); font-size: 13px; font-weight: 700; }
 .garage-card-details { display: grid; grid-template-columns: repeat(3, minmax(110px, 1fr)); gap: 12px; }
 .garage-card-detail { padding: 12px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(0, 0, 0, 0.24); }
 .garage-card-detail span { margin-bottom: 6px; font-size: 10px; }
 .garage-card-detail strong { font-size: 13px; font-weight: 900; }
 .garage-card-actions { min-width: 160px; display: grid; gap: 10px; }
-.garage-card-action, .garage-delete-btn, .maintenance-task-action, .maintenance-delete-btn { padding: 13px 14px; }
-.garage-delete-btn:hover, .maintenance-delete-btn:hover { border-color: var(--accent); background: var(--accent); color: #050505; }
+.garage-card-action, .garage-delete-btn { padding: 13px 14px; }
+.garage-delete-btn:hover { border-color: var(--accent); background: var(--accent); color: #050505; }
+
+/*11. maintenance page*/
+.maintenance-page { height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; background: #030303; color: #fff; }
+.maintenance-page .page-shell, .maintenance-page-shell { width: 100%; height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; }
+.maintenance-page-shell { padding: 34px 44px 60px; }
+.maintenance-layout { width: 100%; max-width: 1500px; margin: 54px auto 0; padding-top: 34px; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 34px; align-items: start; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.maintenance-sidebar, .maintenance-loading-state, .maintenance-column, .maintenance-task-form, .maintenance-task-card, .maintenance-bike-card { border: 1px solid var(--line); background: var(--panel); }
+.maintenance-sidebar { min-height: 620px; padding: 32px; }
+.maintenance-sidebar { min-height: 650px; }
+.maintenance-sidebar h1, .maintenance-main-header h2 { margin: 0; font-size: 38px; font-weight: 900; letter-spacing: -1px; }
+.maintenance-sidebar p { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.maintenance-bike-card { padding: 20px; background: rgba(255, 255, 255, 0.03); }
+.maintenance-bike-card { margin-top: 34px; padding: 22px; }
+.maintenance-bike-card span, .maintenance-form-row label { display: block; color: var(--muted-soft); font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+.maintenance-bike-card span { margin-bottom: 10px; }
+.maintenance-bike-card strong { display: block; font-size: 22px; font-weight: 900; }
+.maintenance-bike-card p { margin-top: 10px; color: rgba(255, 255, 255, 0.58); font-size: 13px; line-height: 1.6; }
+.maintenance-sidebar-actions { margin-top: 24px; display: grid; gap: 12px; }
+.maintenance-main { min-width: 0; }
+.maintenance-main { min-height: 620px; }
+.maintenance-main-header { justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn, .maintenance-task-action, .maintenance-delete-btn { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn { padding: 14px 18px; }
+.maintenance-primary-btn { border-color: var(--accent); background: var(--accent); color: #050505; }
+.maintenance-primary-btn:disabled, .maintenance-secondary-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.maintenance-message { display: none; margin-bottom: 18px; padding: 14px 16px; border: 1px solid rgba(255, 43, 43, 0.45); background: rgba(255, 43, 43, 0.08); color: #ff6b6b; font-size: 13px; font-weight: 700; }
+.maintenance-message.success { border-color: rgba(39, 255, 132, 0.45); background: rgba(39, 255, 132, 0.08); color: #7cffae; }
+.maintenance-loading-state { padding: 42px; color: rgba(255, 255, 255, 0.7); }
+.maintenance-task-list { display: grid; gap: 18px; }
+.maintenance-task-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; color: rgba(255, 255, 255, 0.62); font-size: 13px; font-weight: 700; }
+.maintenance-task-action, .maintenance-delete-btn { padding: 13px 14px; }
+.maintenance-delete-btn:hover { border-color: var(--accent); background: var(--accent); color: #050505; }
 .maintenance-task-form { margin-bottom: 28px; padding: 22px; display: grid; grid-template-columns: 1fr 220px; gap: 16px; }
 .maintenance-form-row { display: grid; gap: 8px; }
 .maintenance-form-row-full { grid-column: 1 / -1; }
@@ -386,7 +455,8 @@ img { display: block; }
 .maintenance-task-meta span { padding: 6px 8px; border: 1px solid rgba(255, 255, 255, 0.09); color: rgba(255, 255, 255, 0.62); font-size: 10px; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase; }
 .maintenance-task-actions { display: grid; gap: 8px; }
 .maintenance-empty-note { padding: 18px; border: 1px dashed rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.5); font-size: 13px; line-height: 1.6; }
-/*11. responsive*/
+
+/*12. responsive*/
 @media (max-width: 1400px) {
   .hero-main { grid-template-columns: 0.95fr 1.3fr 0.9fr; }
   .background-word { font-size: clamp(100px, 15vw, 210px); }
@@ -510,7 +580,7 @@ img { display: block; }
   .garage-card-image-wrap { height: 130px; }
   .garage-card-image { height: 125px; max-height: 125px; }
 }
-/*12. index scroll fix*/
+/*13. index scroll fix*/
 @media (max-width: 900px) {
   .home-page, .home-page-shell { height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; }
   .home-page .hero-section { display: block; }
@@ -524,7 +594,7 @@ img { display: block; }
   .home-page .hero-left, .home-page .hero-right, .home-page .spec-box { min-width: 0; }
   .home-page .spec-link { display: inline-flex; align-items: center; min-height: 44px; overflow: visible; }
 }
-/*13. index homepage polish*/
+/*14. index homepage polish*/
 .home-page, .home-page-shell { background: #000; color: #e0e0ce; }
 .home-page .hero-content { background: radial-gradient(circle at 52% 48%, rgba(224, 224, 206, 0.035), transparent 28%), radial-gradient(circle at 54% 52%, rgba(255, 43, 43, 0.045), transparent 24%), #000; }
 .home-page .hero-image-wrap { min-height: 700px; overflow: visible; }
@@ -582,7 +652,7 @@ img { display: block; }
   .home-page .hero-3d-stage { height: 280px; }
   .home-page .hero-3d-stage model-viewer, .home-page .hero-3d-bike { transform: scale(1.08); }
 }
-/*14. updates page*/
+/*15. updates page*/
 .updates-page, .updates-page .page-shell, .updates-page-shell { min-height: 100svh; background: radial-gradient(circle at 8% 40%, rgba(255, 43, 43, 0.12), transparent 24%), radial-gradient(circle at 82% 18%, rgba(34, 255, 0, 0.08), transparent 18%), radial-gradient(circle at 70% 84%, rgba(74, 163, 255, 0.08), transparent 24%), #000; color: #e0e0ce; }
 .updates-page .page-shell::before, .updates-page .page-shell::after, .updates-page-shell::before, .updates-page-shell::after { display: none; }
 .updates-page .navbar { border-bottom: 1px solid rgba(71, 71, 71, 0.7); }
@@ -610,7 +680,7 @@ img { display: block; }
   .updates-sidebar, .updates-detail-panel { min-height: auto; padding: 24px; border-radius: 22px; }
   .updates-sidebar h1 { font-size: 38px; }
 }
-/*15. index mobile brand grid*/
+/*16. index mobile brand grid*/
 @media (max-width: 1100px) {
   .home-page .tracker-section { padding: 96px 64px 120px; background: #000; }
   .home-page .tracker-header { max-width: 980px; }
