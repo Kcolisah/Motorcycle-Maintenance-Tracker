@@ -674,7 +674,10 @@ img { display: block; }
 .updates-sidebar { height: min(680px, calc(100svh - 190px)); min-height: 0; padding: 32px; display: flex; flex-direction: column; overflow: hidden; }
 .updates-sidebar h1 { margin-bottom: 18px; color: #e0e0ce; font-size: 48px; font-weight: 900; letter-spacing: -1px; }
 .updates-sidebar > p:not(.section-tag) { color: rgba(224, 224, 206, 0.66); line-height: 1.7; }
-.updates-list { margin-top: 32px; display: grid; gap: 14px; }
+.updates-list { margin-top: 32px; display: grid; gap: 14px; overflow-y: auto; padding-right: 10px; }
+.updates-list::-webkit-scrollbar { width: 6px; }
+.updates-list::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(255, 43, 43, 0.38); }
+.updates-list::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.04); }
 .updates-list-item { width: 100%; padding: 18px; border: 1px solid rgba(71, 71, 71, 0.85); border-radius: 18px; background: rgba(0, 0, 0, 0.28); color: #e0e0ce; text-align: left; transition: 0.25s ease; }
 .updates-list-item:hover, .updates-list-item.active { border-color: rgba(255, 43, 43, 0.48); background: rgba(255, 43, 43, 0.055); transform: translateY(-2px); }
 .updates-list-item span { display: block; margin-bottom: 8px; color: var(--accent); font-size: 10px; font-weight: 900; letter-spacing: 1.4px; text-transform: uppercase; }
