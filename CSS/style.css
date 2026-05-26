@@ -671,7 +671,7 @@ img { display: block; }
 .updates-page .nav-links a:hover, .updates-page .nav-links a.active { color: #e0e0ce; }
 .updates-layout { width: 100%; max-width: 1450px; margin: 54px auto 0; padding: 34px 44px 80px; display: grid; grid-template-columns: 420px minmax(0, 1fr); gap: 28px; align-items: start; }
 .updates-sidebar, .updates-detail-panel { border: 1px solid rgba(71, 71, 71, 0.85); border-radius: 26px; background: linear-gradient(180deg, rgba(224, 224, 206, 0.038), rgba(224, 224, 206, 0.014)); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36); }
-.updates-sidebar { min-height: 680px; padding: 32px; }
+.updates-sidebar { height: min(680px, calc(100svh - 190px)); min-height: 0; padding: 32px; display: flex; flex-direction: column; overflow: hidden; }
 .updates-sidebar h1 { margin-bottom: 18px; color: #e0e0ce; font-size: 48px; font-weight: 900; letter-spacing: -1px; }
 .updates-sidebar > p:not(.section-tag) { color: rgba(224, 224, 206, 0.66); line-height: 1.7; }
 .updates-list { margin-top: 32px; display: grid; gap: 14px; }
