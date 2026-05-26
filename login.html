@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motorcycle Tracker | Sign In</title>
+  <link rel="stylesheet" href="CSS/style.css?v=auth-shell-20260526" />
+    <link rel="stylesheet" href="CSS/authShell.css?v=auth-shell-20260526" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/LOGO.png">
+</head>
+
+<body class="login-page">
+  <main class="login-shell">
+    <section class="login-brand-panel">
+      <a href="index.html" class="login-logo-block" aria-label="Motorcycle Tracker Home">
+        <span class="logo-mark">MT</span>
+        <span class="login-logo-text">
+          <strong>Motorcycle</strong>
+          <span>Tracker</span>
+        </span>
+      </a>
+
+      <div class="login-product-copy">
+        <p class="login-kicker">Garage Access</p>
+        <h1>Your bikes. Your maintenance. Your records.</h1>
+        <p>
+          Sign in to manage a personal garage, track mileage, and keep maintenance work organized.
+        </p>
+      </div>
+
+      <div class="login-status-card">
+        <span class="login-status-dot"></span>
+        <div>
+          <strong>Auth V1 shell</strong>
+          <p>Demo access is available while account registration is being built.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="login-panel" aria-labelledby="login-title">
+      <div class="login-panel-header">
+        <p class="login-kicker">Welcome back</p>
+        <h2 id="login-title">Choose an account</h2>
+        <p>Continue with the demo rider account. No password is required for this temporary product preview.</p>
+      </div>
+
+      <button class="demo-user-card" type="button" data-demo-login>
+        <span class="demo-user-avatar">DR</span>
+        <span class="demo-user-info">
+          <strong>Demo Rider</strong>
+          <small>Public demo garage</small>
+        </span>
+        <span class="demo-user-action">Continue</span>
+      </button>
+
+      <button class="continue-session-btn" type="button" data-continue-session hidden>
+        Continue as <span data-active-user>current user</span>
+      </button>
+
+      <div class="login-coming-soon-card">
+        <div>
+          <strong>Use another account</strong>
+          <p>Email/password registration is coming next.</p>
+        </div>
+        <span>Locked</span>
+      </div>
+
+      <div class="login-footnote">
+        <a href="index.html">Back to product home</a>
+        <span>Backend auth coming soon</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="JavaScript/authShell.js?v=auth-shell-20260526"></script>
+</body>
+</html>
