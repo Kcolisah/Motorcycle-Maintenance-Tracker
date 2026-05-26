@@ -4,11 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const updatesPopoverList = document.getElementById("updates-popover-list");
 
   if (!updatesTrigger || !updatesPopover || !updatesPopoverList) {
-    console.error("Updates widget elements are missing.");
     return;
   }
 
   const updates = window.updates || [];
+  const PREVIEW_LIMIT = 3;
   const READ_STORAGE_KEY = "mtReadUpdateIds";
 
   function getReadIds() {
@@ -35,6 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function formatCount(count) {
     return count > 99 ? "99+" : String(count);
+  }
+
+  function getPreviewUpdates() {
+    return updates.slice(0, PREVIEW_LIMIT);
   }
 
   function ensureBadge() {
@@ -98,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </small>
       </div>
 
-      <div class="updates-popover-actions">
+      <div class="updates-popover-header-actions">
         <button class="updates-mark-all-btn" id="updates-mark-all-btn" type="button">
           ${unreadCount > 0 ? "Mark all read" : "Mark all unread"}
         </button>
@@ -119,17 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const badge = ensureBadge();
 
     badge.textContent = formatCount(unreadCount);
-    badge.hidden = unreadCount === 0;
+    badge.classList.toggle("is-visible", unreadCount > 0);
     updatesTrigger.classList.toggle("has-unread", unreadCount > 0);
-    updatesTrigger.setAttribute(
-      "aria-label",
-      unreadCount > 0 ? `Updates, ${unreadCount} unread` : "Updates"
-    );
+    updatesTrigger.setAttribute("aria-label", unreadCount > 0 ? `Updates, ${unreadCount} unread` : "Updates");
   }
 
   function renderList() {
-    updatesPopoverList.innerHTML = updates
-      .slice(0, 5)
+    updatesPopoverList.innerHTML = getPreviewUpdates()
       .map((update) => {
         const read = isRead(update.id);
         const statusText = read ? "Mark as unread" : "Mark as read";
@@ -179,17 +179,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("click", (event) => {
-    const clickedInsideUpdates =
-      updatesPopover.contains(event.target) || updatesTrigger.contains(event.target);
+    const clickedInsideUpdates = updatesPopover.contains(event.target) || updatesTrigger.contains(event.target);
 
     if (!clickedInsideUpdates) {
       updatesPopover.hidden = true;
     }
   });
 
-  window.addEventListener("mtUpdatesChanged", () => {
-    renderWidget();
-  });
+  window.addEventListener("mtUpdatesChanged", renderWidget);
 
   renderWidget();
 });
