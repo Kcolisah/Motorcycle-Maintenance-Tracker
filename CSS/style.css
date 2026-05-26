@@ -708,3 +708,28 @@ img { display: block; }
   .home-page .brand-container { grid-template-columns: 1fr; gap: 18px; }
   .home-page .brand-card { min-height: 170px; }
 }
+/*17. update notification states*/
+.updates-trigger { position: relative; }
+.updates-trigger.has-unread { color: #e0e0ce; border-color: rgba(255, 43, 43, 0.42); background: linear-gradient(180deg, rgba(255, 43, 43, 0.09), rgba(224, 224, 206, 0.018)); box-shadow: 0 0 0 1px rgba(255, 43, 43, 0.12), 0 0 24px rgba(255, 43, 43, 0.18); }
+.updates-trigger.has-unread::after { content: ""; position: absolute; inset: -6px; border: 1px solid rgba(255, 43, 43, 0.38); border-radius: 22px; opacity: 0.75; animation: updatesPulseRing 1.8s ease-in-out infinite; pointer-events: none; }
+.updates-unread-badge { position: absolute; top: 6px; right: 6px; min-width: 18px; height: 18px; padding: 0 5px; display: none; align-items: center; justify-content: center; border-radius: 999px; background: var(--accent); color: #050505; font-size: 10px; font-weight: 900; line-height: 1; z-index: 5; box-shadow: 0 0 18px rgba(255, 43, 43, 0.36); }
+.updates-unread-badge.is-visible { display: inline-flex; }
+.updates-popover-item { position: relative; }
+.updates-popover-item.is-unread { border-color: rgba(255, 43, 43, 0.38); background: radial-gradient(circle at 0% 0%, rgba(255, 43, 43, 0.12), transparent 34%), rgba(224, 224, 206, 0.022); }
+.updates-popover-item.is-unread::before { content: ""; position: absolute; top: 16px; right: 16px; width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 16px rgba(255, 43, 43, 0.7); }
+.updates-popover-item.is-read { opacity: 0.68; }
+.updates-popover-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+.updates-read-toggle, .updates-mark-all-btn { border: 1px solid rgba(224, 224, 206, 0.16); border-radius: 999px; background: rgba(224, 224, 206, 0.025); color: rgba(224, 224, 206, 0.74); font-size: 10px; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase; padding: 7px 10px; transition: 0.22s ease; }
+.updates-read-toggle:hover, .updates-mark-all-btn:hover { border-color: rgba(255, 43, 43, 0.48); color: var(--accent); transform: translateY(-1px); }
+.updates-popover-header-actions { display: flex; align-items: center; gap: 10px; }
+
+@keyframes updatesPulseRing {
+  0% { transform: scale(0.96); opacity: 0.68; }
+  70% { transform: scale(1.12); opacity: 0; }
+  100% { transform: scale(1.12); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .updates-trigger.has-unread::after { inset: -4px; }
+  .updates-popover-actions { justify-content: flex-start; }
+}
