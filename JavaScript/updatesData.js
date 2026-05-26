@@ -1,5 +1,15 @@
 window.updates = [
   {
+    id: "Authentication",
+    title: "Authentication Add-on",
+    date: "June 2026",
+    category: "Frontend",
+    shortText:
+   "Created an authentication login frontend page",
+    fullText:
+    "Created a frontend login page scheduled for June 2. While the backend is being prepared for launch, only the demo user option will be available."
+  },
+{
     id: "homepage-color-polish-update-popover",
     title: "Homepage Color Polish and Updates Panel Fix",
     date: "May 2026",
