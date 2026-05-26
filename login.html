@@ -39,13 +39,14 @@
       </div>
     </section>
 
-    <section class="login-panel" aria-labelledby="login-title">
+     <section class="login-panel" aria-labelledby="login-title">
+       <div class="login-card">
       <div class="login-panel-header">
         <p class="login-kicker">Welcome back</p>
-        <h2 id="login-title">Choose an account</h2>
-        <p>Continue with the demo rider account. No password is required for this temporary product preview.</p>
+        <h2 id="login-title">Sign in to your garage</h2>
+        <p>Use the demo rider account to preview the product while full account registration is being built.</p>
       </div>
-
+  
       <button class="demo-user-card" type="button" data-demo-login>
         <span class="demo-user-avatar">DR</span>
         <span class="demo-user-info">
@@ -54,24 +55,43 @@
         </span>
         <span class="demo-user-action">Continue</span>
       </button>
-
+  
       <button class="continue-session-btn" type="button" data-continue-session hidden>
         Continue as <span data-active-user>current user</span>
       </button>
-
+  
+      <div class="login-divider">
+        <span>Future account access</span>
+      </div>
+  
+      <form class="login-form-preview" aria-label="Future email login preview">
+        <label>
+          Email
+          <input type="email" placeholder="you@example.com" disabled />
+        </label>
+  
+        <label>
+          Password
+          <input type="password" placeholder="Password" disabled />
+        </label>
+  
+        <button type="button" disabled>Email sign in coming soon</button>
+      </form>
+  
       <div class="login-coming-soon-card">
         <div>
           <strong>Use another account</strong>
-          <p>Email/password registration is coming next.</p>
+          <p>Email/password registration will be connected after backend auth is ready.</p>
         </div>
         <span>Locked</span>
       </div>
-
+  
       <div class="login-footnote">
         <a href="index.html">Back to product home</a>
-        <span>Backend auth coming soon</span>
+        <span>Demo environment</span>
       </div>
-    </section>
+    </div>
+  </section>
   </main>
 
   <script src="JavaScript/authShell.js?v=auth-shell-20260526"></script>
