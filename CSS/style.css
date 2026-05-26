@@ -744,6 +744,8 @@ img { display: block; }
 @media (min-width: 901px) {
   .navbar { position: relative; }
   .navbar .logo-block { flex: 0 0 auto; }
-  .navbar .nav-links { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); justify-content: center; white-space: nowrap; }
-  .navbar .nav-action-group { margin-left: auto; }
+  .navbar .nav-links { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); justify-content: center; white-space: nowrap; z-index: 2; }
+  .navbar .nav-garage-btn, .navbar .nav-button, .navbar .account-menu, .navbar .nav-action-group { position: relative; z-index: 3; }
+  .navbar .nav-garage-btn, .navbar .nav-button { margin-left: auto; }
+  .navbar .account-menu { margin-left: 12px; }
 }
