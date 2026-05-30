@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Motorcycle Tracker | Sign In</title>
+  <title>Motorcycle Tracker | Create Account</title>
 
   <link rel="stylesheet" href="CSS/style.css?v=auth-v1" />
   <link rel="stylesheet" href="CSS/authShell.css?v=auth-v1" />
@@ -15,7 +15,7 @@
   <link rel="icon" href="images/LOGO.png">
 </head>
 
-<body class="login-page">
+<body class="login-page register-page">
   <main class="login-shell">
     <section class="login-brand-panel">
       <div class="login-logo-block">
@@ -27,37 +27,44 @@
       </div>
 
       <div class="login-product-copy">
-        <p class="login-kicker">Garage Access</p>
-        <h1>Your bikes. Your maintenance. Your records.</h1>
+        <p class="login-kicker">Create Garage</p>
+        <h1>Build your own maintenance system.</h1>
         <p>
-          Sign in to manage your personal garage, track mileage, and keep maintenance work organized under your own account.
+          Create an account, save motorcycles to your personal garage, and keep service records tied to your own profile.
         </p>
       </div>
 
       <div class="login-status-card">
         <span class="login-status-dot"></span>
         <div>
-          <strong>Auth V1 active</strong>
-          <p>Backend login, JWT sessions, and user-owned garage data are connected.</p>
+          <strong>User-owned data</strong>
+          <p>Your garage and maintenance tasks are protected through JWT authentication.</p>
         </div>
       </div>
     </section>
 
-    <section class="login-panel" aria-labelledby="login-title">
+    <section class="login-panel" aria-labelledby="register-title">
       <div class="login-card login-card-compact">
         <div class="login-panel-header">
-          <p class="login-kicker">Welcome back</p>
-          <h2 id="login-title">Sign in to your garage</h2>
-          <p>Use your account to access your saved bikes and maintenance records.</p>
+          <p class="login-kicker">New account</p>
+          <h2 id="register-title">Create your account</h2>
+          <p>Start tracking your motorcycles with a private garage and maintenance workflow.</p>
         </div>
 
         <div class="auth-message" data-auth-message hidden></div>
 
-        <button class="continue-session-btn" type="button" data-continue-session hidden>
-          Continue as <span data-active-user>current user</span>
-        </button>
+        <form class="login-form-preview" data-register-form aria-label="Create account form">
+          <label>
+            Username
+            <input
+              type="text"
+              name="username"
+              placeholder="kruz"
+              autocomplete="username"
+              required
+            />
+          </label>
 
-        <form class="login-form-preview" data-login-form aria-label="Email login form">
           <label>
             Email
             <input
@@ -74,32 +81,27 @@
             <input
               type="password"
               name="password"
-              placeholder="Password"
-              autocomplete="current-password"
+              placeholder="Create password"
+              autocomplete="new-password"
               required
             />
           </label>
 
-          <button type="submit" data-login-submit>Sign in</button>
+          <button type="submit" data-register-submit>Create account</button>
         </form>
 
         <div class="auth-page-switch">
-          <span>New to Motorcycle Tracker?</span>
-          <a href="register.html">Create an account</a>
+          <span>Already have an account?</span>
+          <a href="login.html">Sign in</a>
         </div>
 
-        <div class="login-divider">
-          <span>Demo access</span>
+        <div class="login-coming-soon-card">
+          <div>
+            <strong>Next security layer</strong>
+            <p>Email verification can be added later in Auth V1.5.</p>
+          </div>
+          <span>V1</span>
         </div>
-
-        <button class="demo-user-card is-secondary-demo" type="button" data-demo-login>
-          <span class="demo-user-avatar">DR</span>
-          <span class="demo-user-info">
-            <strong>Demo Rider</strong>
-            <small>Demo access will be reconnected after Auth V1 frontend testing.</small>
-          </span>
-          <span class="demo-user-action">Soon</span>
-        </button>
 
         <div class="login-footnote">
           <a href="index.html">Back to product home</a>
