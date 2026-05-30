@@ -384,9 +384,16 @@
         event.preventDefault();
         setFormLoading(loginForm, true);
 
-        const formData = new FormData(loginForm);
-        const email = formData.get("email");
-        const password = formData.get("password");
+        const emailInput = loginForm.querySelector("input[name='email'], input[type='email']");
+        const passwordInput = loginForm.querySelector("input[name='password'], input[type='password']");
+
+        const email = emailInput?.value.trim() || "";
+        const password = passwordInput?.value || "";
+
+if (!email || !password) {
+  showAuthMessage("Email and password are required.", "error");
+  return;
+}
 
         try {
           await signIn(email, password, redirectTarget);
