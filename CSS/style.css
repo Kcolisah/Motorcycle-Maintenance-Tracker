@@ -1511,3 +1511,24 @@ img { display: block; }
     .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; overflow-x: clip !important; }
   }
 }
+
+/*38. desktop 150% composition center pass
+  Runs only on the measured desktop 150% zoom state. Mobile breakpoints are untouched. */
+@media (min-width: 1200px) and (max-width: 1800px) and (min-resolution: 2.75dppx) {
+  .home-page-shell.home-state .hero-content { padding-left: 54px !important; padding-right: 54px !important; }
+  .home-page-shell.home-state .hero-main { width: min(100%, 2220px) !important; margin-inline: auto !important; min-height: 760px !important; display: grid !important; grid-template-columns: minmax(390px, 0.72fr) minmax(940px, 1.52fr) minmax(390px, 0.72fr) !important; gap: 22px !important; align-items: center !important; }
+  .home-page-shell.home-state .hero-left { max-width: 330px !important; padding-left: 0 !important; justify-self: start !important; }
+  .home-page-shell.home-state .hero-left h2 { font-size: 60px !important; line-height: 1.05 !important; }
+  .home-page-shell.home-state .hero-left p { max-width: 285px !important; font-size: 17px !important; line-height: 1.7 !important; }
+  .home-page-shell.home-state .hero-image-wrap { min-height: 650px !important; justify-content: center !important; transform: translateX(-4%) !important; }
+  .home-page-shell.home-state .hero-3d-stage { width: min(100%, 960px) !important; height: 640px !important; margin-inline: auto !important; }
+  .home-page-shell.home-state .hero-3d-stage model-viewer, .home-page-shell.home-state .hero-3d-bike { transform: scale(1.28) !important; transform-origin: center !important; }
+  .home-page-shell.home-state .hero-right { display: flex !important; min-height: 620px !important; align-items: flex-end !important; justify-content: center !important; padding-right: 0 !important; transform: translateX(-8%) !important; opacity: 1 !important; visibility: visible !important; }
+  .home-page-shell.home-state .spec-box { display: block !important; width: 100% !important; max-width: 330px !important; opacity: 1 !important; visibility: visible !important; }
+  .home-page-shell.home-state .spec-box h3 { font-size: 34px !important; line-height: 1.08 !important; }
+  .home-page-shell.home-state .spec-box p { font-size: 16px !important; line-height: 1.7 !important; }
+  .home-page-shell.home-state .background-word { left: 52% !important; font-size: clamp(128px, 15.2vw, 238px) !important; letter-spacing: 3px !important; }
+  .home-page-shell.home-state .top-word { top: 132px !important; }
+  .home-page-shell.home-state .bottom-word { top: 322px !important; }
+  .home-page-shell.home-state .brand-marquee { bottom: 64px !important; }
+}
