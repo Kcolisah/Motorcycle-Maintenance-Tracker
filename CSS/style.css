@@ -1425,3 +1425,16 @@ img { display: block; }
   .garage-page .navbar .nav-links a, .garage-page-shell .navbar .nav-links a, .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { height: 30px !important; font-size: 15px !important; }
   .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover, .garage-page .navbar .nav-button, .garage-page .navbar .nav-button:hover, .garage-page-shell .navbar .nav-button, .garage-page-shell .navbar .nav-button:hover { width: min(100%, 380px) !important; max-width: 340px !important; height: 56px !important; border-radius: 21px !important; }
 }
+
+/*36. 150 percent browser zoom compensation
+  Goal: keep high-DPI / 150% zoom environments visually matching the 100% layout. */
+@media (min-resolution: 1.45dppx) {
+  body { background: #000 !important; overflow-x: hidden !important; }
+  .page-shell { width: 150% !important; min-height: 150svh !important; zoom: 0.666667 !important; }
+}
+
+@supports not (zoom: 0.666667) {
+  @media (min-resolution: 1.45dppx) {
+    .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; }
+  }
+}
