@@ -1188,3 +1188,22 @@ img { display: block; }
   .maintenance-sidebar, .maintenance-loading-state, .maintenance-task-form, .maintenance-column, .maintenance-task-card, .maintenance-bike-card { padding: 14px !important; }
   .maintenance-sidebar h1, .maintenance-main-header h2 { font-size: clamp(26px, 7.4vw, 32px) !important; }
 }
+
+/*28. contact mobile final scroll fix*/
+@media (max-width: 780px) {
+  .contact-page-shell, .contact-main { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: clip !important; overflow-y: visible !important; box-sizing: border-box !important; }
+  .contact-page-shell { min-height: 100svh !important; height: auto !important; position: relative !important; }
+  .contact-main { min-height: auto !important; height: auto !important; }
+  .contact-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: clip !important; overflow-y: visible !important; box-sizing: border-box !important; }
+  .contact-hero, .contact-hero-inner, .contact-hero-grid, .contact-copy, .contact-form-wrap, .contact-form, .contact-mini-info { width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; overflow-x: clip !important; }
+  .contact-hero { min-height: auto !important; height: auto !important; overflow-y: visible !important; padding-left: 16px !important; padding-right: 16px !important; }
+  .contact-hero-inner { margin-left: auto !important; margin-right: auto !important; }
+  .contact-mini-info { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .contact-info-card, .contact-field, .contact-field input, .contact-field textarea, .contact-form input, .contact-form textarea, .contact-submit-btn { max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; }
+  .contact-page-shell .account-menu { max-width: 100% !important; min-width: 0 !important; }
+  .contact-page-shell .account-menu-panel, .contact-page-shell .account-dropdown, .contact-page-shell .account-menu-dropdown { right: 0 !important; left: auto !important; max-width: calc(100vw - 32px) !important; box-sizing: border-box !important; }
+}
+@media (max-width: 430px) {
+  .contact-hero { padding-left: 14px !important; padding-right: 14px !important; }
+  .contact-mini-info { gap: 7px !important; }
+}
