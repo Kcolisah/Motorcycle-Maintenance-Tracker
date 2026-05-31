@@ -176,3 +176,43 @@
 @media (max-width: 430px) {
   .account-dropdown { left: 18px !important; right: 18px !important; }
 }
+
+/* 18. Compact mobile login and register pages */
+@media (max-width: 760px) {
+  .login-page { overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .login-page .login-shell { min-height: 100svh; display: flex; flex-direction: column; }
+  .login-page .login-brand-panel { padding: calc(16px + env(safe-area-inset-top)) 20px 8px; }
+  .login-page .login-logo-block { gap: 10px; }
+  .login-page .login-brand-panel .logo-mark { width: 52px; min-width: 52px; height: 52px; border-radius: 16px; font-size: 17px; }
+  .login-page .login-logo-text strong { font-size: 12px; letter-spacing: 1.4px; }
+  .login-page .login-logo-text span { margin-top: 3px; font-size: 12px; letter-spacing: 0.7px; }
+  .login-page .login-panel { padding: 10px 20px calc(26px + env(safe-area-inset-bottom)); }
+  .login-page .login-card { padding: 20px 18px; gap: 14px; border-radius: 24px; }
+  .login-page .login-kicker { margin-bottom: 8px; font-size: 10px; letter-spacing: 3px; }
+  .login-page .login-panel-header h2 { margin-bottom: 8px; font-size: clamp(30px, 9.6vw, 42px); line-height: 1.02; letter-spacing: -1.4px; }
+  .login-page .login-panel-header p:not(.login-kicker) { font-size: 14px; line-height: 1.45; }
+  .login-page .login-form-preview { gap: 11px; }
+  .login-page .login-form-preview label { gap: 6px; font-size: 10px; letter-spacing: 0.9px; }
+  .login-page .login-form-preview input { height: 46px; padding: 0 14px; border-radius: 14px; font-size: 16px; line-height: 1.2; }
+  .login-page .login-form-preview button { height: 48px; border-radius: 16px; font-size: 12px; }
+  .login-page .auth-page-switch { gap: 5px; font-size: 12px; }
+  .login-page .login-divider { gap: 10px; font-size: 10px; letter-spacing: 0.9px; }
+  .login-page .demo-user-card { min-height: auto; padding: 14px; gap: 10px; border-radius: 18px; }
+  .login-page .demo-user-avatar { width: 42px; height: 42px; border-radius: 14px; font-size: 12px; }
+  .login-page .demo-user-info strong { margin-bottom: 3px; font-size: 14px; }
+  .login-page .demo-user-info small { font-size: 11.5px; line-height: 1.3; }
+  .login-page .demo-user-action { padding: 7px 10px; font-size: 10px; }
+  .login-page .login-coming-soon-card { padding: 14px; border-radius: 18px; }
+  .login-page .login-coming-soon-card strong { font-size: 13px; }
+  .login-page .login-coming-soon-card p { font-size: 12px; line-height: 1.35; }
+  .login-page .login-coming-soon-card span { padding: 6px 8px; font-size: 10px; }
+  .login-page .login-footnote { gap: 6px; font-size: 11px; }
+}
+
+@media (max-width: 430px) {
+  .login-page .login-brand-panel { padding: calc(14px + env(safe-area-inset-top)) 18px 6px; }
+  .login-page .login-panel { padding: 8px 18px calc(22px + env(safe-area-inset-bottom)); }
+  .login-page .login-card { padding: 18px 16px; gap: 13px; border-radius: 22px; }
+  .login-page .login-panel-header h2 { font-size: clamp(30px, 9.3vw, 38px); }
+  .register-page .login-coming-soon-card { display: none; }
+}
