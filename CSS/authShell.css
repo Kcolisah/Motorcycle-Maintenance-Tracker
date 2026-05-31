@@ -161,3 +161,18 @@
   .account-dropdown-header { padding: 14px; gap: 12px; }
   .account-dropdown-link { min-height: 50px; font-size: 15px; }
 }
+
+/* 17. compact mobile account dropdown */
+@media (max-width: 900px) {
+  .account-dropdown { position: fixed; top: calc(88px + env(safe-area-inset-top)) !important; left: 28px !important; right: 28px !important; width: auto !important; max-width: none !important; max-height: calc(100svh - 116px) !important; overflow-y: auto !important; padding: 12px !important; border-radius: 22px !important; z-index: 10001 !important; }
+  .account-dropdown-header { padding: 10px !important; gap: 10px !important; }
+  .account-avatar-large { width: 40px !important; min-width: 40px !important; height: 40px !important; }
+  .account-dropdown-header strong { font-size: 13px !important; }
+  .account-dropdown-header p { font-size: 11px !important; }
+  .account-dropdown-link { min-height: 44px !important; padding: 0 10px !important; border-radius: 12px !important; font-size: 13px !important; }
+  .account-signout-btn { margin-top: 4px !important; }
+}
+
+@media (max-width: 430px) {
+  .account-dropdown { left: 18px !important; right: 18px !important; }
+}
