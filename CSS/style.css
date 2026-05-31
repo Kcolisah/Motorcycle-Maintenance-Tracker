@@ -757,3 +757,82 @@ img { display: block; }
   .navbar .nav-garage-btn, .navbar .nav-button { margin-left: auto; }
   .navbar .account-menu { margin-left: 12px; }
 }
+
+/*18. Mobile layout polish */
+@media (max-width: 760px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .page-shell { width: 100%; overflow-x: hidden; }
+
+  .navbar { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "logo account" "links links" "garage garage"; align-items: center; justify-content: stretch; gap: 16px 14px; min-height: auto; padding: 22px 20px 20px; }
+  .navbar .logo-block { grid-area: logo; justify-self: start; min-width: 0; gap: 12px; }
+  .navbar .logo-mark { width: 54px; height: 54px; border-radius: 16px; font-size: 17px; }
+  .navbar .logo-text span:first-child { font-size: 13px; letter-spacing: 1.3px; }
+  .navbar .logo-text span:last-child { font-size: 12px; letter-spacing: 0.9px; }
+  .navbar .nav-links { grid-area: links; position: static !important; transform: none !important; width: 100%; display: flex; justify-content: center; flex-wrap: nowrap; gap: clamp(18px, 7vw, 34px); }
+  .navbar .nav-links a { font-size: clamp(14px, 4.2vw, 16px); line-height: 1.2; }
+  .navbar .nav-garage-btn, .navbar .nav-garage-btn:hover, .navbar .nav-button, .navbar .nav-button:hover { grid-area: garage; justify-self: center; width: min(100%, 320px); min-width: 0; height: 62px; justify-content: center; gap: 12px; padding: 0 22px; border-radius: 24px; transform: none; }
+  .navbar .nav-garage-btn > span:last-child { opacity: 1; transform: none; font-size: 15px; letter-spacing: 1.4px; }
+  .navbar .garage-icon { width: 22px; height: 22px; }
+  .navbar .garage-count-badge { top: 10px; right: 18px; min-width: 22px; height: 22px; font-size: 11px; }
+  .navbar .account-menu { grid-area: account; justify-self: end; margin-left: 0; }
+
+  .home-page .hero-section { display: flex; flex-direction: column; min-height: auto; }
+  .home-page .left-panel { order: 2; display: block; width: 100%; padding: 0 20px 18px; border-right: 0; }
+  .home-page .right-panel { display: none; }
+  .home-page .side-icon-rail { width: min(100%, 380px); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .home-page .side-icon-link, .home-page .side-icon-link:hover, .home-page .side-icon-link.active { width: 100%; min-height: 72px; justify-content: center; padding: 0 14px; gap: 10px; border-radius: 22px; transform: none; }
+  .home-page .side-icon-text { opacity: 1; transform: none; font-size: 13px; letter-spacing: 1.2px; }
+  .home-page .side-icon-svg, .home-page .side-icon-svg svg { width: 22px; height: 22px; flex-basis: 22px; }
+  .home-page .updates-menu-wrap { width: 100%; }
+  .home-page .updates-count-badge { top: 10px; right: 12px; min-width: 22px; height: 22px; font-size: 11px; }
+  .home-page .updates-popover { top: 82px; width: min(92vw, 360px); max-width: min(92vw, 360px); }
+
+  .home-page .hero-content { order: 3; padding: 20px 20px calc(70px + env(safe-area-inset-bottom)); }
+  .home-page .hero-main { gap: 20px; }
+  .home-page .hero-label { text-align: left; margin-top: 4px; margin-bottom: 12px; font-size: 16px; }
+  .home-page .hero-left h2 { font-size: clamp(38px, 11.5vw, 54px); line-height: 0.96; letter-spacing: -1.2px; }
+  .home-page .hero-left p { margin-top: 18px; font-size: clamp(16px, 4.6vw, 18px); line-height: 1.65; }
+  .home-page .hero-actions { margin-top: 22px; }
+  .home-page .primary-btn, .home-page .secondary-btn { min-height: 54px; border-radius: 18px; }
+  .home-page .brand-marquee { margin: 10px 0 20px; opacity: 0.58; }
+  .home-page .brand-marquee-track { gap: 26px; }
+  .home-page .brand-marquee-track span { font-size: 12px; letter-spacing: 3px; }
+  .home-page .hero-image-wrap { margin: 8px 0 2px; }
+  .home-page .hero-3d-stage { height: min(72vw, 330px); }
+  .home-page .spec-box { padding: 20px; border-radius: 20px; }
+
+  .home-page .tracker-steps-section, .home-page .tracker-section, .home-page .info-section { padding-left: 20px; padding-right: 20px; }
+  .home-page .brand-container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .home-page .brand-card { min-height: 150px; padding: 18px 12px; border-radius: 22px; }
+  .home-page .brand-card img { width: 116px; height: 66px; }
+  .home-page .brand-card span { font-size: 16px; }
+
+  .about-page-shell .navbar { padding: 22px 20px 20px; gap: 16px 14px; }
+  .about-page-shell .about-hero { padding: 52px 22px 62px; }
+  .about-page-shell .about-hero-grid { gap: 30px; }
+  .about-page-shell .about-hero-left h1 { font-size: clamp(30px, 8vw, 38px); line-height: 1.05; letter-spacing: -0.8px; }
+  .about-page-shell .about-lead { font-size: 16px; line-height: 1.7; }
+  .about-page-shell .tracker-steps-header h2, .about-page-shell .info-box h2, .about-page-shell .about-values-heading h2, .about-page-shell .about-author-left h2 { font-size: clamp(28px, 8vw, 38px); line-height: 1.06; }
+}
+
+/*19. Small phone polish */
+@media (max-width: 430px) {
+  .navbar { padding: 20px 16px 18px; gap: 14px 12px; }
+  .navbar .logo-mark { width: 50px; height: 50px; }
+  .navbar .logo-text span:first-child { font-size: 12px; }
+  .navbar .logo-text span:last-child { font-size: 11px; }
+  .navbar .nav-links { gap: 22px; }
+  .navbar .nav-links a { font-size: 14px; }
+  .navbar .nav-garage-btn, .navbar .nav-garage-btn:hover, .navbar .nav-button, .navbar .nav-button:hover { width: min(100%, 292px); height: 58px; }
+
+  .home-page .left-panel { padding-inline: 16px; }
+  .home-page .side-icon-rail { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .home-page .side-icon-link, .home-page .side-icon-link:hover, .home-page .side-icon-link.active { min-height: 66px; border-radius: 20px; }
+  .home-page .side-icon-text { font-size: 12px; }
+  .home-page .hero-content { padding-inline: 16px; }
+  .home-page .hero-left h2 { font-size: clamp(36px, 12vw, 48px); }
+  .home-page .hero-left p { font-size: 16px; }
+  .home-page .brand-container { grid-template-columns: 1fr; }
+
+  .about-page-shell .about-hero-left h1 { font-size: 30px; }
+}
