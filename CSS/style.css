@@ -1426,15 +1426,73 @@ img { display: block; }
   .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover, .garage-page .navbar .nav-button, .garage-page .navbar .nav-button:hover, .garage-page-shell .navbar .nav-button, .garage-page-shell .navbar .nav-button:hover { width: min(100%, 380px) !important; max-width: 340px !important; height: 56px !important; border-radius: 21px !important; }
 }
 
-/*36. 150 percent browser zoom compensation
-  Goal: keep high-DPI / 150% zoom environments visually matching the 100% layout. */
-@media (min-resolution: 1.45dppx) {
-  body { background: #000 !important; overflow-x: hidden !important; }
+/*36. desktop-only layout refinement
+  Desktop goal: keep the clean 100% layout structure, keep nav actions visible, and stop oversized background words from spilling across the page.
+  Mobile is intentionally left to the existing max-width rules above. */
+@media (min-width: 901px) {
+  html, body { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; }
+  .page-shell { width: 100% !important; min-height: 100svh !important; zoom: 1 !important; transform: none !important; transform-origin: initial !important; overflow-x: clip !important; }
+
+  .navbar { display: grid !important; grid-template-columns: minmax(190px, auto) minmax(0, 1fr) auto auto !important; align-items: center !important; column-gap: 22px !important; min-height: 100px !important; overflow: visible !important; }
+  .navbar .logo-block { grid-column: 1 !important; justify-self: start !important; min-width: max-content !important; }
+  .navbar .nav-links { grid-column: 2 !important; position: static !important; left: auto !important; top: auto !important; transform: none !important; justify-self: center !important; justify-content: center !important; min-width: 0 !important; max-width: 100% !important; gap: clamp(22px, 2.25vw, 42px) !important; white-space: nowrap !important; }
+  .navbar .nav-links a { font-size: clamp(14px, 1.08vw, 18px) !important; }
+  .navbar .nav-garage-btn, .navbar .nav-button { grid-column: 3 !important; justify-self: end !important; margin-left: 0 !important; }
+  .navbar .account-menu { grid-column: 4 !important; justify-self: end !important; margin-left: 0 !important; }
+  .navbar .nav-garage-btn, .navbar .nav-button, .navbar .account-menu, .navbar .account-menu-trigger { flex-shrink: 0 !important; }
+
+  .maintenance-page-shell .navbar .nav-links { gap: clamp(12px, 1.35vw, 24px) !important; }
+  .maintenance-page-shell .navbar .nav-links a { font-size: clamp(12px, 0.95vw, 15px) !important; }
+  .updates-page-shell .navbar .nav-links { gap: clamp(16px, 1.7vw, 32px) !important; }
+
+  .hero-section, .hero-content, .bikes-display-grid, .feature-bike-layout, .feature-main, .about-hero, .contact-hero { overflow: hidden !important; }
+  .hero-content { min-width: 0 !important; }
+  .background-word { left: 50% !important; max-width: none !important; font-size: clamp(108px, 14.2vw, 238px) !important; letter-spacing: clamp(1px, 0.22vw, 4px) !important; }
+  .top-word { top: clamp(92px, 8.6vw, 130px) !important; }
+  .bottom-word { top: clamp(218px, 20.5vw, 320px) !important; }
+  .about-hero-bg, .contact-hero-bg { max-width: calc(100vw - 96px) !important; overflow: hidden !important; text-align: center !important; }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .navbar { padding-inline: 28px !important; column-gap: 16px !important; }
+  .logo-mark { width: 50px !important; height: 50px !important; border-radius: 14px !important; }
+  .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.35px !important; }
+  .logo-text span:last-child { font-size: 12px !important; }
+  .nav-garage-btn, .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 16px !important; }
+  .nav-garage-btn:hover { width: 126px !important; }
+  .account-menu-trigger:hover, .account-menu-trigger[aria-expanded="true"] { width: 120px !important; }
+
+  .home-page-shell .hero-section { grid-template-columns: 78px minmax(0, 1fr) 0 !important; }
+  .home-page-shell .right-panel { display: none !important; }
+  .home-page-shell .left-panel { padding-inline: 10px !important; }
+  .home-page-shell .hero-content { padding: 10px 30px 42px !important; }
+  .home-page-shell .hero-main { min-height: 640px !important; grid-template-columns: minmax(240px, 0.8fr) minmax(340px, 1.2fr) !important; gap: 24px !important; }
+  .home-page-shell .hero-left { max-width: 300px !important; }
+  .home-page-shell .hero-left h2 { font-size: clamp(40px, 5.2vw, 56px) !important; }
+  .home-page-shell .hero-left p { font-size: 15px !important; line-height: 1.6 !important; }
+  .home-page-shell .hero-image-wrap { min-height: 560px !important; justify-content: flex-end !important; }
+  .home-page-shell .hero-bike { width: min(100%, 590px) !important; max-height: 560px !important; }
+  .home-page-shell .hero-right { display: none !important; }
+  .home-page-shell .background-word { left: 62% !important; font-size: clamp(92px, 12vw, 150px) !important; }
+  .home-page-shell .top-word { top: 98px !important; }
+  .home-page-shell .bottom-word { top: 220px !important; }
+  .home-page-shell .brand-marquee { bottom: 42px !important; }
+
+  .about-hero, .contact-hero { padding-inline: 42px !important; }
+  .about-hero-grid, .contact-hero-grid { gap: 32px !important; }
+  .about-hero-left h1, .contact-copy h1 { font-size: clamp(42px, 5vw, 62px) !important; }
+  .about-highlight-card, .contact-form { max-width: 340px !important; }
+
+  .garage-layout, .maintenance-layout, .updates-layout { padding-inline: 32px !important; gap: 26px !important; }
+  .garage-sidebar, .maintenance-sidebar, .updates-sidebar { min-width: 0 !important; }
+}
+
+@media (max-width: 900px) and (min-resolution: 1.45dppx) {
   .page-shell { width: 150% !important; min-height: 150svh !important; zoom: 0.666667 !important; }
 }
 
 @supports not (zoom: 0.666667) {
-  @media (min-resolution: 1.45dppx) {
+  @media (max-width: 900px) and (min-resolution: 1.45dppx) {
     .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; }
   }
 }
