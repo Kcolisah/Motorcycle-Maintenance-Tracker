@@ -76,6 +76,14 @@ let currentFilteredBikes = [];
 let heroBrandStartIndex = 0;
 let heroStage = "home";
 
+function setHeroStage(stage) {
+  heroStage = stage;
+
+  if (homePageShell) {
+    homePageShell.dataset.heroStage = stage;
+  }
+}
+
 const heroBrandsPerPage = 4;
 
 const brandContainer = document.getElementById("brand-container");
@@ -362,7 +370,7 @@ function renderHeroBrands() {
     `;
 
     button.addEventListener("click", () => {
-      selectBrand(brand);
+      selectBrand(brand, { skipScroll: true });
       setActiveHeroBrandCard(brand);
       enterHeroCategoryMode(brand);
     });
@@ -390,7 +398,7 @@ function renderHeroCategories(brand) {
 
     button.addEventListener("click", () => {
       selectedCategory = category;
-      selectCategory(category);
+      selectCategory(category, { skipScroll: true });
       enterHeroMotorcycleMode(brand, category);
     });
 
@@ -453,7 +461,7 @@ function updateRightPanelForBrandMode() {
 }
 
 function enterHeroBrandMode() {
-  heroStage = "brand";
+  setHeroStage("brand");
   showHeroNavigationUI();
   clearFadeClasses();
 
@@ -483,7 +491,7 @@ function enterHeroBrandMode() {
 }
 
 function enterHeroCategoryMode(brand) {
-  heroStage = "category";
+  setHeroStage("category");
   clearFadeClasses();
 
   heroBrandStage.classList.add("hero-fade-out");
@@ -507,7 +515,7 @@ function enterHeroCategoryMode(brand) {
 }
 
 function enterHeroMotorcycleMode(brand, category) {
-  heroStage = "motorcycle";
+  setHeroStage("motorcycle");
   clearFadeClasses();
 
   heroCategoryStage.classList.add("hero-fade-out");
@@ -531,7 +539,7 @@ function enterHeroMotorcycleMode(brand, category) {
 }
 
 function resetToHomeState() {
-  heroStage = "home";
+  setHeroStage("home");
   selectedBrand = "";
   selectedCategory = "";
   selectedMotorcycle = null;
@@ -588,7 +596,7 @@ function resetToHomeState() {
 
 function handleBackAction() {
   if (heroStage === "motorcycle") {
-    heroStage = "category";
+    setHeroStage("category");
     clearFadeClasses();
 
     heroMotorcycleStage.classList.add("hero-fade-out");
@@ -610,7 +618,7 @@ function handleBackAction() {
   }
 
   if (heroStage === "category") {
-    heroStage = "brand";
+    setHeroStage("brand");
     clearFadeClasses();
 
     heroCategoryStage.classList.add("hero-fade-out");
@@ -639,7 +647,7 @@ function handleBackAction() {
   }
 }
 
-function selectBrand(brand) {
+function selectBrand(brand, options = {}) {
   selectedBrand = brand;
   selectedCategory = "";
   selectedMotorcycle = null;
@@ -658,14 +666,16 @@ function selectBrand(brand) {
     bikeResults.innerHTML = `<p class="result-empty">Select a category for ${brand}.</p>`;
   }
 
-  setTimeout(() => {
-    if (categoryContainer && !categoryContainer.hidden) {
-      smoothScrollToElement(categoryContainer);
-    }
-  }, 120);
+  if (!options.skipScroll) {
+    setTimeout(() => {
+      if (categoryContainer && !categoryContainer.hidden) {
+        smoothScrollToElement(categoryContainer);
+      }
+    }, 120);
+  }
 }
 
-function selectCategory(category) {
+function selectCategory(category, options = {}) {
   if (!selectedBrand) {
     bikeResults.innerHTML = `<p class="result-empty">Select a brand first.</p>`;
     return;
@@ -679,11 +689,13 @@ function selectCategory(category) {
 
   renderBikes(currentFilteredBikes);
 
-  setTimeout(() => {
-    if (bikeResults) {
-      smoothScrollToElement(bikeResults);
-    }
-  }, 120);
+  if (!options.skipScroll) {
+    setTimeout(() => {
+      if (bikeResults) {
+        smoothScrollToElement(bikeResults);
+      }
+    }, 120);
+  }
 }
 
 function renderBikes(bikes) {
@@ -825,6 +837,7 @@ if (heroOpenTrackerLink) {
 }
 
 if (homePageShell) {
+  setHeroStage("home");
   loadMotorcyclesFromApi().finally(() => {
     resetToHomeState();
     restoreTrackerStateOnLoad();
