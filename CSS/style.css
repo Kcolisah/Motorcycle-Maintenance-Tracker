@@ -1487,56 +1487,72 @@ img { display: block; }
   .garage-sidebar, .maintenance-sidebar, .updates-sidebar { min-width: 0 !important; }
 }
 
-/*37. desktop browser 150 percent zoom lock
-  Goal: when desktop zoom reduces the CSS viewport to the 901-1200px range, render the page at the same composition as the normal 100% desktop view.
-  Mobile stays untouched because this starts at 901px only. */
-@media (min-width: 901px) and (max-width: 1200px) and (min-resolution: 1.45dppx) {
-  html, body { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; }
-  .page-shell { width: 150% !important; max-width: none !important; min-height: 150svh !important; zoom: 0.666667 !important; transform: none !important; transform-origin: top left !important; overflow-x: clip !important; }
-
-  .navbar { display: grid !important; grid-template-columns: minmax(220px, auto) minmax(0, 1fr) auto auto !important; align-items: center !important; min-height: 100px !important; padding: 28px 42px !important; column-gap: 28px !important; overflow: visible !important; }
-  .navbar .logo-block { grid-column: 1 !important; justify-self: start !important; min-width: max-content !important; }
-  .navbar .nav-links { grid-column: 2 !important; position: static !important; left: auto !important; top: auto !important; transform: none !important; justify-self: center !important; justify-content: center !important; gap: 42px !important; white-space: nowrap !important; }
-  .navbar .nav-links a { font-size: 18px !important; }
-  .navbar .nav-garage-btn, .navbar .nav-button { grid-column: 3 !important; justify-self: end !important; margin-left: 0 !important; width: 54px !important; height: 54px !important; min-width: 54px !important; border-radius: 18px !important; }
-  .navbar .account-menu { grid-column: 4 !important; justify-self: end !important; margin-left: 0 !important; }
-  .navbar .account-menu-trigger { width: 54px !important; height: 54px !important; min-width: 54px !important; border-radius: 18px !important; }
-
-  .home-page-shell .hero-section { min-height: calc(150svh - 100px) !important; display: grid !important; grid-template-columns: 132px minmax(0, 1fr) 80px !important; }
-  .home-page-shell .left-panel, .home-page-shell .right-panel { display: flex !important; }
-  .home-page-shell .left-panel { padding: 30px 14px !important; }
-  .home-page-shell .hero-content { padding: 12px 48px 48px !important; min-width: 0 !important; }
-  .home-page-shell .hero-main { width: 100% !important; min-height: 760px !important; display: grid !important; grid-template-columns: minmax(300px, 1fr) minmax(560px, 1.5fr) minmax(280px, 0.95fr) !important; align-items: center !important; gap: 10px !important; margin: 0 !important; }
-  .home-page-shell .hero-left { max-width: 320px !important; padding-left: 10px !important; justify-self: start !important; }
-  .home-page-shell .hero-left h2 { font-size: 60px !important; line-height: 1.05 !important; letter-spacing: -0.5px !important; }
-  .home-page-shell .hero-left p { max-width: 280px !important; font-size: 17px !important; line-height: 1.7 !important; }
-  .home-page-shell .hero-actions { max-width: 240px !important; display: flex !important; flex-direction: column !important; gap: 14px !important; }
-  .home-page-shell .hero-image-wrap { min-height: 700px !important; justify-content: center !important; transform: none !important; }
-  .home-page-shell .hero-3d-stage { width: min(100%, 980px) !important; height: 620px !important; margin: 0 auto !important; }
-  .home-page-shell .hero-3d-stage model-viewer, .home-page-shell .hero-3d-bike { transform: scale(1.35) !important; transform-origin: center !important; }
-  .home-page-shell .hero-right { min-height: 620px !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; align-items: flex-end !important; padding-right: 10px !important; transform: none !important; opacity: 1 !important; visibility: visible !important; }
-  .home-page-shell .spec-box { display: block !important; max-width: 310px !important; text-align: right !important; opacity: 1 !important; visibility: visible !important; }
-  .home-page-shell .spec-box h3 { font-size: 34px !important; line-height: 1.08 !important; }
-  .home-page-shell .spec-box p { font-size: 16px !important; line-height: 1.7 !important; }
-  .home-page-shell .background-word { left: 50% !important; font-size: clamp(120px, 17vw, 260px) !important; letter-spacing: 4px !important; }
-  .home-page-shell .top-word { top: 130px !important; }
-  .home-page-shell .bottom-word { top: 320px !important; }
-  .home-page-shell .brand-marquee { bottom: 64px !important; }
-
-  .contact-hero { min-height: calc(150svh - 100px) !important; padding: 42px 56px !important; display: flex !important; align-items: center !important; overflow: hidden !important; }
-  .contact-hero-inner { width: 100% !important; max-width: 1280px !important; margin: 0 auto !important; }
-  .contact-hero-grid { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(420px, 0.94fr) !important; gap: 38px !important; align-items: center !important; }
-  .contact-form-wrap { width: 100% !important; max-width: none !important; }
-  .contact-form { width: 100% !important; max-width: none !important; padding: 28px !important; border-radius: 24px !important; }
-  .contact-copy h1 { max-width: 620px !important; font-size: clamp(56px, 6vw, 96px) !important; line-height: 0.9 !important; letter-spacing: -2px !important; }
-  .contact-lead { max-width: 620px !important; font-size: 18px !important; line-height: 1.55 !important; }
-  .contact-mini-info { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px !important; margin-top: 22px !important; }
-  .contact-info-card { padding: 20px !important; }
-  .contact-hero-bg { display: block !important; font-size: clamp(120px, 15vw, 250px) !important; }
+@media (max-width: 900px) and (min-resolution: 1.45dppx) {
+  .page-shell { width: 150% !important; min-height: 150svh !important; zoom: 0.666667 !important; }
 }
 
 @supports not (zoom: 0.666667) {
-  @media (min-width: 901px) and (max-width: 1200px) and (min-resolution: 1.45dppx) {
-    .page-shell { width: 150% !important; max-width: none !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; overflow-x: clip !important; }
+  @media (max-width: 900px) and (min-resolution: 1.45dppx) {
+    .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; }
+  }
+}
+
+/*37. desktop 150 percent zoom visual match
+  Targets the measured 150% desktop zoom state: 1673px viewport with DPR 3.
+  Mobile stays untouched because this only runs above 1200px wide. */
+@media (min-width: 1200px) and (max-width: 1800px) and (min-resolution: 2.75dppx) {
+  html, body { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; background: #000 !important; }
+  .page-shell { width: 150% !important; min-height: 150svh !important; zoom: 0.666667 !important; transform: none !important; transform-origin: top left !important; overflow-x: clip !important; }
+}
+
+@supports not (zoom: 0.666667) {
+  @media (min-width: 1200px) and (max-width: 1800px) and (min-resolution: 2.75dppx) {
+    body { min-height: 150svh !important; }
+    .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; overflow-x: clip !important; }
+  }
+}
+
+/*38. desktop 150% composition center pass
+  Runs only on the measured desktop 150% zoom state. Mobile breakpoints are untouched. */
+@media (min-width: 1200px) and (max-width: 1800px) and (min-resolution: 2.75dppx) {
+  .home-page-shell.home-state .hero-content { padding-left: 54px !important; padding-right: 54px !important; }
+  .home-page-shell.home-state .hero-main { width: min(100%, 2220px) !important; margin-inline: auto !important; min-height: 760px !important; display: grid !important; grid-template-columns: minmax(390px, 0.72fr) minmax(940px, 1.52fr) minmax(390px, 0.72fr) !important; gap: 22px !important; align-items: center !important; }
+  .home-page-shell.home-state .hero-left { max-width: 330px !important; padding-left: 0 !important; justify-self: start !important; }
+  .home-page-shell.home-state .hero-left h2 { font-size: 60px !important; line-height: 1.05 !important; }
+  .home-page-shell.home-state .hero-left p { max-width: 285px !important; font-size: 17px !important; line-height: 1.7 !important; }
+  .home-page-shell.home-state .hero-image-wrap { min-height: 650px !important; justify-content: center !important; transform: translateX(-4%) !important; }
+  .home-page-shell.home-state .hero-3d-stage { width: min(100%, 960px) !important; height: 640px !important; margin-inline: auto !important; }
+  .home-page-shell.home-state .hero-3d-stage model-viewer, .home-page-shell.home-state .hero-3d-bike { transform: scale(1.28) !important; transform-origin: center !important; }
+  .home-page-shell.home-state .hero-right { display: flex !important; min-height: 620px !important; align-items: flex-end !important; justify-content: center !important; padding-right: 0 !important; transform: translateX(-8%) !important; opacity: 1 !important; visibility: visible !important; }
+  .home-page-shell.home-state .spec-box { display: block !important; width: 100% !important; max-width: 330px !important; opacity: 1 !important; visibility: visible !important; }
+  .home-page-shell.home-state .spec-box h3 { font-size: 34px !important; line-height: 1.08 !important; }
+  .home-page-shell.home-state .spec-box p { font-size: 16px !important; line-height: 1.7 !important; }
+  .home-page-shell.home-state .background-word { left: 52% !important; font-size: clamp(128px, 15.2vw, 238px) !important; letter-spacing: 3px !important; }
+  .home-page-shell.home-state .top-word { top: 132px !important; }
+  .home-page-shell.home-state .bottom-word { top: 322px !important; }
+  .home-page-shell.home-state .brand-marquee { bottom: 64px !important; }
+}
+
+/*125. desktop zoom width lock - mobile untouched*/
+@media (min-width: 769px) and (max-width: 1180px) {
+  body.home-page,
+  body.contact-page,
+  body.about-page {
+    min-width: 1440px;
+  }
+
+  body.home-page .navbar,
+  body.contact-page .navbar,
+  body.about-page .navbar {
+    min-width: 1440px;
+  }
+
+  body.home-page .home-shell,
+  body.contact-page .contact-shell,
+  body.about-page .about-shell {
+    width: 1440px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
