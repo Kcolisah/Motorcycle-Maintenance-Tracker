@@ -1512,23 +1512,30 @@ img { display: block; }
   }
 }
 
-/*38. desktop 150% composition center pass
-  Runs only on the measured desktop 150% zoom state. Mobile breakpoints are untouched. */
+/*38. desktop 150% width lock
+  Runs only on the measured desktop 150% zoom state. Mobile breakpoints are untouched.
+  This keeps the normal 100% desktop composition instead of stretching the hero content into the center. */
 @media (min-width: 1200px) and (max-width: 1800px) and (min-resolution: 2.75dppx) {
-  .home-page-shell.home-state .hero-content { padding-left: 54px !important; padding-right: 54px !important; }
-  .home-page-shell.home-state .hero-main { width: min(100%, 2220px) !important; margin-inline: auto !important; min-height: 760px !important; display: grid !important; grid-template-columns: minmax(390px, 0.72fr) minmax(940px, 1.52fr) minmax(390px, 0.72fr) !important; gap: 22px !important; align-items: center !important; }
-  .home-page-shell.home-state .hero-left { max-width: 330px !important; padding-left: 0 !important; justify-self: start !important; }
-  .home-page-shell.home-state .hero-left h2 { font-size: 60px !important; line-height: 1.05 !important; }
-  .home-page-shell.home-state .hero-left p { max-width: 285px !important; font-size: 17px !important; line-height: 1.7 !important; }
-  .home-page-shell.home-state .hero-image-wrap { min-height: 650px !important; justify-content: center !important; transform: translateX(-4%) !important; }
-  .home-page-shell.home-state .hero-3d-stage { width: min(100%, 960px) !important; height: 640px !important; margin-inline: auto !important; }
-  .home-page-shell.home-state .hero-3d-stage model-viewer, .home-page-shell.home-state .hero-3d-bike { transform: scale(1.28) !important; transform-origin: center !important; }
-  .home-page-shell.home-state .hero-right { display: flex !important; min-height: 620px !important; align-items: flex-end !important; justify-content: center !important; padding-right: 0 !important; transform: translateX(-8%) !important; opacity: 1 !important; visibility: visible !important; }
-  .home-page-shell.home-state .spec-box { display: block !important; width: 100% !important; max-width: 330px !important; opacity: 1 !important; visibility: visible !important; }
-  .home-page-shell.home-state .spec-box h3 { font-size: 34px !important; line-height: 1.08 !important; }
+  .home-page-shell.home-state .hero-section { grid-template-columns: 132px minmax(0, 1fr) 80px !important; }
+  .home-page-shell.home-state .left-panel { display: flex !important; padding: 30px 14px !important; border-right: 1px solid rgba(255, 255, 255, 0.08) !important; }
+  .home-page-shell.home-state .right-panel { display: flex !important; border-left: 1px solid rgba(255, 255, 255, 0.08) !important; }
+  .home-page-shell.home-state .hero-content { padding: 12px 48px 48px !important; }
+  .home-page-shell.home-state .hero-main { width: 100% !important; margin: 0 !important; min-height: 760px !important; display: grid !important; grid-template-columns: 1fr 1.5fr 0.95fr !important; gap: 10px !important; align-items: center !important; }
+  .home-page-shell.home-state .hero-left { width: auto !important; max-width: 320px !important; padding-left: 10px !important; justify-self: stretch !important; text-align: left !important; }
+  .home-page-shell.home-state .hero-left h2 { font-size: 60px !important; line-height: 1.05 !important; letter-spacing: -0.5px !important; }
+  .home-page-shell.home-state .hero-left p { max-width: 280px !important; margin-bottom: 28px !important; font-size: 17px !important; line-height: 1.7 !important; }
+  .home-page-shell.home-state .hero-actions { width: auto !important; max-width: 240px !important; margin-top: 0 !important; display: flex !important; flex-direction: column !important; gap: 14px !important; }
+  .home-page-shell.home-state .primary-btn, .home-page-shell.home-state .secondary-btn { width: auto !important; min-height: auto !important; padding: 16px 22px !important; border-radius: 0 !important; font-size: 15px !important; line-height: normal !important; }
+  .home-page-shell.home-state .primary-btn::after, .home-page-shell.home-state .secondary-btn::after { content: none !important; }
+  .home-page-shell.home-state .hero-image-wrap { min-height: 700px !important; justify-content: center !important; transform: none !important; }
+  .home-page-shell.home-state .hero-3d-stage { width: min(100%, 980px) !important; height: 620px !important; margin-inline: auto !important; }
+  .home-page-shell.home-state .hero-3d-stage model-viewer, .home-page-shell.home-state .hero-3d-bike { transform: scale(1.35) !important; transform-origin: center !important; }
+  .home-page-shell.home-state .hero-right { display: flex !important; min-height: 620px !important; flex-direction: column !important; justify-content: space-between !important; align-items: flex-end !important; padding-right: 10px !important; transform: none !important; opacity: 1 !important; visibility: visible !important; text-align: right !important; }
+  .home-page-shell.home-state .spec-box { display: block !important; width: auto !important; max-width: 310px !important; opacity: 1 !important; visibility: visible !important; text-align: right !important; }
+  .home-page-shell.home-state .spec-box h3 { font-size: 34px !important; line-height: normal !important; }
   .home-page-shell.home-state .spec-box p { font-size: 16px !important; line-height: 1.7 !important; }
-  .home-page-shell.home-state .background-word { left: 52% !important; font-size: clamp(128px, 15.2vw, 238px) !important; letter-spacing: 3px !important; }
-  .home-page-shell.home-state .top-word { top: 132px !important; }
-  .home-page-shell.home-state .bottom-word { top: 322px !important; }
+  .home-page-shell.home-state .background-word { left: 50% !important; font-size: clamp(108px, 14.2vw, 238px) !important; letter-spacing: clamp(1px, 0.22vw, 4px) !important; }
+  .home-page-shell.home-state .top-word { top: clamp(92px, 8.6vw, 130px) !important; }
+  .home-page-shell.home-state .bottom-word { top: clamp(218px, 20.5vw, 320px) !important; }
   .home-page-shell.home-state .brand-marquee { bottom: 64px !important; }
 }
