@@ -1234,7 +1234,7 @@ img { display: block; }
   .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover { height: 54px !important; max-width: 340px !important; }
 }
 
-/*30. unified mobile navbar system*/
+/*30. unified mobile navbar baseline*/
 @media (max-width: 780px) {
   .home-page .navbar, .about-page-shell .navbar, .contact-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "garage garage" !important; align-items: center !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; overflow: visible !important; box-sizing: border-box !important; }
   .home-page .logo-block, .about-page-shell .logo-block, .contact-page-shell .logo-block, .maintenance-page .logo-block, .maintenance-page-shell .logo-block { grid-area: logo !important; justify-self: start !important; min-width: 0 !important; gap: 12px !important; transform: none !important; }
@@ -1264,3 +1264,29 @@ img { display: block; }
   .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover, .contact-page-shell .nav-garage-btn, .contact-page-shell .nav-garage-btn:hover, .maintenance-page .nav-garage-btn, .maintenance-page .nav-garage-btn:hover, .maintenance-page-shell .nav-garage-btn, .maintenance-page-shell .nav-garage-btn:hover { height: 56px !important; max-width: 340px !important; border-radius: 21px !important; }
 }
 
+/*31. about mobile navbar exact size match*/
+@media (max-width: 780px) {
+  body.about-page .about-page-shell .navbar, .about-page-shell .navbar { min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "garage garage" !important; align-items: center !important; justify-content: initial !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; flex-direction: initial !important; }
+  body.about-page .about-page-shell .logo-block, .about-page-shell .logo-block { grid-area: logo !important; justify-content: flex-start !important; justify-self: start !important; gap: 12px !important; transform: none !important; }
+  body.about-page .about-page-shell .logo-mark, .about-page-shell .logo-mark { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 16px !important; font-size: 16px !important; }
+  body.about-page .about-page-shell .logo-text span:first-child, .about-page-shell .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.9px !important; line-height: 1 !important; }
+  body.about-page .about-page-shell .logo-text span:last-child, .about-page-shell .logo-text span:last-child { margin-top: 5px !important; font-size: 12px !important; letter-spacing: 1.2px !important; line-height: 1 !important; }
+  body.about-page .about-page-shell .account-menu, .about-page-shell .account-menu { grid-area: account !important; justify-self: end !important; margin: 0 !important; }
+  body.about-page .about-page-shell .account-menu-trigger, .about-page-shell .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 17px !important; padding: 0 !important; transform: none !important; }
+  body.about-page .about-page-shell .nav-links, .about-page-shell .nav-links { grid-area: links !important; width: 100% !important; display: flex !important; justify-content: center !important; align-items: center !important; gap: clamp(28px, 9vw, 46px) !important; margin: 2px 0 0 !important; padding: 0 !important; flex-wrap: nowrap !important; }
+  body.about-page .about-page-shell .nav-links a, .about-page-shell .nav-links a { position: relative !important; height: 32px !important; padding: 0 2px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; font-size: 15px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; white-space: nowrap !important; }
+  body.about-page .about-page-shell .nav-garage-btn, body.about-page .about-page-shell .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover { grid-area: garage !important; width: min(100%, 380px) !important; min-width: 0 !important; height: 58px !important; justify-self: center !important; justify-content: center !important; gap: 14px !important; padding: 0 24px !important; border-radius: 22px !important; transform: none !important; }
+  body.about-page .about-page-shell .nav-garage-btn > span:last-child, .about-page-shell .nav-garage-btn > span:last-child { font-size: 14px !important; letter-spacing: 1.9px !important; opacity: 1 !important; transform: none !important; }
+  body.about-page .about-page-shell .garage-count-badge, .about-page-shell .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; font-size: 11px !important; }
+}
+
+@media (max-width: 430px) {
+  body.about-page .about-page-shell .navbar, .about-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 14px 10px !important; }
+  body.about-page .about-page-shell .logo-mark, .about-page-shell .logo-mark { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 15px !important; }
+  body.about-page .about-page-shell .logo-text span:first-child, .about-page-shell .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
+  body.about-page .about-page-shell .logo-text span:last-child, .about-page-shell .logo-text span:last-child { font-size: 12px !important; }
+  body.about-page .about-page-shell .account-menu-trigger, .about-page-shell .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; }
+  body.about-page .about-page-shell .nav-links, .about-page-shell .nav-links { gap: clamp(26px, 8.5vw, 38px) !important; }
+  body.about-page .about-page-shell .nav-links a, .about-page-shell .nav-links a { height: 30px !important; font-size: 15px !important; }
+  body.about-page .about-page-shell .nav-garage-btn, body.about-page .about-page-shell .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover { height: 56px !important; max-width: 340px !important; border-radius: 21px !important; }
+}
