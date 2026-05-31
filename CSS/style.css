@@ -1123,6 +1123,8 @@ img { display: block; }
 .contact-page-shell .nav-garage-btn .garage-icon, .contact-page-shell .nav-garage-btn .garage-icon svg { color: #a72608 !important; stroke: #a72608 !important; }
 .contact-page-shell .nav-garage-btn:hover .garage-icon, .contact-page-shell .nav-garage-btn:hover .garage-icon svg { color: #ff2b2b !important; stroke: #ff2b2b !important; }
 
+
+/*PATCHES*/
 /*27. high-dpi desktop virtual 1440p homepage normalization*/
 @media (min-width: 1580px) and (max-width: 1900px) and (min-resolution: 2.5dppx) {
   html, body { overflow-x: hidden !important; }
@@ -1130,4 +1132,21 @@ img { display: block; }
   .home-page .home-page-shell, .home-page .page-shell { width: 150vw !important; max-width: none !important; zoom: 0.6666667 !important; transform-origin: top left !important; }
   .home-page .navbar, .home-page .hero-section, .home-page .tracker-section, .home-page .tracker-steps-section, .home-page .info-section { max-width: none !important; }
   .home-page .hero-section { min-height: 150svh !important; }
+}
+/*28. high-dpi desktop virtual 1440p contact normalization*/
+@media (min-width: 1580px) and (max-width: 1900px) and (min-resolution: 2.5dppx) {
+  html, body { overflow-x: hidden !important; }
+  .contact-page-shell { width: 150vw !important; max-width: none !important; zoom: 0.6666667 !important; transform-origin: top left !important; overflow-x: hidden !important; }
+  .contact-page-shell .navbar, .contact-page-shell .contact-main, .contact-page-shell .contact-hero, .contact-page-shell .contact-hero-inner { max-width: none !important; }
+  .contact-page-shell .contact-hero { min-height: 150svh !important; }
+  .contact-page-shell .nav-garage-btn svg, .contact-page-shell .nav-garage-btn path { color: #a72608 !important; stroke: #a72608 !important; fill: none !important; opacity: 1 !important; }
+}
+
+/*29. high-dpi desktop virtual 1440p bikes normalization*/
+@media (min-width: 1580px) and (max-width: 1900px) and (min-resolution: 2.5dppx) {
+  html, body { overflow-x: hidden !important; }
+  .bikes-page { width: 100vw !important; max-width: 100vw !important; overflow-x: hidden !important; }
+  .bikes-page-shell { width: 150vw !important; max-width: none !important; zoom: 0.6666667 !important; transform-origin: top left !important; overflow-x: hidden !important; }
+  .bikes-page-shell .navbar, .bikes-page-shell .bikes-hero-section, .bikes-page-shell .bikes-content, .bikes-page-shell .bikes-display-grid { max-width: none !important; }
+  .bikes-page-shell .bikes-hero-section { min-height: 150svh !important; }
 }
