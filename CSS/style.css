@@ -912,3 +912,245 @@ img { display: block; }
   .garage-card-actions { display: grid; grid-template-columns: 1fr; gap: 12px; }
   .garage-card-action, .garage-delete-btn { width: 100%; min-height: 52px; }
 }
+
+/* Mobile home app layout */
+@media (max-width: 680px) {
+  .home-page,
+  .home-page body {
+    overflow-x: hidden;
+  }
+
+  .home-page .page-shell,
+  .home-page .home-page-shell {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .home-page .navbar {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas:
+      "logo account"
+      "links links"
+      "garage garage";
+    gap: 18px;
+    align-items: center;
+    padding: 24px 20px 0;
+  }
+
+  .home-page .logo-block {
+    grid-area: logo;
+    justify-self: start;
+  }
+
+  .home-page .account-menu {
+    grid-area: account;
+    justify-self: end;
+  }
+
+  .home-page .nav-links {
+    grid-area: links;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 4px 0 0;
+  }
+
+  .home-page .nav-links a {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .home-page .nav-garage-btn {
+    grid-area: garage;
+    width: min(100%, 340px);
+    height: 56px;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 22px;
+  }
+
+  .home-page .hero-section {
+    width: 100%;
+    max-width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 22px;
+    padding: 28px 20px 70px !important;
+    overflow-x: hidden;
+  }
+
+  .home-page .left-panel {
+    order: 1;
+    width: 100%;
+    max-width: 100%;
+    display: block !important;
+  }
+
+  .home-page .side-icon-rail {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .home-page .updates-menu-wrap {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .home-page .side-icon-link,
+  .home-page .updates-trigger {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 64px !important;
+    padding: 0 14px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    letter-spacing: 1.8px !important;
+  }
+
+  .home-page .side-icon-svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .home-page .side-icon-text {
+    font-size: 12px;
+    letter-spacing: 1.8px;
+  }
+
+  .home-page .hero-content {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  .home-page .hero-label {
+    margin: 4px 0 16px;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+  }
+
+  .home-page .brand-marquee {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 20px;
+    overflow: hidden;
+    opacity: 0.38;
+  }
+
+  .home-page .brand-marquee-track {
+    gap: 24px;
+    font-size: 11px;
+    letter-spacing: 4px;
+  }
+
+  .home-page .hero-main {
+    width: 100%;
+    max-width: 100%;
+    display: block !important;
+  }
+
+  .home-page .hero-left {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .home-page .hero-left h2 {
+    max-width: 100%;
+    font-size: clamp(42px, 12.2vw, 56px) !important;
+    line-height: 0.94 !important;
+    letter-spacing: -1.8px !important;
+    overflow-wrap: normal;
+  }
+
+  .home-page .hero-left p {
+    max-width: 100%;
+    margin-top: 18px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .home-page .hero-actions {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .home-page .primary-btn,
+  .home-page .secondary-btn {
+    width: 100%;
+    min-height: 58px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .home-page .hero-right,
+  .home-page .hero-image-wrap,
+  .home-page .right-panel {
+    display: none !important;
+  }
+
+  .home-page .background-word {
+    display: none !important;
+  }
+}
+
+/* Smaller mobile home tightening */
+@media (max-width: 430px) {
+  .home-page .navbar {
+    padding-left: 18px;
+    padding-right: 18px;
+    gap: 16px;
+  }
+
+  .home-page .nav-links {
+    gap: 22px;
+  }
+
+  .home-page .nav-links a {
+    font-size: 15px;
+  }
+
+  .home-page .hero-section {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .home-page .side-icon-rail {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .home-page .side-icon-link,
+  .home-page .updates-trigger {
+    height: 58px !important;
+    border-radius: 18px !important;
+  }
+
+  .home-page .hero-left h2 {
+    font-size: clamp(38px, 11.8vw, 50px) !important;
+  }
+
+  .home-page .hero-left p {
+    font-size: 16px;
+  }
+}
