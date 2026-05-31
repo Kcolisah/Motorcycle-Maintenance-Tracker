@@ -835,3 +835,93 @@ img { display: block; }
   .garage-card-detail { padding: 18px; }
   .garage-card-actions { grid-template-columns: 1fr; }
 }
+
+/* Mobile overflow cleanup */
+@media (max-width: 680px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .page-shell,
+  .home-page-shell,
+  .hero-section,
+  .hero-content,
+  .hero-main,
+  .tracker-section,
+  .info-section {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .home-page .hero-section {
+    display: block;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .home-page .side-panel {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .home-page .side-icon-rail {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .home-page .side-icon-link,
+  .home-page .updates-trigger {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .home-page .hero-actions {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .home-page .primary-btn,
+  .home-page .secondary-btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .home-page .hero-left,
+  .home-page .hero-right,
+  .home-page .hero-image-wrap {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .home-page .hero-left h2 {
+    max-width: 100%;
+    font-size: clamp(42px, 13vw, 62px);
+    line-height: 0.95;
+  }
+
+  .home-page .hero-left p {
+    max-width: 100%;
+  }
+
+  .updates-popover {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}
