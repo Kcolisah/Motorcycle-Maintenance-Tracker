@@ -1233,3 +1233,4 @@ img { display: block; }
   .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { height: 34px !important; border-radius: 13px !important; font-size: 11px !important; padding: 0 4px !important; }
   .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover { height: 54px !important; max-width: 340px !important; }
 }
+
