@@ -1,5 +1,3 @@
-const API_BASE_URL = "https://api.olysa.app/api";
-
 const garageList = document.getElementById("garageList");
 const garageMessage = document.getElementById("garageMessage");
 const garageLoadingState = document.getElementById("garageLoadingState");
@@ -9,6 +7,42 @@ const refreshGarageBtn = document.getElementById("refreshGarageBtn");
 const totalBikesCount = document.getElementById("totalBikesCount");
 const totalMileageCount = document.getElementById("totalMileageCount");
 const maintenanceDueCount = document.getElementById("maintenanceDueCount");
+
+const GARAGE_LOGIN_REDIRECT = `login.html?redirect=${encodeURIComponent("garage.html")}`;
+
+function getApi() {
+  return window.MotorcycleTrackerApi || null;
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function waitForApiClient(timeout = 1800) {
+  const startedAt = Date.now();
+
+  while (!getApi() && Date.now() - startedAt < timeout) {
+    await wait(50);
+  }
+
+  return getApi();
+}
+
+async function waitForGarageSession(timeout = 1800) {
+  const api = await waitForApiClient(timeout);
+
+  if (!api) {
+    return null;
+  }
+
+  const startedAt = Date.now();
+
+  while (!api.getToken() && Date.now() - startedAt < timeout) {
+    await wait(50);
+  }
+
+  return api.getToken() ? api : null;
+}
 
 function formatPrice(price) {
   if (price === null || price === undefined) {
@@ -130,14 +164,34 @@ function renderGarage(garageItems) {
   });
 }
 
+async function requestGarageWithRetry(api, path, options = {}, retries = 1) {
+  const response = await api.apiRequest(path, options);
+
+  if (response.ok || retries <= 0) {
+    return response;
+  }
+
+  await wait(350);
+  return api.apiRequest(path, options);
+}
+
 async function loadGarage() {
   hideGarageMessage();
   garageLoadingState.style.display = "block";
   garageEmptyState.style.display = "none";
   garageList.innerHTML = "";
 
+  const api = await waitForGarageSession();
+
+  if (!api) {
+    garageLoadingState.style.display = "none";
+    showGarageMessage("Sign in again to load your garage.");
+    window.location.href = GARAGE_LOGIN_REDIRECT;
+    return;
+  }
+
   try {
-    const response = await fetch(`${API_BASE_URL}/garage`);
+    const response = await requestGarageWithRetry(api, "/api/garage");
 
     if (!response.ok) {
       throw new Error(`Backend returned ${response.status}`);
@@ -145,16 +199,28 @@ async function loadGarage() {
 
     const garageItems = await response.json();
     renderGarage(garageItems);
+
+    if (typeof window.loadGarageBadgeCount === "function") {
+      window.loadGarageBadgeCount();
+    }
   } catch (error) {
     garageLoadingState.style.display = "none";
-    showGarageMessage("Garage could not load. Make sure the Spring Boot backend is running.");
+    showGarageMessage("Garage could not load. Try refresh once, then sign in again if it still fails.");
     console.error("Failed to load garage:", error);
   }
 }
 
 async function removeGarageItem(garageId) {
+  const api = await waitForGarageSession();
+
+  if (!api) {
+    showGarageMessage("Sign in again before removing motorcycles from your garage.");
+    window.location.href = GARAGE_LOGIN_REDIRECT;
+    return;
+  }
+
   try {
-    const response = await fetch(`${API_BASE_URL}/garage/${garageId}`, {
+    const response = await requestGarageWithRetry(api, `/api/garage/${garageId}`, {
       method: "DELETE"
     });
 
@@ -169,17 +235,21 @@ async function removeGarageItem(garageId) {
   }
 }
 
-garageList.addEventListener("click", (event) => {
-  const deleteButton = event.target.closest(".garage-delete-btn");
+if (garageList) {
+  garageList.addEventListener("click", (event) => {
+    const deleteButton = event.target.closest(".garage-delete-btn");
 
-  if (!deleteButton) {
-    return;
-  }
+    if (!deleteButton) {
+      return;
+    }
 
-  const garageId = deleteButton.dataset.garageId;
-  removeGarageItem(garageId);
-});
+    const garageId = deleteButton.dataset.garageId;
+    removeGarageItem(garageId);
+  });
+}
 
-refreshGarageBtn.addEventListener("click", loadGarage);
+if (refreshGarageBtn) {
+  refreshGarageBtn.addEventListener("click", loadGarage);
+}
 
-loadGarage();
+document.addEventListener("DOMContentLoaded", loadGarage);
