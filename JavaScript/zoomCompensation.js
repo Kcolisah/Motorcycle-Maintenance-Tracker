@@ -11,12 +11,13 @@
   const updateZoomCompensation = () => {
     clearCompensation();
 
-    const isDesktop = window.matchMedia("(min-width: 900px)").matches;
+    const isRealDesktop = window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)").matches;
+    const hasTouchScreen = navigator.maxTouchPoints && navigator.maxTouchPoints > 0;
     const screenWidth = window.screen?.availWidth || window.screen?.width || 0;
     const viewportWidth = window.innerWidth || 0;
     const windowWidth = window.outerWidth || viewportWidth;
 
-    if (!isDesktop || !screenWidth || !viewportWidth) return;
+    if (!isRealDesktop || hasTouchScreen || !screenWidth || !viewportWidth) return;
 
     const windowIsNearFullWidth = windowWidth >= screenWidth * 0.82;
     const zoomRatio = screenWidth / viewportWidth;

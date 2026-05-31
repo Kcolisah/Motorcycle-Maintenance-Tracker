@@ -1427,14 +1427,14 @@ img { display: block; }
 }
 
 /*36. desktop browser zoom compensation
-  Desktop only. This keeps 150% browser zoom visually aligned with the normal 100% desktop layout without touching mobile. */
-@media (min-width: 900px) {
+  Desktop only. Mobile CSS is intentionally left untouched. */
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
   html.desktop-zoom-compensated, html.desktop-zoom-compensated body { overflow-x: hidden; background: #000; }
   html.desktop-zoom-compensated .page-shell { width: var(--desktop-zoom-width); min-height: var(--desktop-zoom-height); zoom: var(--desktop-zoom-scale); }
 }
 
 @supports not (zoom: 1) {
-  @media (min-width: 900px) {
+  @media (min-width: 900px) and (hover: hover) and (pointer: fine) {
     html.desktop-zoom-compensated .page-shell { transform: scale(var(--desktop-zoom-scale)); transform-origin: top left; }
   }
 }
