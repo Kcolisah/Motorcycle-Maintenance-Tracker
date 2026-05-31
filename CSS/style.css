@@ -1550,3 +1550,84 @@ img { display: block; }
   .about-page-shell .about-highlight-card { padding: 20px; }
   .about-page-shell .about-highlight-card p { font-size: 13px; line-height: 1.55; }
 }
+
+
+/*38. about page mobile compact cards*/
+@media (max-width: 900px) {
+  .about-page-shell .tracker-steps-section,
+  .about-page-shell .info-section,
+  .about-page-shell .about-values-section,
+  .about-page-shell .about-author-section { padding: 54px 30px; }
+
+  .about-page-shell .tracker-steps-header,
+  .about-page-shell .info-box,
+  .about-page-shell .about-values-wrap,
+  .about-page-shell .about-author-wrap { max-width: 100%; }
+
+  .about-page-shell .tracker-steps-header h2,
+  .about-page-shell .info-box h2,
+  .about-page-shell .about-values-heading h2,
+  .about-page-shell .about-author-left h2 { margin-bottom: 12px; font-size: clamp(26px, 6.5vw, 34px); line-height: 1.04; }
+
+  .about-page-shell .tracker-steps-header p,
+  .about-page-shell .info-box p,
+  .about-page-shell .about-values-heading p,
+  .about-page-shell .about-author-left p { font-size: 15px; line-height: 1.55; }
+
+  .about-page-shell .tracker-steps-grid,
+  .about-page-shell .about-values-grid,
+  .about-page-shell .about-info-side,
+  .about-page-shell .about-author-wrap { gap: 16px; }
+
+  .about-page-shell .tracker-steps-grid,
+  .about-page-shell .about-values-grid { margin-top: 30px; }
+
+  .about-page-shell .about-values-heading { margin-bottom: 26px; }
+
+  .about-page-shell .tracker-step-card,
+  .about-page-shell .about-mini-card,
+  .about-page-shell .about-value-card,
+  .about-page-shell .about-author-card { padding: 20px 18px; }
+
+  .about-page-shell .tracker-step-number { margin-bottom: 6px; font-size: 13px; line-height: 1; }
+
+  .about-page-shell .tracker-step-card h3,
+  .about-page-shell .about-mini-card h3,
+  .about-page-shell .about-value-card h3,
+  .about-page-shell .about-author-card h3 { margin-bottom: 8px; font-size: 20px; line-height: 1.08; }
+
+  .about-page-shell .tracker-step-card p,
+  .about-page-shell .about-mini-card p,
+  .about-page-shell .about-value-card p,
+  .about-page-shell .about-author-card p { font-size: 15px; line-height: 1.5; }
+}
+
+@media (max-width: 520px) {
+  .about-page-shell .tracker-steps-section,
+  .about-page-shell .info-section,
+  .about-page-shell .about-values-section,
+  .about-page-shell .about-author-section { padding: 46px 18px; }
+
+  .about-page-shell .tracker-steps-grid,
+  .about-page-shell .about-values-grid,
+  .about-page-shell .about-info-side,
+  .about-page-shell .about-author-wrap { gap: 14px; }
+
+  .about-page-shell .tracker-steps-grid,
+  .about-page-shell .about-values-grid { margin-top: 24px; }
+
+  .about-page-shell .tracker-step-card,
+  .about-page-shell .about-mini-card,
+  .about-page-shell .about-value-card,
+  .about-page-shell .about-author-card { padding: 18px 16px; }
+
+  .about-page-shell .tracker-step-card h3,
+  .about-page-shell .about-mini-card h3,
+  .about-page-shell .about-value-card h3,
+  .about-page-shell .about-author-card h3 { font-size: 19px; }
+
+  .about-page-shell .tracker-step-card p,
+  .about-page-shell .about-mini-card p,
+  .about-page-shell .about-value-card p,
+  .about-page-shell .about-author-card p { font-size: 14px; line-height: 1.48; }
+}
