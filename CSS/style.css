@@ -1122,3 +1122,15 @@ img { display: block; }
 .contact-page-shell .nav-garage-btn { color: #a72608 !important; }
 .contact-page-shell .nav-garage-btn .garage-icon, .contact-page-shell .nav-garage-btn .garage-icon svg { color: #a72608 !important; stroke: #a72608 !important; }
 .contact-page-shell .nav-garage-btn:hover .garage-icon, .contact-page-shell .nav-garage-btn:hover .garage-icon svg { color: #ff2b2b !important; stroke: #ff2b2b !important; }
+
+/*27. high-dpi desktop homepage normalization test*/
+@media (min-width: 1200px) and (max-width: 1900px) and (min-resolution: 2.5dppx) {
+  .home-page .navbar { padding: 28px 38px 0 !important; }
+  .home-page .hero-section { min-height: calc(100svh - 82px) !important; grid-template-columns: 104px 1fr 68px !important; }
+  .home-page .hero-label { font-size: 18px !important; }
+  .home-page .hero-left h2 { font-size: clamp(44px, 5.4vw, 86px) !important; line-height: 0.92 !important; }
+  .home-page .hero-left p { max-width: 360px !important; font-size: 15px !important; line-height: 1.55 !important; }
+  .home-page .primary-btn, .home-page .secondary-btn { min-height: 46px !important; padding: 0 24px !important; font-size: 12px !important; }
+  .home-page .hero-bike-img, .home-page .hero-image-wrap img { max-width: min(54vw, 720px) !important; }
+  .home-page .background-word { font-size: clamp(118px, 15vw, 255px) !important; opacity: 0.22 !important; }
+}
