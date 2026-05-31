@@ -1496,3 +1496,18 @@ img { display: block; }
     .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; }
   }
 }
+
+/*37. desktop 150 percent zoom visual match
+  Targets the measured 150% desktop zoom state: 1673px viewport with DPR 3.
+  Mobile stays untouched because this only runs above 1200px wide. */
+@media (min-width: 1200px) and (max-width: 1800px) and (min-resolution: 2.75dppx) {
+  html, body { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; background: #000 !important; }
+  .page-shell { width: 150% !important; min-height: 150svh !important; zoom: 0.666667 !important; transform: none !important; transform-origin: top left !important; overflow-x: clip !important; }
+}
+
+@supports not (zoom: 0.666667) {
+  @media (min-width: 1200px) and (max-width: 1800px) and (min-resolution: 2.75dppx) {
+    body { min-height: 150svh !important; }
+    .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; overflow-x: clip !important; }
+  }
+}
