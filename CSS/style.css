@@ -1122,3 +1122,15 @@ img { display: block; }
 .contact-page-shell .nav-garage-btn { color: #a72608 !important; }
 .contact-page-shell .nav-garage-btn .garage-icon, .contact-page-shell .nav-garage-btn .garage-icon svg { color: #a72608 !important; stroke: #a72608 !important; }
 .contact-page-shell .nav-garage-btn:hover .garage-icon, .contact-page-shell .nav-garage-btn:hover .garage-icon svg { color: #ff2b2b !important; stroke: #ff2b2b !important; }
+/*27. global mobile scroll overflow guard*/
+@media (max-width: 680px) {
+  html, body { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; }
+  body { position: relative !important; }
+  .page-shell, .home-page-shell, .contact-page-shell, .maintenance-page-shell, .garage-page-shell, .bikes-page-shell, .about-page-shell, .updates-page-shell { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: hidden !important; box-sizing: border-box !important; }
+  main, section, header, nav, footer { max-width: 100% !important; box-sizing: border-box !important; }
+  .navbar, .contact-main, .maintenance-main, .garage-main, .bikes-main, .about-main, .updates-main { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: hidden !important; box-sizing: border-box !important; }
+  .contact-grid, .maintenance-grid, .maintenance-layout, .garage-grid, .bikes-display-grid, .about-grid, .updates-grid { width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; }
+  .contact-card, .contact-form-card, .contact-info-card, .maintenance-card, .garage-card, .bike-card, .about-card, .updates-card { max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; }
+  img, svg, canvas, video, iframe { max-width: 100% !important; box-sizing: border-box !important; }
+  input, textarea, select, button { max-width: 100% !important; box-sizing: border-box !important; }
+}
