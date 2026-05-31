@@ -1118,3 +1118,7 @@ img { display: block; }
   .contact-info-card p { font-size: 11px !important; }
   .contact-form { padding: 15px !important; }
 }
+/*26. contact desktop garage icon visibility*/
+.contact-page-shell .nav-garage-btn { color: #a72608 !important; }
+.contact-page-shell .nav-garage-btn .garage-icon, .contact-page-shell .nav-garage-btn .garage-icon svg { color: #a72608 !important; stroke: #a72608 !important; }
+.contact-page-shell .nav-garage-btn:hover .garage-icon, .contact-page-shell .nav-garage-btn:hover .garage-icon svg { color: #ff2b2b !important; stroke: #ff2b2b !important; }
