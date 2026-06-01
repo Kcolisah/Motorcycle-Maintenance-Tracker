@@ -6,8 +6,8 @@
 
   <title>Motorcycle Tracker | Garage</title>
 
-  <link rel="stylesheet" href="CSS/style.css?v=garage-original-features" />
-  <link rel="stylesheet" href="CSS/authShell.css?v=garage-original-features" />
+  <link rel="stylesheet" href="CSS/style.css?v=garage-clean-dashboard-20260601" />
+  <link rel="stylesheet" href="CSS/authShell.css?v=garage-clean-dashboard-20260601" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,12 +37,12 @@
         <a href="maintenance.html">Maintenance</a>
       </nav>
 
-      <a href="index.html#tracker-preview" class="nav-button">Add Motorcycle</a>
+      <a href="index.html#tracker-preview" class="nav-button garage-add-motorcycle-btn">Add Motorcycle</a>
     </header>
 
     <main class="garage-layout">
       <aside class="garage-sidebar">
-        <p class="garage-kicker">Your Collection</p>
+        <p class="garage-kicker garage-kicker-with-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5"></path><path d="M6 10v9h12v-9"></path><path d="M9 19v-5h6v5"></path></svg>Your Collection</p>
         <h1>My Garage</h1>
         <p>
           Motorcycles saved from the tracker appear here. Use this garage as the base
@@ -50,21 +50,43 @@
         </p>
 
         <div class="garage-stat-stack">
-          <div class="garage-stat-card">
-            <span>Total Bikes</span>
-            <strong id="totalBikesCount">0</strong>
+          <div class="garage-stat-card garage-stat-card-with-icon">
+            <div class="garage-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 16h2l2-5h7l3 5h2"></path><path d="M7 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"></path><path d="M17 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"></path><path d="M9 11l2-3h3l1 3"></path></svg>
+            </div>
+            <div>
+              <span>Total Bikes</span>
+              <strong id="totalBikesCount">0</strong>
+            </div>
           </div>
 
-          <div class="garage-stat-card">
-            <span>Total Mileage</span>
-            <strong id="totalMileageCount">0 mi</strong>
+          <div class="garage-stat-card garage-stat-card-with-icon">
+            <div class="garage-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 14a8 8 0 1 1 16 0"></path><path d="M12 14l4-4"></path><path d="M7 17h10"></path></svg>
+            </div>
+            <div>
+              <span>Total Mileage</span>
+              <strong id="totalMileageCount">0 mi</strong>
+            </div>
           </div>
 
-          <div class="garage-stat-card">
-            <span>Maintenance Due</span>
-            <strong id="maintenanceDueCount">0</strong>
+          <div class="garage-stat-card garage-stat-card-with-icon">
+            <div class="garage-stat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5 5L4 17l3 3 5.7-5.7a4 4 0 0 0 5-5l-2.5 2.5-2.9-2.9 2.4-2.6Z"></path></svg>
+            </div>
+            <div>
+              <span>Maintenance Due</span>
+              <strong id="maintenanceDueCount">0</strong>
+              <em id="maintenanceDueLabel" class="garage-stat-unit">open tasks</em>
+            </div>
           </div>
         </div>
+
+        <a href="maintenance.html" class="garage-sidebar-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3"></path><path d="M17 3v3"></path><path d="M4 8h16"></path><path d="M5 5h14v15H5z"></path></svg>
+          <span>View Maintenance</span>
+          <span aria-hidden="true">›</span>
+        </a>
       </aside>
 
       <section class="garage-main">
@@ -100,9 +122,9 @@
       </section>
     </main>
   </div>
-  <script src="JavaScript/apiClient.js?v=garage-original-features"></script>
-  <script src="JavaScript/authShell.js?v=garage-original-features"></script>
-  <script src="JavaScript/garageBadge.js?v=garage-original-features"></script>
-  <script src="JavaScript/garage.js?v=garage-original-features"></script>
+  <script src="JavaScript/apiClient.js?v=garage-clean-dashboard-20260601"></script>
+  <script src="JavaScript/authShell.js?v=garage-clean-dashboard-20260601"></script>
+  <script src="JavaScript/garageBadge.js?v=garage-clean-dashboard-20260601"></script>
+  <script src="JavaScript/garage.js?v=garage-clean-dashboard-20260601"></script>
 </body>
 </html>

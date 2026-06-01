@@ -1,3 +1,5 @@
+const API_BASE_URL = "https://api.olysa.app/api";
+
 const selectedGarageBikeName = document.getElementById("selectedGarageBikeName");
 const selectedGarageBikeMeta = document.getElementById("selectedGarageBikeMeta");
 
@@ -29,58 +31,6 @@ const statusCounts = {
 
 const urlParams = new URLSearchParams(window.location.search);
 const garageId = urlParams.get("garageId");
-const MAINTENANCE_LOGIN_REDIRECT = `login.html?redirect=${encodeURIComponent(window.location.pathname.split("/").pop() + window.location.search)}`;
-
-function getApi() {
-  return window.MotorcycleTrackerApi || null;
-}
-
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-async function waitForApiClient(timeout = 1800) {
-  const startedAt = Date.now();
-
-  while (!getApi() && Date.now() - startedAt < timeout) {
-    await wait(50);
-  }
-
-  return getApi();
-}
-
-async function waitForMaintenanceSession(timeout = 1800) {
-  const api = await waitForApiClient(timeout);
-
-  if (!api) {
-    return null;
-  }
-
-  const startedAt = Date.now();
-
-  while (!api.getToken() && Date.now() - startedAt < timeout) {
-    await wait(50);
-  }
-
-  return api.getToken() ? api : null;
-}
-
-async function apiRequestWithRetry(path, options = {}, retries = 1) {
-  const api = await waitForMaintenanceSession();
-
-  if (!api) {
-    return null;
-  }
-
-  const response = await api.apiRequest(path, options);
-
-  if (response.ok || retries <= 0) {
-    return response;
-  }
-
-  await wait(350);
-  return api.apiRequest(path, options);
-}
 
 function showMaintenanceMessage(message, type = "error") {
   maintenanceMessage.textContent = message;
@@ -143,16 +93,7 @@ async function loadSelectedGarageBike() {
   }
 
   try {
-    const response = await apiRequestWithRetry("/api/garage");
-
-    if (!response) {
-      selectedGarageBikeName.textContent = "Session unavailable";
-      selectedGarageBikeMeta.textContent = "Sign in again to connect this page to your garage.";
-      setFormEnabled(false);
-      showMaintenanceMessage("Sign in again to load maintenance for this motorcycle.");
-      window.location.href = MAINTENANCE_LOGIN_REDIRECT;
-      return false;
-    }
+    const response = await fetch(`${API_BASE_URL}/garage`);
 
     if (!response.ok) {
       const errorText = await getBackendErrorText(response);
@@ -179,7 +120,7 @@ async function loadSelectedGarageBike() {
     return true;
   } catch (error) {
     selectedGarageBikeName.textContent = "Garage unavailable";
-    selectedGarageBikeMeta.textContent = "Try refresh once, then sign in again if this continues.";
+    selectedGarageBikeMeta.textContent = "Make sure the Spring Boot backend is running.";
     setFormEnabled(false);
     showMaintenanceMessage("Could not load the selected garage bike.");
     console.error("Failed to load selected garage bike:", error);
@@ -316,15 +257,7 @@ async function loadTasks() {
   maintenanceLoadingState.style.display = "block";
 
   try {
-    const response = await apiRequestWithRetry(`/api/garage/${garageId}/tasks`);
-
-    if (!response) {
-      maintenanceLoadingState.style.display = "none";
-      clearTaskColumns();
-      showMaintenanceMessage("Sign in again to load maintenance tasks.");
-      window.location.href = MAINTENANCE_LOGIN_REDIRECT;
-      return;
-    }
+    const response = await fetch(`${API_BASE_URL}/garage/${garageId}/tasks`);
 
     if (!response.ok) {
       const errorText = await getBackendErrorText(response);
@@ -364,7 +297,7 @@ async function createTask(event) {
   createTaskBtn.textContent = "Adding...";
 
   try {
-    const response = await apiRequestWithRetry(`/api/garage/${garageId}/tasks`, {
+    const response = await fetch(`${API_BASE_URL}/garage/${garageId}/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -375,12 +308,6 @@ async function createTask(event) {
         dueDate: dueDate || null
       })
     });
-
-    if (!response) {
-      showMaintenanceMessage("Sign in again before adding maintenance tasks.");
-      window.location.href = MAINTENANCE_LOGIN_REDIRECT;
-      return;
-    }
 
     if (!response.ok) {
       const errorText = await getBackendErrorText(response);
@@ -401,7 +328,7 @@ async function createTask(event) {
 
 async function updateTaskStatus(taskId, nextStatus) {
   try {
-    const response = await apiRequestWithRetry(`/api/tasks/${taskId}/status`, {
+    const response = await fetch(`${API_BASE_URL}/tasks/${taskId}/status`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
@@ -410,12 +337,6 @@ async function updateTaskStatus(taskId, nextStatus) {
         status: nextStatus
       })
     });
-
-    if (!response) {
-      showMaintenanceMessage("Sign in again before updating maintenance tasks.");
-      window.location.href = MAINTENANCE_LOGIN_REDIRECT;
-      return;
-    }
 
     if (!response.ok) {
       const errorText = await getBackendErrorText(response);
@@ -431,15 +352,9 @@ async function updateTaskStatus(taskId, nextStatus) {
 
 async function deleteTask(taskId) {
   try {
-    const response = await apiRequestWithRetry(`/api/tasks/${taskId}`, {
+    const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
       method: "DELETE"
     });
-
-    if (!response) {
-      showMaintenanceMessage("Sign in again before deleting maintenance tasks.");
-      window.location.href = MAINTENANCE_LOGIN_REDIRECT;
-      return;
-    }
 
     if (!response.ok) {
       const errorText = await getBackendErrorText(response);
@@ -451,14 +366,6 @@ async function deleteTask(taskId) {
     showMaintenanceMessage("Could not delete task.");
     console.error("Failed to delete task:", error);
   }
-}
-
-if (maintenanceTaskForm) {
-  maintenanceTaskForm.addEventListener("submit", createTask);
-}
-
-if (refreshTasksBtn) {
-  refreshTasksBtn.addEventListener("click", loadTasks);
 }
 
 document.addEventListener("click", (event) => {
@@ -478,18 +385,10 @@ document.addEventListener("click", (event) => {
   }
 });
 
+maintenanceTaskForm.addEventListener("submit", createTask);
+refreshTasksBtn.addEventListener("click", loadTasks);
+
 async function initializeMaintenancePage() {
-  const api = await waitForMaintenanceSession();
-
-  if (!api) {
-    maintenanceLoadingState.style.display = "none";
-    clearTaskColumns();
-    setFormEnabled(false);
-    showMaintenanceMessage("Sign in again to connect maintenance to your garage.");
-    window.location.href = MAINTENANCE_LOGIN_REDIRECT;
-    return;
-  }
-
   const bikeLoaded = await loadSelectedGarageBike();
 
   if (bikeLoaded) {
@@ -501,4 +400,4 @@ async function initializeMaintenancePage() {
   clearTaskColumns();
 }
 
-document.addEventListener("DOMContentLoaded", initializeMaintenancePage);
+initializeMaintenancePage();
