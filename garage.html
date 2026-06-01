@@ -6,17 +6,20 @@
 
   <title>Motorcycle Tracker | Garage</title>
 
-  <link rel="stylesheet" href="CSS/style.css?v=garage-dashboard-v2" />
-  <link rel="stylesheet" href="CSS/authShell.css?v=garage-dashboard-v2" />
+  <link rel="stylesheet" href="CSS/style.css?v=garage-original-features" />
+  <link rel="stylesheet" href="CSS/authShell.css?v=garage-original-features" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
 
   <link rel="icon" href="images/LOGO.png" />
 </head>
 
-<body class="garage-page garage-dashboard-page">
+<body class="garage-page">
   <div class="page-shell garage-page-shell">
     <header class="navbar">
       <div class="logo-block">
@@ -34,21 +37,12 @@
         <a href="maintenance.html">Maintenance</a>
       </nav>
 
-      <a href="index.html#tracker-preview" class="nav-button garage-add-top-btn">
-        <span>Add Motorcycle</span>
-        <span class="garage-add-plus">+</span>
-      </a>
+      <a href="index.html#tracker-preview" class="nav-button">Add Motorcycle</a>
     </header>
 
-    <main class="garage-layout garage-dashboard-layout">
-      <aside class="garage-sidebar garage-dashboard-sidebar">
-        <p class="garage-kicker garage-sidebar-kicker">
-          <span class="garage-sidebar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 10.5 12 5l8 5.5"></path><path d="M6 10v9h12v-9"></path><path d="M9 19v-5h6v5"></path></svg>
-          </span>
-          Your Collection
-        </p>
-
+    <main class="garage-layout">
+      <aside class="garage-sidebar">
+        <p class="garage-kicker">Your Collection</p>
         <h1>My Garage</h1>
         <p>
           Motorcycles saved from the tracker appear here. Use this garage as the base
@@ -56,47 +50,31 @@
         </p>
 
         <div class="garage-stat-stack">
-          <div class="garage-stat-card garage-stat-card-icon">
-            <span class="garage-stat-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M5 15h2l2-4h6l2 4h2"></path><path d="M7 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path><path d="M17 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path><path d="M10 11V8h4v3"></path></svg>
-            </span>
+          <div class="garage-stat-card">
             <span>Total Bikes</span>
             <strong id="totalBikesCount">0</strong>
           </div>
 
-          <div class="garage-stat-card garage-stat-card-icon">
-            <span class="garage-stat-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 14a8 8 0 0 1 16 0"></path><path d="M12 14l4-4"></path><path d="M6 14h.01"></path><path d="M18 14h.01"></path><path d="M12 6v.01"></path></svg>
-            </span>
+          <div class="garage-stat-card">
             <span>Total Mileage</span>
             <strong id="totalMileageCount">0 mi</strong>
           </div>
 
-          <div class="garage-stat-card garage-stat-card-icon">
-            <span class="garage-stat-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4"></path><path d="M16 5l3 3"></path></svg>
-            </span>
+          <div class="garage-stat-card">
             <span>Maintenance Due</span>
             <strong id="maintenanceDueCount">0</strong>
           </div>
         </div>
-
-        <a href="maintenance.html" class="garage-sidebar-link">
-          <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3v4"></path><path d="M17 3v4"></path><path d="M4 9h16"></path><path d="M5 5h14v15H5z"></path></svg></span>
-          View Maintenance
-          <span aria-hidden="true">›</span>
-        </a>
       </aside>
 
-      <section class="garage-main garage-dashboard-main">
-        <div class="garage-main-header garage-dashboard-main-header">
+      <section class="garage-main">
+        <div class="garage-main-header">
           <div>
             <p class="garage-kicker">Backend Garage</p>
             <h2>Saved Motorcycles</h2>
           </div>
 
-          <button id="refreshGarageBtn" class="garage-secondary-btn garage-refresh-btn" type="button">
-            <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-13.7 5.7"></path><path d="M4 12A8 8 0 0 1 17.7 6.3"></path><path d="M17 3v4h4"></path><path d="M7 21v-4H3"></path></svg></span>
+          <button id="refreshGarageBtn" class="garage-secondary-btn" type="button">
             Refresh
           </button>
         </div>
@@ -118,14 +96,13 @@
           </a>
         </div>
 
-        <div id="garageList" class="garage-list garage-dashboard-list"></div>
+        <div id="garageList" class="garage-list"></div>
       </section>
     </main>
   </div>
-
-  <script src="JavaScript/apiClient.js?v=garage-dashboard-v2"></script>
-  <script src="JavaScript/authShell.js?v=garage-dashboard-v2"></script>
-  <script src="JavaScript/garageBadge.js?v=garage-dashboard-v2"></script>
-  <script src="JavaScript/garage.js?v=garage-dashboard-v2"></script>
+  <script src="JavaScript/apiClient.js?v=garage-original-features"></script>
+  <script src="JavaScript/authShell.js?v=garage-original-features"></script>
+  <script src="JavaScript/garageBadge.js?v=garage-original-features"></script>
+  <script src="JavaScript/garage.js?v=garage-original-features"></script>
 </body>
 </html>
