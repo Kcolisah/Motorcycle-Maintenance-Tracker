@@ -758,876 +758,106 @@ img { display: block; }
   .navbar .account-menu { margin-left: 12px; }
 }
 
-/*18. mobile polish overrides*/
-@media (max-width: 900px) {
-  .navbar { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 24px 20px 20px; gap: 18px; }
-  .navbar .logo-block { grid-column: 1; grid-row: 1; justify-content: flex-start; min-width: 0; }
-  .navbar .nav-links { grid-column: 1 / -1; grid-row: 2; width: 100%; display: flex; justify-content: center; gap: clamp(18px, 6vw, 34px); flex-wrap: nowrap; }
-  .navbar .nav-links a { font-size: clamp(15px, 4vw, 18px); white-space: nowrap; }
-  .navbar .nav-garage-btn, .navbar .nav-garage-btn:hover { grid-column: 1 / -1; grid-row: 3; width: min(100%, 330px); height: 64px; justify-self: center; justify-content: center; gap: 14px; padding: 0 24px; border-radius: 24px; transform: none; }
-  .navbar .nav-garage-btn > span:last-child { opacity: 1; transform: none; font-size: 15px; letter-spacing: 1.6px; }
-  .navbar .garage-count-badge { top: 10px; right: 22px; min-width: 22px; height: 22px; font-size: 11px; }
-
-  .home-page .hero-section { display: grid; grid-template-columns: 1fr; gap: 24px; padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
-  .home-page .left-panel { order: 1; display: block; padding: 0 20px; border: 0; }
-  .home-page .hero-content { order: 2; padding: 8px 20px 44px; overflow: visible; }
-  .home-page .right-panel { display: none; }
-  .home-page .side-icon-rail { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-  .home-page .updates-menu-wrap { width: 100%; }
-  .home-page .side-icon-link, .home-page .side-icon-link:hover, .home-page .side-icon-link.active { width: 100%; min-height: 66px; justify-content: center; padding: 0 16px; border-radius: 22px; transform: none; }
-  .home-page .side-icon-text { opacity: 1; transform: none; font-size: 12px; letter-spacing: 1.2px; }
-  .home-page .updates-count-badge { top: 10px; right: 14px; min-width: 24px; height: 24px; font-size: 11px; }
-
-  .home-page .updates-popover { position: fixed; left: 16px; right: 16px; top: max(88px, env(safe-area-inset-top)); width: auto; max-width: none; max-height: min(72svh, 620px); overflow-y: auto; transform: none; padding: 18px; border-radius: 24px; z-index: 9999; }
-  .home-page .updates-popover-header { align-items: flex-start; gap: 12px; }
-  .home-page .updates-popover-header-actions { align-items: flex-end; flex-direction: column; gap: 8px; }
-  .home-page .updates-popover-item { padding: 16px; }
-
-  .home-page .hero-label { text-align: left; margin-top: 16px; font-size: clamp(18px, 5.5vw, 26px); }
-  .home-page .brand-marquee { margin: 8px 0 22px; opacity: 0.42; }
-  .home-page .hero-main { display: grid; grid-template-columns: 1fr; gap: 18px; }
-  .home-page .hero-left h2 { font-size: clamp(42px, 13vw, 68px); line-height: 0.98; letter-spacing: -1.2px; }
-  .home-page .hero-left p { font-size: clamp(17px, 4.8vw, 22px); line-height: 1.55; }
-  .home-page .hero-actions { margin-top: 24px; }
-  .home-page .primary-btn, .home-page .secondary-btn { min-height: 58px; border-radius: 22px; font-size: 15px; }
-  .home-page .hero-image-wrap { min-height: 300px; }
-  .home-page .hero-3d-stage { height: 330px; }
-
-  .about-page-shell .navbar { grid-template-columns: 1fr auto; justify-content: initial; padding: 24px 20px 20px; gap: 18px; }
-  .about-page-shell .logo-block { justify-content: flex-start; }
-  .about-page-shell .nav-links a { font-size: 17px; }
-  .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover { min-width: 0; width: min(100%, 330px); height: 64px; }
-  .about-page-shell .about-hero { padding: 54px 22px 64px; }
-  .about-page-shell .hero-label { font-size: 18px; }
-  .about-page-shell .about-hero-left h1 { font-size: clamp(28px, 8.5vw, 38px); line-height: 1.08; letter-spacing: -0.7px; }
-  .about-page-shell .about-lead { font-size: 16px; line-height: 1.65; }
-  .about-page-shell .about-highlight-card h3 { font-size: 23px; }
-  .about-page-shell .about-highlight-card p { font-size: 16px; }
-}
-
-/*19. narrow phone polish*/
-@media (max-width: 520px) {
-  .navbar { padding: 22px 18px 18px; gap: 16px; }
-  .logo-mark { width: 54px; height: 54px; border-radius: 16px; }
-  .logo-text span:first-child { font-size: 13px; letter-spacing: 1.7px; }
-  .logo-text span:last-child { font-size: 13px; }
-  .nav-links { gap: 20px; }
-  .nav-links a { font-size: 16px; }
-
-  .home-page .left-panel { padding: 0 18px; }
-  .home-page .side-icon-rail { gap: 12px; }
-  .home-page .side-icon-link, .home-page .side-icon-link:hover, .home-page .side-icon-link.active { min-height: 62px; border-radius: 20px; }
-  .home-page .hero-content { padding: 4px 18px 42px; }
-  .home-page .hero-left h2 { font-size: clamp(40px, 13.5vw, 58px); }
-  .home-page .hero-left p { font-size: 18px; line-height: 1.58; }
-  .home-page .hero-3d-stage { height: 280px; }
-
-  .garage-page-shell, .maintenance-page-shell { padding: 22px 16px calc(88px + env(safe-area-inset-bottom)); }
-  .garage-layout, .maintenance-layout { margin-top: 22px; gap: 22px; }
-  .garage-sidebar, .maintenance-sidebar { padding: 20px; }
-  .garage-stat-stack { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .garage-main-header h2, .maintenance-main-header h2 { font-size: clamp(32px, 10vw, 44px); line-height: 1; }
-  .garage-secondary-btn, .maintenance-secondary-btn { min-height: 56px; }
-  .garage-message, .maintenance-message { padding: 18px; font-size: 14px; line-height: 1.45; }
-  .garage-card { padding: 20px; border-color: rgba(255, 43, 43, 0.34); }
-  .garage-card h3 { font-size: clamp(28px, 8.5vw, 38px); line-height: 1.05; }
-  .garage-card-details { grid-template-columns: 1fr; }
-  .garage-card-detail { padding: 18px; }
-  .garage-card-actions { grid-template-columns: 1fr; }
-}
-
-/*20. mobile app layout final pass*/
-@media (max-width: 900px) {
-  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
-  .page-shell, .home-page-shell, .home-page .hero-section, .home-page .hero-content, .home-page .hero-main, .home-page .left-panel, .home-page .right-panel { width: 100%; max-width: 100%; min-width: 0; overflow-x: hidden; }
-
-  .navbar { width: 100%; max-width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: calc(22px + env(safe-area-inset-top)) 18px 18px; gap: 16px; }
-  .navbar .logo-block { grid-column: 1; grid-row: 1; min-width: 0; justify-self: start; }
-  .navbar .account-menu { grid-column: 2; grid-row: 1; justify-self: end; align-self: center; }
-  .navbar .nav-links { grid-column: 1 / -1; grid-row: 2; width: 100%; display: flex; justify-content: center; align-items: center; gap: clamp(22px, 8vw, 42px); margin: 4px 0 2px; }
-  .navbar .nav-links a { font-size: clamp(14px, 3.8vw, 17px); line-height: 1; white-space: nowrap; }
-  .navbar .nav-garage-btn, .navbar .nav-garage-btn:hover { grid-column: 1 / -1; grid-row: 3; width: min(100%, 380px); height: 58px; justify-self: center; justify-content: center; padding: 0 24px; border-radius: 22px; transform: none; }
-  .navbar .nav-garage-btn > span:last-child { opacity: 1; transform: none; font-size: 14px; letter-spacing: 1.5px; }
-  .navbar .garage-count-badge { top: 8px; right: 20px; }
-
-  .home-page .hero-section { display: grid; grid-template-columns: 1fr; gap: 0; padding: 0 18px calc(80px + env(safe-area-inset-bottom)); }
-  .home-page .hero-content { order: 1; padding: 28px 0 0; background: transparent; }
-  .home-page .left-panel { order: 2; padding: 26px 0 0; border: 0; }
-  .home-page .right-panel, .home-page .hero-image-wrap, .home-page .hero-right, .home-page .background-word { display: none !important; }
-  .home-page .hero-main { display: block; }
-  .home-page .hero-left { width: 100%; max-width: 100%; }
-  .home-page .hero-label { margin: 0 0 20px; text-align: left; font-size: clamp(19px, 5.4vw, 27px); line-height: 1.05; letter-spacing: -0.4px; }
-  .home-page .brand-marquee { margin: 0 0 24px; width: 100%; max-width: 100%; opacity: 0.46; overflow: hidden; }
-  .home-page .brand-marquee-track { white-space: nowrap; }
-  .home-page .hero-left h2 { width: 100%; max-width: 100%; font-size: clamp(36px, 10vw, 48px); line-height: 0.98; letter-spacing: -0.8px; overflow-wrap: normal; word-break: normal; }
-  .home-page .hero-left p { width: 100%; max-width: 100%; margin-top: 20px; font-size: clamp(16px, 4.4vw, 19px); line-height: 1.55; }
-  .home-page .hero-actions { width: 100%; max-width: 100%; margin-top: 26px; display: grid; grid-template-columns: 1fr; gap: 14px; }
-  .home-page .primary-btn, .home-page .secondary-btn { width: 100%; max-width: 100%; min-height: 58px; justify-content: center; text-align: center; border-radius: 22px; font-size: 15px; }
-
-  .home-page .side-icon-rail { width: 100%; max-width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .home-page .updates-menu-wrap { width: 100%; max-width: 100%; min-width: 0; }
-  .home-page .side-icon-link, .home-page .side-icon-link:hover, .home-page .side-icon-link.active, .home-page .updates-trigger, .home-page .updates-trigger:hover { width: 100%; max-width: 100%; min-width: 0; min-height: 64px; padding: 0 14px; justify-content: center; border-radius: 22px; transform: none; }
-  .home-page .side-icon-svg { width: 20px; height: 20px; }
-  .home-page .side-icon-text { opacity: 1; transform: none; font-size: 12px; letter-spacing: 1.2px; }
-  .home-page .updates-count-badge { top: 8px; right: 12px; min-width: 22px; height: 22px; font-size: 10px; }
-
-  .home-page .updates-popover { position: fixed; top: calc(86px + env(safe-area-inset-top)); left: 14px; right: 14px; width: auto; max-width: none; max-height: calc(100svh - 126px); overflow-y: auto; transform: none; padding: 16px; border-radius: 24px; z-index: 10000; }
-  .home-page .updates-popover-header { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 10px; }
-  .home-page .updates-popover-header-actions { flex-direction: column; align-items: flex-end; gap: 8px; }
-  .home-page .updates-popover-item { padding: 15px; border-radius: 18px; }
-
-  .tracker-section, .tracker-steps-section, .info-section { width: 100%; max-width: 100%; overflow-x: hidden; }
-}
-
-/*21. very narrow mobile layout*/
-@media (max-width: 520px) {
-  .navbar { padding-inline: 16px; }
-  .logo-mark { width: 52px; height: 52px; border-radius: 16px; }
+/*18. garage dashboard compact polish*/
+@media (min-width: 901px) {
+  .navbar { min-height: 82px; padding: 22px 34px; }
+  .logo-mark { width: 50px; height: 50px; border-radius: 14px; font-size: 16px; }
   .logo-text span:first-child { font-size: 13px; letter-spacing: 1.6px; }
-  .logo-text span:last-child { font-size: 13px; }
-  .navbar .nav-garage-btn, .navbar .nav-garage-btn:hover { width: min(100%, 340px); height: 56px; }
-  .home-page .hero-section { padding-inline: 18px; }
-  .home-page .hero-content { padding-top: 24px; }
-  .home-page .hero-left h2 { font-size: clamp(34px, 9.8vw, 42px); }
-  .home-page .hero-left p { font-size: 16px; }
-  .home-page .side-icon-rail { grid-template-columns: 1fr; }
-  .home-page .side-icon-link, .home-page .updates-trigger { min-height: 56px; }
+  .logo-text span:last-child { font-size: 12px; }
+  .nav-links { gap: 36px; }
+  .nav-links a { font-size: 15px; }
+  .nav-button { padding: 12px 22px; font-size: 12px; }
+  .garage-page-shell, .maintenance-page-shell { padding: 26px 38px 48px; }
+  .garage-layout, .maintenance-layout { max-width: 1280px; margin-top: 42px; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; }
+  .garage-sidebar, .maintenance-sidebar { min-height: 560px; padding: 28px; }
+  .garage-sidebar h1, .maintenance-sidebar h1, .garage-main-header h2, .maintenance-main-header h2 { font-size: 34px; }
+  .updates-layout { max-width: 1260px; padding: 28px 38px 70px; grid-template-columns: 370px minmax(0, 1fr); }
+  .tracker-steps-section, .tracker-section, .info-section, .about-values-section, .about-author-section { padding: 88px 52px; }
+  .about-page-shell .about-hero { padding: 58px 52px 76px; }
+  .contact-hero { padding: 34px 48px; }
 }
 
-/*22. garage mobile final pass*/
+/*19. garage dashboard redesign*/
+.garage-dashboard-page .navbar { border-bottom: 1px solid rgba(255, 255, 255, 0.075); }
+.garage-dashboard-page .nav-links a.active { color: #fff; }
+.garage-dashboard-page .nav-links a.active::after { content: ""; display: block; width: 100%; height: 2px; margin-top: 14px; background: var(--accent); box-shadow: 0 0 18px rgba(255, 43, 43, 0.48); }
+.garage-add-top-btn { gap: 10px; border-radius: 7px; }
+.garage-add-plus { color: var(--accent); font-size: 20px; line-height: 1; }
+.garage-dashboard-layout { max-width: 1260px; grid-template-columns: 320px minmax(0, 1fr); gap: 38px; border-top: 0; }
+.garage-dashboard-sidebar { border-color: rgba(255, 43, 43, 0.28); border-radius: 18px; background: linear-gradient(135deg, rgba(255, 43, 43, 0.075), rgba(255, 255, 255, 0.022) 34%, rgba(255, 255, 255, 0.012)); box-shadow: 0 26px 80px rgba(0, 0, 0, 0.28); }
+.garage-sidebar-kicker { display: flex; align-items: center; gap: 12px; }
+.garage-sidebar-icon, .garage-stat-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--accent); }
+.garage-sidebar-icon { width: 28px; height: 28px; }
+.garage-sidebar-icon svg, .garage-stat-icon svg, .garage-refresh-btn svg, .garage-card-detail svg, .garage-card-action svg, .garage-delete-btn svg, .garage-service-pill svg, .garage-sidebar-link svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.garage-stat-stack { gap: 14px; padding-top: 26px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.garage-stat-card-icon { min-height: 76px; display: grid; grid-template-columns: 52px 1fr; grid-template-rows: auto auto; gap: 4px 16px; align-items: center; border-radius: 12px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.022)); }
+.garage-stat-card-icon .garage-stat-icon { grid-row: 1 / 3; width: 46px; height: 46px; border: 1px solid rgba(255, 43, 43, 0.32); border-radius: 10px; background: rgba(255, 43, 43, 0.055); }
+.garage-stat-card strong small { color: rgba(255, 255, 255, 0.62); font-size: 15px; font-weight: 700; }
+.garage-sidebar-link { min-height: 48px; margin-top: 22px; padding: 0 16px; display: grid; grid-template-columns: 22px 1fr auto; align-items: center; gap: 12px; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 8px; color: #fff; font-size: 13px; font-weight: 800; transition: 0.24s ease; }
+.garage-sidebar-link:hover { border-color: rgba(255, 43, 43, 0.46); color: var(--accent); transform: translateY(-2px); }
+.garage-dashboard-main-header { margin-bottom: 26px; }
+.garage-refresh-btn { min-width: 132px; gap: 11px; border-radius: 7px; }
+.garage-refresh-btn svg { width: 18px; height: 18px; }
+.garage-dashboard-list { gap: 18px; }
+.garage-dashboard-card { grid-template-columns: 185px minmax(0, 1fr) 170px; gap: 28px; padding: 24px; border-radius: 16px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.014)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035); }
+.garage-dashboard-card:hover { border-color: rgba(255, 43, 43, 0.38); transform: translateY(-2px); }
+.garage-dashboard-card .garage-card-image-wrap { height: 130px; border-radius: 12px; background: radial-gradient(circle, rgba(255, 255, 255, 0.105), transparent 63%); overflow: hidden; }
+.garage-dashboard-card .garage-card-image { height: 128px; max-height: 128px; transform: scale(1.04); }
+.garage-card-title-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; margin-bottom: 18px; }
+.garage-card-title-row h3 { margin-bottom: 8px; font-size: 25px; letter-spacing: -0.6px; }
+.garage-card-meta { gap: 8px; color: rgba(255, 255, 255, 0.58); }
+.garage-card-meta span + span::before { content: "•"; margin-right: 8px; color: rgba(255, 255, 255, 0.36); }
+.garage-service-pill { height: 30px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; font-size: 10px; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase; white-space: nowrap; }
+.garage-service-pill svg { width: 14px; height: 14px; }
+.garage-service-pill.is-due { border: 1px solid rgba(255, 43, 43, 0.48); background: rgba(255, 43, 43, 0.12); color: #ff6b6b; }
+.garage-service-pill.is-soon { border: 1px solid rgba(255, 178, 55, 0.42); background: rgba(255, 178, 55, 0.1); color: #ffbf55; }
+.garage-service-pill.is-active { border: 1px solid rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.7); }
+.garage-dashboard-card .garage-card-details { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.garage-dashboard-card .garage-card-detail { padding: 0 18px; border: 0; border-right: 1px solid rgba(255, 255, 255, 0.08); background: transparent; }
+.garage-dashboard-card .garage-card-detail:first-child { padding-left: 0; }
+.garage-dashboard-card .garage-card-detail:last-child { border-right: 0; }
+.garage-card-detail span { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+.garage-card-detail svg { width: 18px; height: 18px; color: rgba(255, 255, 255, 0.66); }
+.garage-dashboard-card .garage-card-detail strong { font-size: 15px; }
+.garage-dashboard-card .garage-card-actions { min-width: 0; display: grid; gap: 12px; }
+.garage-card-action, .garage-delete-btn { min-height: 48px; display: grid; grid-template-columns: 20px 1fr 16px; align-items: center; gap: 12px; border-radius: 8px; text-align: left; }
+.garage-card-action svg, .garage-delete-btn svg { width: 20px; height: 20px; }
+.garage-card-action svg:last-child { justify-self: end; }
+.garage-delete-btn { grid-template-columns: 20px 1fr; color: #fff; }
+.garage-delete-btn svg { color: var(--accent); }
+.garage-delete-btn:hover { color: #050505; }
+
+/*20. compact all pages*/
+@media (min-width: 901px) and (max-height: 860px) {
+  .login-brand-panel, .login-panel { padding: 34px 54px; }
+  .login-product-copy h1 { font-size: clamp(42px, 5.8vw, 72px); letter-spacing: -3px; }
+  .login-product-copy p { font-size: 15px; }
+  .login-card { width: min(455px, 100%); padding: 28px; gap: 18px; border-radius: 26px; }
+  .login-panel-header h2 { font-size: clamp(32px, 3.4vw, 44px); }
+  .demo-user-card { min-height: 88px; padding: 14px; border-radius: 22px; }
+  .garage-page-shell, .maintenance-page-shell { padding-top: 22px; }
+  .garage-layout, .maintenance-layout { margin-top: 34px; }
+}
+
+@media (max-width: 980px) {
+  .garage-dashboard-layout { grid-template-columns: 1fr; }
+  .garage-dashboard-card { grid-template-columns: 150px minmax(0, 1fr); }
+  .garage-dashboard-card .garage-card-actions { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 680px) {
-  .garage-page-shell { padding: calc(18px + env(safe-area-inset-top)) 16px calc(80px + env(safe-area-inset-bottom)); }
-  .garage-layout { margin-top: 22px; display: grid; grid-template-columns: 1fr; gap: 22px; }
-  .garage-sidebar { padding: 20px; border-radius: 22px; }
-  .garage-stat-stack { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .garage-main-header { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: start; }
-  .garage-main-header h2 { font-size: clamp(34px, 9vw, 42px); line-height: 1.02; }
-  .garage-secondary-btn { width: 100%; min-height: 54px; }
-  .garage-list { display: grid; gap: 18px; }
-  .garage-card { padding: 18px; border-radius: 22px; }
-  .garage-card-image-wrap { height: 150px; }
-  .garage-card h3 { font-size: clamp(28px, 7.8vw, 36px); line-height: 1.05; }
-  .garage-card-meta { flex-wrap: wrap; gap: 10px 16px; }
-  .garage-card-details { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .garage-card-actions { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .garage-card-action, .garage-delete-btn { width: 100%; min-height: 52px; }
+  .garage-dashboard-page .navbar { border-bottom: 0; }
+  .garage-dashboard-layout { gap: 22px; margin-top: 26px; }
+  .garage-dashboard-sidebar { border-radius: 20px; }
+  .garage-stat-card-icon { grid-template-columns: 48px 1fr; }
+  .garage-stat-card-icon .garage-stat-icon { width: 42px; height: 42px; }
+  .garage-dashboard-card { grid-template-columns: 1fr; gap: 18px; padding: 20px; border-radius: 20px; }
+  .garage-dashboard-card .garage-card-image-wrap { height: 165px; }
+  .garage-dashboard-card .garage-card-image { height: 158px; max-height: 158px; }
+  .garage-card-title-row { grid-template-columns: 1fr; gap: 12px; }
+  .garage-dashboard-card .garage-card-details { grid-template-columns: 1fr; gap: 12px; }
+  .garage-dashboard-card .garage-card-detail { padding: 14px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(0, 0, 0, 0.22); }
+  .garage-dashboard-card .garage-card-actions { grid-template-columns: 1fr; }
+  .garage-card-action, .garage-delete-btn { min-height: 54px; }
 }
 
-/*23. final homepage mobile compact-desktop override*/
-@media (max-width: 680px) {
-  html, body { width: 100%; max-width: 100%; overflow-x: hidden !important; overscroll-behavior-x: none !important; }
-  .home-page, .home-page-shell, .home-page .page-shell, .home-page .navbar, .home-page .hero-section, .home-page .hero-content, .home-page .hero-main, .home-page .left-panel, .home-page .side-icon-rail, .home-page .updates-menu-wrap, .home-page .tracker-section, .home-page .tracker-steps-section, .home-page .info-section { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; overflow-x: clip !important; }
-  .home-page .home-page-shell { min-height: 100svh !important; background: radial-gradient(circle at 78% 46%, rgba(255, 43, 43, 0.15), transparent 25%), radial-gradient(circle at 76% 70%, rgba(255, 43, 43, 0.08), transparent 32%), #000 !important; overflow-x: clip !important; }
-  .home-page .navbar { display: grid !important; grid-template-columns: auto minmax(0, 1fr) auto !important; grid-template-areas: "logo links account" "garage garage garage"; align-items: center !important; gap: 22px 16px !important; min-height: 0 !important; padding: calc(22px + env(safe-area-inset-top)) 22px 0 !important; }
-  .home-page .logo-block { grid-area: logo !important; justify-self: start !important; gap: 12px !important; transform: none !important; }
-  .home-page .logo-mark { width: 54px !important; height: 54px !important; border-radius: 16px !important; border-color: rgba(224, 224, 206, 0.28) !important; color: #f5f5e8 !important; background: rgba(255, 255, 255, 0.018) !important; font-size: 16px !important; }
-  .home-page .logo-text span:first-child { color: #f3f3e4 !important; font-size: 13px !important; letter-spacing: 2.2px !important; }
-  .home-page .logo-text span:last-child { margin-top: 5px !important; color: rgba(224, 224, 206, 0.72) !important; font-size: 13px !important; letter-spacing: 1.4px !important; }
-  .home-page .nav-links { grid-area: links !important; display: flex !important; justify-content: center !important; align-items: center !important; gap: clamp(18px, 5vw, 34px) !important; margin: 0 !important; padding: 0 !important; flex-wrap: nowrap !important; }
-  .home-page .nav-links a { position: relative !important; color: rgba(224, 224, 206, 0.72) !important; font-size: clamp(14px, 3vw, 17px) !important; line-height: 1 !important; white-space: nowrap !important; }
-  .home-page .nav-links a:first-child { color: var(--accent) !important; }
-  .home-page .nav-links a:first-child::after { content: ""; position: absolute; left: 50%; bottom: -14px; width: 32px; height: 3px; transform: translateX(-50%); border-radius: 999px; background: var(--accent); }
-  .home-page .account-menu { grid-area: account !important; justify-self: end !important; align-self: center !important; margin: 0 !important; }
-  .home-page .account-menu-trigger, .home-page .account-menu-trigger:hover, .home-page .account-menu-trigger[aria-expanded="true"] { width: 56px !important; height: 56px !important; min-width: 56px !important; padding: 0 !important; justify-content: center !important; border-radius: 50% !important; transform: none !important; background: rgba(255, 255, 255, 0.05) !important; }
-  .home-page .account-label { display: none !important; }
-  .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover { grid-area: garage !important; width: min(100%, 470px) !important; max-width: none !important; height: 68px !important; justify-self: center !important; justify-content: center !important; gap: 18px !important; padding: 0 26px !important; border-radius: 24px !important; border-color: rgba(224, 224, 206, 0.16) !important; background: rgba(255, 255, 255, 0.02) !important; transform: none !important; overflow: visible !important; box-shadow: 0 22px 70px rgba(0, 0, 0, 0.32) !important; }
-  .home-page .nav-garage-btn .garage-icon { width: 27px !important; height: 27px !important; color: var(--accent) !important; }
-  .home-page .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; color: #f3f3e4 !important; font-size: 18px !important; letter-spacing: 2.8px !important; }
-  .home-page .garage-count-badge { top: 50% !important; right: 28px !important; min-width: 34px !important; height: 34px !important; transform: translateY(-50%) !important; color: #fff !important; font-size: 13px !important; box-shadow: 0 12px 34px rgba(255, 43, 43, 0.48) !important; }
-  .home-page .hero-section { display: flex !important; flex-direction: column !important; gap: 0 !important; min-height: auto !important; padding: 14px 22px calc(76px + env(safe-area-inset-bottom)) !important; overflow-x: clip !important; }
-  .home-page .left-panel { order: 0 !important; width: min(100%, 470px) !important; margin: 0 auto 42px !important; display: block !important; padding: 0 !important; border: 0 !important; overflow: visible !important; z-index: 35 !important; }
-  .home-page .side-icon-rail { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px !important; overflow: visible !important; }
-  .home-page .updates-menu-wrap { position: relative !important; display: block !important; overflow: visible !important; }
-  .home-page .side-icon-link, .home-page .side-icon-link:hover, .home-page .side-icon-link.active, .home-page .updates-trigger, .home-page .updates-trigger:hover { width: 100% !important; min-width: 0 !important; min-height: 66px !important; height: 66px !important; padding: 10px 8px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 7px !important; border-radius: 22px !important; border-color: rgba(224, 224, 206, 0.16) !important; background: rgba(255, 255, 255, 0.02) !important; transform: none !important; overflow: visible !important; }
-  .home-page .updates-trigger, .home-page .updates-trigger:hover { border-color: rgba(255, 43, 43, 0.46) !important; box-shadow: 0 18px 48px rgba(255, 43, 43, 0.12) !important; }
-  .home-page .side-icon-svg, .home-page .side-icon-svg svg { width: 24px !important; height: 24px !important; flex: 0 0 24px !important; color: #f3f3e4 !important; }
-  .home-page .side-icon-text { opacity: 1 !important; transform: none !important; color: #f3f3e4 !important; font-size: 12px !important; letter-spacing: 1.6px !important; white-space: nowrap !important; }
-  .home-page .updates-count-badge { top: 8px !important; right: 8px !important; min-width: 28px !important; height: 28px !important; color: #fff !important; font-size: 12px !important; box-shadow: 0 10px 28px rgba(255, 43, 43, 0.42) !important; }
-  .home-page .hero-content { order: 1 !important; position: relative !important; min-height: 660px !important; padding: 0 0 98px !important; background: transparent !important; overflow: visible !important; }
-  .home-page .background-word { display: block !important; left: 50% !important; width: max-content !important; color: rgba(255, 255, 255, 0.034) !important; font-size: clamp(50px, 12vw, 88px) !important; line-height: 0.88 !important; letter-spacing: 1.1px !important; z-index: 1 !important; text-align: center !important; }
-  .home-page .top-word { top: 0 !important; }
-  .home-page .bottom-word { top: 62px !important; }
-  .home-page .hero-label { position: relative !important; z-index: 9 !important; margin: 144px 0 22px !important; text-align: left !important; color: var(--accent) !important; font-size: clamp(20px, 5.2vw, 27px) !important; line-height: 1.05 !important; letter-spacing: 1.2px !important; }
-  .home-page .hero-main { position: relative !important; display: block !important; min-height: 410px !important; z-index: 4 !important; overflow: visible !important; }
-  .home-page .hero-left { position: relative !important; z-index: 12 !important; width: 74% !important; max-width: 500px !important; padding: 0 !important; }
-  .home-page .hero-left h2 { width: 100% !important; max-width: 100% !important; color: var(--accent) !important; font-size: clamp(44px, 10.4vw, 66px) !important; line-height: 0.96 !important; letter-spacing: -1.4px !important; text-shadow: 0 0 12px rgba(255, 43, 43, 0.34), 0 18px 36px rgba(0, 0, 0, 0.7) !important; overflow-wrap: normal !important; word-break: normal !important; }
-  .home-page .hero-left h2 br { display: block !important; }
-  .home-page .hero-left p { width: 100% !important; max-width: 310px !important; margin: 22px 0 0 !important; color: rgba(224, 224, 206, 0.78) !important; font-size: clamp(17px, 4vw, 22px) !important; line-height: 1.58 !important; }
-  .home-page .hero-actions { width: min(100%, 310px) !important; max-width: 310px !important; margin-top: 34px !important; display: grid !important; grid-template-columns: 1fr !important; gap: 14px !important; }
-  .home-page .primary-btn, .home-page .secondary-btn { position: relative !important; width: 100% !important; max-width: 100% !important; min-height: 62px !important; padding: 0 54px 0 22px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 20px !important; text-align: center !important; font-size: 16px !important; line-height: 1.2 !important; letter-spacing: 0 !important; }
-  .home-page .primary-btn { border-color: #e7e7d4 !important; background: #e7e7d4 !important; color: #050505 !important; box-shadow: 0 20px 42px rgba(224, 224, 206, 0.14) !important; }
-  .home-page .secondary-btn { border-color: rgba(224, 224, 206, 0.22) !important; color: #f3f3e4 !important; background: rgba(0, 0, 0, 0.28) !important; }
-  .home-page .primary-btn::after, .home-page .secondary-btn::after { content: "›"; position: absolute; right: 22px; top: 50%; transform: translateY(-52%); font-size: 32px; font-weight: 500; line-height: 1; }
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-image-wrap { display: block !important; position: absolute !important; top: 162px !important; right: -18px !important; width: min(53vw, 285px) !important; height: 410px !important; min-height: 410px !important; margin: 0 !important; overflow: visible !important; pointer-events: auto !important; z-index: 8 !important; opacity: 0.98 !important; }
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-image-wrap::before { width: 112% !important; height: 92% !important; left: 2% !important; top: 8% !important; background: radial-gradient(circle, rgba(255, 43, 43, 0.16), transparent 64%) !important; filter: blur(30px) !important; }
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-image-wrap::after { left: 50% !important; bottom: 46px !important; width: 86% !important; height: 64px !important; opacity: 0.7 !important; filter: blur(18px) !important; }
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-stage { width: 100% !important; height: 100% !important; min-height: 0 !important; margin: 0 !important; overflow: visible !important; pointer-events: auto !important; }
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-stage model-viewer, .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-bike { width: 100% !important; height: 100% !important; transform: scale(1.18) !important; transform-origin: center !important; pointer-events: auto !important; }
-  .home-page .brand-marquee { position: absolute !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; max-width: 100% !important; margin: 0 !important; padding-top: 42px !important; opacity: 1 !important; overflow: hidden !important; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent) !important; }
-  .home-page .brand-marquee::before { content: "TRACKED BRANDS"; position: absolute; left: 50%; top: 0; transform: translateX(-50%); color: rgba(224, 224, 206, 0.62); font-size: 13px; font-weight: 900; letter-spacing: 4px; white-space: nowrap; }
-  .home-page .brand-marquee::after { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 1px; background: linear-gradient(90deg, rgba(224, 224, 206, 0.22), transparent 34%, transparent 66%, rgba(224, 224, 206, 0.22)); }
-  .home-page .brand-marquee-track { gap: 42px !important; animation-duration: 24s !important; }
-  .home-page .brand-marquee-track span { font-size: clamp(18px, 4.4vw, 28px) !important; letter-spacing: 2px !important; opacity: 0.92 !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .left-panel { display: none !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-content { min-height: auto !important; padding-bottom: 0 !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-label, .home-page .home-page-shell:not([data-hero-stage="home"]) .brand-marquee, .home-page .home-page-shell:not([data-hero-stage="home"]) .background-word { display: none !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-main { min-height: 0 !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-left { width: 100% !important; max-width: 100% !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-left h2 { width: 100% !important; max-width: 100% !important; font-size: clamp(36px, 9.6vw, 52px) !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-left p { width: 100% !important; max-width: 100% !important; font-size: 16px !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-image-wrap { display: block !important; position: relative !important; inset: auto !important; width: 100% !important; height: auto !important; min-height: 0 !important; margin: 22px 0 0 !important; overflow: visible !important; pointer-events: auto !important; z-index: 3 !important; opacity: 1 !important; }
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-bike-stage { display: none !important; }
-  .home-page .hero-brand-stage, .home-page .hero-category-stage { width: 100% !important; max-width: 100% !important; margin: 0 !important; }
-  .home-page .hero-brand-grid, .home-page .hero-category-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
-  .home-page .hero-brand-card, .home-page .hero-category-card, .home-page .hero-motorcycle-card { min-height: 118px !important; padding: 14px 10px !important; border-radius: 20px !important; background: rgba(224, 224, 206, 0.026) !important; }
-  .home-page .hero-brand-card img { width: 92px !important; height: 56px !important; object-fit: contain !important; }
-  .home-page .hero-motorcycle-card img { width: 120px !important; height: 76px !important; object-fit: contain !important; }
-  .home-page .hero-brand-card span, .home-page .hero-motorcycle-card span { font-size: 13px !important; letter-spacing: 0.4px !important; }
-  .home-page .hero-category-card { min-height: 96px !important; font-size: 14px !important; letter-spacing: 0.8px !important; }
-  .home-page .hero-brand-controls, .home-page .hero-category-controls { margin-top: 12px !important; display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-  .home-page .hero-category-controls { grid-template-columns: 1fr !important; }
-  .home-page .hero-brand-nav { min-height: 44px !important; padding: 0 14px !important; border-radius: 14px !important; font-size: 12px !important; }
-  .home-page .hero-right, .home-page .right-panel { display: none !important; }
-  .home-page .updates-popover { position: absolute !important; top: calc(100% + 10px) !important; right: 0 !important; left: auto !important; bottom: auto !important; width: min(420px, calc(100vw - 32px)) !important; max-width: min(420px, calc(100vw - 32px)) !important; max-height: min(46svh, 360px) !important; transform: none !important; overflow-y: auto !important; overflow-x: hidden !important; padding: 12px !important; border-radius: 22px !important; border-color: rgba(255, 43, 43, 0.3) !important; background: rgba(7, 7, 9, 0.97) !important; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.72) !important; z-index: 10050 !important; }
-  .home-page .updates-popover-header { display: grid !important; grid-template-columns: 1fr auto !important; align-items: start !important; gap: 10px !important; margin-bottom: 10px !important; }
-  .home-page .updates-popover-header span { font-size: 12px !important; letter-spacing: 1.2px !important; }
-  .home-page .updates-popover-header-actions { display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 6px !important; }
-  .home-page .updates-popover-list { gap: 8px !important; }
-  .home-page .updates-popover-item { padding: 12px !important; border-radius: 16px !important; }
-  .home-page .updates-popover-item strong { font-size: 13px !important; }
-  .home-page .updates-popover-item p { font-size: 11px !important; line-height: 1.42 !important; }
-  .home-page .tracker-steps-section { padding-top: 54px !important; }
-}
-
-@media (max-width: 560px) {
-  .home-page .navbar { grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "garage garage" !important; padding-left: 18px !important; padding-right: 18px !important; gap: 18px 12px !important; }
-  .home-page .nav-links { justify-content: center !important; gap: clamp(28px, 9vw, 48px) !important; padding-top: 2px !important; }
-  .home-page .nav-links a { font-size: 16px !important; }
-  .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover { width: 100% !important; height: 64px !important; border-radius: 23px !important; }
-  .home-page .hero-section { padding-left: 18px !important; padding-right: 18px !important; }
-  .home-page .left-panel { width: 100% !important; margin: 0 0 42px !important; }
-}
-
-@media (max-width: 430px) {
-  .home-page .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 16px 10px !important; }
-  .home-page .logo-mark { width: 50px !important; height: 50px !important; border-radius: 15px !important; }
-  .home-page .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
-  .home-page .logo-text span:last-child { font-size: 12px !important; }
-  .home-page .account-menu-trigger, .home-page .account-menu-trigger:hover, .home-page .account-menu-trigger[aria-expanded="true"] { width: 50px !important; height: 50px !important; min-width: 50px !important; }
-  .home-page .nav-links { gap: 28px !important; }
-  .home-page .nav-links a { font-size: 15px !important; }
-  .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover { height: 60px !important; }
-  .home-page .nav-garage-btn > span:last-child { font-size: 15px !important; letter-spacing: 2px !important; }
-  .home-page .garage-count-badge { right: 20px !important; min-width: 28px !important; height: 28px !important; }
-  .home-page .hero-section { padding-left: 16px !important; padding-right: 16px !important; }
-  .home-page .side-icon-rail { gap: 10px !important; }
-  .home-page .side-icon-link, .home-page .updates-trigger { height: 58px !important; min-height: 58px !important; border-radius: 20px !important; }
-  .home-page .side-icon-svg, .home-page .side-icon-svg svg { width: 20px !important; height: 20px !important; flex-basis: 20px !important; }
-  .home-page .side-icon-text { font-size: 11px !important; letter-spacing: 1.3px !important; }
-  .home-page .hero-content { min-height: 630px !important; padding-bottom: 92px !important; }
-  .home-page .background-word { font-size: clamp(48px, 12vw, 64px) !important; letter-spacing: 0.7px !important; }
-  .home-page .top-word { top: 0 !important; }
-  .home-page .bottom-word { top: 52px !important; }
-  .home-page .hero-label { margin-top: 126px !important; margin-bottom: 18px !important; font-size: 20px !important; }
-  .home-page .hero-left { width: 76% !important; max-width: 330px !important; }
-  .home-page .hero-left h2 { font-size: clamp(38px, 11vw, 46px) !important; }
-  .home-page .hero-left p { max-width: 245px !important; font-size: 15px !important; line-height: 1.55 !important; }
-  .home-page .hero-actions { width: 100% !important; max-width: 260px !important; margin-top: 28px !important; gap: 12px !important; }
-  .home-page .primary-btn, .home-page .secondary-btn { min-height: 58px !important; border-radius: 18px !important; font-size: 15px !important; }
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-image-wrap { top: 168px !important; right: -14px !important; width: min(54vw, 245px) !important; height: 360px !important; min-height: 360px !important; }
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-stage model-viewer, .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-bike { transform: scale(1.14) !important; }
-  .home-page .brand-marquee-track { gap: 34px !important; }
-  .home-page .brand-marquee-track span { font-size: 18px !important; }
-  .home-page .hero-brand-grid, .home-page .hero-category-grid { gap: 9px !important; }
-  .home-page .hero-brand-card, .home-page .hero-category-card, .home-page .hero-motorcycle-card { min-height: 108px !important; border-radius: 18px !important; }
-  .home-page .updates-popover { width: min(390px, calc(100vw - 28px)) !important; max-width: min(390px, calc(100vw - 28px)) !important; max-height: min(42svh, 330px) !important; padding: 10px !important; }
-}
-
-/*24. compact tracker flow cards and global back-to-top*/
-.back-to-top-btn { position: fixed; right: 22px; bottom: calc(22px + env(safe-area-inset-bottom)); width: 48px; height: 48px; border: 1px solid rgba(224, 224, 206, 0.22); border-radius: 999px; display: flex; align-items: center; justify-content: center; background: rgba(7, 7, 9, 0.88); color: var(--accent); font-size: 22px; font-weight: 900; line-height: 1; opacity: 0; pointer-events: none; transform: translateY(12px) scale(0.96); transition: opacity 0.22s ease, transform 0.22s ease, border-color 0.22s ease; z-index: 12000; box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45); cursor: pointer; }
-.back-to-top-btn.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
-.back-to-top-btn:hover { border-color: rgba(255, 43, 43, 0.55); background: rgba(14, 14, 16, 0.96); }
-@media (max-width: 680px) {
-  .home-page .tracker-steps-section { padding: 44px 18px 48px !important; }
-  .home-page .tracker-steps-header h2 { margin-bottom: 0 !important; font-size: clamp(28px, 7vw, 36px) !important; }
-  .home-page .tracker-steps-grid { width: 100% !important; max-width: 100% !important; margin: 24px auto 0 !important; display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; overflow: visible !important; }
-  .home-page .tracker-step-card { min-height: 138px !important; padding: 14px 9px !important; display: flex !important; flex-direction: column !important; justify-content: flex-start !important; gap: 5px !important; border-radius: 16px !important; overflow: hidden !important; }
-  .home-page .tracker-step-number { font-size: 13px !important; line-height: 1 !important; }
-  .home-page .tracker-step-card h3 { margin: 0 !important; font-size: clamp(12px, 2.9vw, 15px) !important; line-height: 1.08 !important; letter-spacing: -0.3px !important; }
-  .home-page .tracker-step-card p { margin: 2px 0 0 !important; font-size: 10px !important; line-height: 1.32 !important; display: -webkit-box !important; -webkit-line-clamp: 3 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
-  .back-to-top-btn { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); width: 44px; height: 44px; font-size: 20px; }
-}
-@media (max-width: 430px) {
-  .home-page .tracker-steps-section { padding: 38px 16px 42px !important; }
-  .home-page .tracker-steps-grid { gap: 7px !important; margin-top: 20px !important; }
-  .home-page .tracker-step-card { min-height: 106px !important; padding: 13px 7px !important; justify-content: center !important; }
-  .home-page .tracker-step-number { font-size: 12px !important; }
-  .home-page .tracker-step-card h3 { font-size: 12px !important; line-height: 1.08 !important; }
-  .home-page .tracker-step-card p { display: none !important; }
-}
-
-
-
-/*25. contact mobile compact cleanup*/
-@media (max-width: 780px) {
-  .contact-page-shell, .contact-main { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; }
-  .contact-page-shell .navbar { min-height: auto !important; padding: calc(18px + env(safe-area-inset-top)) 18px 14px !important; gap: 14px 12px !important; border-bottom-color: rgba(9, 12, 2, 0.12) !important; }
-  .contact-page-shell .logo-block { gap: 11px !important; }
-  .contact-page-shell .logo-mark { width: 50px !important; height: 50px !important; border-radius: 15px !important; font-size: 16px !important; }
-  .contact-page-shell .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.7px !important; }
-  .contact-page-shell .logo-text span:last-child { font-size: 12px !important; }
-  .contact-page-shell .account-menu-trigger, .contact-page-shell .account-menu-trigger:hover, .contact-page-shell .account-menu-trigger[aria-expanded="true"] { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 17px !important; padding: 0 !important; justify-content: center !important; transform: none !important; }
-  .contact-page-shell .account-avatar { width: 28px !important; min-width: 28px !important; height: 28px !important; background: linear-gradient(135deg, #d12a1a, #7a160c) !important; color: #fff !important; }
-  .contact-page-shell .account-label { display: none !important; }
-  .contact-page-shell .nav-links { margin: 2px 0 0 !important; gap: clamp(26px, 9vw, 44px) !important; }
-  .contact-page-shell .nav-links a { font-size: 16px !important; line-height: 1 !important; }
-  .contact-page-shell .nav-garage-btn, .contact-page-shell .nav-garage-btn:hover { width: min(100%, 340px) !important; height: 54px !important; border-radius: 20px !important; background: #090c02 !important; color: #dde2c6 !important; border-color: rgba(9, 12, 2, 0.32) !important; box-shadow: none !important; }
-  .contact-page-shell .nav-garage-btn .garage-icon { color: #a72608 !important; stroke: #a72608 !important; }
-  .contact-page-shell .nav-garage-btn > span:last-child { color: #ffffff !important; font-size: 14px !important; letter-spacing: 1.8px !important; }
-  .contact-page-shell .garage-count-badge { top: 8px !important; right: 18px !important; background: #a72608 !important; color: #dde2c6 !important; }
-  .contact-hero { min-height: auto !important; padding: 28px 18px 40px !important; background-size: 30px 30px, 30px 30px, 100% 100%, 100% 100%, auto !important; }
-  .contact-hero-inner { max-width: 520px !important; }
-  .contact-hero .hero-label { margin: 0 0 26px !important; text-align: center !important; font-size: 16px !important; }
-  .contact-hero-grid { gap: 18px !important; }
-  .contact-copy .section-tag { margin-bottom: 8px !important; font-size: 10px !important; letter-spacing: 3px !important; }
-  .contact-copy h1 { margin-bottom: 14px !important; font-size: clamp(31px, 8.9vw, 44px) !important; line-height: 0.94 !important; letter-spacing: -0.8px !important; }
-  .contact-lead { margin-bottom: 16px !important; font-size: 15px !important; line-height: 1.45 !important; }
-  .contact-mini-info { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; margin-top: 16px !important; }
-  .contact-info-card { min-height: 94px !important; padding: 13px !important; }
-  .contact-info-card h3 { margin-bottom: 6px !important; font-size: 16px !important; line-height: 1.08 !important; }
-  .contact-info-card p { font-size: 12px !important; line-height: 1.35 !important; }
-  .contact-form { padding: 16px !important; border-radius: 20px !important; }
-  .contact-field { gap: 7px !important; margin-bottom: 10px !important; }
-  .contact-field label { font-size: 10px !important; letter-spacing: 1px !important; }
-  .contact-field input, .contact-field textarea, .contact-form input, .contact-form textarea { padding: 12px 14px !important; border-radius: 13px !important; font-size: 14px !important; }
-  .contact-field textarea, .contact-form textarea { min-height: 112px !important; }
-  .contact-submit-btn { min-height: 48px !important; padding: 12px 15px !important; border-radius: 13px !important; font-size: 12px !important; }
-}
-@media (max-width: 430px) {
-  .contact-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 13px 10px !important; }
-  .contact-page-shell .logo-mark { width: 48px !important; height: 48px !important; }
-  .contact-page-shell .nav-links { gap: 30px !important; }
-  .contact-page-shell .nav-links a { font-size: 15px !important; }
-  .contact-page-shell .nav-garage-btn, .contact-page-shell .nav-garage-btn:hover { height: 52px !important; max-width: 330px !important; }
-  .contact-hero { padding: 24px 16px 36px !important; }
-  .contact-hero .hero-label { margin-bottom: 22px !important; }
-  .contact-copy h1 { font-size: clamp(30px, 8.6vw, 38px) !important; }
-  .contact-mini-info { gap: 8px !important; }
-  .contact-info-card { padding: 12px 10px !important; }
-  .contact-info-card h3 { font-size: 15px !important; }
-  .contact-info-card p { font-size: 11px !important; }
-  .contact-form { padding: 15px !important; }
-}
-/*26. contact desktop garage icon visibility*/
-.contact-page-shell .nav-garage-btn { color: #a72608 !important; }
-.contact-page-shell .nav-garage-btn .garage-icon, .contact-page-shell .nav-garage-btn .garage-icon svg { color: #a72608 !important; stroke: #a72608 !important; }
-.contact-page-shell .nav-garage-btn:hover .garage-icon, .contact-page-shell .nav-garage-btn:hover .garage-icon svg { color: #ff2b2b !important; stroke: #ff2b2b !important; }
-/*27. contact and maintenance mobile scroll + scale cleanup*/
-@media (max-width: 680px) {
-  body.contact-page, body.maintenance-page, body:has(.contact-page-shell), body:has(.maintenance-page-shell) { width: 100% !important; max-width: 100% !important; overflow-x: clip !important; overscroll-behavior-x: none !important; }
-
-  .contact-page-shell, .contact-main, .contact-hero, .contact-hero-inner, .contact-hero-grid, .contact-copy, .contact-form-wrap, .contact-form, .contact-mini-info, .contact-info-card { width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; overflow-x: clip !important; }
-  .contact-page-shell { min-height: 100svh !important; overflow-y: auto !important; }
-  .contact-main { min-height: 100svh !important; overflow-y: visible !important; }
-  .contact-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: clip !important; }
-  .contact-hero { padding: 22px 14px 34px !important; }
-  .contact-hero-inner { max-width: 430px !important; margin-inline: auto !important; }
-  .contact-hero .hero-label { margin-bottom: 18px !important; font-size: 14px !important; }
-  .contact-copy .section-tag { margin-bottom: 7px !important; font-size: 9px !important; letter-spacing: 2.4px !important; }
-  .contact-copy h1 { margin-bottom: 11px !important; font-size: clamp(28px, 7.7vw, 36px) !important; line-height: 0.96 !important; }
-  .contact-lead { margin-bottom: 13px !important; font-size: 14px !important; line-height: 1.42 !important; }
-  .contact-mini-info { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; margin-top: 13px !important; }
-  .contact-info-card { min-height: 82px !important; padding: 11px 10px !important; border-radius: 16px !important; }
-  .contact-info-card h3 { margin-bottom: 5px !important; font-size: 14px !important; line-height: 1.05 !important; }
-  .contact-info-card p { font-size: 10.5px !important; line-height: 1.3 !important; }
-  .contact-form { padding: 14px !important; border-radius: 18px !important; }
-  .contact-form-title { font-size: 22px !important; }
-  .contact-form-intro { margin-bottom: 12px !important; font-size: 12px !important; line-height: 1.4 !important; }
-  .contact-field { gap: 6px !important; margin-bottom: 9px !important; }
-  .contact-field label { font-size: 9px !important; letter-spacing: 0.9px !important; }
-  .contact-field input, .contact-field textarea, .contact-form input, .contact-form textarea { max-width: 100% !important; padding: 11px 12px !important; border-radius: 12px !important; font-size: 13px !important; box-sizing: border-box !important; }
-  .contact-field textarea, .contact-form textarea { min-height: 98px !important; }
-  .contact-submit-btn { min-height: 46px !important; padding: 11px 14px !important; border-radius: 12px !important; font-size: 11px !important; }
-
-  .maintenance-page, .maintenance-page .page-shell, .maintenance-page-shell, .maintenance-layout, .maintenance-sidebar, .maintenance-main, .maintenance-main-header, .maintenance-task-form, .maintenance-status-grid, .maintenance-column, .maintenance-task-list, .maintenance-task-card, .maintenance-loading-state, .maintenance-bike-card { width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; overflow-x: clip !important; }
-  .maintenance-page, .maintenance-page .page-shell, .maintenance-page-shell { min-height: 100svh !important; overflow-y: visible !important; }
-  .maintenance-page-shell { padding: calc(16px + env(safe-area-inset-top)) 12px calc(72px + env(safe-area-inset-bottom)) !important; }
-  .maintenance-layout { margin-top: 18px !important; padding-top: 18px !important; grid-template-columns: 1fr !important; gap: 16px !important; }
-  .maintenance-sidebar, .maintenance-loading-state, .maintenance-task-form, .maintenance-column, .maintenance-task-card, .maintenance-bike-card { padding: 16px !important; border-radius: 18px !important; }
-  .maintenance-sidebar { min-height: auto !important; }
-  .maintenance-sidebar h1, .maintenance-main-header h2 { font-size: clamp(28px, 8vw, 36px) !important; line-height: 1.02 !important; letter-spacing: -0.7px !important; }
-  .maintenance-sidebar p, .maintenance-bike-card p { font-size: 13px !important; line-height: 1.5 !important; }
-  .maintenance-bike-card { margin-top: 18px !important; }
-  .maintenance-bike-card strong { font-size: 18px !important; }
-  .maintenance-sidebar-actions { margin-top: 18px !important; gap: 10px !important; }
-  .maintenance-main-header { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; margin-bottom: 16px !important; }
-  .maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn { width: 100% !important; min-height: 48px !important; padding: 12px 14px !important; font-size: 11px !important; }
-  .maintenance-message { padding: 13px 14px !important; font-size: 12px !important; line-height: 1.4 !important; }
-  .maintenance-task-form { margin-bottom: 18px !important; grid-template-columns: 1fr !important; gap: 12px !important; }
-  .maintenance-form-row input, .maintenance-form-row textarea { max-width: 100% !important; padding: 11px 12px !important; font-size: 13px !important; box-sizing: border-box !important; }
-  .maintenance-status-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-  .maintenance-column { min-height: auto !important; }
-  .maintenance-column-header { margin-bottom: 12px !important; }
-  .maintenance-column-header h3 { font-size: 13px !important; }
-  .maintenance-task-card h4 { font-size: 15px !important; }
-  .maintenance-task-card p { font-size: 12px !important; line-height: 1.45 !important; }
-  .maintenance-task-meta { gap: 8px !important; margin-bottom: 10px !important; }
-  .maintenance-task-meta span { font-size: 9px !important; }
-  .maintenance-task-action, .maintenance-delete-btn { min-height: 44px !important; padding: 11px 12px !important; font-size: 11px !important; }
-}
-
-@media (max-width: 430px) {
-  .contact-hero { padding: 20px 12px 30px !important; }
-  .contact-hero-inner { max-width: 390px !important; }
-  .contact-copy h1 { font-size: clamp(27px, 7.4vw, 34px) !important; }
-  .contact-mini-info { gap: 7px !important; }
-  .contact-info-card { min-height: 76px !important; padding: 10px 8px !important; }
-  .contact-info-card h3 { font-size: 13px !important; }
-  .contact-info-card p { font-size: 10px !important; }
-  .maintenance-page-shell { padding-inline: 10px !important; }
-  .maintenance-sidebar, .maintenance-loading-state, .maintenance-task-form, .maintenance-column, .maintenance-task-card, .maintenance-bike-card { padding: 14px !important; }
-  .maintenance-sidebar h1, .maintenance-main-header h2 { font-size: clamp(26px, 7.4vw, 32px) !important; }
-}
-
-/*28. contact mobile final scroll fix*/
-@media (max-width: 780px) {
-  .contact-page-shell, .contact-main { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: clip !important; overflow-y: visible !important; box-sizing: border-box !important; }
-  .contact-page-shell { min-height: 100svh !important; height: auto !important; position: relative !important; }
-  .contact-main { min-height: auto !important; height: auto !important; }
-  .contact-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: clip !important; overflow-y: visible !important; box-sizing: border-box !important; }
-  .contact-hero, .contact-hero-inner, .contact-hero-grid, .contact-copy, .contact-form-wrap, .contact-form, .contact-mini-info { width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; overflow-x: clip !important; }
-  .contact-hero { min-height: auto !important; height: auto !important; overflow-y: visible !important; padding-left: 16px !important; padding-right: 16px !important; }
-  .contact-hero-inner { margin-left: auto !important; margin-right: auto !important; }
-  .contact-mini-info { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-  .contact-info-card, .contact-field, .contact-field input, .contact-field textarea, .contact-form input, .contact-form textarea, .contact-submit-btn { max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; }
-  .contact-page-shell .account-menu { max-width: 100% !important; min-width: 0 !important; }
-  .contact-page-shell .account-menu-panel, .contact-page-shell .account-dropdown, .contact-page-shell .account-menu-dropdown { right: 0 !important; left: auto !important; max-width: calc(100vw - 32px) !important; box-sizing: border-box !important; }
-}
-@media (max-width: 430px) {
-  .contact-hero { padding-left: 14px !important; padding-right: 14px !important; }
-  .contact-mini-info { gap: 7px !important; }
-}
-
-/*29. maintenance mobile compact navbar fix*/
-@media (max-width: 780px) {
-  .maintenance-page, .maintenance-page-shell { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: hidden !important; }
-  .maintenance-page .navbar, .maintenance-page-shell .navbar { width: 100% !important; max-width: 100% !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "garage garage" !important; align-items: center !important; gap: 14px 12px !important; padding: calc(20px + env(safe-area-inset-top)) 16px 18px !important; overflow: visible !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; }
-  .maintenance-page .navbar .logo-block, .maintenance-page-shell .navbar .logo-block { grid-area: logo !important; justify-self: start !important; min-width: 0 !important; gap: 12px !important; }
-  .maintenance-page .navbar .account-menu, .maintenance-page-shell .navbar .account-menu { grid-area: account !important; justify-self: end !important; margin: 0 !important; }
-  .maintenance-page .navbar .account-menu-trigger, .maintenance-page-shell .navbar .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; padding: 0 !important; border-radius: 18px !important; justify-content: center !important; transform: none !important; }
-  .maintenance-page .navbar .account-label, .maintenance-page-shell .navbar .account-label { display: none !important; }
-  .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links { grid-area: links !important; width: 100% !important; max-width: 100% !important; display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; margin: 2px 0 0 !important; padding: 0 !important; overflow: hidden !important; }
-  .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { min-width: 0 !important; height: 36px !important; padding: 0 6px !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 14px !important; background: rgba(255, 255, 255, 0.018) !important; color: rgba(255, 255, 255, 0.74) !important; font-size: 12px !important; font-weight: 800 !important; line-height: 1 !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
-  .maintenance-page .navbar .nav-links a.active, .maintenance-page-shell .navbar .nav-links a.active { border-color: rgba(255, 43, 43, 0.5) !important; color: #fff !important; background: rgba(255, 43, 43, 0.08) !important; }
-  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover { grid-area: garage !important; width: min(100%, 380px) !important; height: 56px !important; justify-self: center !important; justify-content: center !important; gap: 12px !important; padding: 0 22px !important; border-radius: 20px !important; transform: none !important; overflow: visible !important; }
-  .maintenance-page .navbar .nav-garage-btn > span:last-child, .maintenance-page-shell .navbar .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; font-size: 14px !important; letter-spacing: 1.8px !important; }
-  .maintenance-page .navbar .garage-count-badge, .maintenance-page-shell .navbar .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; font-size: 11px !important; }
-}
-
-@media (max-width: 430px) {
-  .maintenance-page .navbar, .maintenance-page-shell .navbar { padding-left: 14px !important; padding-right: 14px !important; gap: 12px 10px !important; }
-  .maintenance-page .navbar .logo-mark, .maintenance-page-shell .navbar .logo-mark { width: 50px !important; height: 50px !important; border-radius: 15px !important; }
-  .maintenance-page .navbar .logo-text span:first-child, .maintenance-page-shell .navbar .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.7px !important; }
-  .maintenance-page .navbar .logo-text span:last-child, .maintenance-page-shell .navbar .logo-text span:last-child { font-size: 12px !important; }
-  .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links { gap: 7px !important; }
-  .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { height: 34px !important; border-radius: 13px !important; font-size: 11px !important; padding: 0 4px !important; }
-  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover { height: 54px !important; max-width: 340px !important; }
-}
-
-/*30. unified mobile navbar baseline*/
-@media (max-width: 780px) {
-  .home-page .navbar, .about-page-shell .navbar, .contact-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "garage garage" !important; align-items: center !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; overflow: visible !important; box-sizing: border-box !important; }
-  .home-page .logo-block, .about-page-shell .logo-block, .contact-page-shell .logo-block, .maintenance-page .logo-block, .maintenance-page-shell .logo-block { grid-area: logo !important; justify-self: start !important; min-width: 0 !important; gap: 12px !important; transform: none !important; }
-  .home-page .logo-mark, .about-page-shell .logo-mark, .contact-page-shell .logo-mark, .maintenance-page .logo-mark, .maintenance-page-shell .logo-mark { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 16px !important; font-size: 16px !important; }
-  .home-page .logo-text span:first-child, .about-page-shell .logo-text span:first-child, .contact-page-shell .logo-text span:first-child, .maintenance-page .logo-text span:first-child, .maintenance-page-shell .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.9px !important; line-height: 1 !important; }
-  .home-page .logo-text span:last-child, .about-page-shell .logo-text span:last-child, .contact-page-shell .logo-text span:last-child, .maintenance-page .logo-text span:last-child, .maintenance-page-shell .logo-text span:last-child { margin-top: 5px !important; font-size: 12px !important; letter-spacing: 1.2px !important; line-height: 1 !important; }
-  .home-page .account-menu, .about-page-shell .account-menu, .contact-page-shell .account-menu, .maintenance-page .account-menu, .maintenance-page-shell .account-menu { grid-area: account !important; justify-self: end !important; align-self: center !important; margin: 0 !important; }
-  .home-page .account-menu-trigger, .about-page-shell .account-menu-trigger, .contact-page-shell .account-menu-trigger, .maintenance-page .account-menu-trigger, .maintenance-page-shell .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; padding: 0 !important; border-radius: 17px !important; justify-content: center !important; transform: none !important; }
-  .home-page .account-label, .about-page-shell .account-label, .contact-page-shell .account-label, .maintenance-page .account-label, .maintenance-page-shell .account-label { display: none !important; }
-  .home-page .nav-links, .about-page-shell .nav-links, .contact-page-shell .nav-links, .maintenance-page .nav-links, .maintenance-page-shell .nav-links { grid-area: links !important; width: 100% !important; max-width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: clamp(28px, 9vw, 46px) !important; margin: 2px 0 0 !important; padding: 0 !important; flex-wrap: nowrap !important; overflow: hidden !important; }
-  .home-page .nav-links a, .about-page-shell .nav-links a, .contact-page-shell .nav-links a, .maintenance-page .nav-links a, .maintenance-page-shell .nav-links a { position: relative !important; min-width: 0 !important; height: 32px !important; padding: 0 2px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; border: 0 !important; background: transparent !important; font-size: 15px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; }
-  .home-page .nav-links a.active::after, .about-page-shell .nav-links a.active::after, .contact-page-shell .nav-links a.active::after, .maintenance-page .nav-links a.active::after, .maintenance-page-shell .nav-links a.active::after { content: "" !important; position: absolute !important; left: 50% !important; bottom: 0 !important; width: 28px !important; height: 2px !important; transform: translateX(-50%) !important; border-radius: 999px !important; background: currentColor !important; }
-  .maintenance-page .nav-links a[href*="garage"], .maintenance-page .nav-links a[href*="about"], .maintenance-page .nav-links a[href*="contact"], .maintenance-page-shell .nav-links a[href*="garage"], .maintenance-page-shell .nav-links a[href*="about"], .maintenance-page-shell .nav-links a[href*="contact"] { display: none !important; }
-  .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover, .contact-page-shell .nav-garage-btn, .contact-page-shell .nav-garage-btn:hover, .maintenance-page .nav-garage-btn, .maintenance-page .nav-garage-btn:hover, .maintenance-page-shell .nav-garage-btn, .maintenance-page-shell .nav-garage-btn:hover { grid-area: garage !important; width: min(100%, 380px) !important; height: 58px !important; justify-self: center !important; justify-content: center !important; gap: 14px !important; padding: 0 24px !important; border-radius: 22px !important; transform: none !important; overflow: visible !important; }
-  .home-page .nav-garage-btn > span:last-child, .about-page-shell .nav-garage-btn > span:last-child, .contact-page-shell .nav-garage-btn > span:last-child, .maintenance-page .nav-garage-btn > span:last-child, .maintenance-page-shell .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; }
-  .home-page .garage-count-badge, .about-page-shell .garage-count-badge, .contact-page-shell .garage-count-badge, .maintenance-page .garage-count-badge, .maintenance-page-shell .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; font-size: 11px !important; }
-}
-
-@media (max-width: 430px) {
-  .home-page .navbar, .about-page-shell .navbar, .contact-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 14px 10px !important; }
-  .home-page .logo-mark, .about-page-shell .logo-mark, .contact-page-shell .logo-mark, .maintenance-page .logo-mark, .maintenance-page-shell .logo-mark { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 15px !important; }
-  .home-page .logo-text span:first-child, .about-page-shell .logo-text span:first-child, .contact-page-shell .logo-text span:first-child, .maintenance-page .logo-text span:first-child, .maintenance-page-shell .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
-  .home-page .logo-text span:last-child, .about-page-shell .logo-text span:last-child, .contact-page-shell .logo-text span:last-child, .maintenance-page .logo-text span:last-child, .maintenance-page-shell .logo-text span:last-child { font-size: 12px !important; }
-  .home-page .account-menu-trigger, .about-page-shell .account-menu-trigger, .contact-page-shell .account-menu-trigger, .maintenance-page .account-menu-trigger, .maintenance-page-shell .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; }
-  .home-page .nav-links, .about-page-shell .nav-links, .contact-page-shell .nav-links, .maintenance-page .nav-links, .maintenance-page-shell .nav-links { gap: clamp(26px, 8.5vw, 38px) !important; }
-  .home-page .nav-links a, .about-page-shell .nav-links a, .contact-page-shell .nav-links a, .maintenance-page .nav-links a, .maintenance-page-shell .nav-links a { height: 30px !important; font-size: 15px !important; }
-  .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover, .contact-page-shell .nav-garage-btn, .contact-page-shell .nav-garage-btn:hover, .maintenance-page .nav-garage-btn, .maintenance-page .nav-garage-btn:hover, .maintenance-page-shell .nav-garage-btn, .maintenance-page-shell .nav-garage-btn:hover { height: 56px !important; max-width: 340px !important; border-radius: 21px !important; }
-}
-
-/*31. about mobile navbar exact size match*/
-@media (max-width: 780px) {
-  body.about-page .about-page-shell .navbar, .about-page-shell .navbar { min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "garage garage" !important; align-items: center !important; justify-content: initial !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; flex-direction: initial !important; }
-  body.about-page .about-page-shell .logo-block, .about-page-shell .logo-block { grid-area: logo !important; justify-content: flex-start !important; justify-self: start !important; gap: 12px !important; transform: none !important; }
-  body.about-page .about-page-shell .logo-mark, .about-page-shell .logo-mark { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 16px !important; font-size: 16px !important; }
-  body.about-page .about-page-shell .logo-text span:first-child, .about-page-shell .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.9px !important; line-height: 1 !important; }
-  body.about-page .about-page-shell .logo-text span:last-child, .about-page-shell .logo-text span:last-child { margin-top: 5px !important; font-size: 12px !important; letter-spacing: 1.2px !important; line-height: 1 !important; }
-  body.about-page .about-page-shell .account-menu, .about-page-shell .account-menu { grid-area: account !important; justify-self: end !important; margin: 0 !important; }
-  body.about-page .about-page-shell .account-menu-trigger, .about-page-shell .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 17px !important; padding: 0 !important; transform: none !important; }
-  body.about-page .about-page-shell .nav-links, .about-page-shell .nav-links { grid-area: links !important; width: 100% !important; display: flex !important; justify-content: center !important; align-items: center !important; gap: clamp(28px, 9vw, 46px) !important; margin: 2px 0 0 !important; padding: 0 !important; flex-wrap: nowrap !important; }
-  body.about-page .about-page-shell .nav-links a, .about-page-shell .nav-links a { position: relative !important; height: 32px !important; padding: 0 2px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; font-size: 15px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; white-space: nowrap !important; }
-  body.about-page .about-page-shell .nav-garage-btn, body.about-page .about-page-shell .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover { grid-area: garage !important; width: min(100%, 380px) !important; min-width: 0 !important; height: 58px !important; justify-self: center !important; justify-content: center !important; gap: 14px !important; padding: 0 24px !important; border-radius: 22px !important; transform: none !important; }
-  body.about-page .about-page-shell .nav-garage-btn > span:last-child, .about-page-shell .nav-garage-btn > span:last-child { font-size: 14px !important; letter-spacing: 1.9px !important; opacity: 1 !important; transform: none !important; }
-  body.about-page .about-page-shell .garage-count-badge, .about-page-shell .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; font-size: 11px !important; }
-}
-
-@media (max-width: 430px) {
-  body.about-page .about-page-shell .navbar, .about-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 14px 10px !important; }
-  body.about-page .about-page-shell .logo-mark, .about-page-shell .logo-mark { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 15px !important; }
-  body.about-page .about-page-shell .logo-text span:first-child, .about-page-shell .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
-  body.about-page .about-page-shell .logo-text span:last-child, .about-page-shell .logo-text span:last-child { font-size: 12px !important; }
-  body.about-page .about-page-shell .account-menu-trigger, .about-page-shell .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; }
-  body.about-page .about-page-shell .nav-links, .about-page-shell .nav-links { gap: clamp(26px, 8.5vw, 38px) !important; }
-  body.about-page .about-page-shell .nav-links a, .about-page-shell .nav-links a { height: 30px !important; font-size: 15px !important; }
-  body.about-page .about-page-shell .nav-garage-btn, body.about-page .about-page-shell .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover { height: 56px !important; max-width: 340px !important; border-radius: 21px !important; }
-}
-
-/*32. garage and maintenance mobile navbar final match*/
-@media (max-width: 780px) {
-  .garage-page .navbar, .garage-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; align-items: center !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; overflow: visible !important; box-sizing: border-box !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; }
-  .garage-page .navbar, .garage-page-shell .navbar { grid-template-areas: "logo account" "links links" "cta cta" !important; }
-  .maintenance-page .navbar, .maintenance-page-shell .navbar { grid-template-areas: "logo account" "links links" "garage garage" !important; }
-  .garage-page .logo-block, .garage-page-shell .logo-block, .maintenance-page .logo-block, .maintenance-page-shell .logo-block { grid-area: logo !important; justify-self: start !important; justify-content: flex-start !important; min-width: 0 !important; gap: 12px !important; transform: none !important; }
-  .garage-page .logo-mark, .garage-page-shell .logo-mark, .maintenance-page .logo-mark, .maintenance-page-shell .logo-mark { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 16px !important; font-size: 16px !important; }
-  .garage-page .logo-text span:first-child, .garage-page-shell .logo-text span:first-child, .maintenance-page .logo-text span:first-child, .maintenance-page-shell .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.9px !important; line-height: 1 !important; }
-  .garage-page .logo-text span:last-child, .garage-page-shell .logo-text span:last-child, .maintenance-page .logo-text span:last-child, .maintenance-page-shell .logo-text span:last-child { margin-top: 5px !important; font-size: 12px !important; letter-spacing: 1.2px !important; line-height: 1 !important; }
-  .garage-page .account-menu, .garage-page-shell .account-menu, .maintenance-page .account-menu, .maintenance-page-shell .account-menu { grid-area: account !important; justify-self: end !important; align-self: center !important; margin: 0 !important; }
-  .garage-page .account-menu-trigger, .garage-page-shell .account-menu-trigger, .maintenance-page .account-menu-trigger, .maintenance-page-shell .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; padding: 0 !important; border-radius: 17px !important; justify-content: center !important; transform: none !important; }
-  .garage-page .account-label, .garage-page-shell .account-label, .maintenance-page .account-label, .maintenance-page-shell .account-label { display: none !important; }
-  .garage-page .nav-links, .garage-page-shell .nav-links, .maintenance-page .nav-links, .maintenance-page-shell .nav-links { grid-area: links !important; width: 100% !important; max-width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: clamp(28px, 9vw, 46px) !important; margin: 2px 0 0 !important; padding: 0 !important; flex-wrap: nowrap !important; overflow: visible !important; }
-  .garage-page .nav-links a, .garage-page-shell .nav-links a, .maintenance-page .nav-links a, .maintenance-page-shell .nav-links a { position: relative !important; min-width: 0 !important; width: auto !important; height: 32px !important; padding: 0 2px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; color: rgba(224, 224, 206, 0.72) !important; font-size: 15px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; }
-  .garage-page .nav-links a:hover, .garage-page .nav-links a.active, .garage-page-shell .nav-links a:hover, .garage-page-shell .nav-links a.active, .maintenance-page .nav-links a:hover, .maintenance-page .nav-links a.active, .maintenance-page-shell .nav-links a:hover, .maintenance-page-shell .nav-links a.active { color: var(--accent) !important; }
-  .garage-page .nav-links a.active::after, .garage-page-shell .nav-links a.active::after, .maintenance-page .nav-links a.active::after, .maintenance-page-shell .nav-links a.active::after { content: "" !important; position: absolute !important; left: 50% !important; bottom: 0 !important; width: 28px !important; height: 2px !important; transform: translateX(-50%) !important; border-radius: 999px !important; background: var(--accent) !important; }
-  .garage-page .nav-links a[href*="maintenance"], .garage-page-shell .nav-links a[href*="maintenance"] { display: none !important; }
-  .maintenance-page .nav-links a[href*="garage"], .maintenance-page .nav-links a[href*="about"], .maintenance-page .nav-links a[href*="contact"], .maintenance-page-shell .nav-links a[href*="garage"], .maintenance-page-shell .nav-links a[href*="about"], .maintenance-page-shell .nav-links a[href*="contact"] { display: none !important; }
-  .garage-page .nav-button, .garage-page-shell .nav-button { grid-area: cta !important; width: min(100%, 380px) !important; height: 58px !important; justify-self: center !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 14px !important; padding: 0 24px !important; border-radius: 22px !important; border: 1px solid rgba(224, 224, 206, 0.16) !important; background: rgba(255, 255, 255, 0.02) !important; color: #f3f3e4 !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.5px !important; text-transform: uppercase !important; transform: none !important; overflow: visible !important; }
-  .maintenance-page .nav-garage-btn, .maintenance-page .nav-garage-btn:hover, .maintenance-page-shell .nav-garage-btn, .maintenance-page-shell .nav-garage-btn:hover { grid-area: garage !important; width: min(100%, 380px) !important; height: 58px !important; justify-self: center !important; justify-content: center !important; gap: 14px !important; padding: 0 24px !important; border-radius: 22px !important; border-color: rgba(224, 224, 206, 0.16) !important; background: rgba(255, 255, 255, 0.02) !important; transform: none !important; overflow: visible !important; }
-  .maintenance-page .nav-garage-btn .garage-icon, .maintenance-page-shell .nav-garage-btn .garage-icon { width: 20px !important; height: 20px !important; color: #f3f3e4 !important; stroke: #f3f3e4 !important; }
-  .maintenance-page .nav-garage-btn > span:last-child, .maintenance-page-shell .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; color: #f3f3e4 !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; }
-  .maintenance-page .garage-count-badge, .maintenance-page-shell .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; font-size: 11px !important; color: #fff !important; }
-}
-
-@media (max-width: 430px) {
-  .garage-page .navbar, .garage-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 14px 10px !important; }
-  .garage-page .logo-mark, .garage-page-shell .logo-mark, .maintenance-page .logo-mark, .maintenance-page-shell .logo-mark { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 15px !important; }
-  .garage-page .logo-text span:first-child, .garage-page-shell .logo-text span:first-child, .maintenance-page .logo-text span:first-child, .maintenance-page-shell .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
-  .garage-page .logo-text span:last-child, .garage-page-shell .logo-text span:last-child, .maintenance-page .logo-text span:last-child, .maintenance-page-shell .logo-text span:last-child { font-size: 12px !important; }
-  .garage-page .account-menu-trigger, .garage-page-shell .account-menu-trigger, .maintenance-page .account-menu-trigger, .maintenance-page-shell .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; }
-  .garage-page .nav-links, .garage-page-shell .nav-links, .maintenance-page .nav-links, .maintenance-page-shell .nav-links { gap: clamp(26px, 8.5vw, 38px) !important; }
-  .garage-page .nav-links a, .garage-page-shell .nav-links a, .maintenance-page .nav-links a, .maintenance-page-shell .nav-links a { height: 30px !important; font-size: 15px !important; }
-  .garage-page .nav-button, .garage-page-shell .nav-button, .maintenance-page .nav-garage-btn, .maintenance-page .nav-garage-btn:hover, .maintenance-page-shell .nav-garage-btn, .maintenance-page-shell .nav-garage-btn:hover { height: 56px !important; max-width: 340px !important; border-radius: 21px !important; }
-}
-
-/*33. final mobile navbar structure lock*/
-@media (max-width: 780px) {
-  .home-page .navbar, .about-page-shell .navbar, .contact-page-shell .navbar, .garage-page .navbar, .garage-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "cta cta" !important; align-items: center !important; justify-content: initial !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; overflow: visible !important; box-sizing: border-box !important; flex-direction: initial !important; }
-  .home-page .logo-block, .about-page-shell .logo-block, .contact-page-shell .logo-block, .garage-page .logo-block, .garage-page-shell .logo-block, .maintenance-page .logo-block, .maintenance-page-shell .logo-block { grid-area: logo !important; justify-self: start !important; justify-content: flex-start !important; align-items: center !important; min-width: 0 !important; gap: 12px !important; transform: none !important; }
-  .home-page .logo-mark, .about-page-shell .logo-mark, .contact-page-shell .logo-mark, .garage-page .logo-mark, .garage-page-shell .logo-mark, .maintenance-page .logo-mark, .maintenance-page-shell .logo-mark { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 16px !important; font-size: 16px !important; line-height: 1 !important; }
-  .home-page .logo-text span:first-child, .about-page-shell .logo-text span:first-child, .contact-page-shell .logo-text span:first-child, .garage-page .logo-text span:first-child, .garage-page-shell .logo-text span:first-child, .maintenance-page .logo-text span:first-child, .maintenance-page-shell .logo-text span:first-child { font-size: 12px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; line-height: 1 !important; }
-  .home-page .logo-text span:last-child, .about-page-shell .logo-text span:last-child, .contact-page-shell .logo-text span:last-child, .garage-page .logo-text span:last-child, .garage-page-shell .logo-text span:last-child, .maintenance-page .logo-text span:last-child, .maintenance-page-shell .logo-text span:last-child { margin-top: 5px !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1.2px !important; line-height: 1 !important; }
-  .home-page .account-menu, .about-page-shell .account-menu, .contact-page-shell .account-menu, .garage-page .account-menu, .garage-page-shell .account-menu, .maintenance-page .account-menu, .maintenance-page-shell .account-menu { grid-area: account !important; justify-self: end !important; align-self: center !important; margin: 0 !important; }
-  .home-page .account-menu-trigger, .about-page-shell .account-menu-trigger, .contact-page-shell .account-menu-trigger, .garage-page .account-menu-trigger, .garage-page-shell .account-menu-trigger, .maintenance-page .account-menu-trigger, .maintenance-page-shell .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; padding: 0 !important; border-radius: 17px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; transform: none !important; }
-  .home-page .account-label, .about-page-shell .account-label, .contact-page-shell .account-label, .garage-page .account-label, .garage-page-shell .account-label, .maintenance-page .account-label, .maintenance-page-shell .account-label { display: none !important; }
-  .home-page .nav-links, .about-page-shell .nav-links, .contact-page-shell .nav-links, .garage-page .nav-links, .garage-page-shell .nav-links, .maintenance-page .nav-links, .maintenance-page-shell .nav-links { grid-area: links !important; width: 100% !important; max-width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: clamp(28px, 9vw, 46px) !important; margin: 2px 0 0 !important; padding: 0 !important; flex-wrap: nowrap !important; overflow: visible !important; }
-  .home-page .nav-links a, .about-page-shell .nav-links a, .contact-page-shell .nav-links a, .garage-page .nav-links a, .garage-page-shell .nav-links a, .maintenance-page .nav-links a, .maintenance-page-shell .nav-links a { position: relative !important; width: auto !important; min-width: 0 !important; height: 32px !important; padding: 0 2px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; font-size: 15px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; }
-  .home-page .nav-links a.active::after, .about-page-shell .nav-links a.active::after, .contact-page-shell .nav-links a.active::after, .garage-page .nav-links a.active::after, .garage-page-shell .nav-links a.active::after, .maintenance-page .nav-links a.active::after, .maintenance-page-shell .nav-links a.active::after { content: "" !important; position: absolute !important; left: 50% !important; bottom: 0 !important; width: 28px !important; height: 2px !important; transform: translateX(-50%) !important; border-radius: 999px !important; background: currentColor !important; }
-  .garage-page .nav-links a[href*="maintenance"], .garage-page-shell .nav-links a[href*="maintenance"] { display: none !important; }
-  .maintenance-page .nav-links a[href*="garage"], .maintenance-page .nav-links a[href*="about"], .maintenance-page .nav-links a[href*="contact"], .maintenance-page-shell .nav-links a[href*="garage"], .maintenance-page-shell .nav-links a[href*="about"], .maintenance-page-shell .nav-links a[href*="contact"] { display: none !important; }
-  .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover, .contact-page-shell .nav-garage-btn, .contact-page-shell .nav-garage-btn:hover, .maintenance-page .nav-garage-btn, .maintenance-page .nav-garage-btn:hover, .maintenance-page-shell .nav-garage-btn, .maintenance-page-shell .nav-garage-btn:hover, .garage-page .nav-button, .garage-page-shell .nav-button { grid-area: cta !important; width: min(100%, 380px) !important; max-width: 380px !important; min-width: 0 !important; height: 58px !important; justify-self: center !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 14px !important; padding: 0 24px !important; border-radius: 22px !important; transform: none !important; overflow: visible !important; box-shadow: none !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; text-transform: uppercase !important; }
-  .home-page .nav-garage-btn > span:last-child, .about-page-shell .nav-garage-btn > span:last-child, .contact-page-shell .nav-garage-btn > span:last-child, .maintenance-page .nav-garage-btn > span:last-child, .maintenance-page-shell .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; }
-  .home-page .garage-count-badge, .about-page-shell .garage-count-badge, .contact-page-shell .garage-count-badge, .maintenance-page .garage-count-badge, .maintenance-page-shell .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; transform: none !important; font-size: 11px !important; }
-  .garage-page .navbar, .garage-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { border-bottom: 0 !important; }
-  .garage-layout, .maintenance-layout { border-top: 0 !important; }
-  .garage-page-shell, .maintenance-page-shell { overflow-x: clip !important; }
-}
-
-@media (max-width: 430px) {
-  .home-page .navbar, .about-page-shell .navbar, .contact-page-shell .navbar, .garage-page .navbar, .garage-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 14px 10px !important; }
-  .home-page .logo-mark, .about-page-shell .logo-mark, .contact-page-shell .logo-mark, .garage-page .logo-mark, .garage-page-shell .logo-mark, .maintenance-page .logo-mark, .maintenance-page-shell .logo-mark { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 15px !important; }
-  .home-page .logo-text span:first-child, .about-page-shell .logo-text span:first-child, .contact-page-shell .logo-text span:first-child, .garage-page .logo-text span:first-child, .garage-page-shell .logo-text span:first-child, .maintenance-page .logo-text span:first-child, .maintenance-page-shell .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
-  .home-page .logo-text span:last-child, .about-page-shell .logo-text span:last-child, .contact-page-shell .logo-text span:last-child, .garage-page .logo-text span:last-child, .garage-page-shell .logo-text span:last-child, .maintenance-page .logo-text span:last-child, .maintenance-page-shell .logo-text span:last-child { font-size: 12px !important; }
-  .home-page .account-menu-trigger, .about-page-shell .account-menu-trigger, .contact-page-shell .account-menu-trigger, .garage-page .account-menu-trigger, .garage-page-shell .account-menu-trigger, .maintenance-page .account-menu-trigger, .maintenance-page-shell .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; }
-  .home-page .nav-links, .about-page-shell .nav-links, .contact-page-shell .nav-links, .garage-page .nav-links, .garage-page-shell .nav-links, .maintenance-page .nav-links, .maintenance-page-shell .nav-links { gap: clamp(26px, 8.5vw, 38px) !important; }
-  .home-page .nav-links a, .about-page-shell .nav-links a, .contact-page-shell .nav-links a, .garage-page .nav-links a, .garage-page-shell .nav-links a, .maintenance-page .nav-links a, .maintenance-page-shell .nav-links a { height: 30px !important; font-size: 15px !important; }
-  .home-page .nav-garage-btn, .home-page .nav-garage-btn:hover, .about-page-shell .nav-garage-btn, .about-page-shell .nav-garage-btn:hover, .contact-page-shell .nav-garage-btn, .contact-page-shell .nav-garage-btn:hover, .maintenance-page .nav-garage-btn, .maintenance-page .nav-garage-btn:hover, .maintenance-page-shell .nav-garage-btn, .maintenance-page-shell .nav-garage-btn:hover, .garage-page .nav-button, .garage-page-shell .nav-button { height: 56px !important; max-width: 340px !important; border-radius: 21px !important; }
-}
-
-/*34. maintenance and garage mobile navbar hard lock*/
-@media (max-width: 780px) {
-  .maintenance-page .navbar, .maintenance-page-shell .navbar, .garage-page .navbar, .garage-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-auto-flow: row !important; align-items: center !important; justify-content: stretch !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; border-bottom: 0 !important; overflow: visible !important; box-sizing: border-box !important; }
-  .maintenance-page .navbar .logo-block, .maintenance-page-shell .navbar .logo-block, .garage-page .navbar .logo-block, .garage-page-shell .navbar .logo-block { grid-column: 1 !important; grid-row: 1 !important; justify-self: start !important; align-self: center !important; display: flex !important; align-items: center !important; gap: 12px !important; min-width: 0 !important; transform: none !important; }
-  .maintenance-page .navbar .logo-mark, .maintenance-page-shell .navbar .logo-mark, .garage-page .navbar .logo-mark, .garage-page-shell .navbar .logo-mark { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 16px !important; font-size: 16px !important; line-height: 1 !important; }
-  .maintenance-page .navbar .logo-text span:first-child, .maintenance-page-shell .navbar .logo-text span:first-child, .garage-page .navbar .logo-text span:first-child, .garage-page-shell .navbar .logo-text span:first-child { font-size: 12px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; line-height: 1 !important; text-transform: uppercase !important; }
-  .maintenance-page .navbar .logo-text span:last-child, .maintenance-page-shell .navbar .logo-text span:last-child, .garage-page .navbar .logo-text span:last-child, .garage-page-shell .navbar .logo-text span:last-child { margin-top: 5px !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1.2px !important; line-height: 1 !important; }
-  .maintenance-page .navbar .account-menu, .maintenance-page-shell .navbar .account-menu, .garage-page .navbar .account-menu, .garage-page-shell .navbar .account-menu { grid-column: 2 !important; grid-row: 1 !important; justify-self: end !important; align-self: center !important; margin: 0 !important; }
-  .maintenance-page .navbar .account-menu-trigger, .maintenance-page-shell .navbar .account-menu-trigger, .garage-page .navbar .account-menu-trigger, .garage-page-shell .navbar .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; padding: 0 !important; border-radius: 17px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; transform: none !important; }
-  .maintenance-page .navbar .account-label, .maintenance-page-shell .navbar .account-label, .garage-page .navbar .account-label, .garage-page-shell .navbar .account-label { display: none !important; }
-  .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links, .garage-page .navbar .nav-links, .garage-page-shell .navbar .nav-links { grid-column: 1 / -1 !important; grid-row: 2 !important; width: 100% !important; max-width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: clamp(28px, 9vw, 46px) !important; margin: 2px 0 0 !important; padding: 0 !important; flex-wrap: nowrap !important; overflow: visible !important; }
-  .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a, .garage-page .navbar .nav-links a, .garage-page-shell .navbar .nav-links a { position: relative !important; width: auto !important; min-width: 0 !important; height: 32px !important; padding: 0 2px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; color: rgba(224, 224, 206, 0.72) !important; font-size: 15px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; }
-  .maintenance-page .navbar .nav-links a:hover, .maintenance-page .navbar .nav-links a.active, .maintenance-page-shell .navbar .nav-links a:hover, .maintenance-page-shell .navbar .nav-links a.active, .garage-page .navbar .nav-links a:hover, .garage-page .navbar .nav-links a.active, .garage-page-shell .navbar .nav-links a:hover, .garage-page-shell .navbar .nav-links a.active { color: var(--accent) !important; }
-  .maintenance-page .navbar .nav-links a.active::after, .maintenance-page-shell .navbar .nav-links a.active::after, .garage-page .navbar .nav-links a.active::after, .garage-page-shell .navbar .nav-links a.active::after { content: "" !important; position: absolute !important; left: 50% !important; bottom: 0 !important; width: 28px !important; height: 2px !important; transform: translateX(-50%) !important; border-radius: 999px !important; background: var(--accent) !important; }
-  .maintenance-page .navbar .nav-links a[href*="garage"], .maintenance-page .navbar .nav-links a[href*="about"], .maintenance-page .navbar .nav-links a[href*="contact"], .maintenance-page-shell .navbar .nav-links a[href*="garage"], .maintenance-page-shell .navbar .nav-links a[href*="about"], .maintenance-page-shell .navbar .nav-links a[href*="contact"], .garage-page .navbar .nav-links a[href*="maintenance"], .garage-page-shell .navbar .nav-links a[href*="maintenance"] { display: none !important; }
-  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover, .garage-page .navbar .nav-button, .garage-page .navbar .nav-button:hover, .garage-page-shell .navbar .nav-button, .garage-page-shell .navbar .nav-button:hover { grid-column: 1 / -1 !important; grid-row: 3 !important; width: min(100%, 380px) !important; max-width: 380px !important; min-width: 0 !important; height: 58px !important; justify-self: center !important; align-self: center !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 14px !important; margin: 0 !important; padding: 0 24px !important; border-radius: 22px !important; border: 1px solid rgba(224, 224, 206, 0.16) !important; background: rgba(255, 255, 255, 0.02) !important; color: #f3f3e4 !important; box-shadow: none !important; transform: none !important; overflow: visible !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; text-transform: uppercase !important; }
-  .maintenance-page .navbar .nav-garage-btn .garage-icon, .maintenance-page-shell .navbar .nav-garage-btn .garage-icon { width: 18px !important; height: 18px !important; min-width: 18px !important; color: rgba(224, 224, 206, 0.9) !important; stroke: currentColor !important; }
-  .maintenance-page .navbar .nav-garage-btn > span:last-child, .maintenance-page-shell .navbar .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; color: #f3f3e4 !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; }
-  .maintenance-page .navbar .garage-count-badge, .maintenance-page-shell .navbar .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; transform: none !important; color: #fff !important; font-size: 11px !important; }
-  .garage-page .garage-layout, .garage-page-shell .garage-layout, .maintenance-page .maintenance-layout, .maintenance-page-shell .maintenance-layout { border-top: 0 !important; }
-}
-
-@media (max-width: 430px) {
-  .maintenance-page .navbar, .maintenance-page-shell .navbar, .garage-page .navbar, .garage-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 14px 10px !important; }
-  .maintenance-page .navbar .logo-mark, .maintenance-page-shell .navbar .logo-mark, .garage-page .navbar .logo-mark, .garage-page-shell .navbar .logo-mark { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 15px !important; }
-  .maintenance-page .navbar .logo-text span:first-child, .maintenance-page-shell .navbar .logo-text span:first-child, .garage-page .navbar .logo-text span:first-child, .garage-page-shell .navbar .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
-  .maintenance-page .navbar .logo-text span:last-child, .maintenance-page-shell .navbar .logo-text span:last-child, .garage-page .navbar .logo-text span:last-child, .garage-page-shell .navbar .logo-text span:last-child { font-size: 12px !important; }
-  .maintenance-page .navbar .account-menu-trigger, .maintenance-page-shell .navbar .account-menu-trigger, .garage-page .navbar .account-menu-trigger, .garage-page-shell .navbar .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; }
-  .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links, .garage-page .navbar .nav-links, .garage-page-shell .navbar .nav-links { gap: clamp(26px, 8.5vw, 38px) !important; }
-  .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a, .garage-page .navbar .nav-links a, .garage-page-shell .navbar .nav-links a { height: 30px !important; font-size: 15px !important; }
-  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover, .garage-page .navbar .nav-button, .garage-page .navbar .nav-button:hover, .garage-page-shell .navbar .nav-button, .garage-page-shell .navbar .nav-button:hover { width: min(100%, 380px) !important; max-width: 340px !important; height: 56px !important; border-radius: 21px !important; }
-}
-/*35. garage and maintenance mobile navbar structural match*/
-@media (max-width: 780px) {
-  .garage-page .navbar, .garage-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { width: 100% !important; max-width: 100% !important; min-height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "cta cta" !important; align-items: center !important; justify-content: initial !important; gap: 16px 12px !important; padding: calc(22px + env(safe-area-inset-top)) 18px 18px !important; border-bottom: 0 !important; overflow: visible !important; box-sizing: border-box !important; }
-  .garage-page .navbar .logo-block, .garage-page-shell .navbar .logo-block, .maintenance-page .navbar .logo-block, .maintenance-page-shell .navbar .logo-block { grid-area: logo !important; justify-self: start !important; align-self: center !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; gap: 12px !important; min-width: 0 !important; margin: 0 !important; transform: none !important; }
-  .garage-page .navbar .logo-mark, .garage-page-shell .navbar .logo-mark, .maintenance-page .navbar .logo-mark, .maintenance-page-shell .navbar .logo-mark { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 16px !important; font-size: 16px !important; line-height: 1 !important; }
-  .garage-page .navbar .logo-text span:first-child, .garage-page-shell .navbar .logo-text span:first-child, .maintenance-page .navbar .logo-text span:first-child, .maintenance-page-shell .navbar .logo-text span:first-child { font-size: 12px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; line-height: 1 !important; text-transform: uppercase !important; }
-  .garage-page .navbar .logo-text span:last-child, .garage-page-shell .navbar .logo-text span:last-child, .maintenance-page .navbar .logo-text span:last-child, .maintenance-page-shell .navbar .logo-text span:last-child { margin-top: 5px !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1.2px !important; line-height: 1 !important; }
-  .garage-page .navbar .account-menu, .garage-page-shell .navbar .account-menu, .maintenance-page .navbar .account-menu, .maintenance-page-shell .navbar .account-menu { grid-area: account !important; justify-self: end !important; align-self: center !important; margin: 0 !important; }
-  .garage-page .navbar .account-menu-trigger, .garage-page-shell .navbar .account-menu-trigger, .maintenance-page .navbar .account-menu-trigger, .maintenance-page-shell .navbar .account-menu-trigger, .garage-page .navbar .account-menu-trigger:hover, .garage-page-shell .navbar .account-menu-trigger:hover, .maintenance-page .navbar .account-menu-trigger:hover, .maintenance-page-shell .navbar .account-menu-trigger:hover, .garage-page .navbar .account-menu-trigger[aria-expanded="true"], .garage-page-shell .navbar .account-menu-trigger[aria-expanded="true"], .maintenance-page .navbar .account-menu-trigger[aria-expanded="true"], .maintenance-page-shell .navbar .account-menu-trigger[aria-expanded="true"] { width: 52px !important; height: 52px !important; min-width: 52px !important; padding: 0 !important; border-radius: 17px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; transform: none !important; }
-  .garage-page .navbar .account-label, .garage-page-shell .navbar .account-label, .maintenance-page .navbar .account-label, .maintenance-page-shell .navbar .account-label { display: none !important; }
-  .garage-page .navbar .nav-links, .garage-page-shell .navbar .nav-links, .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links { grid-area: links !important; width: 100% !important; max-width: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: clamp(28px, 9vw, 46px) !important; margin: 2px 0 0 !important; padding: 0 !important; flex-wrap: nowrap !important; overflow: visible !important; }
-  .garage-page .navbar .nav-links a, .garage-page-shell .navbar .nav-links a, .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { position: relative !important; width: auto !important; min-width: 0 !important; height: 32px !important; padding: 0 2px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; color: rgba(224, 224, 206, 0.72) !important; font-size: 15px !important; font-weight: 700 !important; line-height: 1 !important; letter-spacing: 0 !important; white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; }
-  .garage-page .navbar .nav-links a:hover, .garage-page .navbar .nav-links a.active, .garage-page-shell .navbar .nav-links a:hover, .garage-page-shell .navbar .nav-links a.active, .maintenance-page .navbar .nav-links a:hover, .maintenance-page .navbar .nav-links a.active, .maintenance-page-shell .navbar .nav-links a:hover, .maintenance-page-shell .navbar .nav-links a.active { color: var(--accent) !important; }
-  .garage-page .navbar .nav-links a.active::after, .garage-page-shell .navbar .nav-links a.active::after, .maintenance-page .navbar .nav-links a.active::after, .maintenance-page-shell .navbar .nav-links a.active::after { content: "" !important; position: absolute !important; left: 50% !important; bottom: 0 !important; width: 28px !important; height: 2px !important; transform: translateX(-50%) !important; border-radius: 999px !important; background: var(--accent) !important; }
-  .garage-page .navbar .nav-links a[href*="maintenance"], .garage-page-shell .navbar .nav-links a[href*="maintenance"] { display: none !important; }
-  .maintenance-page .navbar .nav-links a[href*="garage"], .maintenance-page .navbar .nav-links a[href*="about"], .maintenance-page .navbar .nav-links a[href*="contact"], .maintenance-page-shell .navbar .nav-links a[href*="garage"], .maintenance-page-shell .navbar .nav-links a[href*="about"], .maintenance-page-shell .navbar .nav-links a[href*="contact"] { display: none !important; }
-  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover, .garage-page .navbar .nav-button, .garage-page .navbar .nav-button:hover, .garage-page-shell .navbar .nav-button, .garage-page-shell .navbar .nav-button:hover { grid-area: cta !important; width: min(100%, 380px) !important; max-width: 380px !important; min-width: 0 !important; height: 58px !important; justify-self: center !important; align-self: center !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 14px !important; margin: 0 !important; padding: 0 24px !important; border-radius: 22px !important; border: 1px solid rgba(224, 224, 206, 0.16) !important; background: rgba(255, 255, 255, 0.02) !important; color: #f3f3e4 !important; box-shadow: none !important; transform: none !important; overflow: visible !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; text-transform: uppercase !important; }
-  .maintenance-page .navbar .nav-garage-btn .garage-icon, .maintenance-page-shell .navbar .nav-garage-btn .garage-icon { width: 18px !important; height: 18px !important; min-width: 18px !important; color: rgba(224, 224, 206, 0.9) !important; stroke: currentColor !important; }
-  .maintenance-page .navbar .nav-garage-btn > span:last-child, .maintenance-page-shell .navbar .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; color: #f3f3e4 !important; font-size: 14px !important; font-weight: 900 !important; letter-spacing: 1.9px !important; }
-  .maintenance-page .navbar .garage-count-badge, .maintenance-page-shell .navbar .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; transform: none !important; color: #fff !important; font-size: 11px !important; }
-}
-
-@media (max-width: 430px) {
-  .garage-page .navbar, .garage-page-shell .navbar, .maintenance-page .navbar, .maintenance-page-shell .navbar { padding-left: 16px !important; padding-right: 16px !important; gap: 14px 10px !important; }
-  .garage-page .navbar .logo-mark, .garage-page-shell .navbar .logo-mark, .maintenance-page .navbar .logo-mark, .maintenance-page-shell .navbar .logo-mark { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 15px !important; }
-  .garage-page .navbar .logo-text span:first-child, .garage-page-shell .navbar .logo-text span:first-child, .maintenance-page .navbar .logo-text span:first-child, .maintenance-page-shell .navbar .logo-text span:first-child { font-size: 11px !important; letter-spacing: 1.7px !important; }
-  .garage-page .navbar .logo-text span:last-child, .garage-page-shell .navbar .logo-text span:last-child, .maintenance-page .navbar .logo-text span:last-child, .maintenance-page-shell .navbar .logo-text span:last-child { font-size: 12px !important; }
-  .garage-page .navbar .account-menu-trigger, .garage-page-shell .navbar .account-menu-trigger, .maintenance-page .navbar .account-menu-trigger, .maintenance-page-shell .navbar .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; }
-  .garage-page .navbar .nav-links, .garage-page-shell .navbar .nav-links, .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links { gap: clamp(26px, 8.5vw, 38px) !important; }
-  .garage-page .navbar .nav-links a, .garage-page-shell .navbar .nav-links a, .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { height: 30px !important; font-size: 15px !important; }
-  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover, .garage-page .navbar .nav-button, .garage-page .navbar .nav-button:hover, .garage-page-shell .navbar .nav-button, .garage-page-shell .navbar .nav-button:hover { width: min(100%, 380px) !important; max-width: 340px !important; height: 56px !important; border-radius: 21px !important; }
-}
-
-/*36. desktop-only layout refinement
-  Desktop goal: keep the clean 100% layout structure, keep nav actions visible, and stop oversized background words from spilling across the page.
-  Mobile is intentionally left to the existing max-width rules above. */
-@media (min-width: 901px) {
-  html, body { width: 100% !important; max-width: 100% !important; overflow-x: hidden !important; }
-  .page-shell { width: 100% !important; min-height: 100svh !important; zoom: 1 !important; transform: none !important; transform-origin: initial !important; overflow-x: clip !important; }
-
-  .navbar { display: grid !important; grid-template-columns: minmax(190px, auto) minmax(0, 1fr) auto auto !important; align-items: center !important; column-gap: 22px !important; min-height: 100px !important; overflow: visible !important; }
-  .navbar .logo-block { grid-column: 1 !important; justify-self: start !important; min-width: max-content !important; }
-  .navbar .nav-links { grid-column: 2 !important; position: static !important; left: auto !important; top: auto !important; transform: none !important; justify-self: center !important; justify-content: center !important; min-width: 0 !important; max-width: 100% !important; gap: clamp(22px, 2.25vw, 42px) !important; white-space: nowrap !important; }
-  .navbar .nav-links a { font-size: clamp(14px, 1.08vw, 18px) !important; }
-  .navbar .nav-garage-btn, .navbar .nav-button { grid-column: 3 !important; justify-self: end !important; margin-left: 0 !important; }
-  .navbar .account-menu { grid-column: 4 !important; justify-self: end !important; margin-left: 0 !important; }
-  .navbar .nav-garage-btn, .navbar .nav-button, .navbar .account-menu, .navbar .account-menu-trigger { flex-shrink: 0 !important; }
-
-  .maintenance-page-shell .navbar .nav-links { gap: clamp(12px, 1.35vw, 24px) !important; }
-  .maintenance-page-shell .navbar .nav-links a { font-size: clamp(12px, 0.95vw, 15px) !important; }
-  .updates-page-shell .navbar .nav-links { gap: clamp(16px, 1.7vw, 32px) !important; }
-
-  .hero-section, .hero-content, .bikes-display-grid, .feature-bike-layout, .feature-main, .about-hero, .contact-hero { overflow: hidden !important; }
-  .hero-content { min-width: 0 !important; }
-  .background-word { left: 50% !important; max-width: none !important; font-size: clamp(108px, 14.2vw, 238px) !important; letter-spacing: clamp(1px, 0.22vw, 4px) !important; }
-  .top-word { top: clamp(92px, 8.6vw, 130px) !important; }
-  .bottom-word { top: clamp(218px, 20.5vw, 320px) !important; }
-  .about-hero-bg, .contact-hero-bg { max-width: calc(100vw - 96px) !important; overflow: hidden !important; text-align: center !important; }
-}
-
-@media (min-width: 901px) and (max-width: 1200px) {
-  .navbar { padding-inline: 28px !important; column-gap: 16px !important; }
-  .logo-mark { width: 50px !important; height: 50px !important; border-radius: 14px !important; }
-  .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.35px !important; }
-  .logo-text span:last-child { font-size: 12px !important; }
-  .nav-garage-btn, .account-menu-trigger { width: 50px !important; height: 50px !important; min-width: 50px !important; border-radius: 16px !important; }
-  .nav-garage-btn:hover { width: 126px !important; }
-  .account-menu-trigger:hover, .account-menu-trigger[aria-expanded="true"] { width: 120px !important; }
-
-  .home-page-shell .hero-section { grid-template-columns: 78px minmax(0, 1fr) 0 !important; }
-  .home-page-shell .right-panel { display: none !important; }
-  .home-page-shell .left-panel { padding-inline: 10px !important; }
-  .home-page-shell .hero-content { padding: 10px 30px 42px !important; }
-  .home-page-shell .hero-main { min-height: 640px !important; grid-template-columns: minmax(240px, 0.8fr) minmax(340px, 1.2fr) !important; gap: 24px !important; }
-  .home-page-shell .hero-left { max-width: 300px !important; }
-  .home-page-shell .hero-left h2 { font-size: clamp(40px, 5.2vw, 56px) !important; }
-  .home-page-shell .hero-left p { font-size: 15px !important; line-height: 1.6 !important; }
-  .home-page-shell .hero-image-wrap { min-height: 560px !important; justify-content: flex-end !important; }
-  .home-page-shell .hero-bike { width: min(100%, 590px) !important; max-height: 560px !important; }
-  .home-page-shell .hero-right { display: none !important; }
-  .home-page-shell .background-word { left: 62% !important; font-size: clamp(92px, 12vw, 150px) !important; }
-  .home-page-shell .top-word { top: 98px !important; }
-  .home-page-shell .bottom-word { top: 220px !important; }
-  .home-page-shell .brand-marquee { bottom: 42px !important; }
-
-  .about-hero, .contact-hero { padding-inline: 42px !important; }
-  .about-hero-grid, .contact-hero-grid { gap: 32px !important; }
-  .about-hero-left h1, .contact-copy h1 { font-size: clamp(42px, 5vw, 62px) !important; }
-  .about-highlight-card, .contact-form { max-width: 340px !important; }
-
-  .garage-layout, .maintenance-layout, .updates-layout { padding-inline: 32px !important; gap: 26px !important; }
-  .garage-sidebar, .maintenance-sidebar, .updates-sidebar { min-width: 0 !important; }
-}
-
-@media (max-width: 900px) and (min-resolution: 1.45dppx) {
-  .page-shell { width: 150% !important; min-height: 150svh !important; zoom: 0.666667 !important; }
-}
-
-@supports not (zoom: 0.666667) {
-  @media (max-width: 900px) and (min-resolution: 1.45dppx) {
-    .page-shell { width: 150% !important; min-height: 150svh !important; transform: scale(0.666667) !important; transform-origin: top left !important; }
-  }
-}
-
-
-/*37. about page desktop product-story polish*/
-@media (min-width: 901px) {
-  .about-page-shell, .about-main { background: #111213; color: #e0e0ce; }
-  .about-page-shell .navbar { background: #111213; border-bottom: 1px solid rgba(208, 83, 83, 0.22); }
-  .about-page-shell .logo-mark { border-color: rgba(208, 83, 83, 0.48); color: #ef6666; background: rgba(208, 83, 83, 0.055); }
-  .about-page-shell .logo-text span:first-child { color: #ef6666; }
-  .about-page-shell .logo-text span:last-child, .about-page-shell .nav-links a { color: rgba(224, 224, 206, 0.68); }
-  .about-page-shell .nav-links a:hover, .about-page-shell .nav-links a.active { color: #e58f65; }
-  .about-page-shell .nav-garage-btn { border-color: rgba(208, 83, 83, 0.22); background: rgba(208, 83, 83, 0.035); color: #e0e0ce; }
-  .about-page-shell .nav-garage-btn:hover { border-color: rgba(229, 143, 101, 0.42); background: rgba(208, 83, 83, 0.07); }
-
-  .about-page-shell .about-hero { min-height: calc(100svh - 100px); display: flex; align-items: center; padding: 42px 56px 70px; overflow: hidden; border-block: 1px solid rgba(208, 83, 83, 0.16); background: linear-gradient(rgba(208, 83, 83, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(208, 83, 83, 0.06) 1px, transparent 1px), radial-gradient(circle at 24% 26%, rgba(208, 83, 83, 0.16), transparent 28%), radial-gradient(circle at 78% 34%, rgba(229, 143, 101, 0.08), transparent 22%), radial-gradient(circle at 52% 72%, rgba(255, 43, 43, 0.075), transparent 32%), #111213; background-size: 44px 44px, 44px 44px, 100% 100%, 100% 100%, 100% 100%, auto; }
-  .about-page-shell .about-hero::before { content: ""; display: block; position: absolute; inset: 0; background: radial-gradient(circle at 30% 60%, rgba(255, 255, 255, 0.055), transparent 24%), radial-gradient(circle at 74% 36%, rgba(208, 83, 83, 0.08), transparent 20%); filter: none; opacity: 1; animation: none; pointer-events: none; }
-  .about-page-shell .about-hero::after { content: ""; display: block; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17, 18, 19, 0.84), transparent 18%, transparent 82%, rgba(17, 18, 19, 0.88)), linear-gradient(180deg, rgba(17, 18, 19, 0.78), transparent 24%, transparent 76%, rgba(17, 18, 19, 0.9)); pointer-events: none; }
-  .about-page-shell .about-hero-bg { top: 54%; color: rgba(208, 83, 83, 0.052); font-size: clamp(130px, 16vw, 270px); letter-spacing: 7px; }
-  .about-page-shell .about-hero-inner { width: 100%; max-width: 1280px; margin: 0 auto; }
-  .about-page-shell .hero-label { margin-bottom: 34px; color: #ff2b2b; }
-  .about-page-shell .about-hero-grid { width: 100%; margin-top: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 0.76fr); gap: clamp(34px, 4.4vw, 66px); align-items: center; }
-  .about-page-shell .section-tag { color: #e58f65; letter-spacing: 3px; }
-  .about-page-shell .about-hero-left h1 { max-width: 760px; margin-bottom: 22px; color: #e05252; font-size: clamp(52px, 5.7vw, 88px); line-height: 0.9; letter-spacing: -2.6px; text-shadow: 0 12px 34px rgba(255, 43, 43, 0.12), 0 0 24px rgba(208, 83, 83, 0.14); }
-  .about-page-shell .about-lead { max-width: 650px; margin-bottom: 30px; color: rgba(224, 224, 206, 0.74); font-size: 18px; line-height: 1.72; }
-  .about-page-shell .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
-  .about-page-shell .primary-btn, .about-page-shell .secondary-btn { min-height: 52px; border-radius: 0; letter-spacing: 0.5px; }
-  .about-page-shell .primary-btn { border-color: #e05252; background: #e05252; color: #111213; box-shadow: 0 16px 34px rgba(208, 83, 83, 0.18); }
-  .about-page-shell .primary-btn:hover { border-color: #e58f65; background: #e58f65; color: #111213; }
-  .about-page-shell .secondary-btn { border-color: rgba(224, 224, 206, 0.18); color: #e0e0ce; background: rgba(224, 224, 206, 0.018); }
-  .about-page-shell .secondary-btn:hover { border-color: rgba(229, 143, 101, 0.62); color: #e58f65; background: rgba(229, 143, 101, 0.04); }
-
-  .about-page-shell .about-hero-right { display: block; align-self: center; justify-self: stretch; }
-  .about-page-shell .about-card-stack { width: 100%; display: grid; gap: 14px; }
-  .about-page-shell .about-highlight-card { width: 100%; max-width: none !important; padding: 24px; border: 1px solid rgba(208, 83, 83, 0.22); background: linear-gradient(180deg, rgba(208, 83, 83, 0.075), rgba(224, 224, 206, 0.012)), rgba(24, 20, 20, 0.82); box-shadow: 0 24px 58px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(229, 143, 101, 0.09); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-  .about-page-shell .about-highlight-card.is-featured { border-color: rgba(229, 143, 101, 0.34); background: linear-gradient(180deg, rgba(208, 83, 83, 0.11), rgba(224, 224, 206, 0.018)), rgba(24, 20, 20, 0.9); }
-  .about-page-shell .about-highlight-card:hover { transform: translateY(-3px); border-color: rgba(229, 143, 101, 0.5); }
-  .about-page-shell .about-card-kicker { display: block; margin-bottom: 12px; color: rgba(229, 143, 101, 0.78); font-size: 10px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; }
-  .about-page-shell .about-highlight-card h3 { margin-bottom: 10px; color: #e58f65; font-size: clamp(20px, 1.7vw, 27px); line-height: 1.08; font-weight: 900; }
-  .about-page-shell .about-highlight-card p { color: rgba(224, 224, 206, 0.68); font-size: 14px; line-height: 1.65; }
-
-  .about-page-shell .tracker-steps-section, .about-page-shell .info-section, .about-page-shell .about-values-section, .about-page-shell .about-author-section { background: #111213; border-top-color: rgba(208, 83, 83, 0.16); }
-  .about-page-shell .tracker-steps-header h2, .about-page-shell .info-box h2, .about-page-shell .about-values-heading h2, .about-page-shell .about-author-left h2 { color: #e0e0ce; }
-  .about-page-shell .tracker-steps-header p, .about-page-shell .info-box p, .about-page-shell .about-author-left p { color: rgba(224, 224, 206, 0.68); }
-  .about-page-shell .tracker-step-card, .about-page-shell .about-mini-card, .about-page-shell .about-value-card, .about-page-shell .about-author-card { border-color: rgba(208, 83, 83, 0.18); background: linear-gradient(180deg, rgba(208, 83, 83, 0.055), rgba(224, 224, 206, 0.012)), #151515; }
-  .about-page-shell .tracker-step-card h3, .about-page-shell .about-mini-card h3, .about-page-shell .about-value-card h3, .about-page-shell .about-author-card h3 { color: #e58f65; }
-  .about-page-shell .tracker-step-card p, .about-page-shell .about-mini-card p, .about-page-shell .about-value-card p, .about-page-shell .about-author-card p { color: rgba(224, 224, 206, 0.68); }
-}
-
-@media (min-width: 1201px) and (max-height: 850px) {
-  .about-page-shell .about-hero { min-height: auto; padding-top: 34px; padding-bottom: 44px; }
-  .about-page-shell .about-hero-left h1 { font-size: clamp(46px, 4.8vw, 74px); }
-  .about-page-shell .about-lead { font-size: 16px; margin-bottom: 22px; }
-  .about-page-shell .about-highlight-card { padding: 20px; }
-  .about-page-shell .about-highlight-card p { font-size: 13px; line-height: 1.55; }
-}
-
-
-/*38. about page mobile compact cards*/
-@media (max-width: 900px) {
-  .about-page-shell .tracker-steps-section,
-  .about-page-shell .info-section,
-  .about-page-shell .about-values-section,
-  .about-page-shell .about-author-section { padding: 54px 30px; }
-
-  .about-page-shell .tracker-steps-header,
-  .about-page-shell .info-box,
-  .about-page-shell .about-values-wrap,
-  .about-page-shell .about-author-wrap { max-width: 100%; }
-
-  .about-page-shell .tracker-steps-header h2,
-  .about-page-shell .info-box h2,
-  .about-page-shell .about-values-heading h2,
-  .about-page-shell .about-author-left h2 { margin-bottom: 12px; font-size: clamp(26px, 6.5vw, 34px); line-height: 1.04; }
-
-  .about-page-shell .tracker-steps-header p,
-  .about-page-shell .info-box p,
-  .about-page-shell .about-values-heading p,
-  .about-page-shell .about-author-left p { font-size: 15px; line-height: 1.55; }
-
-  .about-page-shell .tracker-steps-grid,
-  .about-page-shell .about-values-grid,
-  .about-page-shell .about-info-side,
-  .about-page-shell .about-author-wrap { gap: 16px; }
-
-  .about-page-shell .tracker-steps-grid,
-  .about-page-shell .about-values-grid { margin-top: 30px; }
-
-  .about-page-shell .about-values-heading { margin-bottom: 26px; }
-
-  .about-page-shell .tracker-step-card,
-  .about-page-shell .about-mini-card,
-  .about-page-shell .about-value-card,
-  .about-page-shell .about-author-card { padding: 20px 18px; }
-
-  .about-page-shell .tracker-step-number { margin-bottom: 6px; font-size: 13px; line-height: 1; }
-
-  .about-page-shell .tracker-step-card h3,
-  .about-page-shell .about-mini-card h3,
-  .about-page-shell .about-value-card h3,
-  .about-page-shell .about-author-card h3 { margin-bottom: 8px; font-size: 20px; line-height: 1.08; }
-
-  .about-page-shell .tracker-step-card p,
-  .about-page-shell .about-mini-card p,
-  .about-page-shell .about-value-card p,
-  .about-page-shell .about-author-card p { font-size: 15px; line-height: 1.5; }
-}
-
-@media (max-width: 520px) {
-  .about-page-shell .tracker-steps-section,
-  .about-page-shell .info-section,
-  .about-page-shell .about-values-section,
-  .about-page-shell .about-author-section { padding: 46px 18px; }
-
-  .about-page-shell .tracker-steps-grid,
-  .about-page-shell .about-values-grid,
-  .about-page-shell .about-info-side,
-  .about-page-shell .about-author-wrap { gap: 14px; }
-
-  .about-page-shell .tracker-steps-grid,
-  .about-page-shell .about-values-grid { margin-top: 24px; }
-
-  .about-page-shell .tracker-step-card,
-  .about-page-shell .about-mini-card,
-  .about-page-shell .about-value-card,
-  .about-page-shell .about-author-card { padding: 18px 16px; }
-
-  .about-page-shell .tracker-step-card h3,
-  .about-page-shell .about-mini-card h3,
-  .about-page-shell .about-value-card h3,
-  .about-page-shell .about-author-card h3 { font-size: 19px; }
-
-  .about-page-shell .tracker-step-card p,
-  .about-page-shell .about-mini-card p,
-  .about-page-shell .about-value-card p,
-  .about-page-shell .about-author-card p { font-size: 14px; line-height: 1.48; }
-}

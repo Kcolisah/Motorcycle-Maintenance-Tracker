@@ -8,97 +8,132 @@ const totalBikesCount = document.getElementById("totalBikesCount");
 const totalMileageCount = document.getElementById("totalMileageCount");
 const maintenanceDueCount = document.getElementById("maintenanceDueCount");
 
-const GARAGE_LOGIN_REDIRECT = `login.html?redirect=${encodeURIComponent("garage.html")}`;
+const garageTaskSummary = new Map();
 
-function getApi() {
-  return window.MotorcycleTrackerApi || null;
+function getApi() { return window.MotorcycleTrackerApi; }
+function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+function formatPrice(price) { return price === null || price === undefined || price === "" ? "N/A" : `$${Number(price).toLocaleString()}`; }
+function formatMileage(mileage) { return mileage === null || mileage === undefined || mileage === "" ? "0 mi" : `${Number(mileage).toLocaleString()} mi`; }
+function showGarageMessage(message) { garageMessage.textContent = message; garageMessage.style.display = "block"; }
+function hideGarageMessage() { garageMessage.textContent = ""; garageMessage.style.display = "none"; }
+function getMotorcycleFromGarageItem(item) { return item.motorcycle || item.bike || item; }
+function getGarageMileage(item) { return item.currentMileage || item.mileage || 0; }
+function getGarageId(item) { return item.id || item.garageId; }
+function getTodayStart() { const today = new Date(); today.setHours(0, 0, 0, 0); return today; }
+
+function icon(name) {
+  const icons = {
+    price: '<svg viewBox="0 0 24 24"><path d="M20 12 12 20 4 12V4h8l8 8Z"></path><path d="M8 8h.01"></path></svg>',
+    mileage: '<svg viewBox="0 0 24 24"><path d="M4 14a8 8 0 0 1 16 0"></path><path d="M12 14l4-4"></path><path d="M6 14h.01"></path><path d="M18 14h.01"></path><path d="M12 6v.01"></path></svg>',
+    calendar: '<svg viewBox="0 0 24 24"><path d="M7 3v4"></path><path d="M17 3v4"></path><path d="M4 9h16"></path><path d="M5 5h14v15H5z"></path></svg>',
+    wrench: '<svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4"></path><path d="M16 5l3 3"></path></svg>',
+    trash: '<svg viewBox="0 0 24 24"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="m6 6 1 15h10l1-15"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg>',
+    chevron: '<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>'
+  };
+
+  return icons[name] || "";
 }
 
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+async function waitForApi() {
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    const api = getApi();
+    if (api) {
+      return api;
+    }
+    await sleep(50);
+  }
+  return null;
 }
 
-async function waitForApiClient(timeout = 1800) {
-  const startedAt = Date.now();
+async function fetchJson(path, options = {}) {
+  const response = await fetch(path, options);
+  const text = await response.text();
+  const data = text ? JSON.parse(text) : null;
 
-  while (!getApi() && Date.now() - startedAt < timeout) {
-    await wait(50);
+  if (!response.ok) {
+    throw new Error(`Backend returned ${response.status}`);
   }
 
-  return getApi();
+  return data;
 }
 
-async function waitForGarageSession(timeout = 1800) {
-  const api = await waitForApiClient(timeout);
+function summarizeTasks(tasks) {
+  const today = getTodayStart();
+  const soonLimit = new Date(today);
+  soonLimit.setDate(today.getDate() + 7);
 
-  if (!api) {
-    return null;
+  const activeTasks = Array.isArray(tasks) ? tasks.filter((task) => (task.status || "PENDING") !== "DONE") : [];
+  const overdueTasks = activeTasks.filter((task) => task.dueDate && new Date(`${task.dueDate}T00:00:00`) <= today);
+  const soonTasks = activeTasks.filter((task) => task.dueDate && new Date(`${task.dueDate}T00:00:00`) > today && new Date(`${task.dueDate}T00:00:00`) <= soonLimit);
+
+  return {
+    active: activeTasks.length,
+    overdue: overdueTasks.length,
+    soon: soonTasks.length
+  };
+}
+
+function getTaskStatusPill(summary) {
+  if (!summary || summary.active === 0) {
+    return "";
   }
 
-  const startedAt = Date.now();
-
-  while (!api.getToken() && Date.now() - startedAt < timeout) {
-    await wait(50);
+  if (summary.overdue > 0) {
+    return '<span class="garage-service-pill is-due">' + icon("wrench") + 'Service Due</span>';
   }
 
-  return api.getToken() ? api : null;
-}
-
-function formatPrice(price) {
-  if (price === null || price === undefined) {
-    return "N/A";
+  if (summary.soon > 0) {
+    return '<span class="garage-service-pill is-soon">' + icon("calendar") + 'Due Soon</span>';
   }
 
-  return `$${Number(price).toLocaleString()}`;
+  return '<span class="garage-service-pill is-active">' + icon("wrench") + `${summary.active} Open</span>`;
 }
 
-function formatMileage(mileage) {
-  if (mileage === null || mileage === undefined) {
-    return "0 mi";
-  }
+async function loadTaskSummaries(garageItems) {
+  garageTaskSummary.clear();
 
-  return `${Number(mileage).toLocaleString()} mi`;
-}
+  await Promise.allSettled(garageItems.map(async (item) => {
+    const garageId = getGarageId(item);
 
-function showGarageMessage(message) {
-  garageMessage.textContent = message;
-  garageMessage.style.display = "block";
-}
+    if (!garageId) {
+      return;
+    }
 
-function hideGarageMessage() {
-  garageMessage.textContent = "";
-  garageMessage.style.display = "none";
-}
-
-function getMotorcycleFromGarageItem(item) {
-  return item.motorcycle || item.bike || item;
-}
-
-function getGarageMileage(item) {
-  return item.currentMileage || item.mileage || 0;
-}
-
-function getGarageId(item) {
-  return item.id || item.garageId;
+    try {
+      const tasks = await fetchJson(`/api/garage/${garageId}/tasks`);
+      garageTaskSummary.set(String(garageId), summarizeTasks(tasks));
+    } catch (error) {
+      garageTaskSummary.set(String(garageId), { active: 0, overdue: 0, soon: 0 });
+      console.warn(`Could not load maintenance tasks for garage item ${garageId}:`, error);
+    }
+  }));
 }
 
 function updateGarageStats(garageItems) {
   const totalBikes = garageItems.length;
-  const totalMileage = garageItems.reduce((sum, item) => {
-    return sum + Number(getGarageMileage(item) || 0);
+  const totalMileage = garageItems.reduce((sum, item) => sum + Number(getGarageMileage(item) || 0), 0);
+  const totalDue = garageItems.reduce((sum, item) => {
+    const garageId = getGarageId(item);
+    const summary = garageTaskSummary.get(String(garageId));
+    return sum + (summary?.active || 0);
   }, 0);
 
   totalBikesCount.textContent = totalBikes;
   totalMileageCount.textContent = formatMileage(totalMileage);
-  maintenanceDueCount.textContent = "0";
+  maintenanceDueCount.textContent = totalDue;
+
+  if (totalDue > 0) {
+    maintenanceDueCount.insertAdjacentHTML("beforeend", " <small>due soon</small>");
+  }
 }
 
 function renderGarageCard(item) {
   const motorcycle = getMotorcycleFromGarageItem(item);
   const garageId = getGarageId(item);
+  const summary = garageTaskSummary.get(String(garageId));
 
   const card = document.createElement("article");
-  card.className = "garage-card";
+  card.className = "garage-card garage-dashboard-card";
 
   card.innerHTML = `
     <div class="garage-card-image-wrap">
@@ -106,27 +141,31 @@ function renderGarageCard(item) {
     </div>
 
     <div class="garage-card-info">
-      <h3>${motorcycle.model || "Saved Motorcycle"}</h3>
-
-      <div class="garage-card-meta">
-        <span>${motorcycle.brand || "Unknown Brand"}</span>
-        <span>${motorcycle.category || "Unknown Category"}</span>
-        <span>${motorcycle.year || "N/A"}</span>
+      <div class="garage-card-title-row">
+        <div>
+          <h3>${motorcycle.model || "Saved Motorcycle"}</h3>
+          <div class="garage-card-meta">
+            <span>${motorcycle.brand || "Unknown Brand"}</span>
+            <span>${motorcycle.category || "Unknown Category"}</span>
+            <span>${motorcycle.year || "N/A"}</span>
+          </div>
+        </div>
+        ${getTaskStatusPill(summary)}
       </div>
 
       <div class="garage-card-details">
         <div class="garage-card-detail">
-          <span>Price</span>
+          <span>${icon("price")} Price</span>
           <strong>${formatPrice(motorcycle.price || item.purchasePrice)}</strong>
         </div>
 
         <div class="garage-card-detail">
-          <span>Mileage</span>
+          <span>${icon("mileage")} Mileage</span>
           <strong>${formatMileage(getGarageMileage(item))}</strong>
         </div>
 
         <div class="garage-card-detail">
-          <span>Added</span>
+          <span>${icon("calendar")} Added</span>
           <strong>${item.addedAt ? new Date(item.addedAt).toLocaleDateString() : "N/A"}</strong>
         </div>
       </div>
@@ -134,11 +173,14 @@ function renderGarageCard(item) {
 
     <div class="garage-card-actions">
       <a class="garage-card-action" href="maintenance.html?garageId=${garageId}">
-        Maintenance
+        ${icon("wrench")}
+        <span>Maintenance</span>
+        ${icon("chevron")}
       </a>
 
       <button class="garage-delete-btn" type="button" data-garage-id="${garageId}">
-        Remove
+        ${icon("trash")}
+        <span>Remove</span>
       </button>
     </div>
   `;
@@ -164,70 +206,41 @@ function renderGarage(garageItems) {
   });
 }
 
-async function requestGarageWithRetry(api, path, options = {}, retries = 1) {
-  const response = await api.apiRequest(path, options);
-
-  if (response.ok || retries <= 0) {
-    return response;
-  }
-
-  await wait(350);
-  return api.apiRequest(path, options);
-}
-
 async function loadGarage() {
   hideGarageMessage();
   garageLoadingState.style.display = "block";
   garageEmptyState.style.display = "none";
   garageList.innerHTML = "";
 
-  const api = await waitForGarageSession();
-
-  if (!api) {
-    garageLoadingState.style.display = "none";
-    showGarageMessage("Sign in again to load your garage.");
-    window.location.href = GARAGE_LOGIN_REDIRECT;
-    return;
-  }
-
   try {
-    const response = await requestGarageWithRetry(api, "/api/garage");
+    const api = await waitForApi();
 
-    if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
+    if (!api?.getToken()) {
+      window.location.href = "login.html?redirect=garage.html";
+      return;
     }
 
-    const garageItems = await response.json();
-    renderGarage(garageItems);
+    let garageItems;
 
-    if (typeof window.loadGarageBadgeCount === "function") {
-      window.loadGarageBadgeCount();
+    try {
+      garageItems = await fetchJson("/api/garage");
+    } catch (firstError) {
+      await sleep(350);
+      garageItems = await fetchJson("/api/garage");
     }
+
+    await loadTaskSummaries(garageItems || []);
+    renderGarage(garageItems || []);
   } catch (error) {
     garageLoadingState.style.display = "none";
-    showGarageMessage("Garage could not load. Try refresh once, then sign in again if it still fails.");
+    showGarageMessage("Garage could not load. Check your session, backend, or network connection, then try Refresh.");
     console.error("Failed to load garage:", error);
   }
 }
 
 async function removeGarageItem(garageId) {
-  const api = await waitForGarageSession();
-
-  if (!api) {
-    showGarageMessage("Sign in again before removing motorcycles from your garage.");
-    window.location.href = GARAGE_LOGIN_REDIRECT;
-    return;
-  }
-
   try {
-    const response = await requestGarageWithRetry(api, `/api/garage/${garageId}`, {
-      method: "DELETE"
-    });
-
-    if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
-    }
-
+    await fetchJson(`/api/garage/${garageId}`, { method: "DELETE" });
     await loadGarage();
   } catch (error) {
     showGarageMessage("Could not remove this motorcycle from the garage.");
@@ -235,21 +248,17 @@ async function removeGarageItem(garageId) {
   }
 }
 
-if (garageList) {
-  garageList.addEventListener("click", (event) => {
-    const deleteButton = event.target.closest(".garage-delete-btn");
+garageList.addEventListener("click", (event) => {
+  const deleteButton = event.target.closest(".garage-delete-btn");
 
-    if (!deleteButton) {
-      return;
-    }
+  if (!deleteButton) {
+    return;
+  }
 
-    const garageId = deleteButton.dataset.garageId;
-    removeGarageItem(garageId);
-  });
-}
+  const garageId = deleteButton.dataset.garageId;
+  removeGarageItem(garageId);
+});
 
-if (refreshGarageBtn) {
-  refreshGarageBtn.addEventListener("click", loadGarage);
-}
+refreshGarageBtn.addEventListener("click", loadGarage);
 
 document.addEventListener("DOMContentLoaded", loadGarage);
