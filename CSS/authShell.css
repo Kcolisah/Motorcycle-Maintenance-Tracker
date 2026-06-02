@@ -245,3 +245,18 @@
 .contact-page .account-label, .contact-page-shell .account-label { display: none !important; }
 .contact-page .account-chevron, .contact-page-shell .account-chevron { display: none !important; }
 .contact-page .account-dropdown, .contact-page-shell .account-dropdown { right: 0; }
+/* Contact page account dropdown fix */
+.contact-page-shell .nav-action-group { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+.contact-page-shell .account-menu { position: relative; display: flex; align-items: center; justify-content: center; margin-left: 0; z-index: 50; }
+.contact-page-shell .account-menu-trigger, .contact-page-shell .account-menu-trigger:hover, .contact-page-shell .account-menu-trigger[aria-expanded="true"] { width: 46px; height: 46px; min-width: 46px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; background: #090c02; border: 1px solid rgba(9, 12, 2, 0.28); color: #dde2c6; transform: none; box-shadow: none; }
+.contact-page-shell .account-avatar { width: 30px; height: 30px; border-radius: 999px; background: #a72608; color: #dde2c6; font-size: 12px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
+.contact-page-shell .account-label, .contact-page-shell .account-chevron { display: none !important; }
+.contact-page-shell .account-dropdown[hidden] { display: none !important; }
+.contact-page-shell .account-dropdown { position: absolute; top: calc(100% + 12px); right: 0; width: 280px; padding: 18px; display: grid; gap: 14px; border-radius: 16px; border: 1px solid rgba(9, 12, 2, 0.18); background: #dde2c6; color: #090c02; box-shadow: 0 22px 50px rgba(9, 12, 2, 0.18); z-index: 999; }
+.contact-page-shell .account-dropdown-header { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid rgba(9, 12, 2, 0.12); }
+.contact-page-shell .account-dropdown-header .account-avatar { width: 38px; height: 38px; color: #dde2c6; }
+.contact-page-shell .account-name { display: block; color: #090c02; font-size: 15px; font-weight: 900; line-height: 1.1; }
+.contact-page-shell .account-email { display: block; margin-top: 4px; color: rgba(9, 12, 2, 0.62); font-size: 12px; font-weight: 700; line-height: 1.2; word-break: break-word; }
+.contact-page-shell .account-dropdown a, .contact-page-shell .account-dropdown button { width: 100%; padding: 11px 12px; display: flex; align-items: center; justify-content: flex-start; border: 0; border-radius: 10px; background: transparent; color: #090c02; font-size: 13px; font-weight: 800; text-align: left; }
+.contact-page-shell .account-dropdown a:hover, .contact-page-shell .account-dropdown button:hover { background: rgba(167, 38, 8, 0.1); color: #a72608; }
+.contact-page-shell .account-signout, .contact-page-shell [data-sign-out], .contact-page-shell [data-logout] { color: #a72608 !important; }
