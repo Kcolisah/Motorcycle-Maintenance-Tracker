@@ -188,3 +188,10 @@
   .auth-page .login-card { transform: scale(0.96); transform-origin: center; }
   .auth-page .login-brand-panel, .auth-page .login-panel { padding-top: 36px; padding-bottom: 36px; }
 }
+
+/* 17. Final account icon lock */
+.account-menu-trigger, .account-menu-trigger:hover, .account-menu-trigger:focus-visible, .account-menu-trigger[aria-expanded="true"] { width: 54px !important; min-width: 54px !important; max-width: 54px !important; height: 54px !important; min-height: 54px !important; max-height: 54px !important; padding: 0 !important; justify-content: center !important; gap: 0 !important; overflow: hidden !important; }
+.account-label, .account-chevron { display: none !important; opacity: 0 !important; visibility: hidden !important; width: 0 !important; min-width: 0 !important; max-width: 0 !important; height: 0 !important; overflow: hidden !important; pointer-events: none !important; }
+.contact-page-shell .account-menu-trigger, .contact-page-shell .account-menu-trigger:hover, .contact-page-shell .account-menu-trigger:focus-visible, .contact-page-shell .account-menu-trigger[aria-expanded="true"] { width: 46px !important; min-width: 46px !important; max-width: 46px !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; border-radius: 12px !important; background: #090c02 !important; color: #dde2c6 !important; border-color: rgba(9, 12, 2, 0.28) !important; box-shadow: none !important; transform: none !important; }
+.contact-page-shell .account-avatar { width: 30px !important; min-width: 30px !important; max-width: 30px !important; height: 30px !important; min-height: 30px !important; max-height: 30px !important; background: #a72608 !important; color: #dde2c6 !important; font-size: 12px !important; }
+
