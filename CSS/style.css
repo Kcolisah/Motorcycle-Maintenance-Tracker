@@ -1731,3 +1731,11 @@ img { display: block; }
   .garage-card-actions { min-width: 158px; display: grid; gap: 12px; }
   .garage-card-action, .garage-delete-btn { width: 100%; min-height: 48px; padding: 0 14px; border-radius: 5px; font-size: 12px; }
 }
+/* Contact page account button cleanup */
+.contact-page .account-menu, .contact-page-shell .account-menu { display: flex; align-items: center; justify-content: center; }
+.contact-page .account-menu-trigger, .contact-page-shell .account-menu-trigger { width: 54px; height: 54px; min-width: 54px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 18px; background: #090c02; border: 1px solid rgba(9, 12, 2, 0.22); color: #dde2c6; box-shadow: 0 10px 24px rgba(9, 12, 2, 0.12); }
+.contact-page .account-menu-trigger:hover, .contact-page-shell .account-menu-trigger:hover { border-color: rgba(167, 38, 8, 0.42); transform: translateY(-1px); }
+.contact-page .account-avatar, .contact-page-shell .account-avatar { width: 34px; height: 34px; border-radius: 999px; background: #a72608; color: #dde2c6; font-size: 13px; font-weight: 900; }
+.contact-page .account-label, .contact-page-shell .account-label { display: none !important; }
+.contact-page .account-chevron, .contact-page-shell .account-chevron { display: none !important; }
+.contact-page .account-dropdown, .contact-page-shell .account-dropdown { right: 0; }
