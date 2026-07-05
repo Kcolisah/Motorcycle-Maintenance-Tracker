@@ -1,1028 +1,854 @@
-/* Mobile cleanup v1
-   This file is intentionally mobile-only. It should be linked after style.css,
-   authShell.css, and any page-specific CSS.
+/* Mobile App Shell v2
+   Same website. Mobile-only app-style layer.
+   Desktop remains controlled by the existing stylesheets.
 */
 
 @media (max-width: 900px) {
+  :root {
+    --mobile-page-pad: 18px;
+    --mobile-card: rgba(255, 255, 255, 0.045);
+    --mobile-card-strong: rgba(255, 255, 255, 0.075);
+    --mobile-line: rgba(255, 255, 255, 0.13);
+    --mobile-line-soft: rgba(255, 255, 255, 0.08);
+    --mobile-text: rgba(255, 255, 255, 0.94);
+    --mobile-muted: rgba(255, 255, 255, 0.64);
+    --mobile-radius: 20px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html,
   body {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 320px !important;
+    min-height: 100% !important;
+    height: auto !important;
     overflow-x: clip !important;
+    overflow-y: auto !important;
+    background: #050505 !important;
   }
 
   body {
-    min-width: 320px !important;
-    background: #000 !important;
+    margin: 0 !important;
+    color: var(--mobile-text) !important;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
   }
 
-  .page-shell {
+  body::before,
+  body::after,
+  .background-word,
+  .dot-line,
+  .right-dots,
+  .brand-marquee {
+    display: none !important;
+  }
+
+  img,
+  svg,
+  canvas,
+  video {
+    max-width: 100%;
+  }
+
+  .page-shell,
+  .home-page-shell,
+  .garage-page-shell,
+  .maintenance-page-shell,
+  .about-page-shell,
+  .contact-page-shell,
+  .bikes-page-shell,
+  .updates-page-shell {
     width: 100% !important;
     max-width: 100% !important;
     min-height: 100svh !important;
-    overflow-x: clip !important;
-  }
-
-  .page-shell::after {
-    opacity: 0.16 !important;
-  }
-
-  /* Mobile header */
-  .navbar,
-  .home-page .navbar,
-  .garage-page .navbar,
-  .garage-page-shell .navbar,
-  .maintenance-page .navbar,
-  .maintenance-page-shell .navbar,
-  .about-page-shell .navbar,
-  .contact-page-shell .navbar,
-  .bikes-page-shell .navbar,
-  .updates-page-shell .navbar {
-    width: 100% !important;
-    min-height: 0 !important;
-    padding: calc(18px + env(safe-area-inset-top)) 22px 16px !important;
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) auto !important;
-    grid-template-areas:
-      "logo action"
-      "links links"
-      "garage garage" !important;
-    align-items: center !important;
-    gap: 14px 12px !important;
+    height: auto !important;
     overflow: visible !important;
+    padding: 0 var(--mobile-page-pad) 42px !important;
+    margin: 0 auto !important;
+    background:
+      radial-gradient(circle at 85% 8%, rgba(33, 255, 113, 0.08), transparent 28%),
+      radial-gradient(circle at 0% 22%, rgba(255, 43, 43, 0.1), transparent 30%),
+      #050505 !important;
   }
 
-  .logo-block,
-  .home-page .logo-block,
-  .garage-page .logo-block,
-  .maintenance-page .logo-block,
-  .about-page-shell .logo-block,
-  .contact-page-shell .logo-block,
-  .bikes-page-shell .logo-block,
-  .updates-page-shell .logo-block {
-    grid-area: logo !important;
+  /* Mobile app header */
+  .navbar {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 18px 0 16px !important;
+    margin: 0 0 18px !important;
+    border: 0 !important;
+    background: transparent !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+
+  .logo-block {
     min-width: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
     gap: 10px !important;
   }
 
-  .logo-mark,
-  .home-page .logo-mark,
-  .garage-page .logo-mark,
-  .maintenance-page .logo-mark,
-  .about-page-shell .logo-mark,
-  .contact-page-shell .logo-mark,
-  .bikes-page-shell .logo-mark,
-  .updates-page-shell .logo-mark {
+  .logo-mark {
     width: 42px !important;
     height: 42px !important;
     min-width: 42px !important;
     border-radius: 12px !important;
+    display: grid !important;
+    place-items: center !important;
     font-size: 13px !important;
   }
 
-  .logo-text span:first-child,
-  .home-page .logo-text span:first-child,
-  .garage-page .logo-text span:first-child,
-  .maintenance-page .logo-text span:first-child,
-  .about-page-shell .logo-text span:first-child,
-  .contact-page-shell .logo-text span:first-child,
-  .bikes-page-shell .logo-text span:first-child,
-  .updates-page-shell .logo-text span:first-child {
+  .logo-text {
+    display: grid !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+  }
+
+  .logo-text span:first-child {
     font-size: 11px !important;
-    letter-spacing: 1.6px !important;
+    letter-spacing: 2px !important;
     line-height: 1 !important;
   }
 
-  .logo-text span:last-child,
-  .home-page .logo-text span:last-child,
-  .garage-page .logo-text span:last-child,
-  .maintenance-page .logo-text span:last-child,
-  .about-page-shell .logo-text span:last-child,
-  .contact-page-shell .logo-text span:last-child,
-  .bikes-page-shell .logo-text span:last-child,
-  .updates-page-shell .logo-text span:last-child {
-    margin-top: 4px !important;
+  .logo-text span:last-child {
     font-size: 11px !important;
-    letter-spacing: 0.9px !important;
+    line-height: 1.1 !important;
   }
 
-  .account-menu,
-  .nav-action-group {
-    grid-area: action !important;
-    justify-self: end !important;
-  }
-
-  .account-menu-trigger,
-  .account-menu-trigger:hover {
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-    border-radius: 999px !important;
-  }
-
-  .account-label {
-    display: none !important;
-  }
-
-  .nav-links,
-  .home-page .nav-links,
-  .garage-page .nav-links,
-  .garage-page-shell .nav-links,
-  .maintenance-page .nav-links,
-  .maintenance-page-shell .nav-links,
-  .about-page-shell .nav-links,
-  .contact-page-shell .nav-links,
-  .bikes-page-shell .nav-links,
-  .updates-page-shell .nav-links {
-    grid-area: links !important;
-    width: calc(100vw - 44px) !important;
-    max-width: calc(100vw - 44px) !important;
-    margin: 0 !important;
-    padding: 2px 0 2px !important;
+  .nav-links {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
     gap: 8px !important;
     overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-x: contain !important;
     scrollbar-width: none !important;
-    transform: none !important;
-    position: static !important;
-    left: auto !important;
-    top: auto !important;
+    padding: 4px 0 2px !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
   }
 
   .nav-links::-webkit-scrollbar {
     display: none !important;
   }
 
-  .nav-links a,
-  .home-page .nav-links a,
-  .garage-page .nav-links a,
-  .garage-page-shell .nav-links a,
-  .maintenance-page .nav-links a,
-  .maintenance-page-shell .nav-links a,
-  .about-page-shell .nav-links a,
-  .contact-page-shell .nav-links a,
-  .bikes-page-shell .nav-links a,
-  .updates-page-shell .nav-links a {
+  .nav-links a {
     flex: 0 0 auto !important;
-    min-height: 34px !important;
-    height: 34px !important;
-    padding: 0 10px !important;
+    min-height: 38px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border: 1px solid transparent !important;
+    padding: 10px 13px !important;
     border-radius: 999px !important;
-    background: transparent !important;
-    color: rgba(255, 255, 255, 0.72) !important;
+    color: rgba(255, 255, 255, 0.74) !important;
     font-size: 12px !important;
-    font-weight: 800 !important;
+    font-weight: 850 !important;
     letter-spacing: -0.1px !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
+    text-transform: none !important;
+    text-decoration: none !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
   }
 
   .nav-links a.active,
-  .nav-links a:hover,
-  .home-page .nav-links a.active,
-  .garage-page .nav-links a.active,
-  .maintenance-page .nav-links a.active,
-  .about-page-shell .nav-links a.active,
-  .contact-page-shell .nav-links a.active,
-  .bikes-page-shell .nav-links a.active,
-  .updates-page-shell .nav-links a.active {
-    border-color: rgba(255, 43, 43, 0.34) !important;
-    background: rgba(255, 43, 43, 0.08) !important;
-    color: #ff4d4d !important;
+  .nav-links a:hover {
+    color: #ff3b3b !important;
+    border-color: rgba(255, 43, 43, 0.32) !important;
+    background: rgba(255, 43, 43, 0.1) !important;
   }
 
   .nav-garage-btn,
-  .nav-garage-btn:hover,
   .nav-button,
-  .garage-page .nav-button,
-  .garage-page-shell .nav-button,
-  .maintenance-page .nav-garage-btn,
-  .maintenance-page .nav-garage-btn:hover,
-  .maintenance-page-shell .nav-garage-btn,
-  .maintenance-page-shell .nav-garage-btn:hover,
-  .contact-page-shell .navbar .nav-garage-btn,
-  .contact-page-shell .navbar .nav-garage-btn:hover {
-    grid-area: garage !important;
-    justify-self: center !important;
-    width: min(100%, 320px) !important;
-    max-width: 320px !important;
+  .garage-add-motorcycle-btn {
+    justify-self: end !important;
     min-width: 0 !important;
-    height: 46px !important;
-    min-height: 46px !important;
-    padding: 0 18px !important;
+    min-height: 42px !important;
+    height: auto !important;
+    width: auto !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 10px !important;
-    border-radius: 18px !important;
-    background: rgba(10, 10, 10, 0.78) !important;
-    border-color: rgba(255, 255, 255, 0.16) !important;
-    color: #fff !important;
+    gap: 9px !important;
+    padding: 11px 14px !important;
+    border-radius: 999px !important;
+    border: 1px solid var(--mobile-line) !important;
+    background: rgba(255, 255, 255, 0.035) !important;
     box-shadow: none !important;
+    color: #fff !important;
+    font-size: 11px !important;
+    font-weight: 950 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
     transform: none !important;
-    overflow: visible !important;
-  }
-
-  .nav-garage-btn > span:last-child,
-  .nav-garage-btn:hover > span:last-child,
-  .contact-page-shell .navbar .nav-garage-btn > span:last-child {
-    width: auto !important;
-    max-width: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: inline-flex !important;
-    transform: none !important;
-    color: currentColor !important;
-    font-size: 12px !important;
-    font-weight: 900 !important;
-    letter-spacing: 1.8px !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
   }
 
   .nav-garage-btn .garage-icon,
-  .contact-page-shell .navbar .nav-garage-btn .garage-icon {
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px !important;
-    color: var(--accent) !important;
-    stroke: var(--accent) !important;
+  .garage-icon {
+    width: 14px !important;
+    height: 14px !important;
   }
 
   .garage-count-badge,
-  .contact-page-shell .navbar .garage-count-badge {
-    top: -7px !important;
-    right: -7px !important;
-    min-width: 20px !important;
-    height: 20px !important;
-    padding: 0 6px !important;
-    border: 2px solid #050505 !important;
-    color: #fff !important;
+  .side-garage-count-badge {
+    min-width: 21px !important;
+    height: 21px !important;
+    display: inline-grid !important;
+    place-items: center !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
+  }
+
+  /* Shared mobile type + sections */
+  .section-tag,
+  .hero-label,
+  .garage-kicker,
+  .maintenance-kicker,
+  .bikes-top-label,
+  .login-kicker {
+    font-size: 10px !important;
+    letter-spacing: 4px !important;
+    line-height: 1.4 !important;
+    color: #ff3636 !important;
+  }
+
+  h1,
+  .hero-main h1,
+  .about-hero h1,
+  .contact-hero h1,
+  .bikes-main-title {
+    font-size: clamp(36px, 12vw, 58px) !important;
+    line-height: 0.95 !important;
+    letter-spacing: -1.8px !important;
+  }
+
+  h2 {
+    font-size: clamp(27px, 8vw, 38px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -1px !important;
+  }
+
+  p {
+    max-width: 100% !important;
   }
 
   .primary-btn,
   .secondary-btn,
-  .garage-primary-link,
-  .garage-secondary-btn,
   .maintenance-primary-btn,
   .maintenance-secondary-btn,
+  .garage-primary-link,
+  .garage-secondary-btn,
   .maintenance-back-link,
-  .maintenance-task-action,
-  .maintenance-delete-btn {
-    min-height: 46px !important;
-    font-size: 12px !important;
-    letter-spacing: 1px !important;
-  }
-
-  /* Home page */
-  .home-page-shell {
-    background: #000 !important;
-  }
-
-  .home-page .hero-section {
-    min-height: auto !important;
-    display: block !important;
-    padding-bottom: 28px !important;
-  }
-
-  .home-page .left-panel,
-  .home-page .right-panel,
-  .home-page .background-word,
-  .home-page .brand-marquee,
-  .home-page .hero-right,
-  .home-page .spec-box {
-    display: none !important;
-  }
-
-  .home-page .hero-content {
+  .garage-card-action,
+  .garage-delete-btn,
+  .bikes-add-garage-btn,
+  .bikes-maintain-btn,
+  .contact-submit-btn,
+  .continue-session-btn {
     width: 100% !important;
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 14px !important;
+  }
+
+  /* Home */
+  .home-page .hero-section,
+  .hero-section {
     min-height: auto !important;
-    padding: 24px 24px 34px !important;
-    overflow: visible !important;
+    height: auto !important;
+    padding: 24px 0 34px !important;
+    margin: 0 !important;
   }
 
-  .home-page .hero-label {
-    display: none !important;
-  }
-
-  .home-page .hero-main {
-    position: relative !important;
+  .hero-content,
+  .hero-main {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 22px !important;
+    gap: 24px !important;
+    align-items: start !important;
+  }
+
+  .hero-left {
+    order: 1 !important;
+    max-width: 100% !important;
+  }
+
+  .hero-right {
+    order: 2 !important;
     min-height: auto !important;
-    padding: 0 !important;
-    overflow: visible !important;
+    display: grid !important;
+    place-items: center !important;
   }
 
-  .home-page .hero-left {
-    width: 100% !important;
-    max-width: 420px !important;
-    padding: 0 !important;
-    position: relative !important;
-    z-index: 3 !important;
+  .hero-main h1 {
+    margin: 10px 0 14px !important;
   }
 
-  .home-page .hero-left h2 {
-    max-width: 360px !important;
-    margin: 0 !important;
-    color: var(--accent) !important;
-    font-size: clamp(38px, 12vw, 62px) !important;
-    line-height: 0.92 !important;
-    letter-spacing: -1.3px !important;
-  }
-
-  .home-page .hero-left p {
-    width: 100% !important;
-    max-width: 420px !important;
-    margin: 16px 0 0 !important;
-    color: rgba(255, 255, 255, 0.76) !important;
+  .hero-main p,
+  .hero-left p {
+    color: var(--mobile-muted) !important;
     font-size: 15px !important;
-    line-height: 1.55 !important;
+    line-height: 1.65 !important;
   }
 
-  .home-page .hero-actions {
-    width: min(100%, 250px) !important;
-    max-width: 250px !important;
+  .hero-actions {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 10px !important;
-    margin-top: 24px !important;
+    max-width: 280px !important;
+    margin-top: 22px !important;
   }
 
-  .home-page .hero-actions .primary-btn,
-  .home-page .hero-actions .secondary-btn {
+  .hero-image-wrap,
+  .hero-3d-stage,
+  .hero-stage-panel {
     width: 100% !important;
-    min-height: 48px !important;
-    padding: 0 18px !important;
-    border-radius: 16px !important;
-    font-size: 13px !important;
-  }
-
-  .home-page .hero-image-wrap,
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-image-wrap {
-    display: flex !important;
-    position: relative !important;
-    inset: auto !important;
-    top: auto !important;
-    right: auto !important;
-    left: auto !important;
-    bottom: auto !important;
-    width: 100% !important;
-    max-width: 420px !important;
-    height: clamp(220px, 58vw, 320px) !important;
-    min-height: clamp(220px, 58vw, 320px) !important;
-    margin: -4px auto 0 !important;
-    align-items: center !important;
-    justify-content: center !important;
-    pointer-events: auto !important;
-    z-index: 2 !important;
-    overflow: visible !important;
-  }
-
-  .home-page .hero-3d-stage,
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-stage {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-  }
-
-  .home-page .hero-3d-stage model-viewer,
-  .home-page .hero-3d-bike,
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-stage model-viewer,
-  .home-page .home-page-shell[data-hero-stage="home"] .hero-3d-bike {
-    width: 100% !important;
-    height: 100% !important;
-    transform: scale(1.18) !important;
-    transform-origin: center !important;
-  }
-
-  .home-page .home-page-shell:not([data-hero-stage="home"]) .hero-image-wrap {
-    display: block !important;
+    max-width: 390px !important;
+    min-height: auto !important;
     height: auto !important;
-    min-height: 0 !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
 
-  .home-page .hero-brand-grid,
-  .home-page .hero-category-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 12px !important;
+  .hero-3d-bike,
+  .hero-image-wrap img {
+    width: min(82vw, 340px) !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 28px 44px rgba(255, 43, 43, 0.16)) drop-shadow(0 34px 50px rgba(0, 0, 0, 0.75)) !important;
   }
 
-  .home-page .hero-brand-card,
-  .home-page .hero-category-card {
-    min-height: 112px !important;
-    padding: 14px !important;
-  }
-
-  .tracker-steps-section,
-  .tracker-section,
   .info-section,
+  .tracker-steps-section,
   .about-values-section,
-  .about-author-section {
-    padding: 52px 24px !important;
+  .about-author-section,
+  .updates-layout {
+    padding: 30px 0 !important;
+    margin: 0 !important;
+    border-top: 1px solid var(--mobile-line-soft) !important;
   }
 
-  .tracker-steps-header h2,
-  .tracker-header h2,
-  .info-box h2,
-  .about-author-left h2,
-  .about-values-heading h2 {
-    font-size: clamp(28px, 8vw, 42px) !important;
-    line-height: 1.05 !important;
-  }
-
+  .info-box,
   .tracker-steps-grid,
-  .about-values-grid {
+  .about-values-grid,
+  .brand-container,
+  .hero-brand-grid,
+  .hero-category-grid,
+  .category-container,
+  .bike-results {
+    display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
-    margin-top: 24px !important;
+    gap: 12px !important;
   }
 
   .tracker-step-card,
-  .about-value-card,
-  .about-mini-card,
-  .about-author-card {
+  .info-box > *,
+  .brand-card,
+  .category-container > *,
+  .bike-results > * {
     min-height: auto !important;
-    padding: 20px !important;
+    padding: 18px !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--mobile-line) !important;
+    background: var(--mobile-card) !important;
   }
 
-  .tracker-step-card h3,
-  .about-value-card h3,
-  .about-mini-card h3,
-  .about-author-card h3 {
-    font-size: 19px !important;
-    line-height: 1.15 !important;
-  }
-
-  .tracker-step-card p,
-  .about-value-card p,
-  .about-mini-card p,
-  .about-author-card p {
-    font-size: 14px !important;
-    line-height: 1.55 !important;
-  }
-
-  .brand-container {
+  .brand-container,
+  .hero-brand-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 12px !important;
-    margin-top: 24px !important;
+    gap: 10px !important;
   }
 
   .brand-card {
-    min-height: 126px !important;
-    padding: 16px 12px !important;
-    gap: 10px !important;
-  }
-
-  .brand-card img {
-    width: 98px !important;
-    height: 52px !important;
-    object-fit: contain !important;
-  }
-
-  .brand-card h3 {
-    font-size: 15px !important;
+    min-height: 118px !important;
+    display: grid !important;
+    place-items: center !important;
     text-align: center !important;
   }
 
-  .category-container,
-  .bike-results {
-    margin-top: 24px !important;
+  .brand-card img {
+    max-width: 58px !important;
+    max-height: 46px !important;
+    object-fit: contain !important;
+    margin-bottom: 8px !important;
   }
 
-  .category-button-row {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-  }
-
-  .category-container button {
-    min-height: 44px !important;
-    padding: 0 12px !important;
-    font-size: 12px !important;
-  }
-
-  /* Maintenance page */
-  body.maintenance-page,
-  body.maintenance-page .maintenance-page-shell,
-  body.maintenance-page .page-shell {
-    background: #050505 !important;
-  }
-
-  body.maintenance-page .maintenance-page-shell,
-  body.maintenance-page .page-shell {
-    height: 100svh !important;
-    min-height: 100svh !important;
-    overflow-y: auto !important;
-    overflow-x: clip !important;
-    padding: 0 18px 56px !important;
-  }
-
-  body.maintenance-page .maintenance-layout {
-    width: 100% !important;
-    max-width: 620px !important;
-    margin: 0 auto !important;
-    padding: 18px 0 48px !important;
-    display: block !important;
-  }
-
-  body.maintenance-page .maintenance-sidebar,
-  body.maintenance-page .maintenance-main,
-  body.maintenance-page .maintenance-bike-selector,
-  body.maintenance-page .maintenance-task-form,
-  body.maintenance-page .maintenance-column {
-    border-radius: 16px !important;
-  }
-
-  body.maintenance-page .maintenance-sidebar {
-    width: 100% !important;
-    margin: 0 0 16px !important;
-    padding: 20px !important;
-  }
-
-  body.maintenance-page .maintenance-sidebar h1 {
-    font-size: 31px !important;
-    line-height: 1 !important;
-    margin-bottom: 14px !important;
-  }
-
-  body.maintenance-page .maintenance-sidebar > p:not(.maintenance-kicker) {
-    font-size: 13px !important;
-    line-height: 1.55 !important;
-  }
-
-  body.maintenance-page .maintenance-bike-card {
-    margin-top: 16px !important;
-    padding: 16px !important;
-    border-radius: 14px !important;
-  }
-
-  body.maintenance-page .maintenance-sidebar-actions {
-    display: grid !important;
-    gap: 10px !important;
-    margin-top: 14px !important;
-  }
-
-  body.maintenance-page .maintenance-main {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 14px !important;
-  }
-
-  body.maintenance-page .maintenance-main-header {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-    margin: 0 !important;
-  }
-
-  body.maintenance-page .maintenance-main-header h2 {
-    font-size: 30px !important;
-    line-height: 1 !important;
-  }
-
-  body.maintenance-page #refreshTasksBtn {
-    width: 100% !important;
-  }
-
-  body.maintenance-page .maintenance-bike-selector {
-    margin: 0 !important;
-    padding: 16px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-header {
-    margin-bottom: 14px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-header h3 {
-    font-size: 23px !important;
+  .brand-card h3,
+  .brand-card h4,
+  .brand-card span {
+    font-size: 15px !important;
     line-height: 1.1 !important;
   }
 
-  body.maintenance-page .maintenance-selector-header p:last-child {
-    font-size: 13px !important;
-    line-height: 1.45 !important;
-  }
-
-  body.maintenance-page .maintenance-bike-selector-grid {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-card {
-    display: grid !important;
-    grid-template-columns: 92px minmax(0, 1fr) !important;
-    gap: 12px !important;
-    padding: 14px !important;
-    align-items: center !important;
-  }
-
-  body.maintenance-page .maintenance-selector-image-wrap {
-    grid-column: 1 !important;
-    grid-row: 1 / span 2 !important;
-    height: 92px !important;
-    border-bottom: 0 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding-right: 8px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-image-wrap img {
-    height: 82px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-copy {
-    grid-column: 2 !important;
-  }
-
-  body.maintenance-page .maintenance-selector-copy h4 {
-    font-size: 17px !important;
-    line-height: 1.08 !important;
-  }
-
-  body.maintenance-page .maintenance-selector-copy p {
-    margin-top: 6px !important;
-    font-size: 12px !important;
-    line-height: 1.35 !important;
-  }
-
-  body.maintenance-page .maintenance-selector-stats {
-    grid-column: 2 !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px !important;
-    padding-top: 8px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-stats span {
-    font-size: 12px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-btn {
-    grid-column: 1 / -1 !important;
-    min-height: 42px !important;
-    font-size: 11px !important;
-  }
-
-  body.maintenance-page .maintenance-selector-card.is-selected::after {
-    top: 10px !important;
-    right: 10px !important;
-    padding: 5px 7px !important;
-    font-size: 8px !important;
-  }
-
-  body.maintenance-page .maintenance-task-form {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    padding: 16px !important;
-  }
-
-  body.maintenance-page .maintenance-form-row-full {
-    grid-column: auto !important;
-  }
-
-  body.maintenance-page .maintenance-status-grid {
+  /* Garage */
+  .garage-layout,
+  .maintenance-layout,
+  .about-hero-grid,
+  .contact-hero-grid,
+  .about-author-wrap,
+  .updates-layout {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
-    padding-bottom: 80px !important;
-  }
-
-  body.maintenance-page .maintenance-column {
-    min-height: auto !important;
-    padding: 14px !important;
-  }
-
-  body.maintenance-page .maintenance-task-list {
-    gap: 12px !important;
-  }
-
-  body.maintenance-page .maintenance-task-card {
-    padding: 14px !important;
-    border-radius: 14px !important;
-  }
-
-  body.maintenance-page .maintenance-task-topline {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    gap: 8px !important;
-  }
-
-  body.maintenance-page .maintenance-task-actions {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 9px !important;
-  }
-
-  /* Garage page */
-  .garage-page .garage-page-shell,
-  .garage-page-shell {
-    padding: 0 18px 54px !important;
-  }
-
-  .garage-layout {
+    gap: 18px !important;
     width: 100% !important;
-    max-width: 620px !important;
-    margin: 0 auto !important;
-    padding: 18px 0 48px !important;
-    display: block !important;
+    max-width: 100% !important;
   }
 
   .garage-sidebar,
-  .garage-card,
-  .garage-empty-state {
-    border-radius: 16px !important;
-  }
-
-  .garage-sidebar {
-    margin-bottom: 16px !important;
+  .maintenance-sidebar,
+  .about-hero,
+  .contact-hero,
+  .about-author-card,
+  .updates-sidebar,
+  .updates-detail-panel {
+    width: 100% !important;
+    max-width: 100% !important;
     padding: 20px !important;
+    border-radius: 20px !important;
+    border: 1px solid var(--mobile-line) !important;
+    background: var(--mobile-card) !important;
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: auto !important;
   }
 
-  .garage-sidebar h1 {
-    font-size: 31px !important;
-    line-height: 1 !important;
+  .garage-main,
+  .maintenance-main,
+  .contact-main,
+  .about-main,
+  .updates-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    gap: 16px !important;
+  }
+
+  .garage-main-header,
+  .maintenance-main-header {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    gap: 12px !important;
+    margin: 0 !important;
   }
 
   .garage-stat-stack {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 10px !important;
+    margin-top: 18px !important;
   }
 
   .garage-stat-card {
-    padding: 14px !important;
-  }
-
-  .garage-main-header {
+    min-height: auto !important;
     display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-    margin-bottom: 14px !important;
-  }
-
-  .garage-main-header h2 {
-    font-size: 30px !important;
-  }
-
-  .garage-secondary-btn {
-    width: 100% !important;
+    grid-template-columns: 44px 1fr !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
   }
 
   .garage-list {
-    display: grid !important;
-    gap: 14px !important;
-  }
-
-  .garage-card {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-    min-height: 0 !important;
-    padding: 16px !important;
-  }
-
-  .garage-card-image-wrap {
-    height: 138px !important;
-  }
-
-  .garage-card-image {
-    height: 130px !important;
-    object-fit: contain !important;
-  }
-
-  .garage-card-title-row,
-  .garage-card-details,
-  .garage-card-actions {
-    grid-template-columns: 1fr !important;
-  }
-
-  .garage-card-detail {
-    padding: 12px !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
-  }
-
-  .garage-card-actions {
-    display: grid !important;
-    gap: 10px !important;
-  }
-
-  /* About / Contact */
-  .about-page-shell .about-hero,
-  .contact-page-shell .contact-hero {
-    min-height: auto !important;
-    padding: 42px 22px !important;
-  }
-
-  .about-page-shell .about-hero-grid,
-  .about-page-shell .about-info-grid,
-  .about-page-shell .about-author-wrap,
-  .contact-page-shell .contact-hero-grid,
-  .contact-mini-info {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 16px !important;
   }
 
-  .about-page-shell .about-hero-left h1,
-  .contact-copy h1 {
-    font-size: clamp(34px, 10vw, 52px) !important;
-    line-height: 0.96 !important;
+  .garage-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 18px !important;
+    border-radius: 22px !important;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.06), transparent 42%),
+      var(--mobile-card) !important;
   }
 
-  .about-page-shell .about-highlight-card,
-  .contact-form,
-  .contact-info-card {
-    border-radius: 18px !important;
-    padding: 20px !important;
+  .garage-card-image-wrap {
+    height: 150px !important;
+    display: grid !important;
+    place-items: center !important;
+    margin-bottom: 14px !important;
   }
 
-  .contact-page-shell .contact-hero-bg {
-    display: none !important;
+  .garage-card-image {
+    width: 100% !important;
+    max-width: 260px !important;
+    height: 132px !important;
+    object-fit: contain !important;
   }
 
-  .contact-page-shell .nav-links a {
-    color: rgba(9, 12, 2, 0.74) !important;
+  .garage-card-title-row {
+    display: grid !important;
+    gap: 8px !important;
   }
 
-  .contact-page-shell .nav-links a.active,
-  .contact-page-shell .nav-links a:hover {
-    color: #a72608 !important;
-    border-color: rgba(167, 38, 8, 0.32) !important;
-    background: rgba(167, 38, 8, 0.08) !important;
+  .garage-card-info h3,
+  .garage-card-title-row h3 {
+    font-size: clamp(25px, 8vw, 34px) !important;
+    line-height: 1.02 !important;
+    margin: 0 !important;
   }
 
-  /* Auth pages */
-  .login-shell {
-    min-height: 100svh !important;
+  .garage-card-meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px 12px !important;
+    color: var(--mobile-muted) !important;
+  }
+
+  .garage-card-details {
+    display: grid !important;
+    gap: 9px !important;
+    margin: 16px 0 !important;
+  }
+
+  .garage-card-detail {
+    min-height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    padding: 11px 12px !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--mobile-line-soft) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .garage-card-actions {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    padding: 18px !important;
-  }
-
-  .login-brand-panel,
-  .login-card {
-    width: 100% !important;
-    max-width: 520px !important;
-    margin: 0 auto !important;
-    border-radius: 18px !important;
-  }
-
-  .login-brand-panel {
-    min-height: auto !important;
-    padding: 24px !important;
-  }
-
-  .login-card {
-    padding: 22px !important;
-  }
-
-  /* Bikes and updates pages */
-  .bikes-hero-section,
-  .bikes-display-grid,
-  .updates-layout {
-    display: block !important;
-    min-height: auto !important;
-  }
-
-  .bikes-content,
-  .updates-layout {
-    padding: 18px 22px 52px !important;
-  }
-
-  .bikes-grid-line,
-  .bikes-gallery-label,
-  .bikes-top-label {
-    display: none !important;
-  }
-
-  .bikes-brand-mini,
-  .bikes-main-copy,
-  .bikes-hero-visual,
-  .bikes-right-panel {
-    position: relative !important;
-    inset: auto !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    width: 100% !important;
-    margin: 0 0 18px !important;
-  }
-
-  .bikes-main-title #brandLine {
-    font-size: clamp(42px, 13vw, 72px) !important;
-  }
-
-  .bikes-main-title #seriesLine {
-    font-size: clamp(34px, 10vw, 56px) !important;
-  }
-
-  .bikes-hero-visual {
-    height: 260px !important;
-  }
-
-  .bikes-hero-visual img {
-    height: 250px !important;
-  }
-}
-
-@media (max-width: 520px) {
-  .navbar,
-  .home-page .navbar,
-  .garage-page .navbar,
-  .maintenance-page .navbar,
-  .about-page-shell .navbar,
-  .contact-page-shell .navbar,
-  .bikes-page-shell .navbar,
-  .updates-page-shell .navbar {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  .nav-links,
-  .home-page .nav-links,
-  .garage-page .nav-links,
-  .maintenance-page .nav-links,
-  .about-page-shell .nav-links,
-  .contact-page-shell .nav-links,
-  .bikes-page-shell .nav-links,
-  .updates-page-shell .nav-links {
-    width: calc(100vw - 32px) !important;
-    max-width: calc(100vw - 32px) !important;
-  }
-
-  .home-page .hero-content,
-  .tracker-steps-section,
-  .tracker-section,
-  .info-section,
-  .about-values-section,
-  .about-author-section {
-    padding-left: 18px !important;
-    padding-right: 18px !important;
-  }
-
-  .home-page .hero-left h2 {
-    font-size: clamp(34px, 12.5vw, 52px) !important;
-  }
-
-  .brand-container,
-  .home-page .hero-brand-grid,
-  .home-page .hero-category-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
   }
 
-  .brand-card {
-    min-height: 116px !important;
-  }
-
-  .brand-card img {
-    width: 84px !important;
-    height: 48px !important;
-  }
-
+  /* Maintenance */
+  body.maintenance-page,
   body.maintenance-page .maintenance-page-shell,
-  body.maintenance-page .page-shell,
-  .garage-page .garage-page-shell,
-  .garage-page-shell {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
+  body.maintenance-page .page-shell {
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
   }
 
-  body.maintenance-page .maintenance-selector-card {
-    grid-template-columns: 82px minmax(0, 1fr) !important;
+  .maintenance-sidebar-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
   }
 
-  body.maintenance-page .maintenance-selector-image-wrap {
-    height: 82px !important;
+  .maintenance-bike-card {
+    padding: 16px !important;
+    border-radius: 16px !important;
+    margin: 16px 0 !important;
   }
 
-  body.maintenance-page .maintenance-selector-image-wrap img {
-    height: 72px !important;
+  .maintenance-bike-selector {
+    padding: 18px !important;
+    border-radius: 20px !important;
+    overflow: visible !important;
   }
 
-  body.maintenance-page .maintenance-selector-copy h4 {
+  .maintenance-bike-selector-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .maintenance-selector-card {
+    padding: 15px !important;
+    border-radius: 18px !important;
+    gap: 12px !important;
+  }
+
+  .maintenance-selector-image-wrap {
+    height: 112px !important;
+    border-radius: 14px !important;
+  }
+
+  .maintenance-selector-image-wrap img {
+    height: 96px !important;
+    object-fit: contain !important;
+  }
+
+  .maintenance-selector-copy h4 {
+    font-size: 19px !important;
+    line-height: 1.15 !important;
+  }
+
+  .maintenance-selector-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .maintenance-task-form {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    border-radius: 18px !important;
+  }
+
+  .maintenance-form-row,
+  .maintenance-form-row-full {
+    grid-column: auto !important;
+  }
+
+  .maintenance-task-form input,
+  .maintenance-task-form textarea {
+    min-height: 46px !important;
+    border-radius: 10px !important;
     font-size: 16px !important;
   }
 
-  body.maintenance-page .maintenance-task-topline {
-    align-items: flex-start !important;
-    flex-direction: column !important;
-  }
-
-  .category-button-row {
+  .maintenance-status-grid {
+    display: grid !important;
     grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding-bottom: 40px !important;
   }
 
-  .contact-form {
+  .maintenance-column {
+    min-height: auto !important;
+    padding: 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .maintenance-task-list {
+    min-height: 88px !important;
+    display: grid !important;
+    gap: 12px !important;
+  }
+
+  .maintenance-task-card {
+    padding: 15px !important;
+    border-radius: 16px !important;
+  }
+
+  .maintenance-task-topline {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: flex-start !important;
+  }
+
+  .maintenance-task-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  .maintenance-task-action,
+  .maintenance-delete-btn {
+    width: 100% !important;
+    min-height: 44px !important;
+    border-radius: 12px !important;
+  }
+
+  /* About / Contact / updates */
+  .about-hero-inner,
+  .contact-hero-inner {
+    padding: 0 !important;
+  }
+
+  .about-hero-left,
+  .about-hero-right,
+  .contact-copy,
+  .contact-form-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .about-lead,
+  .contact-lead {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+  }
+
+  .hero-actions,
+  .about-values-grid,
+  .contact-form,
+  .contact-info-card,
+  .updates-detail-body {
+    width: 100% !important;
+  }
+
+  .contact-form-wrap,
+  .contact-info-card,
+  .about-value-card,
+  .about-highlight-card,
+  .about-mini-card,
+  .updates-detail-panel,
+  .updates-list > * {
     padding: 18px !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--mobile-line) !important;
+    background: var(--mobile-card) !important;
+  }
+
+  .contact-field input,
+  .contact-field textarea {
+    font-size: 16px !important;
+    min-height: 48px !important;
+  }
+
+  /* Auth */
+  .login-shell {
+    min-height: 100svh !important;
+    height: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding: 20px var(--mobile-page-pad) 42px !important;
+    overflow: visible !important;
+  }
+
+  .login-brand-panel,
+  .login-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+  }
+
+  .login-card,
+  .login-card-compact {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+  }
+
+  .login-form-preview input {
+    font-size: 16px !important;
+    min-height: 48px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --mobile-page-pad: 14px;
+  }
+
+  .page-shell,
+  .home-page-shell,
+  .garage-page-shell,
+  .maintenance-page-shell,
+  .about-page-shell,
+  .contact-page-shell,
+  .bikes-page-shell,
+  .updates-page-shell {
+    padding-left: var(--mobile-page-pad) !important;
+    padding-right: var(--mobile-page-pad) !important;
+  }
+
+  .navbar {
+    gap: 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .logo-mark {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+  }
+
+  .logo-text span:first-child {
+    font-size: 9px !important;
+    letter-spacing: 1.8px !important;
+  }
+
+  .nav-garage-btn,
+  .nav-button,
+  .garage-add-motorcycle-btn {
+    padding: 10px 12px !important;
+    font-size: 10px !important;
+    letter-spacing: 1.2px !important;
+  }
+
+  .nav-links a {
+    min-height: 34px !important;
+    padding: 9px 11px !important;
+    font-size: 11px !important;
+  }
+
+  .hero-section {
+    padding-top: 16px !important;
+  }
+
+  .hero-actions {
+    max-width: 100% !important;
+  }
+
+  .hero-3d-bike,
+  .hero-image-wrap img {
+    width: min(88vw, 310px) !important;
+  }
+
+  .brand-container,
+  .hero-brand-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .brand-card {
+    min-height: 108px !important;
+    padding: 14px !important;
+  }
+
+  .garage-sidebar,
+  .maintenance-sidebar,
+  .garage-card,
+  .maintenance-bike-selector,
+  .maintenance-task-form,
+  .maintenance-column,
+  .about-hero,
+  .contact-hero,
+  .contact-form-wrap {
+    padding: 16px !important;
+    border-radius: 18px !important;
+  }
+
+  .garage-card-image-wrap {
+    height: 126px !important;
+  }
+
+  .garage-card-image {
+    height: 112px !important;
+  }
+
+  .maintenance-selector-stats {
+    grid-template-columns: 1fr !important;
   }
 }
