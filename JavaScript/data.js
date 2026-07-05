@@ -764,8 +764,25 @@ function openSelectedBikeByIndex(index) {
   openBikeShowcase(bike);
 }
 
+function isMobileHomeFlow() {
+  return window.matchMedia("(max-width: 900px)").matches;
+}
+
+function handleSelectMotorcycleClick() {
+  if (isMobileHomeFlow()) {
+    if (trackerSection) {
+      trackerSection.hidden = false;
+      smoothScrollToElement(trackerSection);
+    }
+
+    return;
+  }
+
+  enterHeroBrandMode();
+}
+
 if (selectMotorcycleBtn) {
-  selectMotorcycleBtn.addEventListener("click", enterHeroBrandMode);
+  selectMotorcycleBtn.addEventListener("click", handleSelectMotorcycleClick);
 }
 
 if (backHomeBtn) {
