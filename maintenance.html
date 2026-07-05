@@ -6,7 +6,7 @@
 
   <title>Maintenance | Motorcycle Tracker</title>
 
-  <link rel="stylesheet" href="CSS/style.css?v=auth-v1" />
+  <link rel="stylesheet" href="CSS/style.css?v=maintenance-selector-v1" />
   <link rel="stylesheet" href="CSS/authShell.css?v=auth-v1" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -94,6 +94,18 @@
 
         <div id="maintenanceMessage" class="maintenance-message"></div>
 
+        <section id="maintenanceBikeSelector" class="maintenance-bike-selector" hidden>
+          <div class="maintenance-selector-header">
+            <p class="maintenance-kicker">Choose Motorcycle</p>
+            <h3>Select a saved motorcycle</h3>
+            <p>
+              Pick one of your garage motorcycles to view and manage its maintenance tasks.
+            </p>
+          </div>
+
+          <div id="maintenanceBikeSelectorGrid" class="maintenance-bike-selector-grid"></div>
+        </section>
+
         <form id="maintenanceTaskForm" class="maintenance-task-form">
           <div class="maintenance-form-row">
             <label for="taskTitle">Task Title</label>
@@ -155,9 +167,10 @@
       </section>
     </main>
   </div>
-  <script src="JavaScript/apiClient.js?v=garage-original-features"></script>
-  <script src="JavaScript/authShell.js?v=garage-original-features"></script>
-  <script src="JavaScript/garageBadge.js?v=garage-original-features"></script>
-  <script src="JavaScript/maintenance.js?v=garage-original-features"></script>
+
+  <script src="JavaScript/apiClient.js?v=maintenance-selector-v1"></script>
+  <script src="JavaScript/authShell.js?v=auth-v1"></script>
+  <script src="JavaScript/garageBadge.js?v=maintenance-selector-v1"></script>
+  <script src="JavaScript/maintenance.js?v=maintenance-selector-v1"></script>
 </body>
 </html>
