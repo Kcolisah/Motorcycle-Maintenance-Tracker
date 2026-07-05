@@ -212,8 +212,19 @@
     await handleAuthResponse(response, redirectTarget);
   }
 
-  function signInDemo() {
-    showAuthMessage("Demo access will be reconnected after real-account frontend testing.", "info");
+   async function signInDemo(redirectTarget) {
+    const api = getApi();
+
+    if (!api) {
+      showAuthMessage("API client is not loaded.", "error");
+      return;
+    }
+
+    const response = await api.apiRequest("/api/auth/demo", {
+      method: "POST"
+    });
+
+    await handleAuthResponse(response, redirectTarget);
   }
 
   function signOut() {
@@ -422,8 +433,14 @@ if (!email || !password) {
     }
 
     if (demoButton) {
-      demoButton.addEventListener("click", () => {
-        signInDemo();
+      demoButton.addEventListener("click", async () => {
+        demoButton.disabled = true;
+
+        try{
+          await signInDemo(redirectTarget);
+        } finally {
+          demoButton.disabled = false;
+        }
       });
     }
   }
