@@ -35,9 +35,16 @@ const statusCounts = {
   DONE: doneCount
 };
 
+const statusDropZones = {
+  PENDING: pendingTasks?.closest(".maintenance-column"),
+  IN_PROGRESS: inProgressTasks?.closest(".maintenance-column"),
+  DONE: doneTasks?.closest(".maintenance-column")
+};
+
 let urlParams = new URLSearchParams(window.location.search);
 let selectedGarageId = urlParams.get("garageId");
 let garageItemsCache = [];
+let draggedTask = null;
 
 function showMaintenanceMessage(message, type = "error") {
   maintenanceMessage.textContent = message;
@@ -172,6 +179,58 @@ function clearTaskColumns() {
       count.textContent = "0";
     }
   });
+}
+
+function setupStatusDropZones() {
+  Object.entries(statusDropZones).forEach(([status, column]) => {
+    if (!column) {
+      return;
+    }
+
+    column.dataset.dropStatus = status;
+    column.classList.add("maintenance-drop-zone");
+  });
+}
+
+function clearDropZoneHighlights() {
+  Object.values(statusDropZones).forEach((column) => {
+    if (!column) {
+      return;
+    }
+
+    column.classList.remove("is-drop-target", "is-drop-blocked");
+  });
+}
+
+function updateDropZoneHighlight(targetStatus) {
+  Object.entries(statusDropZones).forEach(([status, column]) => {
+    if (!column) {
+      return;
+    }
+
+    const isTarget = status === targetStatus;
+    const isSameStatus = draggedTask && draggedTask.status === targetStatus;
+
+    column.classList.toggle("is-drop-target", isTarget && !isSameStatus);
+    column.classList.toggle("is-drop-blocked", isTarget && isSameStatus);
+  });
+}
+
+async function handleTaskDrop(targetStatus) {
+  if (!draggedTask || !targetStatus) {
+    return;
+  }
+
+  const taskId = draggedTask.id;
+  const currentStatus = draggedTask.status;
+
+  clearDropZoneHighlights();
+
+  if (!taskId || currentStatus === targetStatus) {
+    return;
+  }
+
+  await updateTaskStatus(taskId, targetStatus);
 }
 
 async function fetchGarageItems() {
@@ -441,6 +500,9 @@ function createEmptyNote(text) {
 function renderTaskCard(task) {
   const card = document.createElement("article");
   card.className = "maintenance-task-card";
+  card.draggable = true;
+  card.dataset.taskId = task.id;
+  card.dataset.taskStatus = task.status || "PENDING";
 
   const nextStatus = getNextStatus(task.status);
 
@@ -635,6 +697,74 @@ async function deleteTask(taskId) {
   }
 }
 
+document.addEventListener("dragstart", (event) => {
+  const taskCard = event.target.closest(".maintenance-task-card");
+
+  if (!taskCard) {
+    return;
+  }
+
+  draggedTask = {
+    id: taskCard.dataset.taskId,
+    status: taskCard.dataset.taskStatus
+  };
+
+  taskCard.classList.add("is-dragging");
+
+  if (event.dataTransfer) {
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", draggedTask.id);
+  }
+});
+
+document.addEventListener("dragover", (event) => {
+  if (!draggedTask) {
+    return;
+  }
+
+  const dropZone = event.target.closest("[data-drop-status]");
+
+  if (!dropZone) {
+    clearDropZoneHighlights();
+    return;
+  }
+
+  event.preventDefault();
+
+  if (event.dataTransfer) {
+    event.dataTransfer.dropEffect = "move";
+  }
+
+  updateDropZoneHighlight(dropZone.dataset.dropStatus);
+});
+
+document.addEventListener("drop", (event) => {
+  if (!draggedTask) {
+    return;
+  }
+
+  const dropZone = event.target.closest("[data-drop-status]");
+
+  if (!dropZone) {
+    clearDropZoneHighlights();
+    return;
+  }
+
+  event.preventDefault();
+  handleTaskDrop(dropZone.dataset.dropStatus);
+});
+
+document.addEventListener("dragend", (event) => {
+  const taskCard = event.target.closest(".maintenance-task-card");
+
+  if (taskCard) {
+    taskCard.classList.remove("is-dragging");
+  }
+
+  draggedTask = null;
+  clearDropZoneHighlights();
+});
+
 document.addEventListener("click", (event) => {
   const selectorButton = event.target.closest("[data-select-garage-id]");
   const statusButton = event.target.closest("[data-next-status]");
@@ -680,4 +810,5 @@ window.addEventListener("popstate", async () => {
   }
 });
 
+setupStatusDropZones();
 loadMaintenanceHub();
