@@ -9,6 +9,9 @@ const maintenanceLoadingState = document.getElementById("maintenanceLoadingState
 const refreshTasksBtn = document.getElementById("refreshTasksBtn");
 const createTaskBtn = document.getElementById("createTaskBtn");
 
+const maintenanceMain = document.querySelector(".maintenance-main");
+const maintenanceStatusGrid = document.querySelector(".maintenance-status-grid");
+
 const maintenanceBikeSelector = document.getElementById("maintenanceBikeSelector");
 const maintenanceBikeSelectorGrid = document.getElementById("maintenanceBikeSelectorGrid");
 
@@ -117,19 +120,35 @@ function setFormEnabled(isEnabled) {
   refreshTasksBtn.disabled = !isEnabled;
 }
 
-function setTaskBoardVisible(isVisible) {
-  const statusGrid = document.querySelector(".maintenance-status-grid");
+function runBoardRevealAnimation() {
+  const animatedElements = [maintenanceTaskForm, maintenanceStatusGrid].filter(Boolean);
+
+  animatedElements.forEach((element) => {
+    element.classList.remove("maintenance-board-reveal");
+    void element.offsetWidth;
+    element.classList.add("maintenance-board-reveal");
+  });
+}
+
+function setTaskBoardVisible(isVisible, shouldAnimate = false) {
+  if (maintenanceMain) {
+    maintenanceMain.classList.toggle("maintenance-board-open", isVisible);
+  }
 
   maintenanceTaskForm.hidden = !isVisible;
   maintenanceTaskForm.style.display = isVisible ? "" : "none";
 
-  if (statusGrid) {
-    statusGrid.hidden = !isVisible;
-    statusGrid.style.display = isVisible ? "" : "none";
+  if (maintenanceStatusGrid) {
+    maintenanceStatusGrid.hidden = !isVisible;
+    maintenanceStatusGrid.style.display = isVisible ? "" : "none";
   }
 
   refreshTasksBtn.hidden = !isVisible;
   refreshTasksBtn.style.display = isVisible ? "" : "none";
+
+  if (isVisible && shouldAnimate) {
+    runBoardRevealAnimation();
+  }
 }
 
 function setSelectorVisible(isVisible) {
@@ -171,6 +190,12 @@ async function fetchGarageItems() {
   return garageItemsCache;
 }
 
+function findGarageItemById(garageIdToFind) {
+  return garageItemsCache.find((item) => {
+    return getGarageId(item) === String(garageIdToFind);
+  });
+}
+
 function updateSelectedBikeCard(selectedGarageItem) {
   const motorcycle = getMotorcycleFromGarageItem(selectedGarageItem);
 
@@ -178,7 +203,29 @@ function updateSelectedBikeCard(selectedGarageItem) {
   selectedGarageBikeMeta.textContent = `${motorcycle.brand || "Unknown Brand"} • ${motorcycle.category || "Unknown Category"} • ${motorcycle.year || "N/A"}`;
 }
 
+function updateSelectorCardState() {
+  const selectorCards = document.querySelectorAll("[data-selector-card-garage-id]");
+
+  selectorCards.forEach((card) => {
+    const cardGarageId = card.dataset.selectorCardGarageId;
+    const isSelected = selectedGarageId && cardGarageId === String(selectedGarageId);
+    const cardButton = card.querySelector("[data-select-garage-id]");
+
+    card.classList.toggle("is-selected", Boolean(isSelected));
+
+    if (cardButton) {
+      cardButton.textContent = isSelected ? "Selected" : "View Maintenance";
+      cardButton.setAttribute("aria-pressed", isSelected ? "true" : "false");
+    }
+  });
+}
+
 function renderMaintenanceBikeSelector(garageItems) {
+  if (!maintenanceBikeSelectorGrid) {
+    showMaintenanceMessage("Maintenance selector markup is missing from maintenance.html.");
+    return;
+  }
+
   maintenanceBikeSelectorGrid.innerHTML = "";
 
   if (!garageItems || garageItems.length === 0) {
@@ -206,6 +253,7 @@ function renderMaintenanceBikeSelector(garageItems) {
 
     const card = document.createElement("article");
     card.className = "maintenance-selector-card";
+    card.dataset.selectorCardGarageId = itemGarageId;
 
     card.innerHTML = `
       <div class="maintenance-selector-image-wrap">
@@ -233,6 +281,7 @@ function renderMaintenanceBikeSelector(garageItems) {
         class="maintenance-selector-btn"
         type="button"
         data-select-garage-id="${escapeHtml(itemGarageId)}"
+        aria-pressed="false"
       >
         View Maintenance
       </button>
@@ -240,67 +289,94 @@ function renderMaintenanceBikeSelector(garageItems) {
 
     maintenanceBikeSelectorGrid.appendChild(card);
   });
+
+  updateSelectorCardState();
 }
 
-async function loadGarageSelector() {
+function showNoBikeSelectedState() {
   selectedGarageBikeName.textContent = "Choose a motorcycle";
   selectedGarageBikeMeta.textContent = "Select one of your saved bikes to manage its maintenance tasks.";
 
+  setSelectorVisible(true);
   setFormEnabled(false);
   setTaskBoardVisible(false);
-  setSelectorVisible(true);
   clearTaskColumns();
 
-  maintenanceLoadingState.style.display = "block";
-  maintenanceLoadingState.textContent = "Loading saved motorcycles...";
+  maintenanceLoadingState.style.display = "none";
   hideMaintenanceMessage();
-
-  try {
-    const garageItems = await fetchGarageItems();
-
-    maintenanceLoadingState.style.display = "none";
-    renderMaintenanceBikeSelector(garageItems);
-  } catch (error) {
-    maintenanceLoadingState.style.display = "none";
-    showMaintenanceMessage("Could not load your saved motorcycles.");
-    console.error("Failed to load maintenance bike selector:", error);
-  }
+  updateSelectorCardState();
 }
 
 async function loadSelectedGarageBike() {
   if (!selectedGarageId) {
-    await loadGarageSelector();
+    showNoBikeSelectedState();
     return false;
   }
 
-  setSelectorVisible(false);
-  setTaskBoardVisible(true);
-
   try {
-    const garageItems = await fetchGarageItems();
+    await fetchGarageItems();
 
-    const selectedGarageItem = garageItems.find((item) => {
-      return getGarageId(item) === String(selectedGarageId);
-    });
+    const selectedGarageItem = findGarageItemById(selectedGarageId);
 
     if (!selectedGarageItem) {
       selectedGarageBikeName.textContent = "Garage bike not found";
       selectedGarageBikeMeta.textContent = "This garage item may have been removed.";
       setFormEnabled(false);
+      setTaskBoardVisible(false);
+      updateSelectorCardState();
       showMaintenanceMessage("This garage motorcycle could not be found.");
       return false;
     }
 
     updateSelectedBikeCard(selectedGarageItem);
+    updateSelectorCardState();
     setFormEnabled(true);
     return true;
   } catch (error) {
     selectedGarageBikeName.textContent = "Garage unavailable";
     selectedGarageBikeMeta.textContent = "Make sure the Spring Boot backend is running.";
     setFormEnabled(false);
+    setTaskBoardVisible(false);
     showMaintenanceMessage("Could not load the selected garage bike.");
     console.error("Failed to load selected garage bike:", error);
     return false;
+  }
+}
+
+async function loadMaintenanceHub() {
+  setSelectorVisible(true);
+  setFormEnabled(false);
+  setTaskBoardVisible(Boolean(selectedGarageId));
+
+  maintenanceLoadingState.style.display = "block";
+  maintenanceLoadingState.textContent = selectedGarageId
+    ? "Loading selected motorcycle..."
+    : "Loading saved motorcycles...";
+
+  try {
+    const garageItems = await fetchGarageItems();
+
+    renderMaintenanceBikeSelector(garageItems);
+
+    if (!selectedGarageId) {
+      showNoBikeSelectedState();
+      return;
+    }
+
+    const bikeLoaded = await loadSelectedGarageBike();
+
+    if (bikeLoaded) {
+      setTaskBoardVisible(true, true);
+      await loadTasks();
+      return;
+    }
+
+    maintenanceLoadingState.style.display = "none";
+  } catch (error) {
+    maintenanceLoadingState.style.display = "none";
+    setTaskBoardVisible(false);
+    showMaintenanceMessage("Could not load your saved motorcycles.");
+    console.error("Failed to load maintenance hub:", error);
   }
 }
 
@@ -314,9 +390,9 @@ async function selectGarageBikeInPlace(garageIdToSelect) {
   );
 
   hideMaintenanceMessage();
-  setSelectorVisible(false);
-  setTaskBoardVisible(true);
+  updateSelectorCardState();
   setFormEnabled(false);
+  setTaskBoardVisible(true, true);
   clearTaskColumns();
 
   maintenanceLoadingState.style.display = "block";
@@ -590,33 +666,18 @@ window.addEventListener("popstate", async () => {
   urlParams = new URLSearchParams(window.location.search);
   selectedGarageId = urlParams.get("garageId");
 
-  if (selectedGarageId) {
-    const bikeLoaded = await loadSelectedGarageBike();
-
-    if (bikeLoaded) {
-      await loadTasks();
-    }
-
+  if (!selectedGarageId) {
+    showNoBikeSelectedState();
+    window.history.replaceState({}, "", "maintenance.html");
     return;
   }
 
-  await loadGarageSelector();
-});
-
-async function initializeMaintenancePage() {
   const bikeLoaded = await loadSelectedGarageBike();
 
   if (bikeLoaded) {
+    setTaskBoardVisible(true, true);
     await loadTasks();
-    return;
   }
+});
 
-  if (!selectedGarageId) {
-    return;
-  }
-
-  maintenanceLoadingState.style.display = "none";
-  clearTaskColumns();
-}
-
-initializeMaintenancePage();
+loadMaintenanceHub();
