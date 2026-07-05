@@ -297,3 +297,57 @@ body.maintenance-page .maintenance-status-grid {
   align-items: start;
   padding-bottom: 90px;
 }
+/* Maintenance hub scroll container fix */
+body.maintenance-page {
+  height: 100svh !important;
+  min-height: 100svh !important;
+  overflow: hidden !important;
+}
+
+body.maintenance-page .maintenance-page-shell,
+body.maintenance-page .page-shell {
+  height: 100svh !important;
+  min-height: 100svh !important;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.maintenance-page .maintenance-page-shell::-webkit-scrollbar {
+  width: 10px;
+  display: block;
+}
+
+body.maintenance-page .maintenance-page-shell::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+body.maintenance-page .maintenance-page-shell::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 43, 43, 0.45);
+}
+
+body.maintenance-page .maintenance-page-shell::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 43, 43, 0.7);
+}
+
+body.maintenance-page .maintenance-layout,
+body.maintenance-page .maintenance-main,
+body.maintenance-page .maintenance-sidebar,
+body.maintenance-page .maintenance-status-grid,
+body.maintenance-page .maintenance-column {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body.maintenance-page .maintenance-main {
+  padding-bottom: 120px;
+}
+
+body.maintenance-page .maintenance-status-grid {
+  align-items: start;
+  padding-bottom: 120px;
+}
