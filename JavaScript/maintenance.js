@@ -32,8 +32,9 @@ const statusCounts = {
   DONE: doneCount
 };
 
-const urlParams = new URLSearchParams(window.location.search);
-const garageId = urlParams.get("garageId");
+let urlParams = new URLSearchParams(window.location.search);
+let selectedGarageId = urlParams.get("garageId");
+let garageItemsCache = [];
 
 function showMaintenanceMessage(message, type = "error") {
   maintenanceMessage.textContent = message;
@@ -102,6 +103,10 @@ function getGarageAddedDate(item) {
   return item.addedAt || item.createdAt || item.dateAdded || null;
 }
 
+function getMaintenanceUrlForGarageId(garageId) {
+  return `maintenance.html?garageId=${encodeURIComponent(garageId)}`;
+}
+
 function setFormEnabled(isEnabled) {
   const formElements = maintenanceTaskForm.querySelectorAll("input, textarea, button");
 
@@ -113,15 +118,27 @@ function setFormEnabled(isEnabled) {
 }
 
 function setTaskBoardVisible(isVisible) {
+  const statusGrid = document.querySelector(".maintenance-status-grid");
+
   maintenanceTaskForm.hidden = !isVisible;
-  document.querySelector(".maintenance-status-grid").hidden = !isVisible;
+  maintenanceTaskForm.style.display = isVisible ? "" : "none";
+
+  if (statusGrid) {
+    statusGrid.hidden = !isVisible;
+    statusGrid.style.display = isVisible ? "" : "none";
+  }
+
   refreshTasksBtn.hidden = !isVisible;
+  refreshTasksBtn.style.display = isVisible ? "" : "none";
 }
 
 function setSelectorVisible(isVisible) {
-  if (maintenanceBikeSelector) {
-    maintenanceBikeSelector.hidden = !isVisible;
+  if (!maintenanceBikeSelector) {
+    return;
   }
+
+  maintenanceBikeSelector.hidden = !isVisible;
+  maintenanceBikeSelector.style.display = isVisible ? "block" : "none";
 }
 
 function clearTaskColumns() {
@@ -138,12 +155,30 @@ function clearTaskColumns() {
   });
 }
 
-function renderMaintenanceBikeSelector(garageItems) {
-  if (!maintenanceBikeSelectorGrid) {
-    showMaintenanceMessage("Maintenance selector markup is missing from maintenance.html.");
-    return;
+async function fetchGarageItems() {
+  if (garageItemsCache.length > 0) {
+    return garageItemsCache;
   }
 
+  const response = await fetch(`${API_BASE_URL}/garage`);
+
+  if (!response.ok) {
+    const errorText = await getBackendErrorText(response);
+    throw new Error(`Backend returned ${response.status}: ${errorText}`);
+  }
+
+  garageItemsCache = await response.json();
+  return garageItemsCache;
+}
+
+function updateSelectedBikeCard(selectedGarageItem) {
+  const motorcycle = getMotorcycleFromGarageItem(selectedGarageItem);
+
+  selectedGarageBikeName.textContent = motorcycle.model || "Saved Motorcycle";
+  selectedGarageBikeMeta.textContent = `${motorcycle.brand || "Unknown Brand"} • ${motorcycle.category || "Unknown Category"} • ${motorcycle.year || "N/A"}`;
+}
+
+function renderMaintenanceBikeSelector(garageItems) {
   maintenanceBikeSelectorGrid.innerHTML = "";
 
   if (!garageItems || garageItems.length === 0) {
@@ -194,9 +229,13 @@ function renderMaintenanceBikeSelector(garageItems) {
         </span>
       </div>
 
-      <a class="maintenance-selector-btn" href="maintenance.html?garageId=${encodeURIComponent(itemGarageId)}">
+      <button
+        class="maintenance-selector-btn"
+        type="button"
+        data-select-garage-id="${escapeHtml(itemGarageId)}"
+      >
         View Maintenance
-      </a>
+      </button>
     `;
 
     maintenanceBikeSelectorGrid.appendChild(card);
@@ -217,14 +256,7 @@ async function loadGarageSelector() {
   hideMaintenanceMessage();
 
   try {
-    const response = await fetch(`${API_BASE_URL}/garage`);
-
-    if (!response.ok) {
-      const errorText = await getBackendErrorText(response);
-      throw new Error(`Backend returned ${response.status}: ${errorText}`);
-    }
-
-    const garageItems = await response.json();
+    const garageItems = await fetchGarageItems();
 
     maintenanceLoadingState.style.display = "none";
     renderMaintenanceBikeSelector(garageItems);
@@ -236,7 +268,7 @@ async function loadGarageSelector() {
 }
 
 async function loadSelectedGarageBike() {
-  if (!garageId) {
+  if (!selectedGarageId) {
     await loadGarageSelector();
     return false;
   }
@@ -245,15 +277,11 @@ async function loadSelectedGarageBike() {
   setTaskBoardVisible(true);
 
   try {
-    const response = await fetch(`${API_BASE_URL}/garage`);
+    const garageItems = await fetchGarageItems();
 
-    if (!response.ok) {
-      const errorText = await getBackendErrorText(response);
-      throw new Error(`Backend returned ${response.status}: ${errorText}`);
-    }
-
-    const garageItems = await response.json();
-    const selectedGarageItem = garageItems.find((item) => getGarageId(item) === String(garageId));
+    const selectedGarageItem = garageItems.find((item) => {
+      return getGarageId(item) === String(selectedGarageId);
+    });
 
     if (!selectedGarageItem) {
       selectedGarageBikeName.textContent = "Garage bike not found";
@@ -263,11 +291,7 @@ async function loadSelectedGarageBike() {
       return false;
     }
 
-    const motorcycle = getMotorcycleFromGarageItem(selectedGarageItem);
-
-    selectedGarageBikeName.textContent = motorcycle.model || "Saved Motorcycle";
-    selectedGarageBikeMeta.textContent = `${motorcycle.brand || "Unknown Brand"} • ${motorcycle.category || "Unknown Category"} • ${motorcycle.year || "N/A"}`;
-
+    updateSelectedBikeCard(selectedGarageItem);
     setFormEnabled(true);
     return true;
   } catch (error) {
@@ -278,6 +302,33 @@ async function loadSelectedGarageBike() {
     console.error("Failed to load selected garage bike:", error);
     return false;
   }
+}
+
+async function selectGarageBikeInPlace(garageIdToSelect) {
+  selectedGarageId = String(garageIdToSelect);
+
+  window.history.pushState(
+    { garageId: selectedGarageId },
+    "",
+    getMaintenanceUrlForGarageId(selectedGarageId)
+  );
+
+  hideMaintenanceMessage();
+  setSelectorVisible(false);
+  setTaskBoardVisible(true);
+  setFormEnabled(false);
+  clearTaskColumns();
+
+  maintenanceLoadingState.style.display = "block";
+  maintenanceLoadingState.textContent = "Loading maintenance tasks...";
+
+  const bikeLoaded = await loadSelectedGarageBike();
+
+  if (bikeLoaded) {
+    await loadTasks();
+  }
+
+  setFormEnabled(bikeLoaded);
 }
 
 function getNextStatus(status) {
@@ -386,7 +437,7 @@ function renderTasks(tasks) {
 }
 
 async function loadTasks() {
-  if (!garageId) {
+  if (!selectedGarageId) {
     maintenanceLoadingState.style.display = "none";
     clearTaskColumns();
     return;
@@ -397,7 +448,7 @@ async function loadTasks() {
   maintenanceLoadingState.textContent = "Loading maintenance tasks...";
 
   try {
-    const response = await fetch(`${API_BASE_URL}/garage/${garageId}/tasks`);
+    const response = await fetch(`${API_BASE_URL}/garage/${selectedGarageId}/tasks`);
 
     if (!response.ok) {
       const errorText = await getBackendErrorText(response);
@@ -419,7 +470,7 @@ async function loadTasks() {
 async function createTask(event) {
   event.preventDefault();
 
-  if (!garageId) {
+  if (!selectedGarageId) {
     showMaintenanceMessage("Choose a motorcycle before adding tasks.");
     return;
   }
@@ -437,7 +488,7 @@ async function createTask(event) {
   createTaskBtn.textContent = "Adding...";
 
   try {
-    const response = await fetch(`${API_BASE_URL}/garage/${garageId}/tasks`, {
+    const response = await fetch(`${API_BASE_URL}/garage/${selectedGarageId}/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -509,8 +560,15 @@ async function deleteTask(taskId) {
 }
 
 document.addEventListener("click", (event) => {
+  const selectorButton = event.target.closest("[data-select-garage-id]");
   const statusButton = event.target.closest("[data-next-status]");
   const deleteButton = event.target.closest(".maintenance-delete-btn");
+
+  if (selectorButton) {
+    const garageIdToSelect = selectorButton.dataset.selectGarageId;
+    selectGarageBikeInPlace(garageIdToSelect);
+    return;
+  }
 
   if (statusButton) {
     const taskId = statusButton.dataset.taskId;
@@ -528,6 +586,23 @@ document.addEventListener("click", (event) => {
 maintenanceTaskForm.addEventListener("submit", createTask);
 refreshTasksBtn.addEventListener("click", loadTasks);
 
+window.addEventListener("popstate", async () => {
+  urlParams = new URLSearchParams(window.location.search);
+  selectedGarageId = urlParams.get("garageId");
+
+  if (selectedGarageId) {
+    const bikeLoaded = await loadSelectedGarageBike();
+
+    if (bikeLoaded) {
+      await loadTasks();
+    }
+
+    return;
+  }
+
+  await loadGarageSelector();
+});
+
 async function initializeMaintenancePage() {
   const bikeLoaded = await loadSelectedGarageBike();
 
@@ -536,7 +611,7 @@ async function initializeMaintenancePage() {
     return;
   }
 
-  if (!garageId) {
+  if (!selectedGarageId) {
     return;
   }
 
