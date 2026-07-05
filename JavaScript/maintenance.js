@@ -9,6 +9,9 @@ const maintenanceLoadingState = document.getElementById("maintenanceLoadingState
 const refreshTasksBtn = document.getElementById("refreshTasksBtn");
 const createTaskBtn = document.getElementById("createTaskBtn");
 
+const maintenanceBikeSelector = document.getElementById("maintenanceBikeSelector");
+const maintenanceBikeSelectorGrid = document.getElementById("maintenanceBikeSelectorGrid");
+
 const pendingTasks = document.getElementById("pendingTasks");
 const inProgressTasks = document.getElementById("inProgressTasks");
 const doneTasks = document.getElementById("doneTasks");
@@ -57,12 +60,26 @@ async function getBackendErrorText(response) {
   }
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 function formatDate(dateValue) {
   if (!dateValue) {
-    return "No due date";
+    return "N/A";
   }
 
   return new Date(`${dateValue}T00:00:00`).toLocaleDateString();
+}
+
+function formatMileage(value) {
+  const number = Number(value || 0);
+  return `${number.toLocaleString()} mi`;
 }
 
 function getMotorcycleFromGarageItem(item) {
@@ -71,6 +88,18 @@ function getMotorcycleFromGarageItem(item) {
 
 function getGarageId(item) {
   return String(item.id || item.garageId);
+}
+
+function getMotorcycleImage(motorcycle) {
+  return motorcycle.imageUrl || motorcycle.image || motorcycle.imagePath || "images/LOGO.png";
+}
+
+function getGarageMileage(item) {
+  return item.currentMileage ?? item.mileage ?? getMotorcycleFromGarageItem(item).mileage ?? 0;
+}
+
+function getGarageAddedDate(item) {
+  return item.addedAt || item.createdAt || item.dateAdded || null;
 }
 
 function setFormEnabled(isEnabled) {
@@ -83,14 +112,137 @@ function setFormEnabled(isEnabled) {
   refreshTasksBtn.disabled = !isEnabled;
 }
 
+function setTaskBoardVisible(isVisible) {
+  maintenanceTaskForm.hidden = !isVisible;
+  document.querySelector(".maintenance-status-grid").hidden = !isVisible;
+  refreshTasksBtn.hidden = !isVisible;
+}
+
+function setSelectorVisible(isVisible) {
+  if (maintenanceBikeSelector) {
+    maintenanceBikeSelector.hidden = !isVisible;
+  }
+}
+
+function clearTaskColumns() {
+  Object.values(statusColumns).forEach((column) => {
+    if (column) {
+      column.innerHTML = "";
+    }
+  });
+
+  Object.values(statusCounts).forEach((count) => {
+    if (count) {
+      count.textContent = "0";
+    }
+  });
+}
+
+function renderMaintenanceBikeSelector(garageItems) {
+  if (!maintenanceBikeSelectorGrid) {
+    showMaintenanceMessage("Maintenance selector markup is missing from maintenance.html.");
+    return;
+  }
+
+  maintenanceBikeSelectorGrid.innerHTML = "";
+
+  if (!garageItems || garageItems.length === 0) {
+    maintenanceBikeSelectorGrid.innerHTML = `
+      <article class="maintenance-selector-empty">
+        <h4>No motorcycles saved yet</h4>
+        <p>Add a motorcycle to your garage before creating maintenance tasks.</p>
+        <a href="index.html#tracker-preview">Browse Bikes</a>
+      </article>
+    `;
+    return;
+  }
+
+  garageItems.forEach((item) => {
+    const motorcycle = getMotorcycleFromGarageItem(item);
+    const itemGarageId = getGarageId(item);
+
+    const name = motorcycle.model || "Saved Motorcycle";
+    const brand = motorcycle.brand || "Unknown Brand";
+    const category = motorcycle.category || "Unknown Category";
+    const year = motorcycle.year || "N/A";
+    const image = getMotorcycleImage(motorcycle);
+    const mileage = formatMileage(getGarageMileage(item));
+    const addedDate = getGarageAddedDate(item);
+
+    const card = document.createElement("article");
+    card.className = "maintenance-selector-card";
+
+    card.innerHTML = `
+      <div class="maintenance-selector-image-wrap">
+        <img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" />
+      </div>
+
+      <div class="maintenance-selector-copy">
+        <h4>${escapeHtml(name)}</h4>
+        <p>${escapeHtml(brand)} • ${escapeHtml(category)} • ${escapeHtml(year)}</p>
+      </div>
+
+      <div class="maintenance-selector-stats">
+        <span>
+          <strong>Mileage</strong>
+          ${escapeHtml(mileage)}
+        </span>
+
+        <span>
+          <strong>Added</strong>
+          ${escapeHtml(addedDate ? formatDate(String(addedDate).slice(0, 10)) : "N/A")}
+        </span>
+      </div>
+
+      <a class="maintenance-selector-btn" href="maintenance.html?garageId=${encodeURIComponent(itemGarageId)}">
+        View Maintenance
+      </a>
+    `;
+
+    maintenanceBikeSelectorGrid.appendChild(card);
+  });
+}
+
+async function loadGarageSelector() {
+  selectedGarageBikeName.textContent = "Choose a motorcycle";
+  selectedGarageBikeMeta.textContent = "Select one of your saved bikes to manage its maintenance tasks.";
+
+  setFormEnabled(false);
+  setTaskBoardVisible(false);
+  setSelectorVisible(true);
+  clearTaskColumns();
+
+  maintenanceLoadingState.style.display = "block";
+  maintenanceLoadingState.textContent = "Loading saved motorcycles...";
+  hideMaintenanceMessage();
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/garage`);
+
+    if (!response.ok) {
+      const errorText = await getBackendErrorText(response);
+      throw new Error(`Backend returned ${response.status}: ${errorText}`);
+    }
+
+    const garageItems = await response.json();
+
+    maintenanceLoadingState.style.display = "none";
+    renderMaintenanceBikeSelector(garageItems);
+  } catch (error) {
+    maintenanceLoadingState.style.display = "none";
+    showMaintenanceMessage("Could not load your saved motorcycles.");
+    console.error("Failed to load maintenance bike selector:", error);
+  }
+}
+
 async function loadSelectedGarageBike() {
   if (!garageId) {
-    selectedGarageBikeName.textContent = "No bike selected";
-    selectedGarageBikeMeta.textContent = "Go to Garage and choose Maintenance for a saved motorcycle.";
-    setFormEnabled(false);
-    showMaintenanceMessage("No garage bike was selected. Open this page from the Garage.");
+    await loadGarageSelector();
     return false;
   }
+
+  setSelectorVisible(false);
+  setTaskBoardVisible(true);
 
   try {
     const response = await fetch(`${API_BASE_URL}/garage`);
@@ -126,20 +278,6 @@ async function loadSelectedGarageBike() {
     console.error("Failed to load selected garage bike:", error);
     return false;
   }
-}
-
-function clearTaskColumns() {
-  Object.values(statusColumns).forEach((column) => {
-    if (column) {
-      column.innerHTML = "";
-    }
-  });
-
-  Object.values(statusCounts).forEach((count) => {
-    if (count) {
-      count.textContent = "0";
-    }
-  });
 }
 
 function getNextStatus(status) {
@@ -178,6 +316,7 @@ function renderTaskCard(task) {
   card.className = "maintenance-task-card";
 
   const nextStatus = getNextStatus(task.status);
+
   const nextStatusButton = nextStatus
     ? `<button class="maintenance-task-action" type="button" data-task-id="${task.id}" data-next-status="${nextStatus}">
         Move to ${getStatusLabel(nextStatus)}
@@ -185,13 +324,13 @@ function renderTaskCard(task) {
     : "";
 
   card.innerHTML = `
-    <h4>${task.title || "Untitled Task"}</h4>
+    <h4>${escapeHtml(task.title || "Untitled Task")}</h4>
 
-    <p>${task.description || "No description added."}</p>
+    <p>${escapeHtml(task.description || "No description added.")}</p>
 
     <div class="maintenance-task-meta">
-      <span>${getStatusLabel(task.status)}</span>
-      <span>Due: ${formatDate(task.dueDate)}</span>
+      <span>${escapeHtml(getStatusLabel(task.status))}</span>
+      <span>Due: ${escapeHtml(formatDate(task.dueDate))}</span>
     </div>
 
     <div class="maintenance-task-actions">
@@ -255,6 +394,7 @@ async function loadTasks() {
 
   hideMaintenanceMessage();
   maintenanceLoadingState.style.display = "block";
+  maintenanceLoadingState.textContent = "Loading maintenance tasks...";
 
   try {
     const response = await fetch(`${API_BASE_URL}/garage/${garageId}/tasks`);
@@ -280,7 +420,7 @@ async function createTask(event) {
   event.preventDefault();
 
   if (!garageId) {
-    showMaintenanceMessage("Open this page from the Garage before adding tasks.");
+    showMaintenanceMessage("Choose a motorcycle before adding tasks.");
     return;
   }
 
@@ -393,6 +533,10 @@ async function initializeMaintenancePage() {
 
   if (bikeLoaded) {
     await loadTasks();
+    return;
+  }
+
+  if (!garageId) {
     return;
   }
 
