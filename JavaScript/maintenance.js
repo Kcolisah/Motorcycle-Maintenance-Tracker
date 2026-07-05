@@ -88,6 +88,49 @@ function formatDate(dateValue) {
   return new Date(`${dateValue}T00:00:00`).toLocaleDateString();
 }
 
+function getDueDateInfo(dateValue) {
+  if (!dateValue) {
+    return {
+      label: "No due date",
+      className: "is-no-date"
+    };
+  }
+
+  const today = new Date();
+  const dueDate = new Date(`${dateValue}T00:00:00`);
+
+  today.setHours(0, 0, 0, 0);
+  dueDate.setHours(0, 0, 0, 0);
+
+  const dayDifference = Math.round((dueDate - today) / 86400000);
+
+  if (dayDifference < 0) {
+    return {
+      label: `Overdue by ${Math.abs(dayDifference)}d`,
+      className: "is-overdue"
+    };
+  }
+
+  if (dayDifference === 0) {
+    return {
+      label: "Due today",
+      className: "is-today"
+    };
+  }
+
+  if (dayDifference <= 7) {
+    return {
+      label: `Due in ${dayDifference}d`,
+      className: "is-soon"
+    };
+  }
+
+  return {
+    label: formatDate(dateValue),
+    className: "is-later"
+  };
+}
+
 function formatMileage(value) {
   const number = Number(value || 0);
   return `${number.toLocaleString()} mi`;
@@ -493,7 +536,10 @@ function getStatusLabel(status) {
 function createEmptyNote(text) {
   const note = document.createElement("div");
   note.className = "maintenance-empty-note";
-  note.textContent = text;
+  note.innerHTML = `
+    <span class="maintenance-empty-dot" aria-hidden="true"></span>
+    <p>${escapeHtml(text)}</p>
+  `;
   return note;
 }
 
@@ -505,6 +551,7 @@ function renderTaskCard(task) {
   card.dataset.taskStatus = task.status || "PENDING";
 
   const nextStatus = getNextStatus(task.status);
+  const dueDateInfo = getDueDateInfo(task.dueDate);
 
   const nextStatusButton = nextStatus
     ? `<button class="maintenance-task-action" type="button" data-task-id="${task.id}" data-next-status="${nextStatus}">
@@ -513,12 +560,17 @@ function renderTaskCard(task) {
     : "";
 
   card.innerHTML = `
+    <div class="maintenance-task-topline">
+      <span class="maintenance-task-status-pill">${escapeHtml(getStatusLabel(task.status))}</span>
+      <span class="maintenance-due-badge ${escapeHtml(dueDateInfo.className)}">${escapeHtml(dueDateInfo.label)}</span>
+    </div>
+
     <h4>${escapeHtml(task.title || "Untitled Task")}</h4>
 
     <p>${escapeHtml(task.description || "No description added.")}</p>
 
     <div class="maintenance-task-meta">
-      <span>${escapeHtml(getStatusLabel(task.status))}</span>
+      <span>Drag to move</span>
       <span>Due: ${escapeHtml(formatDate(task.dueDate))}</span>
     </div>
 
@@ -680,6 +732,12 @@ async function updateTaskStatus(taskId, nextStatus) {
 }
 
 async function deleteTask(taskId) {
+  const shouldDelete = window.confirm("Delete this maintenance task?");
+
+  if (!shouldDelete) {
+    return;
+  }
+
   try {
     const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
       method: "DELETE"

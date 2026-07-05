@@ -257,46 +257,6 @@
     grid-template-columns: 1fr;
   }
 }
-/* Maintenance hub scroll safety override */
-html,
-body {
-  height: auto;
-  min-height: 100%;
-  overflow-y: auto;
-}
-
-body.maintenance-page {
-  height: auto !important;
-  min-height: 100svh !important;
-  overflow-x: clip !important;
-  overflow-y: auto !important;
-}
-
-body.maintenance-page .page-shell,
-body.maintenance-page .maintenance-page-shell {
-  height: auto !important;
-  min-height: 100svh !important;
-  overflow-x: clip !important;
-  overflow-y: visible !important;
-}
-
-body.maintenance-page .maintenance-layout,
-body.maintenance-page .maintenance-main,
-body.maintenance-page .maintenance-sidebar,
-body.maintenance-page .maintenance-status-grid,
-body.maintenance-page .maintenance-column {
-  height: auto !important;
-  overflow: visible !important;
-}
-
-body.maintenance-page .maintenance-main {
-  padding-bottom: 90px;
-}
-
-body.maintenance-page .maintenance-status-grid {
-  align-items: start;
-  padding-bottom: 90px;
-}
 /* Maintenance hub scroll container fix */
 body.maintenance-page {
   height: 100svh !important;
@@ -434,5 +394,277 @@ body.maintenance-page .maintenance-status-grid {
 
 .maintenance-task-list {
   min-height: 120px;
+}
+
+/* Maintenance page final polish v1 */
+body.maintenance-page .maintenance-main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+body.maintenance-page .maintenance-main-header {
+  margin-bottom: 0;
+}
+
+body.maintenance-page .maintenance-bike-selector {
+  margin-bottom: 0;
+  padding: clamp(18px, 2.3vw, 26px);
+}
+
+body.maintenance-page .maintenance-selector-header {
+  margin-bottom: 18px;
+}
+
+body.maintenance-page .maintenance-selector-header h3 {
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+body.maintenance-page .maintenance-selector-header p:last-child {
+  max-width: 680px;
+}
+
+body.maintenance-page .maintenance-selector-card {
+  gap: 14px;
+  padding: clamp(16px, 1.8vw, 20px);
+}
+
+body.maintenance-page .maintenance-selector-image-wrap {
+  height: clamp(118px, 13vw, 150px);
+}
+
+body.maintenance-page .maintenance-selector-image-wrap img {
+  height: clamp(104px, 12vw, 130px);
+}
+
+body.maintenance-page .maintenance-selector-copy h4 {
+  font-size: clamp(18px, 1.8vw, 22px);
+}
+
+body.maintenance-page .maintenance-selector-stats {
+  gap: 10px;
+  padding-top: 12px;
+}
+
+body.maintenance-page .maintenance-task-form {
+  margin-top: 2px;
+}
+
+body.maintenance-page .maintenance-status-grid {
+  gap: 16px;
+}
+
+body.maintenance-page .maintenance-column {
+  min-width: 0;
+}
+
+body.maintenance-page .maintenance-task-list {
+  display: grid;
+  gap: 12px;
+}
+
+.maintenance-task-card {
+  padding: 16px;
+}
+
+.maintenance-task-card h4 {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.maintenance-task-card p {
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+.maintenance-task-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.maintenance-task-status-pill,
+.maintenance-due-badge {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 9px;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.maintenance-task-status-pill {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.maintenance-due-badge {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.maintenance-due-badge.is-overdue {
+  border-color: rgba(255, 43, 43, 0.5);
+  background: rgba(255, 43, 43, 0.12);
+  color: #ff7777;
+}
+
+.maintenance-due-badge.is-today {
+  border-color: rgba(255, 184, 77, 0.45);
+  background: rgba(255, 184, 77, 0.1);
+  color: #ffcc7a;
+}
+
+.maintenance-due-badge.is-soon {
+  border-color: rgba(91, 165, 255, 0.42);
+  background: rgba(91, 165, 255, 0.1);
+  color: #9cc8ff;
+}
+
+.maintenance-due-badge.is-later {
+  border-color: rgba(86, 211, 132, 0.32);
+  background: rgba(86, 211, 132, 0.08);
+  color: #9be7b5;
+}
+
+.maintenance-due-badge.is-no-date {
+  opacity: 0.72;
+}
+
+.maintenance-empty-note {
+  min-height: 92px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 18px;
+  border: 1px dashed rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.018);
+  text-align: center;
+}
+
+.maintenance-empty-note p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.maintenance-empty-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 43, 43, 0.62);
+  box-shadow: 0 0 18px rgba(255, 43, 43, 0.35);
+}
+
+@media (max-width: 1180px) {
+  body.maintenance-page .maintenance-layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+
+  body.maintenance-page .maintenance-bike-selector-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.maintenance-page .maintenance-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.maintenance-page .maintenance-column {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 820px) {
+  body.maintenance-page .maintenance-layout {
+    display: block;
+  }
+
+  body.maintenance-page .maintenance-sidebar {
+    margin-bottom: 18px;
+  }
+
+  body.maintenance-page .maintenance-main {
+    gap: 16px;
+  }
+
+  body.maintenance-page .maintenance-main-header {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  body.maintenance-page .maintenance-bike-selector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.maintenance-page .maintenance-task-form {
+    grid-template-columns: 1fr;
+  }
+
+  body.maintenance-page .maintenance-form-row-full {
+    grid-column: auto;
+  }
+
+  body.maintenance-page .maintenance-status-grid {
+    gap: 14px;
+  }
+
+  .maintenance-task-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .maintenance-task-action,
+  .maintenance-delete-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 520px) {
+  body.maintenance-page .maintenance-page-shell,
+  body.maintenance-page .page-shell {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  body.maintenance-page .maintenance-bike-selector,
+  body.maintenance-page .maintenance-task-form,
+  body.maintenance-page .maintenance-column {
+    padding: 14px;
+  }
+
+  body.maintenance-page .maintenance-main-header {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  body.maintenance-page #refreshTasksBtn {
+    width: 100%;
+  }
+
+  body.maintenance-page .maintenance-selector-card {
+    padding: 14px;
+  }
+
+  .maintenance-task-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .maintenance-task-status-pill,
+  .maintenance-due-badge {
+    white-space: normal;
+  }
 }
 
