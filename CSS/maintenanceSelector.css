@@ -257,3 +257,43 @@
     grid-template-columns: 1fr;
   }
 }
+/* Maintenance hub scroll safety override */
+html,
+body {
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+body.maintenance-page {
+  height: auto !important;
+  min-height: 100svh !important;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+}
+
+body.maintenance-page .page-shell,
+body.maintenance-page .maintenance-page-shell {
+  height: auto !important;
+  min-height: 100svh !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+body.maintenance-page .maintenance-layout,
+body.maintenance-page .maintenance-main,
+body.maintenance-page .maintenance-sidebar,
+body.maintenance-page .maintenance-status-grid,
+body.maintenance-page .maintenance-column {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+body.maintenance-page .maintenance-main {
+  padding-bottom: 90px;
+}
+
+body.maintenance-page .maintenance-status-grid {
+  align-items: start;
+  padding-bottom: 90px;
+}
