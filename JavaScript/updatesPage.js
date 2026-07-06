@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const detailBody = document.getElementById("update-detail-body");
   const detailPanel = document.getElementById("updates-detail-panel");
 
-  const updates = window.updates || [];
+  const getUpdates = () => (typeof window.getAllUpdates === "function" ? window.getAllUpdates() : window.updates || []);
+  let updates = getUpdates();
   const READ_STORAGE_KEY = "mtReadUpdateIds";
   let selectedUpdateId = null;
 
@@ -135,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener("mtUpdatesChanged", () => {
+    updates = getUpdates();
+    window.updates = updates;
     renderUpdateList();
     if (selectedUpdateId) {
       showUpdate(selectedUpdateId, false);

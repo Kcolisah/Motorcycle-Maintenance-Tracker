@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Loaded Updates | Motorcycle Tracker Admin</title>
+  <link rel="stylesheet" href="../CSS/style.css?v=navbar-center-final-20260526" />
+  <link rel="stylesheet" href="CSS/adminUpdates.css?v=corporate-admin-v1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../images/LOGO.png">
+</head>
+
+<body class="mt-admin-page">
+  <main class="admin-shell">
+    <section class="admin-dashboard" id="admin-dashboard" hidden>
+      <header class="admin-header">
+        <a class="admin-logo" href="../index.html" aria-label="Motorcycle Tracker home">
+          <span class="admin-logo-mark">MT</span>
+          <span class="admin-logo-text">
+            <strong>Motorcycle Tracker</strong>
+            <small>Update Admin</small>
+          </span>
+        </a>
+
+        <nav class="admin-nav" aria-label="Admin navigation">
+          <a href="index.html">Create Update</a>
+          <a class="active" href="updates.html">Loaded Updates</a>
+          <a href="../updates.html">Public Updates</a>
+          <button class="admin-nav-button" type="button" id="admin-logout-btn">Sign out</button>
+        </nav>
+      </header>
+
+      <section class="admin-hero-card" aria-label="Loaded updates overview">
+        <div>
+          <p class="admin-kicker">LOADED UPDATES</p>
+          <h1>Review update entries</h1>
+          <p class="admin-muted">This page shows static updates and local preview updates. Only local preview updates can be removed here for now.</p>
+        </div>
+        <a class="admin-btn primary admin-link-btn" href="index.html">Create new update</a>
+      </section>
+
+      <section class="admin-card" aria-labelledby="loaded-updates-title">
+        <div class="admin-list-toolbar">
+          <div class="admin-card-heading">
+            <p class="admin-kicker">MANAGE</p>
+            <h2 id="loaded-updates-title">Loaded updates</h2>
+          </div>
+
+          <div class="admin-toolbar-controls">
+            <label>
+              <span>Search</span>
+              <input id="updates-search" type="search" placeholder="Search updates" />
+            </label>
+            <label>
+              <span>Type</span>
+              <select id="updates-filter">
+                <option value="all">All types</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="admin-updates-list full" id="admin-loaded-updates-list"></div>
+        <p class="admin-status" id="admin-update-status" role="status" aria-live="polite"></p>
+      </section>
+    </section>
+  </main>
+
+  <script src="../JavaScript/apiClient.js?v=auth-v1"></script>
+  <script src="../JavaScript/updatesData.js?v=admin-login-updates-v1"></script>
+  <script src="JavaScript/adminConfig.js?v=admin-login-updates-v1"></script>
+  <script src="JavaScript/adminUpdates.js?v=corporate-admin-v1"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Motorcycle Tracker Admin</title>
+  <link rel="stylesheet" href="../CSS/style.css?v=navbar-center-final-20260526" />
+  <link rel="stylesheet" href="CSS/adminUpdates.css?v=corporate-admin-v1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../images/LOGO.png">
+</head>
+
+<body class="mt-admin-page">
+  <main class="admin-shell">
+    <section class="admin-login-card" id="admin-login-card" aria-labelledby="admin-login-title">
+      <a class="admin-logo" href="../index.html" aria-label="Motorcycle Tracker home">
+        <span class="admin-logo-mark">MT</span>
+        <span class="admin-logo-text">
+          <strong>Motorcycle Tracker</strong>
+          <small>Admin</small>
+        </span>
+      </a>
+
+      <p class="admin-kicker">OWNER ACCESS</p>
+      <h1 id="admin-login-title">Sign in to manage updates</h1>
+      <p class="admin-muted">This screen is ready for Spring authentication. No public password is stored in the frontend.</p>
+
+      <form class="admin-form" id="admin-login-form">
+        <label>
+          <span>Username</span>
+          <input id="admin-username" name="username" type="text" autocomplete="username" required />
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required />
+        </label>
+
+        <button class="admin-btn primary" type="submit">Log in</button>
+        <button class="admin-btn secondary" type="button" id="local-preview-login-btn" hidden>Open local preview mode</button>
+        <p class="admin-status" id="admin-login-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="admin-dashboard" id="admin-dashboard" hidden>
+      <header class="admin-header">
+        <a class="admin-logo" href="../index.html" aria-label="Motorcycle Tracker home">
+          <span class="admin-logo-mark">MT</span>
+          <span class="admin-logo-text">
+            <strong>Motorcycle Tracker</strong>
+            <small>Update Admin</small>
+          </span>
+        </a>
+
+        <nav class="admin-nav" aria-label="Admin navigation">
+          <a class="active" href="index.html">Create Update</a>
+          <a href="updates.html">Loaded Updates</a>
+          <a href="../updates.html">Public Updates</a>
+          <button class="admin-nav-button" type="button" id="admin-logout-btn">Sign out</button>
+        </nav>
+      </header>
+
+      <section class="admin-hero-card" aria-label="Admin overview">
+        <div>
+          <p class="admin-kicker">ADMIN HOME</p>
+          <h1>Create a website update</h1>
+          <p class="admin-muted">Write the update, review the preview, then send it. Until Spring is connected, local preview mode only changes your browser.</p>
+        </div>
+        <a class="admin-btn secondary admin-link-btn" href="updates.html">View loaded updates</a>
+      </section>
+
+      <div class="admin-grid admin-grid-editor">
+        <section class="admin-card" aria-labelledby="admin-editor-title">
+          <div class="admin-card-heading">
+            <p class="admin-kicker">UPDATE TYPE + MESSAGE</p>
+            <h2 id="admin-editor-title">Update details</h2>
+          </div>
+
+          <form id="admin-update-form" class="admin-form">
+            <div class="admin-form-row two">
+              <label>
+                <span>Update type</span>
+                <select id="update-type" name="type">
+                  <option>Frontend</option>
+                  <option>Backend</option>
+                  <option>Design</option>
+                  <option>Garage</option>
+                  <option>Maintenance</option>
+                  <option>Release</option>
+                  <option>Bug Fix</option>
+                  <option>Update</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Date</span>
+                <input id="update-date" name="date" type="text" placeholder="July 2026" required />
+              </label>
+            </div>
+
+            <label>
+              <span>Title</span>
+              <input id="update-title" name="title" type="text" placeholder="Example: Mobile home page rebuilt" required />
+            </label>
+
+            <label>
+              <span>Short message</span>
+              <input id="update-short" name="shortText" type="text" placeholder="One clean sentence for the update icon/list." required />
+            </label>
+
+            <label>
+              <span>Full details</span>
+              <textarea id="update-full" name="fullText" rows="7" placeholder="Write the full update here." required></textarea>
+            </label>
+
+            <div class="admin-actions">
+              <button class="admin-btn primary" type="submit">Send update</button>
+              <button class="admin-btn secondary" type="button" id="clear-form-btn">Clear</button>
+            </div>
+
+            <p class="admin-status" id="admin-update-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <aside class="admin-card admin-preview-card" aria-label="Update preview">
+          <div class="admin-card-heading">
+            <p class="admin-kicker">PREVIEW</p>
+            <h2>How it will read</h2>
+          </div>
+
+          <article class="admin-preview-update">
+            <span id="preview-type">Frontend</span>
+            <h3 id="preview-title">Update title</h3>
+            <small id="preview-date">July 2026</small>
+            <p id="preview-short">Short update message will appear here.</p>
+            <div id="preview-full">Full update details will appear here.</div>
+          </article>
+
+          <div class="admin-note-card">
+            <strong>Publishing status</strong>
+            <p>Frontend is ready for <code>POST /api/admin/updates</code>. Spring will decide who can post, edit, or delete later.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="../JavaScript/apiClient.js?v=auth-v1"></script>
+  <script src="../JavaScript/updatesData.js?v=admin-login-updates-v1"></script>
+  <script src="JavaScript/adminConfig.js?v=admin-login-updates-v1"></script>
+  <script src="JavaScript/adminUpdates.js?v=corporate-admin-v1"></script>
+</body>
+</html>

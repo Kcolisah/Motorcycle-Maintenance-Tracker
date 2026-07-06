@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const updates = window.updates || [];
+  const getUpdates = () => (typeof window.getAllUpdates === "function" ? window.getAllUpdates() : window.updates || []);
+  let updates = getUpdates();
   const PREVIEW_LIMIT = 3;
   const READ_STORAGE_KEY = "mtReadUpdateIds";
 
@@ -152,6 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderWidget() {
+    updates = getUpdates();
+    window.updates = updates;
     renderHeader();
     renderBadge();
     renderList();

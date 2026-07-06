@@ -1,4 +1,6 @@
-window.updates = [
+(() => {
+  const CUSTOM_UPDATES_STORAGE_KEY = "mtCustomUpdates";
+  const staticUpdates = [
   {
     id: "auth-shell-demo-login",
     title: "Demo Login Experience",
@@ -100,3 +102,45 @@ window.updates = [
       "Began prototyping a 3D motorcycle viewer for the homepage using React, Vite, and a GLB motorcycle model. The goal is to test a future 2D / 3D toggle before moving the feature into the main Motorcycle Maintenance Tracker."
   }
 ];
+
+  function getStoredUpdates() {
+    try {
+      const storedUpdates = JSON.parse(localStorage.getItem(CUSTOM_UPDATES_STORAGE_KEY));
+      return Array.isArray(storedUpdates) ? storedUpdates : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function normalizeUpdate(update) {
+    return {
+      id: String(update?.id || "").trim(),
+      title: String(update?.title || "Untitled update").trim(),
+      date: String(update?.date || "Undated").trim(),
+      category: String(update?.category || "Update").trim(),
+      shortText: String(update?.shortText || "").trim(),
+      fullText: String(update?.fullText || update?.shortText || "").trim()
+    };
+  }
+
+  function dedupeUpdates(updates) {
+    const seenIds = new Set();
+
+    return updates
+      .map(normalizeUpdate)
+      .filter((update) => {
+        if (!update.id || seenIds.has(update.id)) return false;
+        seenIds.add(update.id);
+        return true;
+      });
+  }
+
+  function getAllUpdates() {
+    return dedupeUpdates([...getStoredUpdates(), ...staticUpdates]);
+  }
+
+  window.mtStaticUpdates = staticUpdates;
+  window.mtCustomUpdatesStorageKey = CUSTOM_UPDATES_STORAGE_KEY;
+  window.getAllUpdates = getAllUpdates;
+  window.updates = getAllUpdates();
+})();
