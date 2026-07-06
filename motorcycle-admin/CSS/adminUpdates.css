@@ -625,3 +625,67 @@ body.mt-admin-page {
     font-size: clamp(2.25rem, 13vw, 3.25rem);
   }
 }
+
+/* Admin header refinement */
+.admin-header {
+  min-height: 58px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  gap: 24px;
+}
+
+.admin-logo {
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+.admin-logo-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  font-size: 0.9rem;
+}
+
+.admin-logo-text strong {
+  font-size: 0.82rem;
+  letter-spacing: 0.115em;
+}
+
+.admin-logo-text small {
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.admin-nav {
+  gap: 8px;
+}
+
+.admin-nav a,
+.admin-nav-button {
+  min-width: 126px;
+  min-height: 32px;
+  padding: 0 14px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.015);
+  font-size: 0.68rem;
+  letter-spacing: 0.075em;
+}
+
+@media (max-width: 900px) {
+  .admin-header {
+    gap: 14px;
+    padding-bottom: 16px;
+  }
+
+  .admin-nav {
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    width: 100%;
+  }
+
+  .admin-nav a,
+  .admin-nav-button {
+    min-width: 0;
+    width: 100%;
+  }
+}
