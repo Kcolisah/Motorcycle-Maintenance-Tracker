@@ -37,10 +37,11 @@ body.mt-admin-page {
 }
 
 .admin-shell {
-  width: min(1180px, calc(100% - 32px));
+  width: min(880px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 32px 0 56px;
+  padding: 34px 0 56px;
 }
+
 
 .admin-login-card,
 .admin-card {
@@ -164,9 +165,10 @@ body.mt-admin-page {
 }
 
 .admin-home-grid {
-  grid-template-columns: minmax(0, 1.16fr) minmax(360px, 0.92fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.9fr);
   align-items: start;
 }
+
 
 .admin-intro-card {
   min-height: 322px;
@@ -628,50 +630,56 @@ body.mt-admin-page {
 
 /* Admin header refinement */
 .admin-header {
-  min-height: 58px;
+  min-height: 52px;
   margin-bottom: 24px;
-  padding-bottom: 16px;
-  gap: 24px;
+  padding-bottom: 14px;
+  gap: 18px;
 }
 
 .admin-logo {
   flex: 0 0 auto;
-  gap: 10px;
+  gap: 9px;
 }
 
 .admin-logo-mark {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 2px;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
 }
 
 .admin-logo-text strong {
-  font-size: 0.82rem;
-  letter-spacing: 0.115em;
+  font-size: 0.76rem;
+  letter-spacing: 0.11em;
 }
 
 .admin-logo-text small {
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   line-height: 1;
 }
 
 .admin-nav {
-  gap: 8px;
+  gap: 7px;
+  margin-left: auto;
 }
 
 .admin-nav a,
 .admin-nav-button {
-  min-width: 126px;
-  min-height: 32px;
-  padding: 0 14px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.015);
-  font-size: 0.68rem;
-  letter-spacing: 0.075em;
+  min-width: 112px;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.012);
+  font-size: 0.64rem;
+  letter-spacing: 0.07em;
 }
 
 @media (max-width: 900px) {
+  .admin-shell {
+    width: min(100% - 22px, 680px);
+    padding-top: 18px;
+  }
+
   .admin-header {
     gap: 14px;
     padding-bottom: 16px;
@@ -681,6 +689,7 @@ body.mt-admin-page {
     grid-template-columns: 1fr 1fr;
     display: grid;
     width: 100%;
+    margin-left: 0;
   }
 
   .admin-nav a,
