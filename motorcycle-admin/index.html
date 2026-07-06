@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow, noarchive" />
   <title>Motorcycle Tracker Admin</title>
   <link rel="stylesheet" href="../CSS/style.css?v=navbar-center-final-20260526" />
-  <link rel="stylesheet" href="CSS/adminUpdates.css?v=corporate-admin-v1" />
+  <link rel="stylesheet" href="CSS/adminUpdates.css?v=admin-clean-v2" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -50,32 +50,33 @@
         <a class="admin-logo" href="../index.html" aria-label="Motorcycle Tracker home">
           <span class="admin-logo-mark">MT</span>
           <span class="admin-logo-text">
-            <strong>Motorcycle Tracker</strong>
-            <small>Update Admin</small>
+            <strong>Motorcycle</strong>
+            <small>Tracker Admin</small>
           </span>
         </a>
 
         <nav class="admin-nav" aria-label="Admin navigation">
-          <a class="active" href="index.html">Create Update</a>
-          <a href="updates.html">Loaded Updates</a>
+          <a href="updates.html">View Updates</a>
           <a href="../updates.html">Public Updates</a>
-          <button class="admin-nav-button" type="button" id="admin-logout-btn">Sign out</button>
+          <a href="../index.html">Public Site</a>
         </nav>
       </header>
 
-      <section class="admin-hero-card" aria-label="Admin overview">
-        <div>
-          <p class="admin-kicker">ADMIN HOME</p>
-          <h1>Create a website update</h1>
-          <p class="admin-muted">Write the update, review the preview, then send it. Until Spring is connected, local preview mode only changes your browser.</p>
-        </div>
-        <a class="admin-btn secondary admin-link-btn" href="updates.html">View loaded updates</a>
-      </section>
+      <div class="admin-grid admin-home-grid">
+        <section class="admin-card admin-intro-card" aria-label="Admin overview">
+          <p class="admin-kicker">PRIVATE UPDATE TOOL</p>
+          <h1>Post website updates</h1>
+          <p class="admin-muted">Type an update, preview how it will read, then send it. Until Spring is connected, this works as local preview mode in your browser.</p>
 
-      <div class="admin-grid admin-grid-editor">
-        <section class="admin-card" aria-labelledby="admin-editor-title">
-          <div class="admin-card-heading">
-            <p class="admin-kicker">UPDATE TYPE + MESSAGE</p>
+          <div class="admin-warning-card">
+            <strong>Admin note</strong>
+            <p>This page is intentionally plain. Real protection comes later through Spring auth, admin roles, and private network rules.</p>
+          </div>
+        </section>
+
+        <section class="admin-card admin-editor-card" aria-labelledby="admin-editor-title">
+          <div class="admin-card-heading compact">
+            <p class="admin-kicker">UPDATE TYPE</p>
             <h2 id="admin-editor-title">Update details</h2>
           </div>
 
@@ -107,14 +108,19 @@
             </label>
 
             <label>
-              <span>Short message</span>
-              <input id="update-short" name="shortText" type="text" placeholder="One clean sentence for the update icon/list." required />
+              <span>Short badge/list message</span>
+              <input id="update-short" name="shortText" type="text" placeholder="One sentence users can scan quickly." required />
             </label>
 
             <label>
-              <span>Full details</span>
+              <span>Full update details</span>
               <textarea id="update-full" name="fullText" rows="7" placeholder="Write the full update here." required></textarea>
             </label>
+
+            <details class="admin-connection-note">
+              <summary>Backend / Spring connection</summary>
+              <p>Frontend is ready for <code>POST /api/admin/updates</code>. Spring will control posting, editing, and deleting later.</p>
+            </details>
 
             <div class="admin-actions">
               <button class="admin-btn primary" type="submit">Send update</button>
@@ -125,25 +131,27 @@
           </form>
         </section>
 
-        <aside class="admin-card admin-preview-card" aria-label="Update preview">
-          <div class="admin-card-heading">
+        <section class="admin-card admin-preview-card" aria-label="Update preview">
+          <div class="admin-card-heading compact">
             <p class="admin-kicker">PREVIEW</p>
-            <h2>How it will read</h2>
+            <h2>Public update card</h2>
           </div>
 
           <article class="admin-preview-update">
-            <span id="preview-type">Frontend</span>
-            <h3 id="preview-title">Update title</h3>
+            <div class="admin-preview-topline">
+              <span id="preview-type">Frontend</span>
+              <small class="admin-preview-state">Unread</small>
+            </div>
+            <h3 id="preview-title">Untitled update</h3>
             <small id="preview-date">July 2026</small>
-            <p id="preview-short">Short update message will appear here.</p>
-            <div id="preview-full">Full update details will appear here.</div>
+            <p id="preview-short">Your short message will show here.</p>
+            <div id="preview-full">Your full update details will show here.</div>
           </article>
 
-          <div class="admin-note-card">
-            <strong>Publishing status</strong>
-            <p>Frontend is ready for <code>POST /api/admin/updates</code>. Spring will decide who can post, edit, or delete later.</p>
+          <div class="admin-preview-footer">
+            <a class="admin-btn secondary admin-link-btn" href="updates.html">View loaded updates</a>
           </div>
-        </aside>
+        </section>
       </div>
     </section>
   </main>
@@ -151,6 +159,6 @@
   <script src="../JavaScript/apiClient.js?v=auth-v1"></script>
   <script src="../JavaScript/updatesData.js?v=admin-login-updates-v1"></script>
   <script src="JavaScript/adminConfig.js?v=admin-login-updates-v1"></script>
-  <script src="JavaScript/adminUpdates.js?v=corporate-admin-v1"></script>
+  <script src="JavaScript/adminUpdates.js?v=admin-clean-v2"></script>
 </body>
 </html>

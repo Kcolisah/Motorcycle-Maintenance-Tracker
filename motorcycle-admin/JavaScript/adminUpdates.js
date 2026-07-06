@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const LOCAL_UPDATES_KEY = config.localUpdatesStorageKey || window.mtCustomUpdatesStorageKey || "mtCustomUpdates";
   const LOGIN_ENDPOINT = config.loginEndpoint || "/api/admin/login";
   const UPDATES_ENDPOINT = config.updatesEndpoint || "/api/admin/updates";
+  const REQUIRE_LOGIN = config.requireLogin === true;
 
   function setStatus(element, message, state = "") {
     if (!element) return;
@@ -357,6 +358,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (hasAdminAccess()) {
+    showDashboard();
+  } else if (!REQUIRE_LOGIN) {
+    sessionStorage.setItem(MODE_KEY, "local-preview");
     showDashboard();
   } else if (loginCard) {
     showLogin();

@@ -3,5 +3,6 @@ window.MT_ADMIN_CONFIG = {
   updatesEndpoint: "/api/admin/updates",
   tokenStorageKey: "mtAdminToken",
   sessionStorageKey: "mtAdminMode",
-  localUpdatesStorageKey: "mtCustomUpdates"
+  localUpdatesStorageKey: "mtCustomUpdates",
+  requireLogin: false
 };
