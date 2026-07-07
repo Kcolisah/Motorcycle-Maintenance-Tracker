@@ -102,7 +102,6 @@ const state = {
   selectedGarageId: null,
   selectedMaintenanceGarageId: null,
   maintenanceStatusFilter: "upcoming",
-  selectedMaintenanceTaskId: null,
   detailTab: "Overview",
   brandQuery: "",
   bikeQuery: "",
@@ -114,8 +113,12 @@ const state = {
   garageReady: false,
   catalogReady: false,
   backendOnline: false,
+  lastDataError: null,
+  isReloading: false,
   updatesOpen: false,
   profileOpen: false,
+  activeTaskId: null,
+  activeBikeActionId: null,
 };
 
 const appShell = document.getElementById("app-shell");
@@ -410,6 +413,7 @@ async function loadCatalog() {
     }
   } catch (error) {
     console.warn("Using static motorcycle catalog for mobile.", error);
+    state.lastDataError = "catalog";
   } finally {
     state.catalogReady = true;
     render();
@@ -440,6 +444,7 @@ async function loadGarage() {
     await loadAllTaskSummaries();
   } catch (error) {
     console.warn("Using preview garage data for mobile.", error);
+    state.lastDataError = "garage";
     state.garageItems = previewGarageItems.map(normalizeGarageItem);
     previewGarageItems.forEach((item, index) => {
       state.taskMap.set(String(item.id), index === 0 ? staticServicePreview.map(normalizeTask) : []);
@@ -461,7 +466,8 @@ function routeTo(view) {
   state.view = view;
   state.updatesOpen = false;
   state.profileOpen = false;
-  state.selectedMaintenanceTaskId = null;
+  state.activeTaskId = null;
+  state.activeBikeActionId = null;
   render();
 }
 
@@ -507,9 +513,22 @@ function getTasks(garageId) {
   return state.taskMap.get(String(garageId)) || [];
 }
 
-function getSelectedMaintenanceTask() {
-  if (!state.selectedMaintenanceGarageId || !state.selectedMaintenanceTaskId) return null;
-  return getTasks(state.selectedMaintenanceGarageId).find((task) => String(task.id) === String(state.selectedMaintenanceTaskId)) || null;
+function findTaskContext(taskId) {
+  for (const item of state.garageItems) {
+    const task = getTasks(item.id).find((entry) => String(entry.id) === String(taskId));
+    if (task) return { task, garageItem: item };
+  }
+  return { task: null, garageItem: null };
+}
+
+function statusForTaskGroup(group) {
+  if (group === "completed") return "DONE";
+  if (group === "in-progress") return "IN_PROGRESS";
+  return "PENDING";
+}
+
+function getTaskActionCopy(group) {
+  return group === "completed" ? "Mark completed" : `Move to ${getTaskGroupLabel(group)}`;
 }
 
 function getAllTasks() {
@@ -546,21 +565,6 @@ function getTaskGroupLabel(group) {
     completed: "Completed",
   };
   return labels[group] || "Upcoming";
-}
-
-function getBackendStatusForGroup(group) {
-  const statusMap = {
-    upcoming: "PENDING",
-    "in-progress": "IN_PROGRESS",
-    completed: "DONE",
-  };
-  return statusMap[group] || "PENDING";
-}
-
-function getStatusTone(group) {
-  if (group === "completed") return "complete";
-  if (group === "in-progress") return "warning";
-  return "neutral";
 }
 
 function getTaskDueMeta(task, selectedItem) {
@@ -650,7 +654,7 @@ function renderHeader() {
   const avatar = escapeHtml(state.user?.initials || "GU");
   const unreadCount = getUnreadUpdates().length;
 
-  if (["brand", "category", "bike-select", "bike-preview", "learn", "about", "contact", "updates"].includes(state.view)) {
+  if (["brand", "category", "bike-select", "bike-preview", "learn", "about", "contact", "updates", "v1"].includes(state.view)) {
     appHeader.innerHTML = `
       <button class="back-btn" type="button" data-route="${state.view === "brand" ? "home" : state.view === "category" ? "brand" : state.view === "bike-select" ? "category" : state.view === "bike-preview" ? "bike-select" : state.view === "learn" ? "home" : "more"}" aria-label="Back">${icons.back}</button>
       <div class="header-actions">
@@ -693,6 +697,42 @@ function renderHeader() {
   `;
 }
 
+
+function renderLoadingScreen(label = "Loading Motorcycle Tracker") {
+  return `
+    <section class="screen loading-screen">
+      <div class="loading-card">
+        <span class="loading-mark">MT</span>
+        <strong>${escapeHtml(label)}</strong>
+        <p>Preparing garage, maintenance, and rider data.</p>
+        <div class="loading-bar"><span></span></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderBackendNotice(context = "mobile") {
+  if (state.backendOnline) return "";
+  if (!state.garageReady && !state.catalogReady) return "";
+  return `
+    <div class="mobile-data-notice">
+      <strong>Preview mode</strong>
+      <span>Backend data is unavailable, so ${escapeHtml(context)} is using safe demo data.</span>
+      <button type="button" data-action="retry-data">Retry</button>
+    </div>
+  `;
+}
+
+function renderPlaceholderCard(title, copy, actionLabel = "Coming soon") {
+  return `
+    <article class="placeholder-card">
+      <strong>${escapeHtml(title)}</strong>
+      <p>${escapeHtml(copy)}</p>
+      <button class="tiny-btn" type="button" data-action="future">${escapeHtml(actionLabel)}</button>
+    </article>
+  `;
+}
+
 function renderHome() {
   const popular = ["Ducati", "BMW", "Kawasaki", "KTM"];
 
@@ -701,6 +741,7 @@ function renderHome() {
       <p class="kicker">Track. Maintain. Ride.</p>
       <h1 class="hero-title">FIND YOUR<br><span>MOTORCYCLE</span></h1>
       <p class="lede">Explore motorcycles by brand and category. Start with a clean selection flow and build your garage later.</p>
+      ${renderBackendNotice("the home preview")}
 
       <div class="hero-bike-wrap">
         <img class="hero-bike" src="${ASSET_BASE}/images/HomePageBike.png" alt="Red Ducati motorcycle" />
@@ -743,6 +784,7 @@ function renderLearn() {
 }
 
 function renderBrand() {
+  if (!state.catalogReady) return renderLoadingScreen("Loading motorcycle catalog");
   const query = state.brandQuery.trim().toLowerCase();
   const filteredBrands = getBrands().filter((brand) => brand.toLowerCase().includes(query));
 
@@ -794,6 +836,7 @@ function renderCategory() {
 }
 
 function renderBikeSelect() {
+  if (!state.catalogReady) return renderLoadingScreen("Loading motorcycles");
   const bikes = getBikesForSelection();
   return `
     <section class="screen bike-select-screen">
@@ -860,6 +903,7 @@ function renderBikePreview() {
 }
 
 function renderGarage() {
+  if (!state.garageReady) return renderLoadingScreen("Loading garage");
   const totalMileage = state.garageItems.reduce((sum, item) => sum + Number(item.currentMileage || 0), 0);
   const totalDue = state.garageItems.reduce((sum, item) => sum + summarizeGarageTasks(item.id).active, 0);
 
@@ -872,6 +916,8 @@ function renderGarage() {
         </div>
         <button class="add-btn" type="button" data-action="add-bike">+ Add Bike</button>
       </div>
+
+      ${renderBackendNotice("garage")}
 
       <div class="garage-list">
         ${state.garageItems.length ? state.garageItems.map(renderGarageCard).join("") : renderEmptyGarage()}
@@ -910,7 +956,7 @@ function renderGarageCard(item) {
         </div>
         <div class="card-actions">
           <button class="detail-btn" type="button" data-garage-detail="${escapeHtml(String(item.id))}">View Details →</button>
-          <button class="overflow-btn" type="button" data-action="bike-menu" aria-label="More options for ${escapeHtml(bike.model)}">···</button>
+          <button class="overflow-btn" type="button" data-bike-actions="${escapeHtml(String(item.id))}" aria-label="More options for ${escapeHtml(bike.model)}">···</button>
         </div>
       </div>
     </article>
@@ -922,24 +968,31 @@ function renderDetail() {
   if (!item) return `<section class="screen"><div class="empty-state">No garage motorcycle selected.</div></section>`;
   const bike = item.motorcycle;
   const tabs = ["Overview", "Maintenance", "Notes", "Docs"];
+  const summary = summarizeGarageTasks(item.id);
 
   return `
-    <section class="screen detail-screen">
-      <div class="detail-hero">
+    <section class="screen detail-screen bike-detail-v2-screen">
+      <div class="detail-hero detail-hero-v2">
         <div class="detail-brand-row">
           <img src="${getLogoForBrand(bike.brand)}" alt="${escapeHtml(bike.brand)} logo" />
-          <div><h1>${escapeHtml(bike.model)}</h1><span>${escapeHtml(String(bike.year))}</span></div>
+          <div><h1>${escapeHtml(bike.model)}</h1><span>${escapeHtml(String(bike.year))} • ${escapeHtml(bike.category)}</span></div>
         </div>
         <div class="detail-bike-stage"><img src="${bike.image}" alt="${escapeHtml(bike.model)}" /></div>
       </div>
 
-      <div class="quick-specs">
-        <div class="quick-spec"><span>Mileage</span><strong>${formatNumber(item.currentMileage)} mi</strong></div>
-        <div class="quick-spec"><span>Added</span><strong>${formatDate(item.addedAt)}</strong></div>
-        <div class="quick-spec"><span>Price</span><strong>${formatMoney(bike.price)}</strong></div>
+      <div class="bike-detail-summary-v2">
+        <article><span>Mileage</span><strong>${formatNumber(item.currentMileage)} mi</strong></article>
+        <article><span>Open Tasks</span><strong>${summary.active}</strong></article>
+        <article><span>Next Service</span><strong>${escapeHtml(summary.nextService)}</strong></article>
       </div>
 
-      <div class="tabs" role="tablist" aria-label="Bike detail sections">
+      <div class="bike-quick-actions-v2">
+        <button type="button" data-maintenance-for="${escapeHtml(String(item.id))}">Maintenance</button>
+        <button type="button" data-tab="Notes">Notes</button>
+        <button type="button" data-tab="Docs">Docs</button>
+      </div>
+
+      <div class="tabs tabs-v2" role="tablist" aria-label="Bike detail sections">
         ${tabs.map((tab) => `<button class="tab-btn ${state.detailTab === tab ? "active" : ""}" type="button" data-tab="${tab}">${tab}</button>`).join("")}
       </div>
 
@@ -954,41 +1007,70 @@ function renderDetailTab(item) {
   const summary = summarizeGarageTasks(item.id);
 
   if (state.detailTab === "Maintenance") {
+    const recentTasks = tasks.slice(0, 4);
     return `
-      <div class="detail-card">
-        <h2>Recent Maintenance</h2>
-        <p>${escapeHtml(bike.model)} has ${tasks.length} backend task${tasks.length === 1 ? "" : "s"}. Next service: ${escapeHtml(summary.nextService)}.</p>
-        <div class="spec-list">
-          ${tasks.slice(0, 3).map((task) => `<div class="spec-line"><span>${escapeHtml(task.title)}</span><strong>${escapeHtml(task.dueDate ? formatDate(task.dueDate) : task.status)}</strong></div>`).join("") || `<div class="spec-line"><span>No maintenance tasks yet</span><strong>--</strong></div>`}
+      <div class="detail-card detail-card-v2">
+        <div class="detail-section-title">
+          <div><span>Service</span><h2>Maintenance summary</h2></div>
+          <button class="tiny-btn" type="button" data-maintenance-for="${escapeHtml(String(item.id))}">Open</button>
         </div>
-        <button class="secondary-btn" type="button" data-maintenance-for="${escapeHtml(String(item.id))}">Open Maintenance</button>
+        <div class="detail-mini-stats">
+          <article><span>Total</span><strong>${summary.total}</strong></article>
+          <article><span>Done</span><strong>${summary.done}</strong></article>
+          <article><span>Next</span><strong>${escapeHtml(summary.nextService)}</strong></article>
+        </div>
+        <div class="detail-task-preview-list">
+          ${recentTasks.length ? recentTasks.map((task) => renderTaskRow(task, item)).join("") : renderMaintenanceEmptyState("upcoming")}
+        </div>
       </div>
     `;
   }
 
   if (state.detailTab === "Notes") {
-    return `<div class="detail-card"><h2>Notes</h2><p>Mobile notes are still a frontend placeholder. Backend storage has not been added yet.</p></div>`;
+    return `
+      <div class="detail-card detail-card-v2 placeholder-flow-card">
+        <div class="detail-section-title"><div><span>Notes</span><h2>Rider notes</h2></div></div>
+        ${renderPlaceholderCard("No notes yet", "Add bike-specific reminders, repair thoughts, mod plans, or inspection notes once note storage is wired.", "Add note soon")}
+        <div class="placeholder-list-v2">
+          <article><strong>Service ideas</strong><span>Track what you want to check next.</span></article>
+          <article><strong>Mod plans</strong><span>Keep future upgrades tied to the bike.</span></article>
+          <article><strong>Ride notes</strong><span>Record small issues before they become expensive.</span></article>
+        </div>
+      </div>
+    `;
   }
 
   if (state.detailTab === "Docs") {
-    return `<div class="detail-card"><h2>Documents</h2><p>Insurance, title, service PDFs, and receipts can sit here once document upload backend support exists.</p></div>`;
+    return `
+      <div class="detail-card detail-card-v2 placeholder-flow-card">
+        <div class="detail-section-title"><div><span>Documents</span><h2>Receipts and records</h2></div></div>
+        ${renderPlaceholderCard("No documents uploaded", "Receipts, service PDFs, title photos, insurance cards, and inspection records can live here later.", "Upload coming soon")}
+        <div class="placeholder-list-v2 docs-list-v2">
+          <article><strong>Receipts</strong><span>Oil, tires, parts, labor.</span></article>
+          <article><strong>Service Records</strong><span>Dealer or shop paperwork.</span></article>
+          <article><strong>Bike Photos</strong><span>Proof, condition, upgrades.</span></article>
+        </div>
+      </div>
+    `;
   }
 
   return `
-    <div class="detail-card">
-      <h2>About This Bike</h2>
-      <p>${escapeHtml(bike.model)} is saved in your garage from the backend garage endpoint.</p>
-      <div class="spec-list">
+    <div class="detail-card detail-card-v2">
+      <div class="detail-section-title"><div><span>Overview</span><h2>Bike dashboard</h2></div></div>
+      <p>${escapeHtml(bike.model)} is saved in your garage. This overview keeps key ownership details and maintenance direction in one compact mobile view.</p>
+      <div class="spec-list spec-list-v2">
         <div class="spec-line"><span>Brand</span><strong>${escapeHtml(bike.brand)}</strong></div>
         <div class="spec-line"><span>Category</span><strong>${escapeHtml(bike.category)}</strong></div>
         <div class="spec-line"><span>Year</span><strong>${escapeHtml(String(bike.year))}</strong></div>
-        <div class="spec-line"><span>Garage ID</span><strong>${escapeHtml(String(item.id))}</strong></div>
+        <div class="spec-line"><span>Added</span><strong>${formatDate(item.addedAt)}</strong></div>
+        <div class="spec-line"><span>Total Spent</span><strong>$0</strong></div>
       </div>
     </div>
   `;
 }
 
 function renderMaintenance() {
+  if (!state.garageReady) return renderLoadingScreen("Loading maintenance");
   const selectedItem = getGarageItemById(state.selectedMaintenanceGarageId) || state.garageItems[0] || null;
   const tasks = selectedItem ? getTasks(selectedItem.id) : [];
   const summary = selectedItem ? summarizeGarageTasks(selectedItem.id) : { total: 0, done: 0, lastService: "--", nextService: "--" };
@@ -1010,6 +1092,8 @@ function renderMaintenance() {
         </div>
         <button class="add-btn" type="button" data-action="add-record">+ Add Record</button>
       </div>
+
+      ${renderBackendNotice("maintenance")}
 
       <div class="bike-filter-strip maintenance-bike-strip" aria-label="Garage motorcycle filter">
         ${state.garageItems.map((item) => `
@@ -1072,12 +1156,12 @@ function renderTaskRow(task, selectedItem = null) {
 function renderMore() {
   const userName = state.user?.username || "Guest Rider";
   return `
-    <section class="screen more-screen more-v2-screen">
+    <section class="screen more-screen more-v2-screen compact-more-screen">
       <p class="kicker">Menu</p>
-      <h1 class="page-title">More</h1>
-      <p class="page-copy">Product pages, support, updates, and future account tools.</p>
+      <h1 class="page-title compact-page-title">More</h1>
+      <p class="page-copy compact-page-copy">Pages, tracker tools, support, and account options.</p>
 
-      <div class="more-account-card">
+      <div class="more-account-card compact-account-card">
         <div>
           <span>${escapeHtml(state.user?.initials || "GU")}</span>
           <strong>${escapeHtml(userName)}</strong>
@@ -1086,18 +1170,23 @@ function renderMore() {
         <button type="button" data-action="toggle-profile">Account</button>
       </div>
 
-      <div class="more-section-label">Pages</div>
-      <div class="more-grid more-grid-v2">
-        <button class="more-card more-card-v2" type="button" data-route="about"><span><strong>About Us</strong><span>Read the purpose behind Motorcycle Tracker.</span></span><span>→</span></button>
-        <button class="more-card more-card-v2" type="button" data-route="contact"><span><strong>Contact</strong><span>Questions, feedback, and project support.</span></span><span>→</span></button>
-        <button class="more-card more-card-v2" type="button" data-route="updates"><span><strong>Updates</strong><span>Product notifications and changelog.</span></span><span>→</span></button>
+      <div class="more-section-group">
+        <div class="more-section-label">Pages</div>
+        <div class="more-list-v3">
+          <button class="more-row-v3" type="button" data-route="about"><span><strong>About Us</strong><small>Project purpose and direction.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-route="contact"><span><strong>Contact</strong><small>Feedback, support, and questions.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-route="updates"><span><strong>Updates</strong><small>Notifications and changelog.</small></span><em>→</em></button>
+        </div>
       </div>
 
-      <div class="more-section-label">Tracker</div>
-      <div class="more-grid more-grid-v2">
-        <button class="more-card more-card-v2" type="button" data-route="brand"><span><strong>Choose Brand</strong><span>Open the motorcycle selection flow.</span></span><span>→</span></button>
-        <button class="more-card more-card-v2" type="button" data-action="request-brand"><span><strong>Request a Brand</strong><span>Future feedback feature.</span></span><span>→</span></button>
-        <button class="more-card more-card-v2" type="button" data-action="future"><span><strong>Settings</strong><span>Profile, notifications, and preferences.</span></span><span>→</span></button>
+      <div class="more-section-group">
+        <div class="more-section-label">Tracker</div>
+        <div class="more-list-v3">
+          <button class="more-row-v3" type="button" data-route="brand"><span><strong>Choose Brand</strong><small>Open motorcycle selection.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-route="v1"><span><strong>V1 Ready Checklist</strong><small>Done, next, and later list.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-action="request-brand"><span><strong>Request a Brand</strong><small>Future feedback feature.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-action="future"><span><strong>Settings</strong><small>Profile and preferences later.</small></span><em>→</em></button>
+        </div>
       </div>
     </section>
   `;
@@ -1116,46 +1205,10 @@ function renderAbout() {
         <p>The goal is simple: make motorcycle selection and maintenance feel structured, visual, and easy to follow instead of scattered across notes, memory, and random tabs.</p>
       </div>
 
-      <div class="mobile-story-card">
-        <span>How it works</span>
-        <h2>The tracker follows a simple user flow</h2>
-        <p>The project is designed to guide the user step by step instead of throwing everything on one screen at once.</p>
-      </div>
-
-      <div class="mobile-mini-grid numbered-mobile-grid">
-        <article><em>01</em><strong>Explore</strong><span>Start from the homepage and enter the tracker to browse motorcycles by brand and category.</span></article>
-        <article><em>02</em><strong>Select</strong><span>View motorcycle options, preview key specs, and choose the bike that fits the user’s interest.</span></article>
-        <article><em>03</em><strong>Manage</strong><span>Add motorcycles to a garage and use that garage as the base for maintenance tracking.</span></article>
-      </div>
-
-      <div class="mobile-story-card">
-        <span>Core Idea</span>
-        <h2>This is a motorcycle management experience, not just a bike list</h2>
-        <p>The project is being built as more than a static catalog. It connects exploration, ownership structure, and maintenance into one clear system.</p>
-      </div>
-
       <div class="mobile-mini-grid">
-        <article><strong>Current focus</strong><span>Clean frontend flow, better user experience, stronger organization, and a foundation for backend-backed product features.</span></article>
-        <article><strong>Future direction</strong><span>User accounts, real garage ownership logic, and database-backed maintenance records.</span></article>
-      </div>
-
-      <div class="mobile-story-card">
-        <span>What makes it useful</span>
-        <h2>Designed around clarity, structure, and growth</h2>
-        <p>The mobile version keeps the same purpose as desktop while making the experience easier to use with your thumb.</p>
-      </div>
-
-      <div class="mobile-mini-grid">
-        <article><strong>Clear navigation</strong><span>Users should understand where they are, what step comes next, and how to move through the tracker without confusion.</span></article>
-        <article><strong>Garage-first logic</strong><span>The maintenance side is tied to a garage structure so the user flow feels logical and grounded.</span></article>
-        <article><strong>Scalable direction</strong><span>The structure is being shaped to grow into a stronger full-stack system later.</span></article>
-      </div>
-
-      <div class="mobile-story-card">
-        <span>About the developer</span>
-        <h2>Built by Olysa</h2>
-        <p>This project is part of a growing portfolio focused on clean design, structured systems, and practical software projects with room to scale.</p>
-        <button class="secondary-btn compact-btn mobile-about-link" type="button" data-action="open-portfolio">View Full Portfolio</button>
+        <article><strong>Explore</strong><span>Browse motorcycles by brand and category.</span></article>
+        <article><strong>Garage</strong><span>Save bikes and keep their details close.</span></article>
+        <article><strong>Maintain</strong><span>Track service records in a cleaner flow.</span></article>
       </div>
     </section>
   `;
@@ -1184,26 +1237,70 @@ function renderContact() {
   `;
 }
 
-function renderUpdatesPage() {
-  const updates = getUpdates();
+
+function renderV1Checklist() {
+  const sections = [
+    { label: "Done", items: ["Mobile app shell", "Login redirect", "Garage loading", "Maintenance cards", "About and Contact screens"] },
+    { label: "Next", items: ["Task status sheet", "Garage bike actions", "Empty states", "More/Profile cleanup", "Phone QA pass"] },
+    { label: "Later", items: ["VIN lookup", "Recall API", "Docs uploads", "Native PWA install", "Premium features"] },
+  ];
+
   return `
-    <section class="screen updates-screen">
-      <p class="kicker">Notifications</p>
-      <h1 class="page-title">Updates</h1>
-      <p class="page-copy">Uses the same local update data and read/unread behavior as the desktop notification widget.</p>
-      <button class="secondary-btn compact-btn" type="button" data-action="toggle-all-updates-read">${getUnreadUpdates().length ? "Mark all read" : "Mark all unread"}</button>
-      <div class="updates-list-mobile">
-        ${updates.map((update) => renderUpdateCard(update)).join("")}
+    <section class="screen info-screen v1-screen">
+      <p class="kicker">Internship Demo</p>
+      <h1 class="page-title compact-page-title">V1 Ready Checklist</h1>
+      <p class="page-copy compact-page-copy">Quick product-readiness list for the mobile experience.</p>
+      <div class="v1-checklist">
+        ${sections.map((section) => `
+          <article class="v1-card">
+            <strong>${escapeHtml(section.label)}</strong>
+            <ul>
+              ${section.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </article>
+        `).join("")}
       </div>
     </section>
+  `;
+}
+
+function renderUpdatesPage() {
+  const updates = getUpdates();
+  const unreadCount = getUnreadUpdates().length;
+  return `
+    <section class="screen updates-screen updates-inbox-screen">
+      <p class="kicker">Notifications</p>
+      <h1 class="page-title compact-page-title">Updates</h1>
+      <p class="page-copy compact-page-copy">A cleaner inbox for product updates, mobile changes, and tracker notices.</p>
+      <div class="updates-summary-v2">
+        <article><span>Unread</span><strong>${unreadCount}</strong></article>
+        <article><span>Total</span><strong>${updates.length}</strong></article>
+      </div>
+      <button class="secondary-btn compact-btn" type="button" data-action="toggle-all-updates-read">${unreadCount ? "Mark all read" : "Mark all unread"}</button>
+      <div class="updates-list-mobile updates-list-v2">
+        ${updates.length ? updates.map((update) => renderUpdateCard(update)).join("") : renderUpdatesEmptyState()}
+      </div>
+    </section>
+  `;
+}
+
+function renderUpdatesEmptyState() {
+  return `
+    <div class="maintenance-empty-v2 updates-empty-v2">
+      <strong>No updates yet</strong>
+      <span>Product changes and tracker notices will appear here.</span>
+    </div>
   `;
 }
 
 function renderUpdateCard(update) {
   const read = isUpdateRead(update.id);
   return `
-    <article class="update-card ${read ? "read" : "unread"}">
-      <span>${escapeHtml(update.category || "Update")}</span>
+    <article class="update-card update-card-v2 ${read ? "read" : "unread"}">
+      <div class="update-card-top">
+        <span>${escapeHtml(update.category || "Update")}</span>
+        <em>${read ? "Read" : "New"}</em>
+      </div>
       <strong>${escapeHtml(update.title)}</strong>
       <p>${escapeHtml(update.shortText || update.fullText || "")}</p>
       <button class="tiny-btn" type="button" data-toggle-update-read="${escapeHtml(update.id)}">${read ? "Mark unread" : "Mark read"}</button>
@@ -1212,6 +1309,7 @@ function renderUpdateCard(update) {
 }
 
 function renderMain() {
+  if (!state.authReady && !runningFromFileSystem()) return renderLoadingScreen("Preparing secure session");
   switch (state.view) {
     case "brand": return renderBrand();
     case "category": return renderCategory();
@@ -1225,17 +1323,87 @@ function renderMain() {
     case "about": return renderAbout();
     case "contact": return renderContact();
     case "updates": return renderUpdatesPage();
+    case "v1": return renderV1Checklist();
     case "home":
     default: return renderHome();
   }
+}
+
+
+function renderTaskActionSheet() {
+  if (!state.activeTaskId) return "";
+  const { task, garageItem } = findTaskContext(state.activeTaskId);
+  if (!task) return "";
+  const group = getTaskGroup(task);
+  const dueMeta = getTaskDueMeta(task, garageItem);
+  const bikeName = garageItem?.motorcycle?.model || "Selected motorcycle";
+
+  return `
+    <div class="sheet-backdrop" data-action="close-sheet"></div>
+    <section class="bottom-sheet task-sheet" data-floating-panel role="dialog" aria-label="Maintenance task actions">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <span>${escapeHtml(getTaskGroupLabel(group))}</span>
+        <button type="button" data-action="close-sheet" aria-label="Close">×</button>
+      </div>
+      <h2>${escapeHtml(task.title)}</h2>
+      <p>${escapeHtml(task.description || "No description added.")}</p>
+      <div class="sheet-meta-grid">
+        <div><span>Bike</span><strong>${escapeHtml(bikeName)}</strong></div>
+        <div><span>Due</span><strong>${escapeHtml(dueMeta.primary)}</strong></div>
+        <div><span>Details</span><strong>${escapeHtml(dueMeta.secondary)}</strong></div>
+      </div>
+      <div class="sheet-action-group">
+        <span>Move status</span>
+        ${["upcoming", "in-progress", "completed"].map((targetGroup) => `
+          <button class="sheet-action-btn ${group === targetGroup ? "active" : ""}" type="button" data-action="move-task-status" data-task-status="${targetGroup}">
+            ${escapeHtml(getTaskActionCopy(targetGroup))}
+          </button>
+        `).join("")}
+      </div>
+      <div class="sheet-footer-actions">
+        <button class="secondary-btn compact-btn" type="button" data-maintenance-for="${escapeHtml(String(garageItem?.id || ""))}">View Maintenance</button>
+        <button class="secondary-btn compact-btn" type="button" data-route="detail" data-garage-detail="${escapeHtml(String(garageItem?.id || ""))}">View Bike</button>
+      </div>
+    </section>
+  `;
+}
+
+function renderBikeActionSheet() {
+  if (!state.activeBikeActionId) return "";
+  const item = getGarageItemById(state.activeBikeActionId);
+  if (!item) return "";
+  const bike = item.motorcycle;
+  const summary = summarizeGarageTasks(item.id);
+
+  return `
+    <div class="sheet-backdrop" data-action="close-sheet"></div>
+    <section class="bottom-sheet bike-sheet" data-floating-panel role="dialog" aria-label="Bike actions">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <span>Garage Bike</span>
+        <button type="button" data-action="close-sheet" aria-label="Close">×</button>
+      </div>
+      <h2>${escapeHtml(bike.model)}</h2>
+      <p>${escapeHtml(String(bike.year))} • ${formatNumber(item.currentMileage)} mi • ${summary.active} open task${summary.active === 1 ? "" : "s"}</p>
+      <div class="sheet-action-group">
+        <button class="sheet-action-btn" type="button" data-garage-detail="${escapeHtml(String(item.id))}">View Details</button>
+        <button class="sheet-action-btn" type="button" data-maintenance-for="${escapeHtml(String(item.id))}">Maintenance</button>
+        <button class="sheet-action-btn" type="button" data-action="bike-notes-placeholder">Notes</button>
+        <button class="sheet-action-btn danger-soft" type="button" data-action="bike-remove-placeholder">Remove placeholder</button>
+      </div>
+    </section>
+  `;
 }
 
 function renderOverlay() {
   const panels = [];
   if (state.updatesOpen) panels.push(renderUpdatesPanel());
   if (state.profileOpen) panels.push(renderProfilePanel());
-  if (state.selectedMaintenanceTaskId) panels.push(renderTaskDetailSheet());
+  if (state.activeTaskId) panels.push(renderTaskActionSheet());
+  if (state.activeBikeActionId) panels.push(renderBikeActionSheet());
   overlayLayer.innerHTML = panels.join("");
+  overlayLayer.classList.toggle("has-sheet", Boolean(state.activeTaskId || state.activeBikeActionId));
 }
 
 function renderUpdatesPanel() {
@@ -1278,61 +1446,13 @@ function renderProfilePanel() {
   `;
 }
 
-function renderTaskDetailSheet() {
-  const task = getSelectedMaintenanceTask();
-  const selectedItem = getGarageItemById(state.selectedMaintenanceGarageId);
-
-  if (!task) {
-    state.selectedMaintenanceTaskId = null;
-    return "";
-  }
-
-  const group = getTaskGroup(task);
-  const dueMeta = getTaskDueMeta(task, selectedItem);
-  const bikeName = selectedItem?.motorcycle?.model || "Selected motorcycle";
-  const statuses = ["upcoming", "in-progress", "completed"];
-
-  return `
-    <div class="mobile-sheet-backdrop">
-      <section class="mobile-task-sheet" data-floating-panel aria-label="Maintenance task details">
-        <div class="sheet-grabber" aria-hidden="true"></div>
-        <div class="task-sheet-head">
-          <div>
-            <span>${escapeHtml(bikeName)}</span>
-            <h2>${escapeHtml(task.title)}</h2>
-          </div>
-          <button class="sheet-close-btn" type="button" data-action="close-task-sheet" aria-label="Close task details">×</button>
-        </div>
-
-        <p class="task-sheet-description">${escapeHtml(task.description || "No description added.")}</p>
-
-        <div class="task-sheet-meta">
-          <div><span>Status</span><strong>${escapeHtml(getTaskGroupLabel(group))}</strong></div>
-          <div><span>Due</span><strong>${escapeHtml(dueMeta.primary)}</strong></div>
-          <div><span>Date / Mileage</span><strong>${escapeHtml(dueMeta.secondary)}</strong></div>
-        </div>
-
-        <div class="task-sheet-section-label">Move Status</div>
-        <div class="task-status-actions">
-          ${statuses.map((targetGroup) => `
-            <button class="task-status-action ${group === targetGroup ? "active" : ""}" type="button" data-action="move-task-status" data-task-status-target="${targetGroup}">
-              <span>${escapeHtml(getTaskGroupLabel(targetGroup))}</span>
-              ${group === targetGroup ? "<em>Current</em>" : ""}
-            </button>
-          `).join("")}
-        </div>
-      </section>
-    </div>
-  `;
-}
-
 function updateBottomNav() {
   const navViews = ["home", "garage", "maintenance", "more"];
   const activeView = navViews.includes(state.view) ? state.view : "";
   bottomNav.querySelectorAll(".nav-item").forEach((button) => {
     button.classList.toggle("active", button.dataset.route === activeView);
   });
-  const hideBottom = ["brand", "category", "bike-select", "bike-preview", "detail", "learn", "about", "contact", "updates"].includes(state.view);
+  const hideBottom = ["brand", "category", "bike-select", "bike-preview", "detail", "learn", "about", "contact", "updates", "v1"].includes(state.view);
   appShell.classList.toggle("no-bottom", hideBottom);
 }
 
@@ -1413,6 +1533,40 @@ async function addCatalogBikeToGarage(bikeId) {
   }
 }
 
+
+async function updateMobileTaskStatus(taskId, nextGroup) {
+  const { task, garageItem } = findTaskContext(taskId);
+  if (!task || !garageItem) {
+    showToast("Task not found.");
+    return;
+  }
+
+  const nextStatus = statusForTaskGroup(nextGroup);
+  const previousStatus = task.status;
+  task.status = nextStatus;
+  state.maintenanceStatusFilter = nextGroup;
+  state.activeTaskId = null;
+  render();
+
+  try {
+    if (state.backendOnline) {
+      await fetchJson(`/tasks/${encodeURIComponent(taskId)}/status`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: nextStatus }),
+      });
+      await loadTasksForGarage(garageItem.id);
+    }
+    showToast(`Task moved to ${getTaskGroupLabel(nextGroup)}.`);
+    render();
+  } catch (error) {
+    console.error("Failed to update task status:", error);
+    task.status = previousStatus;
+    showToast("Could not update task status.");
+    render();
+  }
+}
+
 async function addMaintenanceRecord() {
   const garageId = state.selectedMaintenanceGarageId;
   if (!garageId) {
@@ -1437,61 +1591,6 @@ async function addMaintenanceRecord() {
   } catch (error) {
     console.error("Failed to add maintenance record:", error);
     showToast("Could not add maintenance task.");
-  }
-}
-
-function updateLocalTaskStatus(taskId, nextStatus) {
-  const garageId = state.selectedMaintenanceGarageId;
-  if (!garageId) return false;
-
-  const tasks = getTasks(garageId);
-  const taskIndex = tasks.findIndex((task) => String(task.id) === String(taskId));
-  if (taskIndex < 0) return false;
-
-  tasks[taskIndex] = { ...tasks[taskIndex], status: nextStatus };
-  state.taskMap.set(String(garageId), tasks);
-  return true;
-}
-
-async function moveSelectedTaskStatus(targetGroup) {
-  const task = getSelectedMaintenanceTask();
-  const garageId = state.selectedMaintenanceGarageId;
-  const nextStatus = getBackendStatusForGroup(targetGroup);
-
-  if (!task || !garageId) {
-    showToast("Select a task first.");
-    return;
-  }
-
-  if (getTaskGroup(task) === targetGroup) {
-    state.selectedMaintenanceTaskId = null;
-    render();
-    return;
-  }
-
-  if (String(task.id).startsWith("local-")) {
-    updateLocalTaskStatus(task.id, nextStatus);
-    state.maintenanceStatusFilter = targetGroup;
-    state.selectedMaintenanceTaskId = null;
-    showToast(`Moved to ${getTaskGroupLabel(targetGroup)}.`);
-    render();
-    return;
-  }
-
-  try {
-    await fetchJson(`/tasks/${encodeURIComponent(task.id)}/status`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: nextStatus }),
-    });
-    await loadTasksForGarage(garageId);
-    state.maintenanceStatusFilter = targetGroup;
-    state.selectedMaintenanceTaskId = null;
-    showToast(`Moved to ${getTaskGroupLabel(targetGroup)}.`);
-    render();
-  } catch (error) {
-    console.error("Failed to update maintenance task status:", error);
-    showToast("Could not update task status.");
   }
 }
 
@@ -1528,7 +1627,25 @@ function handleSelectionClick(target) {
   if (garageDetail) {
     state.selectedGarageId = garageDetail.dataset.garageDetail;
     state.detailTab = "Overview";
+    state.activeTaskId = null;
+    state.activeBikeActionId = null;
     routeTo("detail");
+    return true;
+  }
+
+  const taskDetail = target.closest("[data-task-detail]");
+  if (taskDetail) {
+    state.activeTaskId = taskDetail.dataset.taskDetail;
+    state.activeBikeActionId = null;
+    render();
+    return true;
+  }
+
+  const bikeActions = target.closest("[data-bike-actions]");
+  if (bikeActions) {
+    state.activeBikeActionId = bikeActions.dataset.bikeActions;
+    state.activeTaskId = null;
+    render();
     return true;
   }
 
@@ -1536,7 +1653,6 @@ function handleSelectionClick(target) {
   if (maintenanceFilter) {
     state.selectedMaintenanceGarageId = maintenanceFilter.dataset.maintenanceFilter;
     state.maintenanceStatusFilter = "upcoming";
-    state.selectedMaintenanceTaskId = null;
     render();
     return true;
   }
@@ -1548,16 +1664,11 @@ function handleSelectionClick(target) {
     return true;
   }
 
-  const taskDetail = target.closest("[data-task-detail]");
-  if (taskDetail) {
-    state.selectedMaintenanceTaskId = taskDetail.dataset.taskDetail;
-    render();
-    return true;
-  }
-
   const maintenanceFor = target.closest("[data-maintenance-for]");
   if (maintenanceFor) {
     state.selectedMaintenanceGarageId = maintenanceFor.dataset.maintenanceFor;
+    state.activeTaskId = null;
+    state.activeBikeActionId = null;
     routeTo("maintenance");
     return true;
   }
@@ -1583,6 +1694,40 @@ async function handleActionClick(target) {
   if (!actionButton) return false;
   const action = actionButton.dataset.action;
 
+  if (action === "retry-data") {
+    state.catalogReady = false;
+    state.garageReady = false;
+    state.lastDataError = null;
+    render();
+    await Promise.allSettled([loadCatalog(), loadGarage()]);
+    showToast(state.backendOnline ? "Data refreshed." : "Still using preview data.");
+    return true;
+  }
+
+  if (action === "close-sheet") {
+    state.activeTaskId = null;
+    state.activeBikeActionId = null;
+    render();
+    return true;
+  }
+
+  if (action === "move-task-status") {
+    await updateMobileTaskStatus(state.activeTaskId, actionButton.dataset.taskStatus || "upcoming");
+    return true;
+  }
+
+  if (action === "bike-notes-placeholder") {
+    state.activeBikeActionId = null;
+    showToast("Notes tab is coming next.");
+    render();
+    return true;
+  }
+
+  if (action === "bike-remove-placeholder") {
+    showToast("Remove bike will be wired after confirmation UI.");
+    return true;
+  }
+
   if (action === "toggle-updates") {
     state.updatesOpen = !state.updatesOpen;
     state.profileOpen = false;
@@ -1593,24 +1738,7 @@ async function handleActionClick(target) {
   if (action === "toggle-profile") {
     state.profileOpen = !state.profileOpen;
     state.updatesOpen = false;
-    state.selectedMaintenanceTaskId = null;
     render();
-    return true;
-  }
-
-  if (action === "close-task-sheet") {
-    state.selectedMaintenanceTaskId = null;
-    render();
-    return true;
-  }
-
-  if (action === "move-task-status") {
-    await moveSelectedTaskStatus(actionButton.dataset.taskStatusTarget || "upcoming");
-    return true;
-  }
-
-  if (action === "open-portfolio") {
-    window.location.href = "https://olysa.app";
     return true;
   }
 
@@ -1654,6 +1782,16 @@ async function handleActionClick(target) {
     return true;
   }
 
+  if (action === "bike-menu") {
+    const item = selectedGarageItem();
+    if (item) {
+      state.activeBikeActionId = String(item.id);
+      state.activeTaskId = null;
+      render();
+      return true;
+    }
+  }
+
   const messages = {
     "request-brand": "Request Brand is planned for a later backend pass.",
     "bike-menu": "Bike options are placeholders for now.",
@@ -1686,18 +1824,18 @@ overlayLayer.addEventListener("click", async (event) => {
   if (!event.target.closest("[data-floating-panel]")) {
     state.profileOpen = false;
     state.updatesOpen = false;
-    state.selectedMaintenanceTaskId = null;
+    state.activeTaskId = null;
+    state.activeBikeActionId = null;
     render();
   }
 });
 
 document.addEventListener("click", (event) => {
   const clickedInsideFloating = event.target.closest("[data-floating-panel]");
-  const clickedTrigger = event.target.closest("[data-action='toggle-updates'], [data-action='toggle-profile'], [data-task-detail]");
-  if (!clickedInsideFloating && !clickedTrigger && (state.profileOpen || state.updatesOpen || state.selectedMaintenanceTaskId)) {
+  const clickedTrigger = event.target.closest("[data-action='toggle-updates'], [data-action='toggle-profile']");
+  if (!clickedInsideFloating && !clickedTrigger && (state.profileOpen || state.updatesOpen)) {
     state.profileOpen = false;
     state.updatesOpen = false;
-    state.selectedMaintenanceTaskId = null;
     render();
   }
 });
