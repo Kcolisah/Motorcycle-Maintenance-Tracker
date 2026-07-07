@@ -1658,3 +1658,78 @@ button {
     padding-bottom: max(10px, env(safe-area-inset-bottom));
   }
 }
+
+/* Phone viewport polish: real phones should not see a fake phone frame. */
+@media (max-width: 540px) {
+  html,
+  body {
+    min-height: 100dvh;
+    background: #030303;
+  }
+
+  .mobile-stage {
+    width: 100%;
+    min-height: 100dvh;
+    display: block;
+    padding: 0;
+    background: #030303;
+  }
+
+  .app-shell {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .app-header {
+    padding-left: max(18px, env(safe-area-inset-left));
+    padding-right: max(18px, env(safe-area-inset-right));
+  }
+
+  .app-main {
+    padding-left: max(18px, env(safe-area-inset-left));
+    padding-right: max(18px, env(safe-area-inset-right));
+  }
+
+  .detail-hero {
+    margin-left: calc(-1 * max(18px, env(safe-area-inset-left)));
+    margin-right: calc(-1 * max(18px, env(safe-area-inset-right)));
+    border-radius: 0 0 28px 28px;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .bottom-nav {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .app-header,
+  .app-main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(40px, 12vw, 50px);
+  }
+
+  .brand-strip {
+    gap: 8px;
+  }
+
+  .brand-mini {
+    min-height: 72px;
+  }
+}
