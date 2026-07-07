@@ -1016,11 +1016,6 @@ function renderDetail() {
         <article><span>Next Service</span><strong>${escapeHtml(summary.nextService)}</strong></article>
       </div>
 
-      <div class="bike-quick-actions-v2">
-        <button type="button" data-maintenance-for="${escapeHtml(String(item.id))}">Maintenance</button>
-        <button type="button" data-tab="Notes">Notes</button>
-        <button type="button" data-tab="Docs">Docs</button>
-      </div>
 
       <div class="tabs tabs-v2" role="tablist" aria-label="Bike detail sections">
         ${tabs.map((tab) => `<button class="tab-btn ${state.detailTab === tab ? "active" : ""}" type="button" data-tab="${tab}">${tab}</button>`).join("")}
