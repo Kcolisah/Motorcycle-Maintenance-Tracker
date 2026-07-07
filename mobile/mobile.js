@@ -102,6 +102,7 @@ const state = {
   selectedGarageId: null,
   selectedMaintenanceGarageId: null,
   maintenanceStatusFilter: "upcoming",
+  selectedMaintenanceTaskId: null,
   detailTab: "Overview",
   brandQuery: "",
   bikeQuery: "",
@@ -460,6 +461,7 @@ function routeTo(view) {
   state.view = view;
   state.updatesOpen = false;
   state.profileOpen = false;
+  state.selectedMaintenanceTaskId = null;
   render();
 }
 
@@ -505,6 +507,11 @@ function getTasks(garageId) {
   return state.taskMap.get(String(garageId)) || [];
 }
 
+function getSelectedMaintenanceTask() {
+  if (!state.selectedMaintenanceGarageId || !state.selectedMaintenanceTaskId) return null;
+  return getTasks(state.selectedMaintenanceGarageId).find((task) => String(task.id) === String(state.selectedMaintenanceTaskId)) || null;
+}
+
 function getAllTasks() {
   return Array.from(state.taskMap.values()).flat();
 }
@@ -539,6 +546,21 @@ function getTaskGroupLabel(group) {
     completed: "Completed",
   };
   return labels[group] || "Upcoming";
+}
+
+function getBackendStatusForGroup(group) {
+  const statusMap = {
+    upcoming: "PENDING",
+    "in-progress": "IN_PROGRESS",
+    completed: "DONE",
+  };
+  return statusMap[group] || "PENDING";
+}
+
+function getStatusTone(group) {
+  if (group === "completed") return "complete";
+  if (group === "in-progress") return "warning";
+  return "neutral";
 }
 
 function getTaskDueMeta(task, selectedItem) {
@@ -1094,10 +1116,46 @@ function renderAbout() {
         <p>The goal is simple: make motorcycle selection and maintenance feel structured, visual, and easy to follow instead of scattered across notes, memory, and random tabs.</p>
       </div>
 
+      <div class="mobile-story-card">
+        <span>How it works</span>
+        <h2>The tracker follows a simple user flow</h2>
+        <p>The project is designed to guide the user step by step instead of throwing everything on one screen at once.</p>
+      </div>
+
+      <div class="mobile-mini-grid numbered-mobile-grid">
+        <article><em>01</em><strong>Explore</strong><span>Start from the homepage and enter the tracker to browse motorcycles by brand and category.</span></article>
+        <article><em>02</em><strong>Select</strong><span>View motorcycle options, preview key specs, and choose the bike that fits the user’s interest.</span></article>
+        <article><em>03</em><strong>Manage</strong><span>Add motorcycles to a garage and use that garage as the base for maintenance tracking.</span></article>
+      </div>
+
+      <div class="mobile-story-card">
+        <span>Core Idea</span>
+        <h2>This is a motorcycle management experience, not just a bike list</h2>
+        <p>The project is being built as more than a static catalog. It connects exploration, ownership structure, and maintenance into one clear system.</p>
+      </div>
+
       <div class="mobile-mini-grid">
-        <article><strong>Explore</strong><span>Browse motorcycles by brand and category.</span></article>
-        <article><strong>Garage</strong><span>Save bikes and keep their details close.</span></article>
-        <article><strong>Maintain</strong><span>Track service records in a cleaner flow.</span></article>
+        <article><strong>Current focus</strong><span>Clean frontend flow, better user experience, stronger organization, and a foundation for backend-backed product features.</span></article>
+        <article><strong>Future direction</strong><span>User accounts, real garage ownership logic, and database-backed maintenance records.</span></article>
+      </div>
+
+      <div class="mobile-story-card">
+        <span>What makes it useful</span>
+        <h2>Designed around clarity, structure, and growth</h2>
+        <p>The mobile version keeps the same purpose as desktop while making the experience easier to use with your thumb.</p>
+      </div>
+
+      <div class="mobile-mini-grid">
+        <article><strong>Clear navigation</strong><span>Users should understand where they are, what step comes next, and how to move through the tracker without confusion.</span></article>
+        <article><strong>Garage-first logic</strong><span>The maintenance side is tied to a garage structure so the user flow feels logical and grounded.</span></article>
+        <article><strong>Scalable direction</strong><span>The structure is being shaped to grow into a stronger full-stack system later.</span></article>
+      </div>
+
+      <div class="mobile-story-card">
+        <span>About the developer</span>
+        <h2>Built by Olysa</h2>
+        <p>This project is part of a growing portfolio focused on clean design, structured systems, and practical software projects with room to scale.</p>
+        <button class="secondary-btn compact-btn mobile-about-link" type="button" data-action="open-portfolio">View Full Portfolio</button>
       </div>
     </section>
   `;
@@ -1176,6 +1234,7 @@ function renderOverlay() {
   const panels = [];
   if (state.updatesOpen) panels.push(renderUpdatesPanel());
   if (state.profileOpen) panels.push(renderProfilePanel());
+  if (state.selectedMaintenanceTaskId) panels.push(renderTaskDetailSheet());
   overlayLayer.innerHTML = panels.join("");
 }
 
@@ -1215,6 +1274,54 @@ function renderProfilePanel() {
       <button class="account-link disabled" type="button">Manage Billing</button>
       <button class="account-link disabled" type="button">Product Settings</button>
       <button class="account-link danger" type="button" data-action="${actionName}">${actionLabel}</button>
+    </div>
+  `;
+}
+
+function renderTaskDetailSheet() {
+  const task = getSelectedMaintenanceTask();
+  const selectedItem = getGarageItemById(state.selectedMaintenanceGarageId);
+
+  if (!task) {
+    state.selectedMaintenanceTaskId = null;
+    return "";
+  }
+
+  const group = getTaskGroup(task);
+  const dueMeta = getTaskDueMeta(task, selectedItem);
+  const bikeName = selectedItem?.motorcycle?.model || "Selected motorcycle";
+  const statuses = ["upcoming", "in-progress", "completed"];
+
+  return `
+    <div class="mobile-sheet-backdrop">
+      <section class="mobile-task-sheet" data-floating-panel aria-label="Maintenance task details">
+        <div class="sheet-grabber" aria-hidden="true"></div>
+        <div class="task-sheet-head">
+          <div>
+            <span>${escapeHtml(bikeName)}</span>
+            <h2>${escapeHtml(task.title)}</h2>
+          </div>
+          <button class="sheet-close-btn" type="button" data-action="close-task-sheet" aria-label="Close task details">×</button>
+        </div>
+
+        <p class="task-sheet-description">${escapeHtml(task.description || "No description added.")}</p>
+
+        <div class="task-sheet-meta">
+          <div><span>Status</span><strong>${escapeHtml(getTaskGroupLabel(group))}</strong></div>
+          <div><span>Due</span><strong>${escapeHtml(dueMeta.primary)}</strong></div>
+          <div><span>Date / Mileage</span><strong>${escapeHtml(dueMeta.secondary)}</strong></div>
+        </div>
+
+        <div class="task-sheet-section-label">Move Status</div>
+        <div class="task-status-actions">
+          ${statuses.map((targetGroup) => `
+            <button class="task-status-action ${group === targetGroup ? "active" : ""}" type="button" data-action="move-task-status" data-task-status-target="${targetGroup}">
+              <span>${escapeHtml(getTaskGroupLabel(targetGroup))}</span>
+              ${group === targetGroup ? "<em>Current</em>" : ""}
+            </button>
+          `).join("")}
+        </div>
+      </section>
     </div>
   `;
 }
@@ -1333,6 +1440,61 @@ async function addMaintenanceRecord() {
   }
 }
 
+function updateLocalTaskStatus(taskId, nextStatus) {
+  const garageId = state.selectedMaintenanceGarageId;
+  if (!garageId) return false;
+
+  const tasks = getTasks(garageId);
+  const taskIndex = tasks.findIndex((task) => String(task.id) === String(taskId));
+  if (taskIndex < 0) return false;
+
+  tasks[taskIndex] = { ...tasks[taskIndex], status: nextStatus };
+  state.taskMap.set(String(garageId), tasks);
+  return true;
+}
+
+async function moveSelectedTaskStatus(targetGroup) {
+  const task = getSelectedMaintenanceTask();
+  const garageId = state.selectedMaintenanceGarageId;
+  const nextStatus = getBackendStatusForGroup(targetGroup);
+
+  if (!task || !garageId) {
+    showToast("Select a task first.");
+    return;
+  }
+
+  if (getTaskGroup(task) === targetGroup) {
+    state.selectedMaintenanceTaskId = null;
+    render();
+    return;
+  }
+
+  if (String(task.id).startsWith("local-")) {
+    updateLocalTaskStatus(task.id, nextStatus);
+    state.maintenanceStatusFilter = targetGroup;
+    state.selectedMaintenanceTaskId = null;
+    showToast(`Moved to ${getTaskGroupLabel(targetGroup)}.`);
+    render();
+    return;
+  }
+
+  try {
+    await fetchJson(`/tasks/${encodeURIComponent(task.id)}/status`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: nextStatus }),
+    });
+    await loadTasksForGarage(garageId);
+    state.maintenanceStatusFilter = targetGroup;
+    state.selectedMaintenanceTaskId = null;
+    showToast(`Moved to ${getTaskGroupLabel(targetGroup)}.`);
+    render();
+  } catch (error) {
+    console.error("Failed to update maintenance task status:", error);
+    showToast("Could not update task status.");
+  }
+}
+
 function handleSelectionClick(target) {
   const brandButton = target.closest("[data-select-brand]");
   if (brandButton) {
@@ -1374,6 +1536,7 @@ function handleSelectionClick(target) {
   if (maintenanceFilter) {
     state.selectedMaintenanceGarageId = maintenanceFilter.dataset.maintenanceFilter;
     state.maintenanceStatusFilter = "upcoming";
+    state.selectedMaintenanceTaskId = null;
     render();
     return true;
   }
@@ -1381,6 +1544,13 @@ function handleSelectionClick(target) {
   const maintenanceStatus = target.closest("[data-maintenance-status]");
   if (maintenanceStatus) {
     state.maintenanceStatusFilter = maintenanceStatus.dataset.maintenanceStatus || "upcoming";
+    render();
+    return true;
+  }
+
+  const taskDetail = target.closest("[data-task-detail]");
+  if (taskDetail) {
+    state.selectedMaintenanceTaskId = taskDetail.dataset.taskDetail;
     render();
     return true;
   }
@@ -1423,7 +1593,24 @@ async function handleActionClick(target) {
   if (action === "toggle-profile") {
     state.profileOpen = !state.profileOpen;
     state.updatesOpen = false;
+    state.selectedMaintenanceTaskId = null;
     render();
+    return true;
+  }
+
+  if (action === "close-task-sheet") {
+    state.selectedMaintenanceTaskId = null;
+    render();
+    return true;
+  }
+
+  if (action === "move-task-status") {
+    await moveSelectedTaskStatus(actionButton.dataset.taskStatusTarget || "upcoming");
+    return true;
+  }
+
+  if (action === "open-portfolio") {
+    window.location.href = "https://olysa.app";
     return true;
   }
 
@@ -1499,16 +1686,18 @@ overlayLayer.addEventListener("click", async (event) => {
   if (!event.target.closest("[data-floating-panel]")) {
     state.profileOpen = false;
     state.updatesOpen = false;
+    state.selectedMaintenanceTaskId = null;
     render();
   }
 });
 
 document.addEventListener("click", (event) => {
   const clickedInsideFloating = event.target.closest("[data-floating-panel]");
-  const clickedTrigger = event.target.closest("[data-action='toggle-updates'], [data-action='toggle-profile']");
-  if (!clickedInsideFloating && !clickedTrigger && (state.profileOpen || state.updatesOpen)) {
+  const clickedTrigger = event.target.closest("[data-action='toggle-updates'], [data-action='toggle-profile'], [data-task-detail]");
+  if (!clickedInsideFloating && !clickedTrigger && (state.profileOpen || state.updatesOpen || state.selectedMaintenanceTaskId)) {
     state.profileOpen = false;
     state.updatesOpen = false;
+    state.selectedMaintenanceTaskId = null;
     render();
   }
 });
