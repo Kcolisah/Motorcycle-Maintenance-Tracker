@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Motorcycle Tracker Mobile</title>
+  <link rel="icon" href="../images/LOGO.png" />
+  <link rel="stylesheet" href="mobile.css" />
+</head>
+<body>
+  <div class="mobile-stage">
+    <div class="app-shell" id="app-shell">
+      <div class="status-bar" aria-hidden="true">
+        <span>9:41</span>
+        <span class="status-icons">▰▰▰  5G  ▱</span>
+      </div>
+
+      <header class="app-header" id="app-header"></header>
+
+      <main class="app-main" id="app-main" aria-live="polite"></main>
+
+      <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile app navigation">
+        <button class="nav-item active" type="button" data-route="home" aria-label="Home">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.8 12 4l8 6.8V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-9.2Z"/></svg>
+          <span>Home</span>
+        </button>
+        <button class="nav-item" type="button" data-route="garage" aria-label="Garage">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 5l8 6v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8Z"/><path d="M8 20v-5h8v5"/></svg>
+          <span>Garage</span>
+        </button>
+        <button class="nav-item" type="button" data-route="maintenance" aria-label="Maintenance">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.4 6.2 3.4 3.4"/><path d="M4 20l4.7-1.2 9.7-9.7a2.4 2.4 0 0 0-3.5-3.5l-9.7 9.7L4 20Z"/></svg>
+          <span>Maintenance</span>
+        </button>
+        <button class="nav-item" type="button" data-route="more" aria-label="More">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+          <span>More</span>
+        </button>
+      </nav>
+
+      <div class="home-indicator" aria-hidden="true"></div>
+      <div class="toast" id="toast" role="status"></div>
+    </div>
+  </div>
+
+  <script src="mobile.js"></script>
+</body>
+</html>
