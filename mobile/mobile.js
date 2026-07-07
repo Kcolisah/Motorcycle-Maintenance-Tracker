@@ -268,8 +268,19 @@ function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
 
+function runningFromFileSystem() {
+  return window.location.protocol === "file:";
+}
+
+function redirectToDesktopSignIn() {
+  if (runningFromFileSystem()) return false;
+
+  const redirectTarget = "mobile/index.html";
+  window.location.replace(`${ASSET_BASE}/login.html?redirect=${encodeURIComponent(redirectTarget)}`);
+  return true;
+}
+
 function getInitials(user) {
-  if (user?.isDemo) return "D";
   const source = user?.username || user?.email || "Guest";
   return source
     .split(/[\s._-]+/)
@@ -368,20 +379,24 @@ async function signInDemo() {
 async function initializeAuth() {
   state.user = normalizeUser(getStoredUser()) || null;
 
-  if (getToken()) {
-    const user = await refreshCurrentUser();
-    state.user = user || state.user;
+  if (!getToken()) {
+    if (redirectToDesktopSignIn()) return false;
+
+    // Local file preview only: keep the shell usable without a backend/login redirect.
+    state.user = null;
     state.authReady = true;
-    return;
+    return true;
   }
 
-  try {
-    await signInDemo();
-  } catch (error) {
-    console.warn("Demo auth unavailable; using local mobile preview mode.", error);
-    state.user = normalizeUser({ username: "Demo Rider", email: "Preview mode", isDemo: true });
-    state.authReady = true;
+  const user = await refreshCurrentUser();
+  state.user = user || state.user;
+
+  if (!state.user) {
+    if (redirectToDesktopSignIn()) return false;
   }
+
+  state.authReady = true;
+  return true;
 }
 
 async function loadCatalog() {
@@ -555,7 +570,7 @@ function toggleAllUpdatesRead() {
 }
 
 function renderHeader() {
-  const avatar = escapeHtml(state.user?.initials || "D");
+  const avatar = escapeHtml(state.user?.initials || "GU");
   const unreadCount = getUnreadUpdates().length;
 
   if (["brand", "category", "bike-select", "bike-preview", "learn", "about", "contact", "updates"].includes(state.view)) {
@@ -565,7 +580,7 @@ function renderHeader() {
         <button class="icon-btn notification-btn ${unreadCount ? "has-unread" : ""}" type="button" data-action="toggle-updates" aria-label="Updates">
           ${icons.bell}${unreadCount ? `<span class="notification-badge">${unreadCount > 99 ? "99+" : unreadCount}</span>` : ""}
         </button>
-        <button class="profile-btn" type="button" data-action="toggle-profile" aria-label="Profile">${avatar}</button>
+        <button class="profile-btn" type="button" data-action="toggle-profile" aria-label="Profile"><span class="profile-avatar">${avatar}</span></button>
       </div>
     `;
     return;
@@ -596,7 +611,7 @@ function renderHeader() {
       <button class="icon-btn notification-btn ${unreadCount ? "has-unread" : ""}" type="button" data-action="toggle-updates" aria-label="Updates">
         ${icons.bell}${unreadCount ? `<span class="notification-badge">${unreadCount > 99 ? "99+" : unreadCount}</span>` : ""}
       </button>
-      <button class="profile-btn" type="button" data-action="toggle-profile" aria-label="Profile">${avatar}</button>
+      <button class="profile-btn" type="button" data-action="toggle-profile" aria-label="Profile"><span class="profile-avatar">${avatar}</span></button>
     </div>
   `;
 }
@@ -1057,15 +1072,19 @@ function renderUpdatesPanel() {
 }
 
 function renderProfilePanel() {
-  const user = state.user || normalizeUser({ username: "Guest Rider", email: "Not signed in", isDemo: false });
-  const actionLabel = getToken() ? "Sign out" : "Demo Login";
-  const actionName = getToken() ? "sign-out" : "demo-login";
+  const signedIn = Boolean(getToken() && state.user);
+  const user = signedIn ? state.user : normalizeUser({ username: "Guest Rider", email: "Choose an account to continue", isDemo: false });
+  const actionLabel = signedIn ? "Sign out" : "Sign in";
+  const actionName = signedIn ? "sign-out" : "sign-in";
 
   return `
     <div class="floating-panel profile-floating" data-floating-panel>
       <div class="account-summary">
         <span class="profile-avatar-large">${escapeHtml(user.initials || "GU")}</span>
-        <div><strong>${escapeHtml(user.username || "Guest Rider")}</strong><small>${escapeHtml(user.email || "Not signed in")}</small><em>${escapeHtml(user.role || "Guest")}</em></div>
+        <div>
+          <strong>${escapeHtml(user.username || "Guest Rider")}</strong>
+          <small>${escapeHtml(signedIn ? user.email || "Demo Account" : "Choose an account to continue")}</small>
+        </div>
       </div>
       <button class="account-link disabled" type="button">Account Information</button>
       <button class="account-link disabled" type="button">Manage Billing</button>
@@ -1264,8 +1283,13 @@ async function handleActionClick(target) {
   if (action === "sign-out") {
     clearAuth();
     state.profileOpen = false;
-    showToast("Signed out.");
-    render();
+    window.location.href = `${ASSET_BASE}/login.html?redirect=${encodeURIComponent("mobile/index.html")}`;
+    return true;
+  }
+
+  if (action === "sign-in") {
+    state.profileOpen = false;
+    window.location.href = `${ASSET_BASE}/login.html?redirect=${encodeURIComponent("mobile/index.html")}`;
     return true;
   }
 
@@ -1350,7 +1374,8 @@ appMain.addEventListener("input", (event) => {
 
 async function init() {
   render();
-  await initializeAuth();
+  const authReady = await initializeAuth();
+  if (!authReady) return;
   await Promise.allSettled([loadCatalog(), loadGarage()]);
 }
 
