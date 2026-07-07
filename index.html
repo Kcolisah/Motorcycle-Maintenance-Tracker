@@ -14,25 +14,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" href="images/LOGO.png">
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-</head>
-<head>
+
+
+
   <script>
+
     (function () {
+
       const path = window.location.pathname;
+
       const params = new URLSearchParams(window.location.search);
-
       const isMobilePage = path.startsWith("/mobile/");
-      const isHomePage = path === "/" || path.endsWith("/index.html");
-      const forceDesktop = params.get("view") === "desktop";
 
+      const isHomePage = path === "/" || path === "/index.html" || path.endsWith("/index.html");
+
+      const forceDesktop = params.get("view") === "desktop";
       const isPhoneSize = window.matchMedia("(max-width: 768px)").matches;
       const isPhoneDevice = /Android|iPhone|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
       if (!isMobilePage && isHomePage && !forceDesktop && (isPhoneSize || isPhoneDevice)) {
+
         window.location.replace("/mobile/");
+
       }
+
     })();
+
   </script>
+
+</head>
 
   <!-- the rest of your existing head code stays here -->
 
