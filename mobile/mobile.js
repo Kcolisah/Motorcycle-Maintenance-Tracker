@@ -101,6 +101,7 @@ const state = {
   selectedCatalogBikeId: null,
   selectedGarageId: null,
   selectedMaintenanceGarageId: null,
+  maintenanceStatusFilter: "upcoming",
   detailTab: "Overview",
   brandQuery: "",
   bikeQuery: "",
@@ -523,6 +524,60 @@ function summarizeGarageTasks(garageId) {
   };
 }
 
+
+function getTaskGroup(task) {
+  const status = String(task?.status || "PENDING").trim().toUpperCase().replaceAll(" ", "_");
+  if (["DONE", "COMPLETE", "COMPLETED"].includes(status)) return "completed";
+  if (["IN_PROGRESS", "INPROGRESS", "STARTED", "ACTIVE"].includes(status)) return "in-progress";
+  return "upcoming";
+}
+
+function getTaskGroupLabel(group) {
+  const labels = {
+    upcoming: "Upcoming",
+    "in-progress": "In Progress",
+    completed: "Completed",
+  };
+  return labels[group] || "Upcoming";
+}
+
+function getTaskDueMeta(task, selectedItem) {
+  const group = getTaskGroup(task);
+  if (group === "completed") {
+    return {
+      tone: "complete",
+      primary: task.dueDate ? `Completed ${formatDate(task.dueDate)}` : "Completed",
+      secondary: task.mileage && task.mileage !== "--" ? `${escapeHtml(task.mileage)} mi` : "Service history",
+    };
+  }
+
+  if (task.dueDate) {
+    const due = new Date(String(task.dueDate).includes("T") ? task.dueDate : `${task.dueDate}T00:00:00`);
+    if (!Number.isNaN(due.getTime())) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      due.setHours(0, 0, 0, 0);
+      const dayDiff = Math.round((due - today) / 86400000);
+      if (dayDiff < 0) return { tone: "overdue", primary: `Overdue by ${Math.abs(dayDiff)} day${Math.abs(dayDiff) === 1 ? "" : "s"}`, secondary: formatDate(task.dueDate) };
+      if (dayDiff === 0) return { tone: "warning", primary: "Due today", secondary: formatDate(task.dueDate) };
+      return { tone: "warning", primary: `Due in ${dayDiff} day${dayDiff === 1 ? "" : "s"}`, secondary: formatDate(task.dueDate) };
+    }
+  }
+
+  if (task.mileage && task.mileage !== "--") {
+    const current = Number(selectedItem?.currentMileage || 0);
+    const target = Number(String(task.mileage).replace(/[^0-9.]/g, ""));
+    if (target && current) {
+      const remaining = target - current;
+      if (remaining < 0) return { tone: "overdue", primary: `Due ${formatNumber(Math.abs(remaining))} mi ago`, secondary: `${formatNumber(current)} / ${formatNumber(target)} mi` };
+      return { tone: "warning", primary: `Due in ${formatNumber(remaining)} mi`, secondary: `${formatNumber(current)} / ${formatNumber(target)} mi` };
+    }
+    return { tone: "neutral", primary: `Due at ${escapeHtml(task.mileage)} mi`, secondary: "Mileage based" };
+  }
+
+  return { tone: "neutral", primary: group === "in-progress" ? "In progress" : "No due date", secondary: task.dueDate ? formatDate(task.dueDate) : "Add details later" };
+}
+
 function getUpdates() {
   if (typeof window.getAllUpdates === "function") return window.getAllUpdates();
   if (Array.isArray(window.updates)) return window.updates;
@@ -914,12 +969,19 @@ function renderDetailTab(item) {
 function renderMaintenance() {
   const selectedItem = getGarageItemById(state.selectedMaintenanceGarageId) || state.garageItems[0] || null;
   const tasks = selectedItem ? getTasks(selectedItem.id) : [];
-  const activeTasks = tasks.filter((task) => task.status !== "DONE");
-  const summary = selectedItem ? summarizeGarageTasks(selectedItem.id) : { total: 0, active: 0, lastService: "--", nextService: "--" };
+  const summary = selectedItem ? summarizeGarageTasks(selectedItem.id) : { total: 0, done: 0, lastService: "--", nextService: "--" };
+  const groups = {
+    upcoming: tasks.filter((task) => getTaskGroup(task) === "upcoming"),
+    "in-progress": tasks.filter((task) => getTaskGroup(task) === "in-progress"),
+    completed: tasks.filter((task) => getTaskGroup(task) === "completed"),
+  };
+  const activeGroup = state.maintenanceStatusFilter || "upcoming";
+  const visibleTasks = groups[activeGroup] || groups.upcoming;
+  const bikeName = selectedItem?.motorcycle?.model || "Select a motorcycle";
 
   return `
-    <section class="screen maintenance-screen">
-      <div class="title-row">
+    <section class="screen maintenance-screen maintenance-v2-screen">
+      <div class="title-row maintenance-title-row">
         <div>
           <h1 class="page-title">Maintenance</h1>
           <p class="page-copy">Filtered per motorcycle in your garage.</p>
@@ -927,7 +989,7 @@ function renderMaintenance() {
         <button class="add-btn" type="button" data-action="add-record">+ Add Record</button>
       </div>
 
-      <div class="bike-filter-strip" aria-label="Garage motorcycle filter">
+      <div class="bike-filter-strip maintenance-bike-strip" aria-label="Garage motorcycle filter">
         ${state.garageItems.map((item) => `
           <button class="filter-chip ${String(item.id) === String(state.selectedMaintenanceGarageId) ? "active" : ""}" type="button" data-maintenance-filter="${escapeHtml(String(item.id))}">
             ${escapeHtml(item.motorcycle.model)}
@@ -935,45 +997,85 @@ function renderMaintenance() {
         `).join("") || `<button class="filter-chip active" type="button" data-action="add-bike">Add bike first</button>`}
       </div>
 
-      <div class="maintenance-grid">
-        <div class="maintenance-panel"><span class="stat-icon blue">${icons.calendar}</span><span class="stat-copy"><span>Total Tasks</span><strong>${summary.total}</strong></span></div>
-        <div class="maintenance-panel"><span class="stat-icon blue">${icons.wallet}</span><span class="stat-copy"><span>Total Spent</span><strong>$0</strong></span></div>
-        <div class="maintenance-panel"><span class="stat-icon green">${icons.wrench}</span><span class="stat-copy"><span>Last Service</span><strong>${escapeHtml(summary.lastService)}</strong></span></div>
-        <div class="maintenance-panel"><span class="stat-icon orange">${icons.gauge}</span><span class="stat-copy"><span>Next Service</span><strong>${escapeHtml(summary.nextService)}</strong></span></div>
+      <div class="maintenance-stats-v2" aria-label="Maintenance summary for ${escapeHtml(bikeName)}">
+        <article class="maintenance-stat-v2"><span>Total Tasks</span><strong>${summary.total}</strong></article>
+        <article class="maintenance-stat-v2"><span>Total Spent</span><strong>$0</strong></article>
+        <article class="maintenance-stat-v2"><span>Last Service</span><strong>${escapeHtml(summary.lastService)}</strong></article>
+        <article class="maintenance-stat-v2"><span>Next Service</span><strong>${escapeHtml(summary.nextService)}</strong></article>
       </div>
 
-      <div class="table-card">
-        <div class="table-head"><span>Task</span><span>Status</span><span>Date</span></div>
-        ${tasks.length ? tasks.map(renderTaskRow).join("") : `<div class="service-row"><div class="service-title"><strong>No tasks yet</strong><span>Add a record to create one.</span></div><span>--</span><span>--</span></div>`}
+      <div class="maintenance-status-tabs" role="tablist" aria-label="Maintenance task status">
+        ${["upcoming", "in-progress", "completed"].map((group) => `
+          <button class="maintenance-status-tab ${activeGroup === group ? "active" : ""}" type="button" data-maintenance-status="${group}">
+            <span>${getTaskGroupLabel(group)}</span><em>${groups[group].length}</em>
+          </button>
+        `).join("")}
+      </div>
+
+      <div class="maintenance-task-list-v2">
+        ${visibleTasks.length ? visibleTasks.map((task) => renderTaskRow(task, selectedItem)).join("") : renderMaintenanceEmptyState(activeGroup)}
       </div>
     </section>
   `;
 }
 
-function renderTaskRow(task) {
-  const status = task.status || "PENDING";
+function renderMaintenanceEmptyState(group) {
   return `
-    <div class="service-row task-row">
-      <div class="service-title"><strong>${escapeHtml(task.title)}</strong><span>${escapeHtml(task.description)}</span></div>
-      <span>${escapeHtml(status.replaceAll("_", " "))}</span>
-      <span>${escapeHtml(task.dueDate ? formatDate(task.dueDate) : "--")}</span>
+    <div class="maintenance-empty-v2">
+      <strong>No ${escapeHtml(getTaskGroupLabel(group).toLowerCase())} tasks</strong>
+      <span>${group === "completed" ? "Completed work will show here." : "Add a record when this bike needs service."}</span>
     </div>
   `;
 }
 
-function renderMore() {
+function renderTaskRow(task, selectedItem = null) {
+  const group = getTaskGroup(task);
+  const dueMeta = getTaskDueMeta(task, selectedItem);
   return `
-    <section class="screen more-screen">
-      <h1 class="page-title">More</h1>
-      <p class="page-copy">Desktop-style pages and future product sections.</p>
+    <button class="maintenance-task-card-v2 ${dueMeta.tone}" type="button" data-task-detail="${escapeHtml(task.id)}" aria-label="View ${escapeHtml(task.title)}">
+      <div class="maintenance-task-main-v2">
+        <strong>${escapeHtml(task.title)}</strong>
+        <span>${escapeHtml(task.description || getTaskGroupLabel(group))}</span>
+        <em>${escapeHtml(getTaskGroupLabel(group))}</em>
+      </div>
+      <div class="maintenance-task-due-v2">
+        <strong>${escapeHtml(dueMeta.primary)}</strong>
+        <span>${escapeHtml(dueMeta.secondary)}</span>
+      </div>
+      <span class="maintenance-task-arrow" aria-hidden="true">›</span>
+    </button>
+  `;
+}
 
-      <div class="more-grid">
-        <button class="more-card" type="button" data-route="about"><span><strong>About Us</strong><span>Read the product purpose.</span></span><span>→</span></button>
-        <button class="more-card" type="button" data-route="contact"><span><strong>Contact</strong><span>Open the contact screen.</span></span><span>→</span></button>
-        <button class="more-card" type="button" data-route="updates"><span><strong>Updates</strong><span>View product notifications and changelog.</span></span><span>→</span></button>
-        <button class="more-card" type="button" data-route="brand"><span><strong>Choose Brand</strong><span>Open the app-style selection flow.</span></span><span>→</span></button>
-        <button class="more-card" type="button" data-action="request-brand"><span><strong>Request a Brand</strong><span>Future feedback feature.</span></span><span>→</span></button>
-        <button class="more-card" type="button" data-action="future"><span><strong>Settings</strong><span>Profile, notifications, and preferences.</span></span><span>→</span></button>
+function renderMore() {
+  const userName = state.user?.username || "Guest Rider";
+  return `
+    <section class="screen more-screen more-v2-screen">
+      <p class="kicker">Menu</p>
+      <h1 class="page-title">More</h1>
+      <p class="page-copy">Product pages, support, updates, and future account tools.</p>
+
+      <div class="more-account-card">
+        <div>
+          <span>${escapeHtml(state.user?.initials || "GU")}</span>
+          <strong>${escapeHtml(userName)}</strong>
+          <small>${state.backendOnline ? "Backend connected" : "Preview mode"}</small>
+        </div>
+        <button type="button" data-action="toggle-profile">Account</button>
+      </div>
+
+      <div class="more-section-label">Pages</div>
+      <div class="more-grid more-grid-v2">
+        <button class="more-card more-card-v2" type="button" data-route="about"><span><strong>About Us</strong><span>Read the purpose behind Motorcycle Tracker.</span></span><span>→</span></button>
+        <button class="more-card more-card-v2" type="button" data-route="contact"><span><strong>Contact</strong><span>Questions, feedback, and project support.</span></span><span>→</span></button>
+        <button class="more-card more-card-v2" type="button" data-route="updates"><span><strong>Updates</strong><span>Product notifications and changelog.</span></span><span>→</span></button>
+      </div>
+
+      <div class="more-section-label">Tracker</div>
+      <div class="more-grid more-grid-v2">
+        <button class="more-card more-card-v2" type="button" data-route="brand"><span><strong>Choose Brand</strong><span>Open the motorcycle selection flow.</span></span><span>→</span></button>
+        <button class="more-card more-card-v2" type="button" data-action="request-brand"><span><strong>Request a Brand</strong><span>Future feedback feature.</span></span><span>→</span></button>
+        <button class="more-card more-card-v2" type="button" data-action="future"><span><strong>Settings</strong><span>Profile, notifications, and preferences.</span></span><span>→</span></button>
       </div>
     </section>
   `;
@@ -981,22 +1083,45 @@ function renderMore() {
 
 function renderAbout() {
   return `
-    <section class="screen info-screen">
-      <p class="kicker">About Us</p>
-      <h1 class="page-title">Built for riders</h1>
-      <p class="page-copy">Motorcycle Tracker helps riders explore bikes, save motorcycles to a personal garage, and keep maintenance organized in one clean product flow.</p>
-      <div class="detail-card block-gap"><h2>Mobile goal</h2><p>This screen keeps the mobile app feeling self-contained while still matching the desktop site structure.</p></div>
+    <section class="screen info-screen about-mobile-screen mobile-story-screen">
+      <p class="kicker">Project Overview</p>
+      <h1 class="mobile-display-title">Built for riders who want a cleaner way to track their bikes</h1>
+      <p class="page-copy mobile-large-copy">Motorcycle Tracker is a motorcycle management project focused on helping users explore bikes by brand and category, build a personal garage, and organize maintenance in one place.</p>
+
+      <div class="mobile-story-card primary-story-card">
+        <span>Motorcycle Tracker</span>
+        <h2>Why this project exists</h2>
+        <p>The goal is simple: make motorcycle selection and maintenance feel structured, visual, and easy to follow instead of scattered across notes, memory, and random tabs.</p>
+      </div>
+
+      <div class="mobile-mini-grid">
+        <article><strong>Explore</strong><span>Browse motorcycles by brand and category.</span></article>
+        <article><strong>Garage</strong><span>Save bikes and keep their details close.</span></article>
+        <article><strong>Maintain</strong><span>Track service records in a cleaner flow.</span></article>
+      </div>
     </section>
   `;
 }
 
 function renderContact() {
   return `
-    <section class="screen info-screen">
-      <p class="kicker">Contact</p>
-      <h1 class="page-title">Get in touch</h1>
-      <p class="page-copy">The desktop site has a contact page. This mobile screen is a matching app-style placeholder until the contact form is connected.</p>
-      <div class="detail-card block-gap"><h2>Contact form</h2><p>Backend/email submission is not connected yet on mobile.</p></div>
+    <section class="screen info-screen contact-mobile-screen mobile-story-screen">
+      <p class="kicker">Get in touch</p>
+      <h1 class="mobile-display-title">Questions, feedback, or project support</h1>
+      <p class="page-copy mobile-large-copy">Use this page to send a message about Motorcycle Tracker, report an issue, or ask a general question about the project.</p>
+
+      <div class="mobile-mini-grid contact-mini-grid-mobile">
+        <article><strong>Project Support</strong><span>Questions about the tracker, features, or general use.</span></article>
+        <article><strong>Bug Reports</strong><span>Found something broken or not working as expected.</span></article>
+      </div>
+
+      <form class="mobile-contact-form" id="mobile-contact-form">
+        <label>Name<input type="text" id="mobile-contact-name" placeholder="Your name" required /></label>
+        <label>Email<input type="email" id="mobile-contact-email" placeholder="Your email" required /></label>
+        <label>Subject<input type="text" id="mobile-contact-subject" placeholder="What is this about?" required /></label>
+        <label>Message<textarea id="mobile-contact-message" placeholder="Write your message here" required></textarea></label>
+        <button class="primary-btn" type="submit">Send Message</button>
+      </form>
     </section>
   `;
 }
@@ -1124,6 +1249,25 @@ function bindDynamicEvents() {
     bikeInput.focus({ preventScroll: true });
     bikeInput.setSelectionRange(bikeInput.value.length, bikeInput.value.length);
   }
+
+  const mobileContactForm = document.getElementById("mobile-contact-form");
+  if (mobileContactForm && !mobileContactForm.dataset.bound) {
+    mobileContactForm.dataset.bound = "true";
+    mobileContactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = document.getElementById("mobile-contact-name")?.value.trim() || "";
+      const email = document.getElementById("mobile-contact-email")?.value.trim() || "";
+      const subject = document.getElementById("mobile-contact-subject")?.value.trim() || "Motorcycle Tracker Contact";
+      const message = document.getElementById("mobile-contact-message")?.value.trim() || "";
+      const emailSubject = encodeURIComponent(`Motorcycle Tracker Contact: ${subject}`);
+      const emailBody = encodeURIComponent(`Name: ${name}
+Email: ${email}
+
+Message:
+${message}`);
+      window.location.href = `mailto:Kcolisah@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+    });
+  }
 }
 
 function handleRouteClick(target) {
@@ -1229,6 +1373,14 @@ function handleSelectionClick(target) {
   const maintenanceFilter = target.closest("[data-maintenance-filter]");
   if (maintenanceFilter) {
     state.selectedMaintenanceGarageId = maintenanceFilter.dataset.maintenanceFilter;
+    state.maintenanceStatusFilter = "upcoming";
+    render();
+    return true;
+  }
+
+  const maintenanceStatus = target.closest("[data-maintenance-status]");
+  if (maintenanceStatus) {
+    state.maintenanceStatusFilter = maintenanceStatus.dataset.maintenanceStatus || "upcoming";
     render();
     return true;
   }
