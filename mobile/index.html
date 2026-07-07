@@ -10,11 +10,6 @@
 <body>
   <div class="mobile-stage">
     <div class="app-shell" id="app-shell">
-      <div class="status-bar" aria-hidden="true">
-        <span>9:41</span>
-        <span class="status-icons">▰▰▰  5G  ▱</span>
-      </div>
-
       <header class="app-header" id="app-header"></header>
 
       <main class="app-main" id="app-main" aria-live="polite"></main>
@@ -38,11 +33,12 @@
         </button>
       </nav>
 
-      <div class="home-indicator" aria-hidden="true"></div>
+      <div class="mobile-overlay-layer" id="mobile-overlay-layer"></div>
       <div class="toast" id="toast" role="status"></div>
     </div>
   </div>
 
+  <script src="../JavaScript/updatesData.js"></script>
   <script src="mobile.js"></script>
 </body>
 </html>

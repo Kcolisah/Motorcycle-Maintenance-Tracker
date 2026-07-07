@@ -1,11 +1,78 @@
 const ASSET_BASE = "..";
+const API_ORIGIN =
+  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8082"
+    : "https://api.olysa.app";
+const API_BASE_URL = `${API_ORIGIN}/api`;
+
+const TOKEN_KEY = "mtAuthToken";
+const USER_KEY = "mtAuthUser";
+const READ_UPDATES_KEY = "mtReadUpdateIds";
+
+const fallbackMotorcycles = [
+  { id: 1, brand: "Aprilia", category: "Sport", model: "Aprilia RS457", year: 2026, price: 6799, image: "images/Aprilia/Sport/Aprilia_RS457.png" },
+  { id: 2, brand: "Aprilia", category: "Sport", model: "Aprilia RS660", year: 2026, price: 11299, image: "images/Aprilia/Sport/Aprilia_RS660.png" },
+  { id: 3, brand: "Aprilia", category: "SuperSport", model: "Aprilia RSV4", year: 2026, price: 18999, image: "images/Aprilia/SuperSport/Aprilia_RSV4.png" },
+
+  { id: 4, brand: "BMW", category: "Sport", model: "BMW G310RR", year: 2026, price: 4000, image: "images/BMW/Sport/BMW_G310RR.png" },
+  { id: 5, brand: "BMW", category: "Sport", model: "BMW F900R", year: 2026, price: 8995, image: "images/BMW/Sport/BMW_F900R.png" },
+  { id: 6, brand: "BMW", category: "SuperSport", model: "BMW S1000RR", year: 2026, price: 26405, image: "images/BMW/SuperSport/BMW_S1000RR.png" },
+  { id: 7, brand: "BMW", category: "HyperSport", model: "BMW M1000RR", year: 2026, price: 35000, image: "images/BMW/HyperSport/BMW_M1000RR.png" },
+
+  { id: 8, brand: "Ducati", category: "Sport", model: "Ducati SuperSport 950", year: 2026, price: 18395, image: "images/Ducati/Sport/Ducati_SuperSport_950.png" },
+  { id: 9, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V2", year: 2026, price: 16995, image: "images/Ducati/SuperSport/Ducati_Panigale_V2.png" },
+  { id: 10, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V4", year: 2026, price: 27795, image: "images/Ducati/SuperSport/Ducati_Panigale_V4.png" },
+  { id: 11, brand: "Ducati", category: "HyperSport", model: "Ducati Streetfighter V4", year: 2026, price: 29295, image: "images/Ducati/HyperSport/Ducati_Streetfighter_V4.png" },
+
+  { id: 12, brand: "Harley", category: "Cruiser", model: "Harley Iron 993", year: 2026, price: 10499, image: "images/Harley/Cruiser/Harley_Iron_993.png" },
+  { id: 13, brand: "Harley", category: "Cruiser", model: "Harley Low Rider S", year: 2026, price: 18999, image: "images/Harley/Cruiser/Harley_Low_Rider_S.png" },
+  { id: 14, brand: "Harley", category: "Cruiser", model: "Harley Sportster S", year: 2026, price: 15999, image: "images/Harley/Cruiser/Harley_Sportster_S.png" },
+
+  { id: 15, brand: "Honda", category: "Sport", model: "Honda CBR 500R", year: 2026, price: 6399, image: "images/Honda/Sport/Honda_CBR_500R.png" },
+  { id: 16, brand: "Honda", category: "Sport", model: "Honda CBR 650R", year: 2026, price: 9799, image: "images/Honda/Sport/Honda_CBR_650R.png" },
+  { id: 17, brand: "Honda", category: "SuperSport", model: "Honda CBR 600RR", year: 2026, price: 12499, image: "images/Honda/SuperSport/Honda_CBR_600RR.png" },
+  { id: 18, brand: "Honda", category: "SuperSport", model: "Honda CBR 1000RR", year: 2026, price: 16999, image: "images/Honda/SuperSport/Honda_CBR_1000RR.png" },
+
+  { id: 19, brand: "Indian", category: "Cruiser", model: "Indian Chief", year: 2026, price: 14999, image: "images/Indian/Cruiser/Indian_Chief.png" },
+  { id: 20, brand: "Indian", category: "Cruiser", model: "Indian Scout", year: 2026, price: 12999, image: "images/Indian/Cruiser/Indian_Scout.png" },
+
+  { id: 21, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 500R", year: 2026, price: 5399, image: "images/Kawasaki/Sport/Kawasaki_Ninja_500R.png" },
+  { id: 22, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 650R", year: 2026, price: 7599, image: "images/Kawasaki/Sport/Kawasaki_Ninja_650R.png" },
+  { id: 23, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX6R", year: 2026, price: 11599, image: "images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png" },
+  { id: 24, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX 10R", year: 2026, price: 16999, image: "images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_10R.png" },
+  { id: 25, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki-Ninja ZX14R", year: 2025, price: 17599, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_ZX_14R.png" },
+  { id: 26, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2", year: 2026, price: 34400, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_H2.png" },
+  { id: 27, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2R", year: 2026, price: 62100, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_H2R.png" },
+
+  { id: 28, brand: "KTM", category: "Sport", model: "KTM RC390", year: 2026, price: 5899, image: "images/KTM/Sport/KTM_RC390.png" },
+  { id: 29, brand: "KTM", category: "HyperSport", model: "KTM RC8C", year: 2026, price: 41499, image: "images/KTM/HyperSport/KTM_RC8C.png" },
+
+  { id: 30, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 250R", year: 2026, price: 5149, image: "images/Suzuki/Sport/Suzuki_GSX_250R.png" },
+  { id: 31, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 8R", year: 2026, price: 9699, image: "images/Suzuki/Sport/Suzuki_GSX_8R.png" },
+  { id: 32, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 600R", year: 2026, price: 12199, image: "images/Suzuki/SuperSport/Suzuki_GSX_600R.png" },
+  { id: 33, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 750R", year: 2026, price: 13249, image: "images/Suzuki/SuperSport/Suzuki_GSX_750R.png" },
+  { id: 34, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 1000R", year: 2026, price: 18645, image: "images/Suzuki/SuperSport/Suzuki_GSX_1000R.png" },
+  { id: 35, brand: "Suzuki", category: "HyperSport", model: "Suzuki GSX Hayabusa", year: 2026, price: 19499, image: "images/Suzuki/HyperSport/Suzuki_GSX_Hayabusa.png" },
+
+  { id: 36, brand: "Triumph", category: "Sport", model: "Triumph Daytona 660", year: 2026, price: 9395, image: "images/Triumph/Sport/Triumph_Daytona_660.png" },
+  { id: 37, brand: "Triumph", category: "Sport", model: "Triumph Speed Triple_RR", year: 2026, price: 21495, image: "images/Triumph/Sport/Triumph_Speed_Triple_RR.png" },
+  { id: 38, brand: "Triumph", category: "SuperSport", model: "Triumph Daytona 765", year: 2026, price: 9395, image: "images/Triumph/SuperSport/Triumph_Daytona_765.png" },
+  { id: 39, brand: "Triumph", category: "SuperSport", model: "Triumph Speed Triple 1200 RS", year: 2026, price: 21545, image: "images/Triumph/SuperSport/Triumph_Speed_Triple_1200_RS.png" },
+
+  { id: 40, brand: "Yamaha", category: "Sport", model: "Yamaha R3", year: 2026, price: 5499, image: "images/Yamaha/Sport/Yamaha_R3.png" },
+  { id: 41, brand: "Yamaha", category: "Sport", model: "Yamaha R7", year: 2026, price: 9399, image: "images/Yamaha/Sport/Yamaha_R7.png" },
+  { id: 42, brand: "Yamaha", category: "SuperSport", model: "Yamaha R6", year: 2026, price: 13499, image: "images/Yamaha/SuperSport/Yamaha_R6.png" },
+  { id: 43, brand: "Yamaha", category: "SuperSport", model: "Yamaha R1", year: 2026, price: 19199, image: "images/Yamaha/SuperSport/Yamaha_R1.png" }
+];;
 
 const brandLogoMap = {
   Aprilia: `${ASSET_BASE}/images/Aprilia/Aprilia_Logo.png`,
   BMW: `${ASSET_BASE}/images/BMW/BMW_Logo.png`,
   Ducati: `${ASSET_BASE}/images/Ducati/Ducati_Logo.png`,
+  Harley: `${ASSET_BASE}/images/Harley/Harley_Logo.png`,
   "Harley-Davidson": `${ASSET_BASE}/images/Harley/Harley_Logo.png`,
   Honda: `${ASSET_BASE}/images/Honda/Honda_Logo.png`,
+  Indian: `${ASSET_BASE}/images/Indian/Indian_Logo.png`,
   "Indian Motorcycle": `${ASSET_BASE}/images/Indian/Indian_Logo.png`,
   Kawasaki: `${ASSET_BASE}/images/Kawasaki/Kawasaki_Logo.png`,
   KTM: `${ASSET_BASE}/images/KTM/KTM_Logo.png`,
@@ -14,103 +81,50 @@ const brandLogoMap = {
   Yamaha: `${ASSET_BASE}/images/Yamaha/Yamaha_Logo.png`,
 };
 
-const brands = Object.keys(brandLogoMap);
-
-const garageBikes = [
-  {
-    id: "ducati-v4",
-    brand: "Ducati",
-    model: "Ducati Panigale V4",
-    year: 2022,
-    mileage: 4250,
-    price: 23999,
-    image: `${ASSET_BASE}/images/Ducati/SuperSport/Ducati_Panigale_V4.png`,
-    logo: brandLogoMap.Ducati,
-    nextService: "2,500 mi",
-    lastService: "May 1, 2024",
-    serviceCount: 6,
-    about: "The Panigale V4 is powered by a 1,103 cc Desmosedici Stradale engine and designed for high performance on the track and street.",
-    specs: [
-      ["Engine", "1,103 cc"],
-      ["Power", "214 hp"],
-      ["Torque", "90.4 lb-ft"],
-      ["Transmission", "6-speed"],
-      ["Weight", "385 lbs"],
-      ["Fuel Capacity", "4.0 gal"],
-    ],
-  },
-  {
-    id: "yamaha-r1",
-    brand: "Yamaha",
-    model: "Yamaha R1",
-    year: 2021,
-    mileage: 7800,
-    price: 19199,
-    image: `${ASSET_BASE}/images/Yamaha/SuperSport/Yamaha_R1.png`,
-    logo: brandLogoMap.Yamaha,
-    nextService: "1,200 mi",
-    lastService: "Apr 12, 2024",
-    serviceCount: 4,
-    about: "A sharp liter-class supersport with crossplane character, aggressive ergonomics, and serious track-focused personality.",
-    specs: [
-      ["Engine", "998 cc"],
-      ["Power", "198 hp"],
-      ["Torque", "83 lb-ft"],
-      ["Transmission", "6-speed"],
-      ["Weight", "448 lbs"],
-      ["Fuel Capacity", "4.5 gal"],
-    ],
-  },
-  {
-    id: "zx6r",
-    brand: "Kawasaki",
-    model: "Kawasaki Ninja ZX-6R",
-    year: 2023,
-    mileage: 2150,
-    price: 11599,
-    image: `${ASSET_BASE}/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png`,
-    logo: brandLogoMap.Kawasaki,
-    nextService: "3,000 mi",
-    lastService: "Mar 8, 2024",
-    serviceCount: 3,
-    about: "A focused 636 cc supersport that balances street usability with aggressive middleweight performance.",
-    specs: [
-      ["Engine", "636 cc"],
-      ["Power", "127 hp"],
-      ["Torque", "52 lb-ft"],
-      ["Transmission", "6-speed"],
-      ["Weight", "430 lbs"],
-      ["Fuel Capacity", "4.5 gal"],
-    ],
-  },
+const staticServicePreview = [
+  { date: "May 1, 2024", title: "Oil Change", description: "Shell Advance 15W-50", mileage: "4,200 mi", cost: "$120.00", status: "DONE" },
+  { date: "Feb 10, 2024", title: "Chain Adjustment", description: "Adjusted and lubricated", mileage: "3,800 mi", cost: "$80.00", status: "DONE" },
+  { date: "Nov 20, 2023", title: "Tire Replacement", description: "Pirelli Diablo Rosso IV", mileage: "3,200 mi", cost: "$400.00", status: "DONE" },
 ];
 
-const serviceRecords = [
-  { date: "May 1, 2024", task: "Oil Change", note: "Shell Advance 15W-50", mileage: "4,200 mi", cost: "$120.00" },
-  { date: "Feb 10, 2024", task: "Chain Adjustment", note: "Adjusted and lubricated", mileage: "3,800 mi", cost: "$80.00" },
-  { date: "Nov 20, 2023", task: "Tire Replacement", note: "Pirelli Diablo Rosso IV", mileage: "3,200 mi", cost: "$400.00" },
-  { date: "Aug 15, 2023", task: "Brake Fluid Change", note: "Motul RBF 600", mileage: "2,600 mi", cost: "$90.00" },
-  { date: "May 10, 2023", task: "Oil Change", note: "Shell Advance 15W-50", mileage: "1,800 mi", cost: "$120.00" },
-  { date: "Mar 5, 2023", task: "Initial Service", note: "Dealer service", mileage: "600 mi", cost: "$150.00" },
+const previewGarageItems = [
+  buildPreviewGarageItem("ducati-v4", "Ducati Panigale V4", "Ducati", "SuperSport", 2022, 4250, 23999, `${ASSET_BASE}/images/Ducati/SuperSport/Ducati_Panigale_V4.png`),
+  buildPreviewGarageItem("yamaha-r1", "Yamaha R1", "Yamaha", "SuperSport", 2021, 7800, 19199, `${ASSET_BASE}/images/Yamaha/SuperSport/Yamaha_R1.png`),
+  buildPreviewGarageItem("zx6r", "Kawasaki Ninja ZX-6R", "Kawasaki", "SuperSport", 2023, 2150, 11599, `${ASSET_BASE}/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png`),
 ];
 
 const state = {
   view: "home",
+  previousView: "home",
   selectedBrand: "Ducati",
-  selectedBikeId: "ducati-v4",
+  selectedCategory: "SuperSport",
+  selectedCatalogBikeId: null,
+  selectedGarageId: null,
+  selectedMaintenanceGarageId: null,
   detailTab: "Overview",
   brandQuery: "",
+  bikeQuery: "",
+  catalog: fallbackMotorcycles.map(normalizeCatalogBike),
+  garageItems: [],
+  taskMap: new Map(),
+  user: null,
+  authReady: false,
+  garageReady: false,
+  catalogReady: false,
+  backendOnline: false,
+  updatesOpen: false,
+  profileOpen: false,
 };
 
 const appShell = document.getElementById("app-shell");
 const appHeader = document.getElementById("app-header");
 const appMain = document.getElementById("app-main");
 const bottomNav = document.getElementById("bottom-nav");
+const overlayLayer = document.getElementById("mobile-overlay-layer");
 const toast = document.getElementById("toast");
 
 const icons = {
   bell: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.8L4.7 16a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4L18 12.8V9a6 6 0 0 0-6-6Z"></path><path d="M9.5 20a2.5 2.5 0 0 0 5 0"></path></svg>`,
-  user: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="8" r="4"></circle></svg>`,
   back: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>`,
   share: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4"></path><path d="m8 8 4-4 4 4"></path><path d="M5 13v6h14v-6"></path></svg>`,
   dots: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg>`,
@@ -124,47 +138,447 @@ const icons = {
   chevron: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>`,
 };
 
+function buildPreviewGarageItem(id, model, brand, category, year, mileage, price, image) {
+  return {
+    id,
+    currentMileage: mileage,
+    addedAt: "2024-05-01",
+    motorcycle: {
+      id,
+      model,
+      brand,
+      category,
+      year,
+      price,
+      image,
+      imageUrl: image,
+    },
+  };
+}
+
+function normalizeCatalogBike(bike) {
+  return {
+    id: bike.id,
+    brand: bike.brand || "Unknown Brand",
+    category: bike.category || "Unknown Category",
+    model: bike.model || "Saved Motorcycle",
+    year: bike.year || "N/A",
+    price: Number(bike.price || 0),
+    image: resolveAssetPath(bike.imageUrl || bike.image_url || bike.image || "images/LOGO.png"),
+  };
+}
+
+function normalizeGarageItem(item) {
+  const motorcycle = item?.motorcycle || item?.bike || item || {};
+  return {
+    id: String(item?.id || item?.garageId || motorcycle?.garageId || motorcycle?.id || cryptoRandomId()),
+    motorcycleId: motorcycle?.id || item?.motorcycleId || item?.bikeId || null,
+    currentMileage: Number(item?.currentMileage ?? item?.mileage ?? motorcycle?.mileage ?? 0),
+    addedAt: item?.addedAt || item?.createdAt || item?.dateAdded || null,
+    purchaseDate: item?.purchaseDate || item?.createdAt || item?.addedAt || null,
+    motorcycle: {
+      id: motorcycle?.id || item?.motorcycleId || null,
+      model: motorcycle?.model || item?.model || "Saved Motorcycle",
+      brand: motorcycle?.brand || item?.brand || "Unknown Brand",
+      category: motorcycle?.category || item?.category || "Unknown Category",
+      year: motorcycle?.year || item?.year || "N/A",
+      price: Number(motorcycle?.price ?? item?.price ?? 0),
+      image: resolveAssetPath(motorcycle?.imageUrl || motorcycle?.image_url || motorcycle?.image || motorcycle?.imagePath || item?.image || "images/LOGO.png"),
+    },
+  };
+}
+
+function normalizeTask(task) {
+  return {
+    id: String(task?.id || cryptoRandomId()),
+    title: task?.title || task?.task || task?.service || "Maintenance Task",
+    description: task?.description || task?.note || task?.notes || "No description added.",
+    dueDate: task?.dueDate || task?.date || task?.serviceDate || null,
+    status: task?.status || "PENDING",
+    mileage: task?.mileage || task?.currentMileage || "--",
+    cost: task?.cost || task?.totalCost || null,
+  };
+}
+
+function cryptoRandomId() {
+  return `local-${Math.random().toString(36).slice(2)}`;
+}
+
+function resolveAssetPath(path) {
+  const raw = String(path || "");
+  if (!raw) return `${ASSET_BASE}/images/LOGO.png`;
+  if (raw.startsWith("http") || raw.startsWith("data:") || raw.startsWith("../")) return raw;
+  if (raw.startsWith("/")) return raw;
+  return `${ASSET_BASE}/${raw}`;
+}
+
+function getLogoForBrand(brand) {
+  return brandLogoMap[brand] || brandLogoMap[normalizeBrandName(brand)] || `${ASSET_BASE}/images/LOGO.png`;
+}
+
+function normalizeBrandName(brand) {
+  if (brand === "Harley-Davidson") return "Harley";
+  if (brand === "Indian Motorcycle") return "Indian";
+  return brand;
+}
+
 function formatNumber(value) {
-  return value.toLocaleString();
+  return Number(value || 0).toLocaleString();
 }
 
 function formatMoney(value) {
-  return `$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+  const number = Number(value || 0);
+  if (!number) return "$0";
+  return `$${number.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
-function selectedBike() {
-  return garageBikes.find((bike) => bike.id === state.selectedBikeId) || garageBikes[0];
+function formatDate(value) {
+  if (!value) return "--";
+  const date = new Date(String(value).includes("T") ? value : `${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return "--";
+  return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function showToast(message) {
   toast.textContent = message;
   toast.classList.add("show");
   window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1900);
+  showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2100);
+}
+
+function getStoredUser() {
+  try {
+    const user = localStorage.getItem(USER_KEY);
+    return user ? JSON.parse(user) : null;
+  } catch {
+    return null;
+  }
+}
+
+function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+function getInitials(user) {
+  if (user?.isDemo) return "D";
+  const source = user?.username || user?.email || "Guest";
+  return source
+    .split(/[\s._-]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("") || "GU";
+}
+
+function normalizeUser(user) {
+  if (!user) return null;
+  return {
+    id: user.id,
+    username: user.username || (user.isDemo ? "Demo Rider" : "Rider"),
+    email: user.email || (user.isDemo ? "demo@motorcycle-tracker.local" : ""),
+    isDemo: Boolean(user.isDemo),
+    role: user.isDemo ? "Demo Account" : "Rider Account",
+    initials: getInitials(user),
+  };
+}
+
+function saveAuth(token, user) {
+  if (token) localStorage.setItem(TOKEN_KEY, token);
+  localStorage.setItem(USER_KEY, JSON.stringify(normalizeUser(user)));
+  state.user = normalizeUser(user);
+}
+
+function clearAuth() {
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(USER_KEY);
+  state.user = null;
+}
+
+async function apiRequest(path, options = {}) {
+  const headers = new Headers(options.headers || {});
+  const token = getToken();
+  if (token && !headers.has("Authorization")) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+  const response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+  if (response.status === 401 || response.status === 403) {
+    clearAuth();
+  }
+  return response;
+}
+
+async function readJson(response) {
+  const text = await response.text();
+  if (!text) return null;
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
+async function fetchJson(path, options = {}) {
+  const response = await apiRequest(path, options);
+  const data = await readJson(response);
+  if (!response.ok) {
+    throw new Error(`Backend returned ${response.status}`);
+  }
+  return data;
+}
+
+async function refreshCurrentUser() {
+  if (!getToken()) return null;
+  try {
+    const user = await fetchJson("/auth/me");
+    saveAuth(getToken(), user);
+    return state.user;
+  } catch {
+    return null;
+  }
+}
+
+async function signInDemo() {
+  const response = await apiRequest("/auth/demo", { method: "POST" });
+  const data = await readJson(response);
+  if (!response.ok || !data?.token) {
+    throw new Error("Demo login failed.");
+  }
+
+  saveAuth(data.token, {
+    username: data.username || "Demo Rider",
+    email: data.email || "demo@motorcycle-tracker.local",
+    isDemo: true,
+  });
+
+  await refreshCurrentUser();
+  state.authReady = true;
+  render();
+  return state.user;
+}
+
+async function initializeAuth() {
+  state.user = normalizeUser(getStoredUser()) || null;
+
+  if (getToken()) {
+    const user = await refreshCurrentUser();
+    state.user = user || state.user;
+    state.authReady = true;
+    return;
+  }
+
+  try {
+    await signInDemo();
+  } catch (error) {
+    console.warn("Demo auth unavailable; using local mobile preview mode.", error);
+    state.user = normalizeUser({ username: "Demo Rider", email: "Preview mode", isDemo: true });
+    state.authReady = true;
+  }
+}
+
+async function loadCatalog() {
+  try {
+    const backendMotorcycles = await fetchJson("/motorcycles");
+    if (Array.isArray(backendMotorcycles) && backendMotorcycles.length) {
+      state.catalog = backendMotorcycles.map(normalizeCatalogBike);
+      state.backendOnline = true;
+    }
+  } catch (error) {
+    console.warn("Using static motorcycle catalog for mobile.", error);
+  } finally {
+    state.catalogReady = true;
+    render();
+  }
+}
+
+async function loadTasksForGarage(garageId) {
+  const tasks = await fetchJson(`/garage/${encodeURIComponent(garageId)}/tasks`);
+  const normalizedTasks = Array.isArray(tasks) ? tasks.map(normalizeTask) : [];
+  state.taskMap.set(String(garageId), normalizedTasks);
+  return normalizedTasks;
+}
+
+async function loadAllTaskSummaries() {
+  await Promise.allSettled(
+    state.garageItems.map(async (item) => {
+      if (!item.id) return;
+      await loadTasksForGarage(item.id);
+    })
+  );
+}
+
+async function loadGarage() {
+  try {
+    const garageItems = await fetchJson("/garage");
+    state.garageItems = Array.isArray(garageItems) ? garageItems.map(normalizeGarageItem) : [];
+    state.backendOnline = true;
+    await loadAllTaskSummaries();
+  } catch (error) {
+    console.warn("Using preview garage data for mobile.", error);
+    state.garageItems = previewGarageItems.map(normalizeGarageItem);
+    previewGarageItems.forEach((item, index) => {
+      state.taskMap.set(String(item.id), index === 0 ? staticServicePreview.map(normalizeTask) : []);
+    });
+  } finally {
+    if (!state.selectedGarageId && state.garageItems[0]) {
+      state.selectedGarageId = String(state.garageItems[0].id);
+    }
+    if (!state.selectedMaintenanceGarageId && state.garageItems[0]) {
+      state.selectedMaintenanceGarageId = String(state.garageItems[0].id);
+    }
+    state.garageReady = true;
+    render();
+  }
 }
 
 function routeTo(view) {
+  state.previousView = state.view;
   state.view = view;
+  state.updatesOpen = false;
+  state.profileOpen = false;
+  render();
+}
+
+function backToPrevious(fallback = "home") {
+  routeTo(state.previousView || fallback);
+}
+
+function getBrands() {
+  return [...new Set(state.catalog.map((bike) => bike.brand))].sort((a, b) => a.localeCompare(b));
+}
+
+function getCategoriesForBrand(brand) {
+  return [...new Set(state.catalog.filter((bike) => bike.brand === brand).map((bike) => bike.category))].sort();
+}
+
+function getBikesForSelection() {
+  const query = state.bikeQuery.trim().toLowerCase();
+  return state.catalog.filter((bike) => {
+    const brandMatch = !state.selectedBrand || bike.brand === state.selectedBrand;
+    const categoryMatch = !state.selectedCategory || bike.category === state.selectedCategory;
+    const queryMatch = !query || `${bike.brand} ${bike.category} ${bike.model}`.toLowerCase().includes(query);
+    return brandMatch && categoryMatch && queryMatch;
+  });
+}
+
+function getCatalogBikeById(id) {
+  return state.catalog.find((bike) => String(bike.id) === String(id)) || state.catalog[0];
+}
+
+function getGarageItemById(id) {
+  return state.garageItems.find((item) => String(item.id) === String(id)) || state.garageItems[0] || null;
+}
+
+function selectedGarageItem() {
+  return getGarageItemById(state.selectedGarageId);
+}
+
+function selectedCatalogBike() {
+  return getCatalogBikeById(state.selectedCatalogBikeId);
+}
+
+function getTasks(garageId) {
+  return state.taskMap.get(String(garageId)) || [];
+}
+
+function getAllTasks() {
+  return Array.from(state.taskMap.values()).flat();
+}
+
+function summarizeGarageTasks(garageId) {
+  const tasks = getTasks(garageId);
+  const active = tasks.filter((task) => task.status !== "DONE");
+  const done = tasks.filter((task) => task.status === "DONE");
+  const lastDone = done.find((task) => task.dueDate) || done[0] || null;
+  const nextActive = active.find((task) => task.dueDate) || active[0] || null;
+  return {
+    total: tasks.length,
+    active: active.length,
+    done: done.length,
+    lastService: lastDone?.dueDate ? formatDate(lastDone.dueDate) : done.length ? "Completed" : "--",
+    nextService: nextActive?.dueDate ? formatDate(nextActive.dueDate) : active.length ? "Open task" : "--",
+  };
+}
+
+function getUpdates() {
+  if (typeof window.getAllUpdates === "function") return window.getAllUpdates();
+  if (Array.isArray(window.updates)) return window.updates;
+  return [
+    { id: "mobile-preview", category: "Mobile", title: "Mobile App UI", shortText: "Testing the new app-style mobile interface.", fullText: "Testing the new app-style mobile interface." },
+  ];
+}
+
+function getReadUpdateIds() {
+  try {
+    const ids = JSON.parse(localStorage.getItem(READ_UPDATES_KEY));
+    return Array.isArray(ids) ? ids : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveReadUpdateIds(ids) {
+  localStorage.setItem(READ_UPDATES_KEY, JSON.stringify(ids));
+}
+
+function isUpdateRead(id) {
+  return getReadUpdateIds().includes(id);
+}
+
+function getUnreadUpdates() {
+  return getUpdates().filter((update) => !isUpdateRead(update.id));
+}
+
+function toggleUpdateRead(id) {
+  const ids = getReadUpdateIds();
+  if (ids.includes(id)) {
+    saveReadUpdateIds(ids.filter((readId) => readId !== id));
+  } else {
+    saveReadUpdateIds([...ids, id]);
+  }
+  render();
+}
+
+function toggleAllUpdatesRead() {
+  const updates = getUpdates();
+  const unread = getUnreadUpdates();
+  saveReadUpdateIds(unread.length ? updates.map((update) => update.id) : []);
   render();
 }
 
 function renderHeader() {
-  const bike = selectedBike();
+  const avatar = escapeHtml(state.user?.initials || "D");
+  const unreadCount = getUnreadUpdates().length;
 
-  if (state.view === "brand") {
+  if (["brand", "category", "bike-select", "bike-preview", "learn", "about", "contact", "updates"].includes(state.view)) {
     appHeader.innerHTML = `
-      <button class="back-btn" type="button" data-route="home" aria-label="Back to home">${icons.back}</button>
-      <div class="header-actions"></div>
+      <button class="back-btn" type="button" data-route="${state.view === "brand" ? "home" : state.view === "category" ? "brand" : state.view === "bike-select" ? "category" : state.view === "bike-preview" ? "bike-select" : state.view === "learn" ? "home" : "more"}" aria-label="Back">${icons.back}</button>
+      <div class="header-actions">
+        <button class="icon-btn notification-btn ${unreadCount ? "has-unread" : ""}" type="button" data-action="toggle-updates" aria-label="Updates">
+          ${icons.bell}${unreadCount ? `<span class="notification-badge">${unreadCount > 99 ? "99+" : unreadCount}</span>` : ""}
+        </button>
+        <button class="profile-btn" type="button" data-action="toggle-profile" aria-label="Profile">${avatar}</button>
+      </div>
     `;
     return;
   }
 
   if (state.view === "detail") {
+    const item = selectedGarageItem();
+    const model = item?.motorcycle?.model || "motorcycle";
     appHeader.innerHTML = `
       <button class="back-btn" type="button" data-route="garage" aria-label="Back to garage">${icons.back}</button>
       <div class="header-actions">
-        <button class="icon-btn" type="button" data-action="share" aria-label="Share ${bike.model}">${icons.share}</button>
-        <button class="more-btn" type="button" data-action="more" aria-label="More options">${icons.dots}</button>
+        <button class="icon-btn" type="button" data-action="share" aria-label="Share ${escapeHtml(model)}">${icons.share}</button>
+        <button class="more-btn" type="button" data-action="bike-menu" aria-label="More options">${icons.dots}</button>
       </div>
     `;
     return;
@@ -179,8 +593,10 @@ function renderHeader() {
       </div>
     </div>
     <div class="header-actions">
-      <button class="icon-btn" type="button" data-action="updates" aria-label="Updates">${icons.bell}</button>
-      <button class="icon-btn" type="button" data-action="profile" aria-label="Profile">${icons.user}</button>
+      <button class="icon-btn notification-btn ${unreadCount ? "has-unread" : ""}" type="button" data-action="toggle-updates" aria-label="Updates">
+        ${icons.bell}${unreadCount ? `<span class="notification-badge">${unreadCount > 99 ? "99+" : unreadCount}</span>` : ""}
+      </button>
+      <button class="profile-btn" type="button" data-action="toggle-profile" aria-label="Profile">${avatar}</button>
     </div>
   `;
 }
@@ -199,7 +615,7 @@ function renderHome() {
       </div>
 
       <button class="primary-btn" type="button" data-route="brand">Select Motorcycle <span>→</span></button>
-      <button class="secondary-btn" type="button" data-action="learn">Learn More</button>
+      <button class="secondary-btn" type="button" data-route="learn">Learn More</button>
 
       <div class="section-head">
         <h2>Popular Brands</h2>
@@ -208,9 +624,9 @@ function renderHome() {
 
       <div class="brand-strip">
         ${popular.map((brand) => `
-          <button class="brand-mini" type="button" data-brand="${brand}" data-route="brand">
-            <img src="${brandLogoMap[brand]}" alt="${brand} logo" />
-            <span>${brand}</span>
+          <button class="brand-mini" type="button" data-select-brand="${escapeHtml(brand)}" data-route="category">
+            <img src="${getLogoForBrand(brand)}" alt="${escapeHtml(brand)} logo" />
+            <span>${escapeHtml(brand)}</span>
           </button>
         `).join("")}
       </div>
@@ -218,9 +634,25 @@ function renderHome() {
   `;
 }
 
+function renderLearn() {
+  return `
+    <section class="screen info-screen">
+      <p class="kicker">Tracker Flow</p>
+      <h1 class="page-title">How it works</h1>
+      <p class="page-copy">This matches the desktop Learn More flow: brand first, category second, then motorcycle results.</p>
+      <div class="step-list">
+        <article class="step-card"><span>01</span><strong>Select your brand</strong><p>Choose the motorcycle brand you want to explore first.</p></article>
+        <article class="step-card"><span>02</span><strong>Pick a category</strong><p>Only valid categories for that brand will be shown.</p></article>
+        <article class="step-card"><span>03</span><strong>View motorcycles</strong><p>See the motorcycles available for that brand and category.</p></article>
+      </div>
+      <button class="primary-btn" type="button" data-route="brand">Start Selection</button>
+    </section>
+  `;
+}
+
 function renderBrand() {
   const query = state.brandQuery.trim().toLowerCase();
-  const filteredBrands = brands.filter((brand) => brand.toLowerCase().includes(query));
+  const filteredBrands = getBrands().filter((brand) => brand.toLowerCase().includes(query));
 
   return `
     <section class="screen brand-screen">
@@ -233,9 +665,9 @@ function renderBrand() {
 
       <div class="brand-grid">
         ${filteredBrands.map((brand) => `
-          <button class="brand-card ${brand === state.selectedBrand ? "active" : ""}" type="button" data-select-brand="${brand}">
-            <img src="${brandLogoMap[brand]}" alt="${brand} logo" />
-            <span>${brand}</span>
+          <button class="brand-card ${brand === state.selectedBrand ? "active" : ""}" type="button" data-select-brand="${escapeHtml(brand)}" data-route="category">
+            <img src="${getLogoForBrand(brand)}" alt="${escapeHtml(brand)} logo" />
+            <span>${escapeHtml(brand)}</span>
           </button>
         `).join("")}
       </div>
@@ -250,64 +682,143 @@ function renderBrand() {
   `;
 }
 
+function renderCategory() {
+  const categories = getCategoriesForBrand(state.selectedBrand);
+  return `
+    <section class="screen category-screen">
+      <p class="kicker">${escapeHtml(state.selectedBrand)}</p>
+      <h1 class="page-title">Pick Category</h1>
+      <p class="page-copy">Only categories available for ${escapeHtml(state.selectedBrand)} are shown.</p>
+      <div class="category-grid">
+        ${categories.map((category) => `
+          <button class="category-card ${category === state.selectedCategory ? "active" : ""}" type="button" data-select-category="${escapeHtml(category)}" data-route="bike-select">
+            <span>${escapeHtml(category)}</span>
+            <small>${state.catalog.filter((bike) => bike.brand === state.selectedBrand && bike.category === category).length} bikes</small>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderBikeSelect() {
+  const bikes = getBikesForSelection();
+  return `
+    <section class="screen bike-select-screen">
+      <p class="kicker">${escapeHtml(state.selectedBrand)} • ${escapeHtml(state.selectedCategory)}</p>
+      <h1 class="page-title">Select Bike</h1>
+      <label class="search-wrap">
+        ${icons.search}
+        <input id="bike-search" type="search" placeholder="Search motorcycle..." value="${escapeHtml(state.bikeQuery)}" autocomplete="off" />
+      </label>
+      <div class="catalog-list">
+        ${bikes.map((bike) => renderCatalogCard(bike)).join("")}
+      </div>
+      ${bikes.length ? "" : `<div class="empty-state">No motorcycle matched that search.</div>`}
+    </section>
+  `;
+}
+
+function renderCatalogCard(bike) {
+  return `
+    <article class="bike-card catalog-card">
+      <div class="bike-thumb"><img src="${bike.image}" alt="${escapeHtml(bike.model)}" /></div>
+      <div class="bike-info">
+        <div>
+          <h3>${escapeHtml(bike.model)}</h3>
+          <div class="meta-row"><span>${escapeHtml(String(bike.year))}</span><span class="dot-sep"></span><span>${escapeHtml(bike.category)}</span></div>
+        </div>
+        <div class="card-actions">
+          <button class="detail-btn" type="button" data-catalog-detail="${escapeHtml(String(bike.id))}">View →</button>
+          <button class="overflow-btn" type="button" data-add-catalog-bike="${escapeHtml(String(bike.id))}" aria-label="Add ${escapeHtml(bike.model)}">+</button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderBikePreview() {
+  const bike = selectedCatalogBike();
+  if (!bike) return `<section class="screen"><div class="empty-state">No motorcycle selected.</div></section>`;
+
+  return `
+    <section class="screen detail-screen">
+      <div class="detail-hero">
+        <div class="detail-brand-row">
+          <img src="${getLogoForBrand(bike.brand)}" alt="${escapeHtml(bike.brand)} logo" />
+          <div>
+            <h1>${escapeHtml(bike.model)}</h1>
+            <span>${escapeHtml(String(bike.year))}</span>
+          </div>
+        </div>
+        <div class="detail-bike-stage"><img src="${bike.image}" alt="${escapeHtml(bike.model)}" /></div>
+      </div>
+      <div class="quick-specs">
+        <div class="quick-spec"><span>Brand</span><strong>${escapeHtml(bike.brand)}</strong></div>
+        <div class="quick-spec"><span>Category</span><strong>${escapeHtml(bike.category)}</strong></div>
+        <div class="quick-spec"><span>Price</span><strong>${formatMoney(bike.price)}</strong></div>
+      </div>
+      <div class="detail-card">
+        <h2>Add to Garage</h2>
+        <p>This uses the same backend idea as desktop: select a motorcycle, enter mileage, then save it to your garage.</p>
+        <button class="primary-btn block-gap" type="button" data-add-catalog-bike="${escapeHtml(String(bike.id))}">Add to Garage</button>
+      </div>
+    </section>
+  `;
+}
+
 function renderGarage() {
-  const totalMileage = garageBikes.reduce((sum, bike) => sum + bike.mileage, 0);
-  const totalSpent = 1250;
+  const totalMileage = state.garageItems.reduce((sum, item) => sum + Number(item.currentMileage || 0), 0);
+  const totalDue = state.garageItems.reduce((sum, item) => sum + summarizeGarageTasks(item.id).active, 0);
 
   return `
     <section class="screen garage-screen">
       <div class="title-row">
         <div>
           <h1 class="page-title">My Garage</h1>
-          <p class="page-copy">Your motorcycles at a glance.</p>
+          <p class="page-copy">${state.backendOnline ? "Connected to backend." : "Preview mode. Backend not available."}</p>
         </div>
         <button class="add-btn" type="button" data-action="add-bike">+ Add Bike</button>
       </div>
 
       <div class="garage-list">
-        ${garageBikes.map(renderBikeCard).join("")}
+        ${state.garageItems.length ? state.garageItems.map(renderGarageCard).join("") : renderEmptyGarage()}
       </div>
 
       <div class="stat-grid">
-        <div class="stat-card">
-          <span class="stat-icon">${icons.bike}</span>
-          <span class="stat-copy"><span>Total Bikes</span><strong>${garageBikes.length}</strong></span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon blue">${icons.gauge}</span>
-          <span class="stat-copy"><span>Total Mileage</span><strong>${formatNumber(totalMileage)} mi</strong></span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon">${icons.wrench}</span>
-          <span class="stat-copy"><span>Maintenance Due</span><strong>1</strong></span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon green">${icons.wallet}</span>
-          <span class="stat-copy"><span>Total Spent</span><strong>$1,250.00</strong></span>
-        </div>
+        <div class="stat-card"><span class="stat-icon">${icons.bike}</span><span class="stat-copy"><span>Total Bikes</span><strong>${state.garageItems.length}</strong></span></div>
+        <div class="stat-card"><span class="stat-icon blue">${icons.gauge}</span><span class="stat-copy"><span>Total Mileage</span><strong>${formatNumber(totalMileage)} mi</strong></span></div>
+        <div class="stat-card"><span class="stat-icon">${icons.wrench}</span><span class="stat-copy"><span>Maintenance Due</span><strong>${totalDue}</strong></span></div>
+        <div class="stat-card"><span class="stat-icon green">${icons.wallet}</span><span class="stat-copy"><span>Total Spent</span><strong>$0</strong></span></div>
       </div>
     </section>
   `;
 }
 
-function renderBikeCard(bike) {
+function renderEmptyGarage() {
+  return `
+    <div class="empty-state stacked-empty">
+      <p>No motorcycles saved yet.</p>
+      <button class="primary-btn" type="button" data-action="add-bike">Add Your First Bike</button>
+    </div>
+  `;
+}
+
+function renderGarageCard(item) {
+  const bike = item.motorcycle;
+  const summary = summarizeGarageTasks(item.id);
   return `
     <article class="bike-card">
-      <div class="bike-thumb">
-        <img src="${bike.image}" alt="${bike.model}" />
-      </div>
+      <div class="bike-thumb"><img src="${bike.image}" alt="${escapeHtml(bike.model)}" /></div>
       <div class="bike-info">
         <div>
-          <h3>${bike.model}</h3>
-          <div class="meta-row">
-            <span>${bike.year}</span>
-            <span class="dot-sep"></span>
-            <span>${formatNumber(bike.mileage)} mi</span>
-          </div>
+          <h3>${escapeHtml(bike.model)}</h3>
+          <div class="meta-row"><span>${escapeHtml(String(bike.year))}</span><span class="dot-sep"></span><span>${formatNumber(item.currentMileage)} mi</span></div>
+          ${summary.active ? `<span class="status-pill warn">${summary.active} open task${summary.active === 1 ? "" : "s"}</span>` : `<span class="status-pill ok">No open tasks</span>`}
         </div>
         <div class="card-actions">
-          <button class="detail-btn" type="button" data-bike-detail="${bike.id}">View Details →</button>
-          <button class="overflow-btn" type="button" data-action="bike-menu" aria-label="More options for ${bike.model}">···</button>
+          <button class="detail-btn" type="button" data-garage-detail="${escapeHtml(String(item.id))}">View Details →</button>
+          <button class="overflow-btn" type="button" data-action="bike-menu" aria-label="More options for ${escapeHtml(bike.model)}">···</button>
         </div>
       </div>
     </article>
@@ -315,133 +826,123 @@ function renderBikeCard(bike) {
 }
 
 function renderDetail() {
-  const bike = selectedBike();
+  const item = selectedGarageItem();
+  if (!item) return `<section class="screen"><div class="empty-state">No garage motorcycle selected.</div></section>`;
+  const bike = item.motorcycle;
   const tabs = ["Overview", "Maintenance", "Notes", "Docs"];
 
   return `
     <section class="screen detail-screen">
       <div class="detail-hero">
         <div class="detail-brand-row">
-          <img src="${bike.logo}" alt="${bike.brand} logo" />
-          <div>
-            <h1>${bike.model}</h1>
-            <span>${bike.year}</span>
-          </div>
+          <img src="${getLogoForBrand(bike.brand)}" alt="${escapeHtml(bike.brand)} logo" />
+          <div><h1>${escapeHtml(bike.model)}</h1><span>${escapeHtml(String(bike.year))}</span></div>
         </div>
-
-        <div class="detail-bike-stage">
-          <img src="${bike.image}" alt="${bike.model}" />
-        </div>
+        <div class="detail-bike-stage"><img src="${bike.image}" alt="${escapeHtml(bike.model)}" /></div>
       </div>
 
       <div class="quick-specs">
-        <div class="quick-spec"><span>Mileage</span><strong>${formatNumber(bike.mileage)} mi</strong></div>
-        <div class="quick-spec"><span>Purchase Date</span><strong>May 12, 2022</strong></div>
-        <div class="quick-spec"><span>Purchase Price</span><strong>${formatMoney(bike.price)}</strong></div>
+        <div class="quick-spec"><span>Mileage</span><strong>${formatNumber(item.currentMileage)} mi</strong></div>
+        <div class="quick-spec"><span>Added</span><strong>${formatDate(item.addedAt)}</strong></div>
+        <div class="quick-spec"><span>Price</span><strong>${formatMoney(bike.price)}</strong></div>
       </div>
 
       <div class="tabs" role="tablist" aria-label="Bike detail sections">
         ${tabs.map((tab) => `<button class="tab-btn ${state.detailTab === tab ? "active" : ""}" type="button" data-tab="${tab}">${tab}</button>`).join("")}
       </div>
 
-      ${renderDetailTab(bike)}
+      ${renderDetailTab(item)}
     </section>
   `;
 }
 
-function renderDetailTab(bike) {
+function renderDetailTab(item) {
+  const bike = item.motorcycle;
+  const tasks = getTasks(item.id);
+  const summary = summarizeGarageTasks(item.id);
+
   if (state.detailTab === "Maintenance") {
     return `
       <div class="detail-card">
         <h2>Recent Maintenance</h2>
-        <p>${bike.model} has ${bike.serviceCount} records. Next service is estimated at ${bike.nextService}.</p>
+        <p>${escapeHtml(bike.model)} has ${tasks.length} backend task${tasks.length === 1 ? "" : "s"}. Next service: ${escapeHtml(summary.nextService)}.</p>
         <div class="spec-list">
-          ${serviceRecords.slice(0, 3).map((record) => `
-            <div class="spec-line"><span>${record.task}</span><strong>${record.date}</strong></div>
-          `).join("")}
+          ${tasks.slice(0, 3).map((task) => `<div class="spec-line"><span>${escapeHtml(task.title)}</span><strong>${escapeHtml(task.dueDate ? formatDate(task.dueDate) : task.status)}</strong></div>`).join("") || `<div class="spec-line"><span>No maintenance tasks yet</span><strong>--</strong></div>`}
         </div>
+        <button class="secondary-btn" type="button" data-maintenance-for="${escapeHtml(String(item.id))}">Open Maintenance</button>
       </div>
     `;
   }
 
   if (state.detailTab === "Notes") {
-    return `
-      <div class="detail-card">
-        <h2>Notes</h2>
-        <p>Quick bike notes can live here later, like tire setup, preferred oil, repair reminders, and seller history.</p>
-      </div>
-    `;
+    return `<div class="detail-card"><h2>Notes</h2><p>Mobile notes are still a frontend placeholder. Backend storage has not been added yet.</p></div>`;
   }
 
   if (state.detailTab === "Docs") {
-    return `
-      <div class="detail-card">
-        <h2>Documents</h2>
-        <p>Insurance, title, service PDFs, and receipt uploads can sit here when we add the backend support.</p>
-      </div>
-    `;
+    return `<div class="detail-card"><h2>Documents</h2><p>Insurance, title, service PDFs, and receipts can sit here once document upload backend support exists.</p></div>`;
   }
 
   return `
     <div class="detail-card">
       <h2>About This Bike</h2>
-      <p>${bike.about}</p>
-
+      <p>${escapeHtml(bike.model)} is saved in your garage from the backend garage endpoint.</p>
       <div class="spec-list">
-        ${bike.specs.map(([label, value]) => `
-          <div class="spec-line"><span>${label}</span><strong>${value}</strong></div>
-        `).join("")}
+        <div class="spec-line"><span>Brand</span><strong>${escapeHtml(bike.brand)}</strong></div>
+        <div class="spec-line"><span>Category</span><strong>${escapeHtml(bike.category)}</strong></div>
+        <div class="spec-line"><span>Year</span><strong>${escapeHtml(String(bike.year))}</strong></div>
+        <div class="spec-line"><span>Garage ID</span><strong>${escapeHtml(String(item.id))}</strong></div>
       </div>
     </div>
   `;
 }
 
 function renderMaintenance() {
+  const selectedItem = getGarageItemById(state.selectedMaintenanceGarageId) || state.garageItems[0] || null;
+  const tasks = selectedItem ? getTasks(selectedItem.id) : [];
+  const activeTasks = tasks.filter((task) => task.status !== "DONE");
+  const summary = selectedItem ? summarizeGarageTasks(selectedItem.id) : { total: 0, active: 0, lastService: "--", nextService: "--" };
+
   return `
     <section class="screen maintenance-screen">
       <div class="title-row">
         <div>
           <h1 class="page-title">Maintenance</h1>
-          <p class="page-copy">Track all maintenance and service history.</p>
+          <p class="page-copy">Filtered per motorcycle in your garage.</p>
         </div>
         <button class="add-btn" type="button" data-action="add-record">+ Add Record</button>
       </div>
 
+      <div class="bike-filter-strip" aria-label="Garage motorcycle filter">
+        ${state.garageItems.map((item) => `
+          <button class="filter-chip ${String(item.id) === String(state.selectedMaintenanceGarageId) ? "active" : ""}" type="button" data-maintenance-filter="${escapeHtml(String(item.id))}">
+            ${escapeHtml(item.motorcycle.model)}
+          </button>
+        `).join("") || `<button class="filter-chip active" type="button" data-action="add-bike">Add bike first</button>`}
+      </div>
+
       <div class="maintenance-grid">
-        <div class="maintenance-panel">
-          <span class="stat-icon blue">${icons.calendar}</span>
-          <span class="stat-copy"><span>Total Records</span><strong>6</strong></span>
-        </div>
-        <div class="maintenance-panel">
-          <span class="stat-icon blue">${icons.wallet}</span>
-          <span class="stat-copy"><span>Total Spent</span><strong>$1,250.00</strong></span>
-        </div>
-        <div class="maintenance-panel">
-          <span class="stat-icon green">${icons.wrench}</span>
-          <span class="stat-copy"><span>Last Service</span><strong>May 1, 2024</strong></span>
-        </div>
-        <div class="maintenance-panel">
-          <span class="stat-icon orange">${icons.gauge}</span>
-          <span class="stat-copy"><span>Next Service</span><strong>2,500 mi</strong></span>
-        </div>
+        <div class="maintenance-panel"><span class="stat-icon blue">${icons.calendar}</span><span class="stat-copy"><span>Total Tasks</span><strong>${summary.total}</strong></span></div>
+        <div class="maintenance-panel"><span class="stat-icon blue">${icons.wallet}</span><span class="stat-copy"><span>Total Spent</span><strong>$0</strong></span></div>
+        <div class="maintenance-panel"><span class="stat-icon green">${icons.wrench}</span><span class="stat-copy"><span>Last Service</span><strong>${escapeHtml(summary.lastService)}</strong></span></div>
+        <div class="maintenance-panel"><span class="stat-icon orange">${icons.gauge}</span><span class="stat-copy"><span>Next Service</span><strong>${escapeHtml(summary.nextService)}</strong></span></div>
       </div>
 
       <div class="table-card">
-        <div class="table-head">
-          <span>Date</span><span>Mileage</span><span>Cost</span>
-        </div>
-        ${serviceRecords.map((record) => `
-          <div class="service-row">
-            <div class="service-title">
-              <strong>${record.date}<br>${record.task}</strong>
-              <span>${record.note}</span>
-            </div>
-            <span>${record.mileage}</span>
-            <span>${record.cost}</span>
-          </div>
-        `).join("")}
+        <div class="table-head"><span>Task</span><span>Status</span><span>Date</span></div>
+        ${tasks.length ? tasks.map(renderTaskRow).join("") : `<div class="service-row"><div class="service-title"><strong>No tasks yet</strong><span>Add a record to create one.</span></div><span>--</span><span>--</span></div>`}
       </div>
     </section>
+  `;
+}
+
+function renderTaskRow(task) {
+  const status = task.status || "PENDING";
+  return `
+    <div class="service-row task-row">
+      <div class="service-title"><strong>${escapeHtml(task.title)}</strong><span>${escapeHtml(task.description)}</span></div>
+      <span>${escapeHtml(status.replaceAll("_", " "))}</span>
+      <span>${escapeHtml(task.dueDate ? formatDate(task.dueDate) : "--")}</span>
+    </div>
   `;
 }
 
@@ -449,57 +950,138 @@ function renderMore() {
   return `
     <section class="screen more-screen">
       <h1 class="page-title">More</h1>
-      <p class="page-copy">Mobile app ideas we can wire into the real product later.</p>
+      <p class="page-copy">Desktop-style pages and future product sections.</p>
 
       <div class="more-grid">
-        <button class="more-card" type="button" data-route="brand">
-          <span><strong>Choose Brand</strong><span>Open the app-style brand flow.</span></span>
-          <span>→</span>
-        </button>
-        <button class="more-card" type="button" data-action="request-brand">
-          <span><strong>Request a Brand</strong><span>Great future addition for user feedback.</span></span>
-          <span>→</span>
-        </button>
-        <button class="more-card" type="button" data-action="future">
-          <span><strong>Documents</strong><span>Insurance, title, receipts, and uploads.</span></span>
-          <span>→</span>
-        </button>
-        <button class="more-card" type="button" data-action="future">
-          <span><strong>Settings</strong><span>Profile, notifications, and preferences.</span></span>
-          <span>→</span>
-        </button>
+        <button class="more-card" type="button" data-route="about"><span><strong>About Us</strong><span>Read the product purpose.</span></span><span>→</span></button>
+        <button class="more-card" type="button" data-route="contact"><span><strong>Contact</strong><span>Open the contact screen.</span></span><span>→</span></button>
+        <button class="more-card" type="button" data-route="updates"><span><strong>Updates</strong><span>View product notifications and changelog.</span></span><span>→</span></button>
+        <button class="more-card" type="button" data-route="brand"><span><strong>Choose Brand</strong><span>Open the app-style selection flow.</span></span><span>→</span></button>
+        <button class="more-card" type="button" data-action="request-brand"><span><strong>Request a Brand</strong><span>Future feedback feature.</span></span><span>→</span></button>
+        <button class="more-card" type="button" data-action="future"><span><strong>Settings</strong><span>Profile, notifications, and preferences.</span></span><span>→</span></button>
       </div>
     </section>
   `;
 }
 
+function renderAbout() {
+  return `
+    <section class="screen info-screen">
+      <p class="kicker">About Us</p>
+      <h1 class="page-title">Built for riders</h1>
+      <p class="page-copy">Motorcycle Tracker helps riders explore bikes, save motorcycles to a personal garage, and keep maintenance organized in one clean product flow.</p>
+      <div class="detail-card block-gap"><h2>Mobile goal</h2><p>This screen keeps the mobile app feeling self-contained while still matching the desktop site structure.</p></div>
+    </section>
+  `;
+}
+
+function renderContact() {
+  return `
+    <section class="screen info-screen">
+      <p class="kicker">Contact</p>
+      <h1 class="page-title">Get in touch</h1>
+      <p class="page-copy">The desktop site has a contact page. This mobile screen is a matching app-style placeholder until the contact form is connected.</p>
+      <div class="detail-card block-gap"><h2>Contact form</h2><p>Backend/email submission is not connected yet on mobile.</p></div>
+    </section>
+  `;
+}
+
+function renderUpdatesPage() {
+  const updates = getUpdates();
+  return `
+    <section class="screen updates-screen">
+      <p class="kicker">Notifications</p>
+      <h1 class="page-title">Updates</h1>
+      <p class="page-copy">Uses the same local update data and read/unread behavior as the desktop notification widget.</p>
+      <button class="secondary-btn compact-btn" type="button" data-action="toggle-all-updates-read">${getUnreadUpdates().length ? "Mark all read" : "Mark all unread"}</button>
+      <div class="updates-list-mobile">
+        ${updates.map((update) => renderUpdateCard(update)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderUpdateCard(update) {
+  const read = isUpdateRead(update.id);
+  return `
+    <article class="update-card ${read ? "read" : "unread"}">
+      <span>${escapeHtml(update.category || "Update")}</span>
+      <strong>${escapeHtml(update.title)}</strong>
+      <p>${escapeHtml(update.shortText || update.fullText || "")}</p>
+      <button class="tiny-btn" type="button" data-toggle-update-read="${escapeHtml(update.id)}">${read ? "Mark unread" : "Mark read"}</button>
+    </article>
+  `;
+}
+
 function renderMain() {
   switch (state.view) {
-    case "brand":
-      return renderBrand();
-    case "garage":
-      return renderGarage();
-    case "detail":
-      return renderDetail();
-    case "maintenance":
-      return renderMaintenance();
-    case "more":
-      return renderMore();
+    case "brand": return renderBrand();
+    case "category": return renderCategory();
+    case "bike-select": return renderBikeSelect();
+    case "bike-preview": return renderBikePreview();
+    case "garage": return renderGarage();
+    case "detail": return renderDetail();
+    case "maintenance": return renderMaintenance();
+    case "more": return renderMore();
+    case "learn": return renderLearn();
+    case "about": return renderAbout();
+    case "contact": return renderContact();
+    case "updates": return renderUpdatesPage();
     case "home":
-    default:
-      return renderHome();
+    default: return renderHome();
   }
+}
+
+function renderOverlay() {
+  const panels = [];
+  if (state.updatesOpen) panels.push(renderUpdatesPanel());
+  if (state.profileOpen) panels.push(renderProfilePanel());
+  overlayLayer.innerHTML = panels.join("");
+}
+
+function renderUpdatesPanel() {
+  const updates = getUpdates().slice(0, 3);
+  const unreadCount = getUnreadUpdates().length;
+  return `
+    <div class="floating-panel updates-floating" data-floating-panel>
+      <div class="floating-head"><strong>Latest Updates</strong><small>${unreadCount} unread</small></div>
+      <div class="floating-list">
+        ${updates.map((update) => renderUpdateCard(update)).join("")}
+      </div>
+      <div class="floating-actions">
+        <button class="tiny-btn" type="button" data-action="toggle-all-updates-read">${unreadCount ? "Mark all read" : "Mark all unread"}</button>
+        <button class="tiny-btn" type="button" data-route="updates">See all</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderProfilePanel() {
+  const user = state.user || normalizeUser({ username: "Guest Rider", email: "Not signed in", isDemo: false });
+  const actionLabel = getToken() ? "Sign out" : "Demo Login";
+  const actionName = getToken() ? "sign-out" : "demo-login";
+
+  return `
+    <div class="floating-panel profile-floating" data-floating-panel>
+      <div class="account-summary">
+        <span class="profile-avatar-large">${escapeHtml(user.initials || "GU")}</span>
+        <div><strong>${escapeHtml(user.username || "Guest Rider")}</strong><small>${escapeHtml(user.email || "Not signed in")}</small><em>${escapeHtml(user.role || "Guest")}</em></div>
+      </div>
+      <button class="account-link disabled" type="button">Account Information</button>
+      <button class="account-link disabled" type="button">Manage Billing</button>
+      <button class="account-link disabled" type="button">Product Settings</button>
+      <button class="account-link danger" type="button" data-action="${actionName}">${actionLabel}</button>
+    </div>
+  `;
 }
 
 function updateBottomNav() {
   const navViews = ["home", "garage", "maintenance", "more"];
   const activeView = navViews.includes(state.view) ? state.view : "";
-
   bottomNav.querySelectorAll(".nav-item").forEach((button) => {
     button.classList.toggle("active", button.dataset.route === activeView);
   });
-
-  const hideBottom = state.view === "brand" || state.view === "detail";
+  const hideBottom = ["brand", "category", "bike-select", "bike-preview", "detail", "learn", "about", "contact", "updates"].includes(state.view);
   appShell.classList.toggle("no-bottom", hideBottom);
 }
 
@@ -507,98 +1089,252 @@ function render() {
   renderHeader();
   appMain.innerHTML = renderMain();
   updateBottomNav();
+  renderOverlay();
   bindDynamicEvents();
   appMain.scrollTop = 0;
 }
 
 function bindDynamicEvents() {
-  const searchInput = document.getElementById("brand-search");
-  if (searchInput) {
-    searchInput.focus({ preventScroll: true });
-    searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
+  const brandInput = document.getElementById("brand-search");
+  if (brandInput && document.activeElement?.id !== "brand-search") {
+    brandInput.focus({ preventScroll: true });
+    brandInput.setSelectionRange(brandInput.value.length, brandInput.value.length);
   }
-}
-
-function escapeHtml(value) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+  const bikeInput = document.getElementById("bike-search");
+  if (bikeInput && document.activeElement?.id !== "bike-search") {
+    bikeInput.focus({ preventScroll: true });
+    bikeInput.setSelectionRange(bikeInput.value.length, bikeInput.value.length);
+  }
 }
 
 function handleRouteClick(target) {
   const routeButton = target.closest("[data-route]");
   if (!routeButton) return false;
-
-  const brand = routeButton.dataset.brand;
+  const brand = routeButton.dataset.selectBrand || routeButton.dataset.brand;
   if (brand) {
     state.selectedBrand = brand;
+    const categories = getCategoriesForBrand(brand);
+    state.selectedCategory = categories[0] || "";
   }
-
   routeTo(routeButton.dataset.route);
   return true;
 }
 
-function handleActionClick(target) {
+async function addCatalogBikeToGarage(bikeId) {
+  const bike = getCatalogBikeById(bikeId);
+  if (!bike) return;
+
+  const mileageInput = window.prompt(`Enter current mileage for ${bike.model}:`, "0");
+  if (mileageInput === null) return;
+  const currentMileage = Number(mileageInput);
+  if (Number.isNaN(currentMileage) || currentMileage < 0) {
+    showToast("Enter a valid mileage number.");
+    return;
+  }
+
+  try {
+    await fetchJson(`/garage/${encodeURIComponent(bike.id)}?currentMileage=${encodeURIComponent(currentMileage)}`, { method: "POST" });
+    showToast(`${bike.model} added to garage.`);
+    await loadGarage();
+    routeTo("garage");
+  } catch (error) {
+    console.error("Failed to add bike:", error);
+    showToast("Could not add bike. Backend may be unavailable or garage may be full.");
+  }
+}
+
+async function addMaintenanceRecord() {
+  const garageId = state.selectedMaintenanceGarageId;
+  if (!garageId) {
+    showToast("Add or select a motorcycle first.");
+    return;
+  }
+
+  const title = window.prompt("Maintenance task title:", "Oil Change");
+  if (!title) return;
+  const description = window.prompt("Description:", "") || "";
+  const dueDate = window.prompt("Due date (YYYY-MM-DD, optional):", "") || null;
+
+  try {
+    await fetchJson(`/garage/${encodeURIComponent(garageId)}/tasks`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: title.trim(), description: description.trim(), dueDate }),
+    });
+    await loadTasksForGarage(garageId);
+    showToast("Maintenance task added.");
+    render();
+  } catch (error) {
+    console.error("Failed to add maintenance record:", error);
+    showToast("Could not add maintenance task.");
+  }
+}
+
+function handleSelectionClick(target) {
+  const brandButton = target.closest("[data-select-brand]");
+  if (brandButton) {
+    state.selectedBrand = brandButton.dataset.selectBrand;
+    const categories = getCategoriesForBrand(state.selectedBrand);
+    state.selectedCategory = categories[0] || "";
+    return false;
+  }
+
+  const categoryButton = target.closest("[data-select-category]");
+  if (categoryButton) {
+    state.selectedCategory = categoryButton.dataset.selectCategory;
+    state.bikeQuery = "";
+    return false;
+  }
+
+  const catalogDetail = target.closest("[data-catalog-detail]");
+  if (catalogDetail) {
+    state.selectedCatalogBikeId = catalogDetail.dataset.catalogDetail;
+    routeTo("bike-preview");
+    return true;
+  }
+
+  const addCatalog = target.closest("[data-add-catalog-bike]");
+  if (addCatalog) {
+    addCatalogBikeToGarage(addCatalog.dataset.addCatalogBike);
+    return true;
+  }
+
+  const garageDetail = target.closest("[data-garage-detail]");
+  if (garageDetail) {
+    state.selectedGarageId = garageDetail.dataset.garageDetail;
+    state.detailTab = "Overview";
+    routeTo("detail");
+    return true;
+  }
+
+  const maintenanceFilter = target.closest("[data-maintenance-filter]");
+  if (maintenanceFilter) {
+    state.selectedMaintenanceGarageId = maintenanceFilter.dataset.maintenanceFilter;
+    render();
+    return true;
+  }
+
+  const maintenanceFor = target.closest("[data-maintenance-for]");
+  if (maintenanceFor) {
+    state.selectedMaintenanceGarageId = maintenanceFor.dataset.maintenanceFor;
+    routeTo("maintenance");
+    return true;
+  }
+
+  const tabButton = target.closest("[data-tab]");
+  if (tabButton) {
+    state.detailTab = tabButton.dataset.tab;
+    render();
+    return true;
+  }
+
+  const updateToggle = target.closest("[data-toggle-update-read]");
+  if (updateToggle) {
+    toggleUpdateRead(updateToggle.dataset.toggleUpdateRead);
+    return true;
+  }
+
+  return false;
+}
+
+async function handleActionClick(target) {
   const actionButton = target.closest("[data-action]");
   if (!actionButton) return false;
-
   const action = actionButton.dataset.action;
-  const messages = {
-    updates: "Updates panel can be wired in later.",
-    profile: "Profile/login can connect to the existing auth later.",
-    learn: "This is the app preview flow. Desktop was not touched.",
-    "request-brand": "Request Brand is a strong future addition.",
-    "add-bike": "Add Bike button is a mobile placeholder for now.",
-    "add-record": "Add Record button is a mobile placeholder for now.",
-    "bike-menu": "Bike actions can be wired later.",
-    share: "Share action can be wired later.",
-    more: "More bike options can be wired later.",
-    future: "This section is planned for a later backend pass.",
-  };
 
+  if (action === "toggle-updates") {
+    state.updatesOpen = !state.updatesOpen;
+    state.profileOpen = false;
+    render();
+    return true;
+  }
+
+  if (action === "toggle-profile") {
+    state.profileOpen = !state.profileOpen;
+    state.updatesOpen = false;
+    render();
+    return true;
+  }
+
+  if (action === "toggle-all-updates-read") {
+    toggleAllUpdatesRead();
+    return true;
+  }
+
+  if (action === "sign-out") {
+    clearAuth();
+    state.profileOpen = false;
+    showToast("Signed out.");
+    render();
+    return true;
+  }
+
+  if (action === "demo-login") {
+    try {
+      await signInDemo();
+      showToast("Demo user signed in.");
+      await loadGarage();
+    } catch {
+      showToast("Demo login failed.");
+    }
+    return true;
+  }
+
+  if (action === "add-bike") {
+    state.selectedBrand = state.selectedBrand || "Ducati";
+    routeTo("brand");
+    return true;
+  }
+
+  if (action === "add-record") {
+    await addMaintenanceRecord();
+    return true;
+  }
+
+  const messages = {
+    "request-brand": "Request Brand is planned for a later backend pass.",
+    "bike-menu": "Bike options are placeholders for now.",
+    share: "Share action can be wired later.",
+    future: "This section is planned for a later pass.",
+  };
   showToast(messages[action] || "Coming later.");
   return true;
 }
 
-appHeader.addEventListener("click", (event) => {
+appHeader.addEventListener("click", async (event) => {
   if (handleRouteClick(event.target)) return;
-  handleActionClick(event.target);
+  await handleActionClick(event.target);
 });
 
 bottomNav.addEventListener("click", (event) => {
   handleRouteClick(event.target);
 });
 
-appMain.addEventListener("click", (event) => {
+appMain.addEventListener("click", async (event) => {
+  if (handleSelectionClick(event.target)) return;
   if (handleRouteClick(event.target)) return;
+  await handleActionClick(event.target);
+});
 
-  const brandButton = event.target.closest("[data-select-brand]");
-  if (brandButton) {
-    state.selectedBrand = brandButton.dataset.selectBrand;
-    showToast(`${state.selectedBrand} selected`);
+overlayLayer.addEventListener("click", async (event) => {
+  if (handleSelectionClick(event.target)) return;
+  if (handleRouteClick(event.target)) return;
+  if (await handleActionClick(event.target)) return;
+  if (!event.target.closest("[data-floating-panel]")) {
+    state.profileOpen = false;
+    state.updatesOpen = false;
     render();
-    return;
   }
+});
 
-  const bikeDetailButton = event.target.closest("[data-bike-detail]");
-  if (bikeDetailButton) {
-    state.selectedBikeId = bikeDetailButton.dataset.bikeDetail;
-    state.detailTab = "Overview";
-    routeTo("detail");
-    return;
-  }
-
-  const tabButton = event.target.closest("[data-tab]");
-  if (tabButton) {
-    state.detailTab = tabButton.dataset.tab;
+document.addEventListener("click", (event) => {
+  const clickedInsideFloating = event.target.closest("[data-floating-panel]");
+  const clickedTrigger = event.target.closest("[data-action='toggle-updates'], [data-action='toggle-profile']");
+  if (!clickedInsideFloating && !clickedTrigger && (state.profileOpen || state.updatesOpen)) {
+    state.profileOpen = false;
+    state.updatesOpen = false;
     render();
-    return;
   }
-
-  handleActionClick(event.target);
 });
 
 appMain.addEventListener("input", (event) => {
@@ -606,6 +1342,16 @@ appMain.addEventListener("input", (event) => {
     state.brandQuery = event.target.value;
     render();
   }
+  if (event.target.id === "bike-search") {
+    state.bikeQuery = event.target.value;
+    render();
+  }
 });
 
-render();
+async function init() {
+  render();
+  await initializeAuth();
+  await Promise.allSettled([loadCatalog(), loadGarage()]);
+}
+
+init();
