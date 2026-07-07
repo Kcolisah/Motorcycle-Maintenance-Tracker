@@ -29,12 +29,12 @@
       const isHomePage = path === "/" || path === "/index.html" || path.endsWith("/index.html");
 
       const forceDesktop = params.get("view") === "desktop";
-      const isPhoneSize = window.matchMedia("(max-width: 768px)").matches;
+      const isPhoneSize = window.matchMedia("(max-width: 480px)").matches;
       const isPhoneDevice = /Android|iPhone|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
       if (!isMobilePage && isHomePage && !forceDesktop && (isPhoneSize || isPhoneDevice)) {
 
-        window.location.replace("/mobile/");
+        window.location.replace(`${window.location.origin}/login.html?redirect=mobile/index.html`);
 
       }
 
