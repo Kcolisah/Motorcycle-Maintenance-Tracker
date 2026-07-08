@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Compare Motorcycles | Motorcycle Tracker</title>
+
+  <link rel="stylesheet" href="CSS/style.css?v=compare-hero-clean-v3" />
+  <link rel="stylesheet" href="CSS/authShell.css?v=auth-shell-20260526" />
+  <link rel="stylesheet" href="CSS/mobile.css?v=mobile-app-v2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" href="images/LOGO.png" />
+</head>
+
+<body class="compare-page">
+  <div class="page-shell compare-page-shell">
+    <header class="navbar">
+      <div class="logo-block">
+        <div class="logo-mark">MT</div>
+        <div class="logo-text">
+          <span>MOTORCYCLE</span>
+          <span>Tracker</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="compare.html" class="active">Compare</a>
+      </nav>
+
+      <a href="garage.html" class="nav-garage-btn" aria-label="Garage">
+        <svg
+          class="garage-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M3 10.5 12 4l9 6.5"></path>
+          <path d="M5 10v9h14v-9"></path>
+          <path d="M9 19v-5h6v5"></path>
+        </svg>
+
+        <span class="garage-count-badge" data-garage-count>0</span>
+        <span>GARAGE</span>
+      </a>
+    </header>
+
+    <main class="compare-main">
+      <section class="compare-hero reveal-section">
+        <div class="compare-hero-copy">
+          <p class="section-tag">Compare</p>
+          <h1>Compare Motorcycles</h1>
+          <p>
+            Pick two supported bikes from the current tracker catalog and compare
+            performance, price, year, and key specs side by side.
+          </p>
+
+          <div class="compare-hero-summary" aria-label="Current compare catalog details">
+            <div class="compare-hero-summary-copy">
+              <span>Compare Catalog</span>
+              <strong data-compare-count>Loading catalog...</strong>
+              <p>From supported motorcycles in the tracker catalog.</p>
+            </div>
+
+            <div class="compare-catalog-metrics">
+              <div>
+                <b data-compare-brand-count>—</b>
+                <small>Brands</small>
+              </div>
+              <div>
+                <b data-compare-spec-count>8</b>
+                <small>Specs</small>
+              </div>
+              <div>
+                <b data-compare-year-count>—</b>
+                <small>Years</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-hero-showcase" aria-label="Featured compare motorcycles">
+          <div class="compare-hero-visual" aria-hidden="true">
+            <div class="compare-hero-bike compare-hero-bike-secondary"></div>
+            <div class="compare-hero-bike compare-hero-bike-primary"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="compare-selector-panel reveal-section" aria-label="Motorcycle comparison controls">
+        <div class="compare-selector-group" data-compare-side="a">
+          <div class="compare-selector-heading">
+            <span>First pick</span>
+            <small>Primary motorcycle</small>
+          </div>
+
+          <label class="compare-field">
+            <span>Brand</span>
+            <select id="compareBrandA" data-compare-brand="a"></select>
+          </label>
+
+          <label class="compare-field">
+            <span>Model</span>
+            <select id="compareModelA" data-compare-model="a"></select>
+          </label>
+
+          <label class="compare-field compare-year-field">
+            <span>Year</span>
+            <select id="compareYearA" data-compare-year="a"></select>
+          </label>
+        </div>
+
+        <button class="compare-swap-btn" id="compareSwapBtn" type="button" aria-label="Swap selected motorcycles">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 7h11l-3-3"></path>
+            <path d="m18 7-3 3"></path>
+            <path d="M17 17H6l3 3"></path>
+            <path d="m6 17 3-3"></path>
+          </svg>
+          <span>Swap</span>
+        </button>
+
+        <div class="compare-selector-group" data-compare-side="b">
+          <div class="compare-selector-heading">
+            <span>Second pick</span>
+            <small>Comparison motorcycle</small>
+          </div>
+
+          <label class="compare-field">
+            <span>Brand</span>
+            <select id="compareBrandB" data-compare-brand="b"></select>
+          </label>
+
+          <label class="compare-field">
+            <span>Model</span>
+            <select id="compareModelB" data-compare-model="b"></select>
+          </label>
+
+          <label class="compare-field compare-year-field">
+            <span>Year</span>
+            <select id="compareYearB" data-compare-year="b"></select>
+          </label>
+        </div>
+      </section>
+
+      <section class="compare-status" id="compareStatus" aria-live="polite">Loading current motorcycle catalog...</section>
+
+      <section class="compare-results reveal-section" id="compareResults" hidden>
+        <div class="compare-bike-grid" id="compareBikeCards"></div>
+
+        <div class="compare-table-wrap">
+          <div class="compare-table-header">
+            <span>Spec</span>
+            <span data-table-bike-a>Bike A</span>
+            <span>Result</span>
+            <span data-table-bike-b>Bike B</span>
+          </div>
+
+          <div class="compare-table" id="compareTable"></div>
+        </div>
+
+        <div class="compare-insights" id="compareInsights"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="JavaScript/data.js?v=compare-v1"></script>
+  <script src="JavaScript/compare.js?v=compare-v1"></script>
+  <script src="JavaScript/apiClient.js?v=compare-v1"></script>
+  <script src="JavaScript/authShell.js?v=auth-v1"></script>
+  <script src="JavaScript/garageBadge.js?v=auth-v1"></script>
+</body>
+</html>
