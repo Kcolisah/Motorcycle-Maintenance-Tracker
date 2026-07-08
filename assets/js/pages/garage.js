@@ -11,11 +11,16 @@ const maintenanceDueLabel = document.getElementById("maintenanceDueLabel");
 
 const garageTaskSummary = new Map();
 
-function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+const formatters = window.MTFormatters || {};
+const garageIcons = window.MTGarageIcons || {};
+
+const sleep = formatters.sleep || ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
+const formatPrice = formatters.formatCurrency || ((price) => (price === null || price === undefined || price === "" ? "N/A" : `$${Number(price).toLocaleString()}`));
+const formatMileage = formatters.formatMileage || ((mileage) => (mileage === null || mileage === undefined || mileage === "" ? "0 mi" : `${Number(mileage).toLocaleString()} mi`));
+const formatAddedDate = formatters.formatDisplayDate || ((dateValue) => (dateValue ? new Date(dateValue).toLocaleDateString() : "N/A"));
+const garageIcon = garageIcons.getGarageIcon || (() => "");
+
 function getApi() { return window.MotorcycleTrackerApi; }
-function formatPrice(price) { return price === null || price === undefined || price === "" ? "N/A" : `$${Number(price).toLocaleString()}`; }
-function formatMileage(mileage) { return mileage === null || mileage === undefined || mileage === "" ? "0 mi" : `${Number(mileage).toLocaleString()} mi`; }
-function formatAddedDate(dateValue) { return dateValue ? new Date(dateValue).toLocaleDateString() : "N/A"; }
 function showGarageMessage(message) { garageMessage.textContent = message; garageMessage.style.display = "block"; }
 function hideGarageMessage() { garageMessage.textContent = ""; garageMessage.style.display = "none"; }
 function getMotorcycleFromGarageItem(item) { return item.motorcycle || item.bike || item; }
@@ -41,17 +46,6 @@ async function fetchJson(path, options = {}) {
   return data;
 }
 
-function garageIcon(name) {
-  const icons = {
-    price: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12 12 20 4 12V4h8l8 8Z"></path><path d="M8 8h.01"></path></svg>',
-    mileage: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 1 1 16 0"></path><path d="M12 14l4-4"></path><path d="M7 17h10"></path></svg>',
-    calendar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3"></path><path d="M17 3v3"></path><path d="M4 8h16"></path><path d="M5 5h14v15H5z"></path></svg>',
-    wrench: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5 5L4 17l3 3 5.7-5.7a4 4 0 0 0 5-5l-2.5 2.5-2.9-2.9 2.4-2.6Z"></path></svg>',
-    trash: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M6 7l1 14h10l1-14"></path><path d="M9 7V4h6v3"></path></svg>',
-    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>'
-  };
-  return icons[name] || "";
-}
 
 function summarizeTasks(tasks) {
   const today = getTodayStart();

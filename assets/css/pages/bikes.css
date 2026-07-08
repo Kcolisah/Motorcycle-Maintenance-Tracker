@@ -1,0 +1,47 @@
+/* Bikes catalog page */
+/*7. bikes page*/
+.bikes-page, .bikes-page-shell { background: #000; }
+.bikes-page-shell::before, .bikes-page-shell::after { display: none; }
+.bikes-hero-section { grid-template-columns: 110px 1fr 80px; }
+.bikes-content { padding: 12px 0 48px; }
+.bikes-display-grid { position: relative; min-height: 760px; height: auto; overflow: hidden; border-block: 1px solid rgba(255, 255, 255, 0.08); }
+.bikes-grid-line { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0.08); z-index: 1; }
+.bikes-grid-line-1 { left: 220px; }
+.bikes-grid-line-2 { left: 560px; }
+.bikes-grid-line-3 { right: 290px; }
+.bikes-top-label, .bikes-brand-mini, .bikes-main-copy, .bikes-hero-visual, .bikes-right-panel, .bikes-gallery-label { position: absolute; z-index: 3; }
+.bikes-top-label { top: 18px; left: 50%; transform: translateX(-50%); font-size: 18px; font-weight: 900; font-style: italic; }
+.bikes-brand-mini { top: 28px; left: 12px; }
+.bikes-brand-mini h3 { margin-bottom: 8px; font-size: 18px; font-weight: 800; }
+.bikes-brand-mini p { color: rgba(255, 255, 255, 0.84); font-size: 14px; }
+.bikes-main-copy { top: 180px; left: 250px; width: 300px; }
+.bikes-main-title { margin-bottom: 22px; line-height: 0.88; text-transform: uppercase; font-style: italic; }
+.bikes-main-title span { display: block; }
+.bikes-main-title #brandLine { color: var(--brand-accent, var(--accent)); font-size: 82px; font-weight: 900; letter-spacing: 2px; }
+.bikes-main-title #seriesLine { color: #f5f5f5; font-size: 66px; font-weight: 900; }
+.bikes-specs-block h4, .bikes-spec-summary h3 { color: var(--brand-accent, var(--accent)); font-weight: 900; text-transform: uppercase; }
+.bikes-specs-block h4 { margin-bottom: 10px; font-size: 16px; }
+.bikes-specs-block p { margin-bottom: 5px; color: rgba(255, 255, 255, 0.9); font-size: 12px; font-weight: 700; }
+.bikes-maintain-btn { margin-top: 18px; border: 0; background: transparent; color: var(--brand-accent, var(--accent)); font-size: 13px; font-weight: 900; letter-spacing: 1px; }
+.bikes-hero-visual { top: 120px; left: 460px; width: calc(130% - 870px); height: 520px; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.bikes-hero-visual img { width: min(100%, 760px); height: 520px; max-height: 520px; object-fit: contain; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.5)); }
+.bikes-hero-visual p { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 14px; font-weight: 700; }
+.bikes-right-panel { top: 90px; right: 28px; width: 230px; }
+.bikes-count-wrap { justify-content: flex-end; flex-wrap: wrap; gap: 4px; margin-bottom: 36px; text-align: right; }
+.bikes-count-current { font-size: 74px; line-height: 0.9; }
+.bikes-count-divider, .bikes-count-total { font-size: 26px; color: rgba(255, 255, 255, 0.75); }
+.bikes-count-wrap p { width: 100%; margin-top: 4px; font-size: 18px; letter-spacing: 1px; }
+.bikes-spec-summary, .bikes-preview-title { text-align: right; }
+.bikes-spec-summary { margin-bottom: 28px; }
+.bikes-spec-summary h3 { margin-bottom: 18px; font-size: 20px; }
+.bikes-spec-summary p { margin-bottom: 11px; color: rgba(255, 255, 255, 0.92); font-size: 15px; }
+.bikes-add-garage-btn { width: 100%; margin: 28px 0 18px; padding: 14px 18px; border: 1px solid var(--brand-accent, var(--accent)); background: transparent; color: var(--brand-accent, var(--accent)); font-size: 13px; font-weight: 900; letter-spacing: 1.4px; text-transform: uppercase; transition: 0.25s ease; }
+.bikes-add-garage-btn:hover { background: var(--brand-accent, var(--accent)); color: #050505; }
+.bikes-add-garage-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.bikes-preview-title { margin-bottom: 12px; font-size: 16px; font-weight: 900; font-style: italic; }
+.bikes-preview-list { display: flex; flex-direction: column; gap: 12px; }
+.bikes-preview-card { position: relative; height: 84px; padding: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.015); transition: 0.2s ease; }
+.bikes-preview-card:hover, .bikes-preview-card.active { border-color: var(--brand-accent, var(--accent)); }
+.bikes-preview-card img { width: 100%; height: 100%; object-fit: contain; }
+.bikes-preview-card span { position: absolute; left: 8px; right: 8px; bottom: 6px; color: rgba(255, 255, 255, 0.88); font-size: 11px; font-weight: 700; text-align: center; }
+.bikes-gallery-label { left: 12px; bottom: 24px; color: rgba(255, 255, 255, 0.9); font-size: 15px; }

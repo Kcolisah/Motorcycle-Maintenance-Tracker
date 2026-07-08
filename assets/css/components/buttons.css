@@ -1,0 +1,7 @@
+/* Shared button treatments */
+.nav-button, .primary-btn, .secondary-btn, .garage-secondary-btn, .garage-primary-link, .garage-card-action, .garage-delete-btn, .maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn, .maintenance-task-action, .maintenance-delete-btn { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); background: transparent; color: var(--text); font-weight: 900; text-align: center; transition: 0.25s ease; }
+.nav-button { padding: 14px 26px; background: rgba(18, 18, 22, 0.9); border-color: rgba(255, 255, 255, 0.14); font-size: 14px; font-weight: 700; }
+.nav-button:hover, .primary-btn:hover, .secondary-btn:hover, .maintenance-primary-btn:hover, .bikes-add-garage-btn:hover { transform: translateY(-2px); }
+.primary-btn, .secondary-btn { padding: 16px 22px; font-size: 15px; letter-spacing: 0.4px; }
+.primary-btn { border-color: #fff; background: #fff; color: #000; }
+.secondary-btn:hover, .garage-secondary-btn:hover, .garage-primary-link:hover, .garage-card-action:hover, .maintenance-back-link:hover, .maintenance-secondary-btn:hover, .maintenance-task-action:hover { border-color: var(--accent); color: var(--accent); }

@@ -1,309 +1,7 @@
 (() => {
   const API_TIMEOUT_MS = 2500;
 
-const compareSpecsMap = {
-  "Aprilia RS457": {
-    engine: "457cc parallel-twin",
-    horsepower: "47 hp",
-    weight: "386 lbs",
-    zeroSixty: "5.0 seconds",
-    topSpeed: "118 mph"
-  },
-  "Aprilia RS660": {
-    engine: "659cc parallel-twin",
-    horsepower: "100 hp",
-    weight: "403 lbs",
-    zeroSixty: "3.8 seconds",
-    topSpeed: "149 mph"
-  },
-  "Aprilia RSV4": {
-    engine: "1099cc V4",
-    horsepower: "217 hp",
-    weight: "445 lbs",
-    zeroSixty: "3.1 seconds",
-    topSpeed: "180 mph"
-  },
-  "BMW G310RR": {
-    engine: "313cc single-cylinder",
-    horsepower: "34 hp",
-    weight: "383 lbs",
-    zeroSixty: "6.2 seconds",
-    topSpeed: "100 mph"
-  },
-  "BMW F900R": {
-    engine: "895cc parallel-twin",
-    horsepower: "99 hp",
-    weight: "465 lbs",
-    zeroSixty: "3.5 seconds",
-    topSpeed: "124 mph"
-  },
-  "BMW S1000RR": {
-    engine: "999cc inline-four",
-    horsepower: "205 hp",
-    weight: "434 lbs",
-    zeroSixty: "3.0 seconds",
-    topSpeed: "188 mph"
-  },
-  "BMW M1000RR": {
-    engine: "999cc inline-four",
-    horsepower: "205 hp",
-    weight: "423 lbs",
-    zeroSixty: "2.9 seconds",
-    topSpeed: "189 mph"
-  },
-  "Ducati SuperSport 950": {
-    engine: "937cc L-twin",
-    horsepower: "110 hp",
-    weight: "460 lbs",
-    zeroSixty: "3.4 seconds",
-    topSpeed: "152 mph"
-  },
-  "Ducati Panigale V2": {
-    engine: "955cc V-twin",
-    horsepower: "155 hp",
-    weight: "441 lbs",
-    zeroSixty: "3.2 seconds",
-    topSpeed: "170 mph"
-  },
-  "Ducati Panigale V4": {
-    engine: "1103cc V4",
-    horsepower: "215 hp",
-    weight: "434 lbs",
-    zeroSixty: "3.0 seconds",
-    topSpeed: "186 mph"
-  },
-  "Ducati Streetfighter V4": {
-    engine: "1103cc V4",
-    horsepower: "208 hp",
-    weight: "439 lbs",
-    zeroSixty: "3.0 seconds",
-    topSpeed: "180 mph"
-  },
-  "Harley Iron 993": {
-    engine: "975cc V-twin",
-    horsepower: "90 hp",
-    weight: "481 lbs",
-    zeroSixty: "4.4 seconds",
-    topSpeed: "120 mph"
-  },
-  "Harley Low Rider S": {
-    engine: "1923cc V-twin",
-    horsepower: "103 hp",
-    weight: "679 lbs",
-    zeroSixty: "4.1 seconds",
-    topSpeed: "120 mph"
-  },
-  "Harley Sportster S": {
-    engine: "1252cc V-twin",
-    horsepower: "121 hp",
-    weight: "502 lbs",
-    zeroSixty: "3.5 seconds",
-    topSpeed: "143 mph"
-  },
-  "Honda CBR 500R": {
-    engine: "471cc parallel-twin",
-    horsepower: "47 hp",
-    weight: "423 lbs",
-    zeroSixty: "5.2 seconds",
-    topSpeed: "116 mph"
-  },
-  "Honda CBR 650R": {
-    engine: "649cc inline-four",
-    horsepower: "94 hp",
-    weight: "463 lbs",
-    zeroSixty: "3.9 seconds",
-    topSpeed: "149 mph"
-  },
-  "Honda CBR 600RR": {
-    engine: "599cc inline-four",
-    horsepower: "121 hp",
-    weight: "410 lbs",
-    zeroSixty: "3.2 seconds",
-    topSpeed: "160 mph"
-  },
-  "Honda CBR 1000RR": {
-    engine: "999cc inline-four",
-    horsepower: "189 hp",
-    weight: "430 lbs",
-    zeroSixty: "2.9 seconds",
-    topSpeed: "186 mph"
-  },
-  "Indian Chief": {
-    engine: "1890cc V-twin",
-    horsepower: "89 hp",
-    weight: "670 lbs",
-    zeroSixty: "4.2 seconds",
-    topSpeed: "115 mph"
-  },
-  "Indian Scout": {
-    engine: "1133cc V-twin",
-    horsepower: "100 hp",
-    weight: "561 lbs",
-    zeroSixty: "3.9 seconds",
-    topSpeed: "124 mph"
-  },
-  "Kawasaki Ninja 500R": {
-    engine: "451cc parallel-twin",
-    horsepower: "51 hp",
-    weight: "377 lbs",
-    zeroSixty: "4.5 seconds",
-    topSpeed: "118 mph"
-  },
-  "Kawasaki Ninja 650R": {
-    engine: "649cc parallel-twin",
-    horsepower: "67 hp",
-    weight: "426 lbs",
-    zeroSixty: "3.8 seconds",
-    topSpeed: "130 mph"
-  },
-  "Kawasaki Ninja ZX6R": {
-    engine: "636cc inline-four",
-    horsepower: "127 hp",
-    weight: "434 lbs",
-    zeroSixty: "3.2 seconds",
-    topSpeed: "164 mph"
-  },
-  "Kawasaki Ninja ZX 10R": {
-    engine: "998cc inline-four",
-    horsepower: "203 hp",
-    weight: "456 lbs",
-    zeroSixty: "3.0 seconds",
-    topSpeed: "186 mph"
-  },
-  "Kawasaki-Ninja ZX14R": {
-    engine: "1441cc inline-four",
-    horsepower: "197 hp",
-    weight: "593 lbs",
-    zeroSixty: "2.8 seconds",
-    topSpeed: "186 mph"
-  },
-  "Kawasaki Ninja H2": {
-    engine: "998cc supercharged inline-four",
-    horsepower: "228 hp",
-    weight: "526 lbs",
-    zeroSixty: "2.7 seconds",
-    topSpeed: "209 mph"
-  },
-  "Kawasaki Ninja H2R": {
-    engine: "998cc supercharged inline-four",
-    horsepower: "310 hp",
-    weight: "476 lbs",
-    zeroSixty: "2.5 seconds",
-    topSpeed: "240 mph"
-  },
-  "KTM RC390": {
-    engine: "373cc single-cylinder",
-    horsepower: "43 hp",
-    weight: "379 lbs",
-    zeroSixty: "5.1 seconds",
-    topSpeed: "105 mph"
-  },
-  "KTM RC8C": {
-    engine: "889cc parallel-twin",
-    horsepower: "135 hp",
-    weight: "311 lbs",
-    zeroSixty: "3.0 seconds",
-    topSpeed: "170 mph"
-  },
-  "Suzuki GSX 250R": {
-    engine: "248cc parallel-twin",
-    horsepower: "24 hp",
-    weight: "392 lbs",
-    zeroSixty: "7.8 seconds",
-    topSpeed: "90 mph"
-  },
-  "Suzuki GSX 8R": {
-    engine: "776cc parallel-twin",
-    horsepower: "82 hp",
-    weight: "452 lbs",
-    zeroSixty: "3.9 seconds",
-    topSpeed: "140 mph"
-  },
-  "Suzuki GSX 600R": {
-    engine: "599cc inline-four",
-    horsepower: "124 hp",
-    weight: "412 lbs",
-    zeroSixty: "3.3 seconds",
-    topSpeed: "160 mph"
-  },
-  "Suzuki GSX 750R": {
-    engine: "750cc inline-four",
-    horsepower: "148 hp",
-    weight: "419 lbs",
-    zeroSixty: "3.0 seconds",
-    topSpeed: "168 mph"
-  },
-  "Suzuki GSX 1000R": {
-    engine: "999cc inline-four",
-    horsepower: "199 hp",
-    weight: "443 lbs",
-    zeroSixty: "2.9 seconds",
-    topSpeed: "186 mph"
-  },
-  "Suzuki GSX Hayabusa": {
-    engine: "1340cc inline-four",
-    horsepower: "187 hp",
-    weight: "582 lbs",
-    zeroSixty: "3.0 seconds",
-    topSpeed: "186 mph"
-  },
-  "Triumph Daytona 660": {
-    engine: "660cc inline-three",
-    horsepower: "95 hp",
-    weight: "443 lbs",
-    zeroSixty: "3.9 seconds",
-    topSpeed: "143 mph"
-  },
-  "Triumph Speed Triple_RR": {
-    engine: "1160cc inline-three",
-    horsepower: "177 hp",
-    weight: "438 lbs",
-    zeroSixty: "3.1 seconds",
-    topSpeed: "170 mph"
-  },
-  "Triumph Daytona 765": {
-    engine: "765cc inline-three",
-    horsepower: "128 hp",
-    weight: "410 lbs",
-    zeroSixty: "3.4 seconds",
-    topSpeed: "160 mph"
-  },
-  "Triumph Speed Triple 1200 RS": {
-    engine: "1160cc inline-three",
-    horsepower: "177 hp",
-    weight: "437 lbs",
-    zeroSixty: "3.1 seconds",
-    topSpeed: "170 mph"
-  },
-  "Yamaha R3": {
-    engine: "321cc parallel-twin",
-    horsepower: "42 hp",
-    weight: "375 lbs",
-    zeroSixty: "5.0 seconds",
-    topSpeed: "112 mph"
-  },
-  "Yamaha R7": {
-    engine: "689cc parallel-twin",
-    horsepower: "73 hp",
-    weight: "414 lbs",
-    zeroSixty: "3.9 seconds",
-    topSpeed: "145 mph"
-  },
-  "Yamaha R6": {
-    engine: "599cc inline-four",
-    horsepower: "117 hp",
-    weight: "419 lbs",
-    zeroSixty: "3.3 seconds",
-    topSpeed: "160 mph"
-  },
-  "Yamaha R1": {
-    engine: "998cc inline-four",
-    horsepower: "198 hp",
-    weight: "448 lbs",
-    zeroSixty: "2.9 seconds",
-    topSpeed: "186 mph"
-  }
-};
+  const compareSpecsMap = window.MT_BIKE_SPECS_MAP || {};
 
   const state = {
     catalog: [],
@@ -338,84 +36,10 @@ const compareSpecsMap = {
     }
   };
 
-  const comparisonRows = [
-    {
-      label: "Category",
-      detail: "Bike type",
-      key: "category",
-      type: "text"
-    },
-    {
-      label: "Year",
-      detail: "Model year",
-      key: "year",
-      type: "text"
-    },
-    {
-      label: "Price",
-      detail: "Starting price",
-      key: "price",
-      type: "number",
-      lowerWins: true,
-      formatter: formatCurrency,
-      unit: "value"
-    },
-    {
-      label: "Engine",
-      detail: "Configuration",
-      key: "engine",
-      type: "text"
-    },
-    {
-      label: "Horsepower",
-      detail: "Peak output",
-      key: "horsepowerValue",
-      displayKey: "horsepower",
-      type: "number",
-      higherWins: true,
-      formatter: (value) => formatNumber(value, "hp"),
-      unit: "power"
-    },
-    {
-      label: "Weight",
-      detail: "Curb / wet weight",
-      key: "weightLbs",
-      displayKey: "weight",
-      type: "number",
-      lowerWins: true,
-      formatter: (value) => formatNumber(value, "lbs"),
-      unit: "weight"
-    },
-    {
-      label: "0–60 mph",
-      detail: "Acceleration",
-      key: "zeroToSixtySeconds",
-      displayKey: "zeroSixty",
-      type: "number",
-      lowerWins: true,
-      formatter: (value) => formatNumber(value, "sec"),
-      unit: "acceleration"
-    },
-    {
-      label: "Top Speed",
-      detail: "Estimated max speed",
-      key: "topSpeedMph",
-      displayKey: "topSpeed",
-      type: "number",
-      higherWins: true,
-      formatter: (value) => formatNumber(value, "mph"),
-      unit: "speed"
-    },
-    {
-      label: "Power / Weight",
-      detail: "Horsepower per pound",
-      key: "powerToWeight",
-      type: "number",
-      higherWins: true,
-      formatter: (value) => formatDecimal(value, 3, "hp/lb"),
-      unit: "ratio"
-    }
-  ];
+  const comparisonRows = (window.MT_COMPARE_ROW_DEFINITIONS || []).map((row) => ({
+    ...row,
+    formatter: getComparisonFormatter(row.formatter)
+  }));
 
   function getStaticMotorcycles() {
     try {
@@ -457,7 +81,7 @@ const compareSpecsMap = {
       model: rawBike.model || "Unknown Model",
       year: Number(rawBike.year) || "Not added yet",
       price,
-      image: rawBike.imageUrl || rawBike.image_url || rawBike.image || "images/HomePageBike.png",
+      image: rawBike.imageUrl || rawBike.image_url || rawBike.image || "assets/images/HomePageBike.png",
       engine: rawBike.engine || fallbackSpecs.engine || "Not added yet",
       horsepower: rawBike.horsepower ? formatNumber(parseNumber(rawBike.horsepower), "hp") : fallbackSpecs.horsepower || "Not added yet",
       horsepowerValue,
@@ -706,6 +330,19 @@ const compareSpecsMap = {
     return suffix ? `${Number(value).toFixed(digits)} ${suffix}` : Number(value).toFixed(digits);
   }
 
+  function getComparisonFormatter(formatterName) {
+    const formatters = {
+      currency: formatCurrency,
+      horsepower: (value) => formatNumber(value, "hp"),
+      weight: (value) => formatNumber(value, "lbs"),
+      acceleration: (value) => formatNumber(value, "sec"),
+      speed: (value) => formatNumber(value, "mph"),
+      powerToWeight: (value) => formatDecimal(value, 3, "hp/lb")
+    };
+
+    return formatters[formatterName] || null;
+  }
+
   function formatModelName(bike) {
     return `${bike.year} ${bike.model}`;
   }
@@ -818,7 +455,7 @@ const compareSpecsMap = {
         </div>
 
         <div class="compare-bike-image-wrap">
-          <img src="${bike.image}" alt="${bike.model}" onerror="this.src='images/HomePageBike.png'">
+          <img src="${bike.image}" alt="${bike.model}" onerror="this.src='assets/images/HomePageBike.png'">
         </div>
 
         <div class="compare-bike-copy">
@@ -874,21 +511,11 @@ const compareSpecsMap = {
   }
 
   function getBrandAccent(brand) {
-    const brandAccentMap = {
-      Aprilia: "#ff2b2b",
-      BMW: "#4aa3ff",
-      Ducati: "#ff2b2b",
-      Harley: "#ff7a00",
-      Honda: "#ff2b2b",
-      Indian: "#c0392b",
-      Kawasaki: "#22ff00",
-      KTM: "#ff7a00",
-      Suzuki: "#4aa3ff",
-      Triumph: "#ffffff",
-      Yamaha: "#4aa3ff"
-    };
+    if (typeof window.getMotorcycleBrandAccent === "function") {
+      return window.getMotorcycleBrandAccent(brand);
+    }
 
-    return brandAccentMap[brand] || "#ff2b2b";
+    return "#ff2b2b";
   }
 
   function getDeltaPercent(valueA, valueB, digits = 1) {

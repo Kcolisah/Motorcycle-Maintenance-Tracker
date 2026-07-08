@@ -1,57 +1,57 @@
 let motorcycles = [
-  { id: 1, brand: "Aprilia", category: "Sport", model: "Aprilia RS457", year: 2026, price: 6799, image: "images/Aprilia/Sport/Aprilia_RS457.png" },
-  { id: 2, brand: "Aprilia", category: "Sport", model: "Aprilia RS660", year: 2026, price: 11299, image: "images/Aprilia/Sport/Aprilia_RS660.png" },
-  { id: 3, brand: "Aprilia", category: "SuperSport", model: "Aprilia RSV4", year: 2026, price: 18999, image: "images/Aprilia/SuperSport/Aprilia_RSV4.png" },
+  { id: 1, brand: "Aprilia", category: "Sport", model: "Aprilia RS457", year: 2026, price: 6799, image: "assets/images/Aprilia/Sport/Aprilia_RS457.png" },
+  { id: 2, brand: "Aprilia", category: "Sport", model: "Aprilia RS660", year: 2026, price: 11299, image: "assets/images/Aprilia/Sport/Aprilia_RS660.png" },
+  { id: 3, brand: "Aprilia", category: "SuperSport", model: "Aprilia RSV4", year: 2026, price: 18999, image: "assets/images/Aprilia/SuperSport/Aprilia_RSV4.png" },
 
-  { id: 4, brand: "BMW", category: "Sport", model: "BMW G310RR", year: 2026, price: 4000, image: "images/BMW/Sport/BMW_G310RR.png" },
-  { id: 5, brand: "BMW", category: "Sport", model: "BMW F900R", year: 2026, price: 8995, image: "images/BMW/Sport/BMW_F900R.png" },
-  { id: 6, brand: "BMW", category: "SuperSport", model: "BMW S1000RR", year: 2026, price: 26405, image: "images/BMW/SuperSport/BMW_S1000RR.png" },
-  { id: 7, brand: "BMW", category: "HyperSport", model: "BMW M1000RR", year: 2026, price: 35000, image: "images/BMW/HyperSport/BMW_M1000RR.png" },
+  { id: 4, brand: "BMW", category: "Sport", model: "BMW G310RR", year: 2026, price: 4000, image: "assets/images/BMW/Sport/BMW_G310RR.png" },
+  { id: 5, brand: "BMW", category: "Sport", model: "BMW F900R", year: 2026, price: 8995, image: "assets/images/BMW/Sport/BMW_F900R.png" },
+  { id: 6, brand: "BMW", category: "SuperSport", model: "BMW S1000RR", year: 2026, price: 26405, image: "assets/images/BMW/SuperSport/BMW_S1000RR.png" },
+  { id: 7, brand: "BMW", category: "HyperSport", model: "BMW M1000RR", year: 2026, price: 35000, image: "assets/images/BMW/HyperSport/BMW_M1000RR.png" },
 
-  { id: 8, brand: "Ducati", category: "Sport", model: "Ducati SuperSport 950", year: 2026, price: 18395, image: "images/Ducati/Sport/Ducati_SuperSport_950.png" },
-  { id: 9, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V2", year: 2026, price: 16995, image: "images/Ducati/SuperSport/Ducati_Panigale_V2.png" },
-  { id: 10, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V4", year: 2026, price: 27795, image: "images/Ducati/SuperSport/Ducati_Panigale_V4.png" },
-  { id: 11, brand: "Ducati", category: "HyperSport", model: "Ducati Streetfighter V4", year: 2026, price: 29295, image: "images/Ducati/HyperSport/Ducati_Streetfighter_V4.png" },
+  { id: 8, brand: "Ducati", category: "Sport", model: "Ducati SuperSport 950", year: 2026, price: 18395, image: "assets/images/Ducati/Sport/Ducati_SuperSport_950.png" },
+  { id: 9, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V2", year: 2026, price: 16995, image: "assets/images/Ducati/SuperSport/Ducati_Panigale_V2.png" },
+  { id: 10, brand: "Ducati", category: "SuperSport", model: "Ducati Panigale V4", year: 2026, price: 27795, image: "assets/images/Ducati/SuperSport/Ducati_Panigale_V4.png" },
+  { id: 11, brand: "Ducati", category: "HyperSport", model: "Ducati Streetfighter V4", year: 2026, price: 29295, image: "assets/images/Ducati/HyperSport/Ducati_Streetfighter_V4.png" },
 
-  { id: 12, brand: "Harley", category: "Cruiser", model: "Harley Iron 993", year: 2026, price: 10499, image: "images/Harley/Cruiser/Harley_Iron_993.png" },
-  { id: 13, brand: "Harley", category: "Cruiser", model: "Harley Low Rider S", year: 2026, price: 18999, image: "images/Harley/Cruiser/Harley_Low_Rider_S.png" },
-  { id: 14, brand: "Harley", category: "Cruiser", model: "Harley Sportster S", year: 2026, price: 15999, image: "images/Harley/Cruiser/Harley_Sportster_S.png" },
+  { id: 12, brand: "Harley", category: "Cruiser", model: "Harley Iron 993", year: 2026, price: 10499, image: "assets/images/Harley/Cruiser/Harley_Iron_993.png" },
+  { id: 13, brand: "Harley", category: "Cruiser", model: "Harley Low Rider S", year: 2026, price: 18999, image: "assets/images/Harley/Cruiser/Harley_Low_Rider_S.png" },
+  { id: 14, brand: "Harley", category: "Cruiser", model: "Harley Sportster S", year: 2026, price: 15999, image: "assets/images/Harley/Cruiser/Harley_Sportster_S.png" },
 
-  { id: 15, brand: "Honda", category: "Sport", model: "Honda CBR 500R", year: 2026, price: 6399, image: "images/Honda/Sport/Honda_CBR_500R.png" },
-  { id: 16, brand: "Honda", category: "Sport", model: "Honda CBR 650R", year: 2026, price: 9799, image: "images/Honda/Sport/Honda_CBR_650R.png" },
-  { id: 17, brand: "Honda", category: "SuperSport", model: "Honda CBR 600RR", year: 2026, price: 12499, image: "images/Honda/SuperSport/Honda_CBR_600RR.png" },
-  { id: 18, brand: "Honda", category: "SuperSport", model: "Honda CBR 1000RR", year: 2026, price: 16999, image: "images/Honda/SuperSport/Honda_CBR_1000RR.png" },
+  { id: 15, brand: "Honda", category: "Sport", model: "Honda CBR 500R", year: 2026, price: 6399, image: "assets/images/Honda/Sport/Honda_CBR_500R.png" },
+  { id: 16, brand: "Honda", category: "Sport", model: "Honda CBR 650R", year: 2026, price: 9799, image: "assets/images/Honda/Sport/Honda_CBR_650R.png" },
+  { id: 17, brand: "Honda", category: "SuperSport", model: "Honda CBR 600RR", year: 2026, price: 12499, image: "assets/images/Honda/SuperSport/Honda_CBR_600RR.png" },
+  { id: 18, brand: "Honda", category: "SuperSport", model: "Honda CBR 1000RR", year: 2026, price: 16999, image: "assets/images/Honda/SuperSport/Honda_CBR_1000RR.png" },
 
-  { id: 19, brand: "Indian", category: "Cruiser", model: "Indian Chief", year: 2026, price: 14999, image: "images/Indian/Cruiser/Indian_Chief.png" },
-  { id: 20, brand: "Indian", category: "Cruiser", model: "Indian Scout", year: 2026, price: 12999, image: "images/Indian/Cruiser/Indian_Scout.png" },
+  { id: 19, brand: "Indian", category: "Cruiser", model: "Indian Chief", year: 2026, price: 14999, image: "assets/images/Indian/Cruiser/Indian_Chief.png" },
+  { id: 20, brand: "Indian", category: "Cruiser", model: "Indian Scout", year: 2026, price: 12999, image: "assets/images/Indian/Cruiser/Indian_Scout.png" },
 
-  { id: 21, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 500R", year: 2026, price: 5399, image: "images/Kawasaki/Sport/Kawasaki_Ninja_500R.png" },
-  { id: 22, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 650R", year: 2026, price: 7599, image: "images/Kawasaki/Sport/Kawasaki_Ninja_650R.png" },
-  { id: 23, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX6R", year: 2026, price: 11599, image: "images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png" },
-  { id: 24, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX 10R", year: 2026, price: 16999, image: "images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_10R.png" },
-  { id: 25, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki-Ninja ZX14R", year: 2025, price: 17599, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_ZX_14R.png" },
-  { id: 26, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2", year: 2026, price: 34400, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_H2.png" },
-  { id: 27, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2R", year: 2026, price: 62100, image: "images/Kawasaki/HyperSport/Kawasaki_Ninja_H2R.png" },
+  { id: 21, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 500R", year: 2026, price: 5399, image: "assets/images/Kawasaki/Sport/Kawasaki_Ninja_500R.png" },
+  { id: 22, brand: "Kawasaki", category: "Sport", model: "Kawasaki Ninja 650R", year: 2026, price: 7599, image: "assets/images/Kawasaki/Sport/Kawasaki_Ninja_650R.png" },
+  { id: 23, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX6R", year: 2026, price: 11599, image: "assets/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_6R.png" },
+  { id: 24, brand: "Kawasaki", category: "SuperSport", model: "Kawasaki Ninja ZX 10R", year: 2026, price: 16999, image: "assets/images/Kawasaki/SuperSport/Kawasaki_Ninja_ZX_10R.png" },
+  { id: 25, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki-Ninja ZX14R", year: 2025, price: 17599, image: "assets/images/Kawasaki/HyperSport/Kawasaki_Ninja_ZX_14R.png" },
+  { id: 26, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2", year: 2026, price: 34400, image: "assets/images/Kawasaki/HyperSport/Kawasaki_Ninja_H2.png" },
+  { id: 27, brand: "Kawasaki", category: "HyperSport", model: "Kawasaki Ninja H2R", year: 2026, price: 62100, image: "assets/images/Kawasaki/HyperSport/Kawasaki_Ninja_H2R.png" },
 
-  { id: 28, brand: "KTM", category: "Sport", model: "KTM RC390", year: 2026, price: 5899, image: "images/KTM/Sport/KTM_RC390.png" },
-  { id: 29, brand: "KTM", category: "HyperSport", model: "KTM RC8C", year: 2026, price: 41499, image: "images/KTM/HyperSport/KTM_RC8C.png" },
+  { id: 28, brand: "KTM", category: "Sport", model: "KTM RC390", year: 2026, price: 5899, image: "assets/images/KTM/Sport/KTM_RC390.png" },
+  { id: 29, brand: "KTM", category: "HyperSport", model: "KTM RC8C", year: 2026, price: 41499, image: "assets/images/KTM/HyperSport/KTM_RC8C.png" },
 
-  { id: 30, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 250R", year: 2026, price: 5149, image: "images/Suzuki/Sport/Suzuki_GSX_250R.png" },
-  { id: 31, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 8R", year: 2026, price: 9699, image: "images/Suzuki/Sport/Suzuki_GSX_8R.png" },
-  { id: 32, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 600R", year: 2026, price: 12199, image: "images/Suzuki/SuperSport/Suzuki_GSX_600R.png" },
-  { id: 33, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 750R", year: 2026, price: 13249, image: "images/Suzuki/SuperSport/Suzuki_GSX_750R.png" },
-  { id: 34, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 1000R", year: 2026, price: 18645, image: "images/Suzuki/SuperSport/Suzuki_GSX_1000R.png" },
-  { id: 35, brand: "Suzuki", category: "HyperSport", model: "Suzuki GSX Hayabusa", year: 2026, price: 19499, image: "images/Suzuki/HyperSport/Suzuki_GSX_Hayabusa.png" },
+  { id: 30, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 250R", year: 2026, price: 5149, image: "assets/images/Suzuki/Sport/Suzuki_GSX_250R.png" },
+  { id: 31, brand: "Suzuki", category: "Sport", model: "Suzuki GSX 8R", year: 2026, price: 9699, image: "assets/images/Suzuki/Sport/Suzuki_GSX_8R.png" },
+  { id: 32, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 600R", year: 2026, price: 12199, image: "assets/images/Suzuki/SuperSport/Suzuki_GSX_600R.png" },
+  { id: 33, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 750R", year: 2026, price: 13249, image: "assets/images/Suzuki/SuperSport/Suzuki_GSX_750R.png" },
+  { id: 34, brand: "Suzuki", category: "SuperSport", model: "Suzuki GSX 1000R", year: 2026, price: 18645, image: "assets/images/Suzuki/SuperSport/Suzuki_GSX_1000R.png" },
+  { id: 35, brand: "Suzuki", category: "HyperSport", model: "Suzuki GSX Hayabusa", year: 2026, price: 19499, image: "assets/images/Suzuki/HyperSport/Suzuki_GSX_Hayabusa.png" },
 
-  { id: 36, brand: "Triumph", category: "Sport", model: "Triumph Daytona 660", year: 2026, price: 9395, image: "images/Triumph/Sport/Triumph_Daytona_660.png" },
-  { id: 37, brand: "Triumph", category: "Sport", model: "Triumph Speed Triple_RR", year: 2026, price: 21495, image: "images/Triumph/Sport/Triumph_Speed_Triple_RR.png" },
-  { id: 38, brand: "Triumph", category: "SuperSport", model: "Triumph Daytona 765", year: 2026, price: 9395, image: "images/Triumph/SuperSport/Triumph_Daytona_765.png" },
-  { id: 39, brand: "Triumph", category: "SuperSport", model: "Triumph Speed Triple 1200 RS", year: 2026, price: 21545, image: "images/Triumph/SuperSport/Triumph_Speed_Triple_1200_RS.png" },
+  { id: 36, brand: "Triumph", category: "Sport", model: "Triumph Daytona 660", year: 2026, price: 9395, image: "assets/images/Triumph/Sport/Triumph_Daytona_660.png" },
+  { id: 37, brand: "Triumph", category: "Sport", model: "Triumph Speed Triple_RR", year: 2026, price: 21495, image: "assets/images/Triumph/Sport/Triumph_Speed_Triple_RR.png" },
+  { id: 38, brand: "Triumph", category: "SuperSport", model: "Triumph Daytona 765", year: 2026, price: 9395, image: "assets/images/Triumph/SuperSport/Triumph_Daytona_765.png" },
+  { id: 39, brand: "Triumph", category: "SuperSport", model: "Triumph Speed Triple 1200 RS", year: 2026, price: 21545, image: "assets/images/Triumph/SuperSport/Triumph_Speed_Triple_1200_RS.png" },
 
-  { id: 40, brand: "Yamaha", category: "Sport", model: "Yamaha R3", year: 2026, price: 5499, image: "images/Yamaha/Sport/Yamaha_R3.png" },
-  { id: 41, brand: "Yamaha", category: "Sport", model: "Yamaha R7", year: 2026, price: 9399, image: "images/Yamaha/Sport/Yamaha_R7.png" },
-  { id: 42, brand: "Yamaha", category: "SuperSport", model: "Yamaha R6", year: 2026, price: 13499, image: "images/Yamaha/SuperSport/Yamaha_R6.png" },
-  { id: 43, brand: "Yamaha", category: "SuperSport", model: "Yamaha R1", year: 2026, price: 19199, image: "images/Yamaha/SuperSport/Yamaha_R1.png" }
+  { id: 40, brand: "Yamaha", category: "Sport", model: "Yamaha R3", year: 2026, price: 5499, image: "assets/images/Yamaha/Sport/Yamaha_R3.png" },
+  { id: 41, brand: "Yamaha", category: "Sport", model: "Yamaha R7", year: 2026, price: 9399, image: "assets/images/Yamaha/Sport/Yamaha_R7.png" },
+  { id: 42, brand: "Yamaha", category: "SuperSport", model: "Yamaha R6", year: 2026, price: 13499, image: "assets/images/Yamaha/SuperSport/Yamaha_R6.png" },
+  { id: 43, brand: "Yamaha", category: "SuperSport", model: "Yamaha R1", year: 2026, price: 19199, image: "assets/images/Yamaha/SuperSport/Yamaha_R1.png" }
 ];
 
 const MOTORCYCLE_API_BASE_URL = "https://api.olysa.app/api";
@@ -144,17 +144,17 @@ revealSections.forEach((section) => {
 });
 
 const brandLogoMap = {
-  Aprilia: "images/Aprilia/Aprilia_Logo.png",
-  BMW: "images/BMW/BMW_Logo.png",
-  Ducati: "images/Ducati/Ducati_Logo.png",
-  Harley: "images/Harley/Harley_Logo.png",
-  Honda: "images/Honda/Honda_Logo.png",
-  Indian: "images/Indian/Indian_Logo.png",
-  Kawasaki: "images/Kawasaki/Kawasaki_Logo.png",
-  KTM: "images/KTM/KTM_Logo.png",
-  Suzuki: "images/Suzuki/Suzuki_logo.png",
-  Triumph: "images/Triumph/Triumph_Logo.png",
-  Yamaha: "images/Yamaha/Yamaha_Logo.png"
+  Aprilia: "assets/images/Aprilia/Aprilia_Logo.png",
+  BMW: "assets/images/BMW/BMW_Logo.png",
+  Ducati: "assets/images/Ducati/Ducati_Logo.png",
+  Harley: "assets/images/Harley/Harley_Logo.png",
+  Honda: "assets/images/Honda/Honda_Logo.png",
+  Indian: "assets/images/Indian/Indian_Logo.png",
+  Kawasaki: "assets/images/Kawasaki/Kawasaki_Logo.png",
+  KTM: "assets/images/KTM/KTM_Logo.png",
+  Suzuki: "assets/images/Suzuki/Suzuki_logo.png",
+  Triumph: "assets/images/Triumph/Triumph_Logo.png",
+  Yamaha: "assets/images/Yamaha/Yamaha_Logo.png"
 };
 
 let allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
@@ -184,8 +184,6 @@ async function loadMotorcyclesFromApi() {
 
     motorcycles = backendMotorcycles.map(normalizeMotorcycleFromApi);
     allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
-
-    console.log("Loaded motorcycles from Spring Boot backend:", motorcycles);
   } catch (error) {
     console.warn("Using static data.js motorcycles because backend was not available:", error);
   }
@@ -551,8 +549,8 @@ function resetToHomeState() {
 
   hideHeroNavigationUI();
 
-  specTitle.textContent = "Homepage Goal";
-  specText.textContent = "This first screen acts as the front page of the project. The user lands here first, then moves into the tracker to choose a brand, category, and eventually see filtered results.";
+  specTitle.textContent = "Start Your Tracker";
+  specText.textContent = "Choose a brand, narrow by category, and open a motorcycle profile with specs, pricing, and maintenance tools.";
   specLink.textContent = "ENTER TRACKER";
   specLink.setAttribute("href", "#tracker-preview");
 
