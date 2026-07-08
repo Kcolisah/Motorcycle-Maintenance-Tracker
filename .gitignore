@@ -4,3 +4,10 @@ out/
 target/
 node_modules/
 .DS_Store
+motorcycle-admin/
+database/
+JavaScript/adminAccess.js
+.env
+.env.*
+*.log
+Thumbs.db
