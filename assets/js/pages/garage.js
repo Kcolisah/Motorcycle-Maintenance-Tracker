@@ -1,3 +1,36 @@
+function resolveGarageImagePath(path) {
+  if (!path) {
+    return "assets/images/LOGO.png";
+  }
+
+  const value = String(path).trim();
+
+  if (
+    value.startsWith("http://") ||
+    value.startsWith("https://") ||
+    value.startsWith("data:") ||
+    value.startsWith("assets/") ||
+    value.startsWith("/assets/") ||
+    value.startsWith("../assets/")
+  ) {
+    return value;
+  }
+
+  if (value.startsWith("/images/")) {
+    return `/assets${value}`;
+  }
+
+  if (value.startsWith("images/")) {
+    return `assets/${value}`;
+  }
+
+  if (value.startsWith("./images/")) {
+    return `assets/${value.slice(2)}`;
+  }
+
+  return value;
+}
+
 const garageList = document.getElementById("garageList");
 const garageMessage = document.getElementById("garageMessage");
 const garageLoadingState = document.getElementById("garageLoadingState");
@@ -108,7 +141,7 @@ function renderGarageCard(item) {
 
   card.innerHTML = `
     <div class="garage-card-image-wrap">
-      <img class="garage-card-image" src="${motorcycle.imageUrl || motorcycle.image || ""}" alt="${motorcycle.model || "Motorcycle"}">
+      <img class="garage-card-image" src="${resolveGarageImagePath(motorcycle.imageUrl || motorcycle.image_url || motorcycle.image || motorcycle.imagePath)}" alt="${motorcycle.model || "Motorcycle"}">
     </div>
 
     <div class="garage-card-info">

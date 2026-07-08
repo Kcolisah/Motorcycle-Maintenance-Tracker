@@ -66,7 +66,40 @@
     return compareSpecsMap[model] || {};
   }
 
-  function normalizeBike(rawBike) {
+  function resolveCompareImagePath(path) {
+  if (!path) {
+    return "assets/images/HomePageBike.png";
+  }
+
+  const value = String(path).trim();
+
+  if (
+    value.startsWith("http://") ||
+    value.startsWith("https://") ||
+    value.startsWith("data:") ||
+    value.startsWith("assets/") ||
+    value.startsWith("/assets/") ||
+    value.startsWith("../assets/")
+  ) {
+    return value;
+  }
+
+  if (value.startsWith("/images/")) {
+    return `/assets${value}`;
+  }
+
+  if (value.startsWith("images/")) {
+    return `assets/${value}`;
+  }
+
+  if (value.startsWith("./images/")) {
+    return `assets/${value.slice(2)}`;
+  }
+
+  return value;
+}
+
+function normalizeBike(rawBike) {
     const fallbackSpecs = getFallbackSpecs(rawBike.model);
     const horsepowerValue = parseNumber(rawBike.horsepower ?? rawBike.horsepower_hp ?? fallbackSpecs.horsepower);
     const weightLbs = parseNumber(rawBike.weightLbs ?? rawBike.weight_lbs ?? rawBike.weight ?? fallbackSpecs.weight);
@@ -81,7 +114,7 @@
       model: rawBike.model || "Unknown Model",
       year: Number(rawBike.year) || "Not added yet",
       price,
-      image: rawBike.imageUrl || rawBike.image_url || rawBike.image || "assets/images/HomePageBike.png",
+      image: resolveCompareImagePath(rawBike.imageUrl || rawBike.image_url || rawBike.image || rawBike.imagePath),
       engine: rawBike.engine || fallbackSpecs.engine || "Not added yet",
       horsepower: rawBike.horsepower ? formatNumber(parseNumber(rawBike.horsepower), "hp") : fallbackSpecs.horsepower || "Not added yet",
       horsepowerValue,

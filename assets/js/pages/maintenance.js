@@ -1,3 +1,36 @@
+function resolveMaintenanceImagePath(path) {
+  if (!path) {
+    return "assets/images/LOGO.png";
+  }
+
+  const value = String(path).trim();
+
+  if (
+    value.startsWith("http://") ||
+    value.startsWith("https://") ||
+    value.startsWith("data:") ||
+    value.startsWith("assets/") ||
+    value.startsWith("/assets/") ||
+    value.startsWith("../assets/")
+  ) {
+    return value;
+  }
+
+  if (value.startsWith("/images/")) {
+    return `/assets${value}`;
+  }
+
+  if (value.startsWith("images/")) {
+    return `assets/${value}`;
+  }
+
+  if (value.startsWith("./images/")) {
+    return `assets/${value.slice(2)}`;
+  }
+
+  return value;
+}
+
 const API_BASE_URL = "https://api.olysa.app/api";
 
 const selectedGarageBikeName = document.getElementById("selectedGarageBikeName");
@@ -132,7 +165,7 @@ function getGarageId(item) {
 }
 
 function getMotorcycleImage(motorcycle) {
-  return motorcycle.imageUrl || motorcycle.image || motorcycle.imagePath || "assets/images/LOGO.png";
+  return resolveMaintenanceImagePath(motorcycle.imageUrl || motorcycle.image_url || motorcycle.image || motorcycle.imagePath);
 }
 
 function getGarageMileage(item) {
