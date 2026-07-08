@@ -349,3 +349,59 @@
     display: none !important;
   }
 }
+
+/* Focused OLED contact account menu override */
+.contact-page-shell .account-menu-trigger,
+.contact-page-shell .account-menu-trigger:hover,
+.contact-page-shell .account-menu-trigger:focus-visible,
+.contact-page-shell .account-menu-trigger[aria-expanded="true"] {
+  width: 50px !important;
+  min-width: 50px !important;
+  height: 50px !important;
+  border-radius: 14px !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.contact-page-shell .account-avatar {
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  background: linear-gradient(135deg, #ff3434, #7a1010) !important;
+  color: #fff !important;
+}
+
+.contact-page-shell .account-dropdown {
+  width: 280px !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(8, 8, 10, 0.97) !important;
+  color: #fff !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+.contact-page-shell .account-dropdown-header {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.contact-page-shell .account-dropdown-header strong {
+  color: #fff !important;
+}
+
+.contact-page-shell .account-dropdown-header p,
+.contact-page-shell .account-dropdown-link {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+
+.contact-page-shell .account-dropdown-link:hover {
+  background: rgba(255, 255, 255, 0.055) !important;
+  color: #fff !important;
+}
+
+.contact-page-shell .account-signout-btn {
+  color: #ff6b6b !important;
+}
