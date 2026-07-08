@@ -81,6 +81,311 @@ const brandLogoMap = {
   Yamaha: `${ASSET_BASE}/images/Yamaha/Yamaha_Logo.png`,
 };
 
+const mobileCompareSpecsMap = {
+  "Aprilia RS457": {
+    engine: "457cc parallel-twin",
+    horsepower: "47 hp",
+    weight: "386 lbs",
+    zeroSixty: "5.0 seconds",
+    topSpeed: "118 mph"
+  },
+  "Aprilia RS660": {
+    engine: "659cc parallel-twin",
+    horsepower: "100 hp",
+    weight: "403 lbs",
+    zeroSixty: "3.8 seconds",
+    topSpeed: "149 mph"
+  },
+  "Aprilia RSV4": {
+    engine: "1099cc V4",
+    horsepower: "217 hp",
+    weight: "445 lbs",
+    zeroSixty: "3.1 seconds",
+    topSpeed: "180 mph"
+  },
+  "BMW G310RR": {
+    engine: "313cc single-cylinder",
+    horsepower: "34 hp",
+    weight: "383 lbs",
+    zeroSixty: "6.2 seconds",
+    topSpeed: "100 mph"
+  },
+  "BMW F900R": {
+    engine: "895cc parallel-twin",
+    horsepower: "99 hp",
+    weight: "465 lbs",
+    zeroSixty: "3.5 seconds",
+    topSpeed: "124 mph"
+  },
+  "BMW S1000RR": {
+    engine: "999cc inline-four",
+    horsepower: "205 hp",
+    weight: "434 lbs",
+    zeroSixty: "3.0 seconds",
+    topSpeed: "188 mph"
+  },
+  "BMW M1000RR": {
+    engine: "999cc inline-four",
+    horsepower: "205 hp",
+    weight: "423 lbs",
+    zeroSixty: "2.9 seconds",
+    topSpeed: "189 mph"
+  },
+  "Ducati SuperSport 950": {
+    engine: "937cc L-twin",
+    horsepower: "110 hp",
+    weight: "460 lbs",
+    zeroSixty: "3.4 seconds",
+    topSpeed: "152 mph"
+  },
+  "Ducati Panigale V2": {
+    engine: "955cc V-twin",
+    horsepower: "155 hp",
+    weight: "441 lbs",
+    zeroSixty: "3.2 seconds",
+    topSpeed: "170 mph"
+  },
+  "Ducati Panigale V4": {
+    engine: "1103cc V4",
+    horsepower: "215 hp",
+    weight: "434 lbs",
+    zeroSixty: "3.0 seconds",
+    topSpeed: "186 mph"
+  },
+  "Ducati Streetfighter V4": {
+    engine: "1103cc V4",
+    horsepower: "208 hp",
+    weight: "439 lbs",
+    zeroSixty: "3.0 seconds",
+    topSpeed: "180 mph"
+  },
+  "Harley Iron 993": {
+    engine: "975cc V-twin",
+    horsepower: "90 hp",
+    weight: "481 lbs",
+    zeroSixty: "4.4 seconds",
+    topSpeed: "120 mph"
+  },
+  "Harley Low Rider S": {
+    engine: "1923cc V-twin",
+    horsepower: "103 hp",
+    weight: "679 lbs",
+    zeroSixty: "4.1 seconds",
+    topSpeed: "120 mph"
+  },
+  "Harley Sportster S": {
+    engine: "1252cc V-twin",
+    horsepower: "121 hp",
+    weight: "502 lbs",
+    zeroSixty: "3.5 seconds",
+    topSpeed: "143 mph"
+  },
+  "Honda CBR 500R": {
+    engine: "471cc parallel-twin",
+    horsepower: "47 hp",
+    weight: "423 lbs",
+    zeroSixty: "5.2 seconds",
+    topSpeed: "116 mph"
+  },
+  "Honda CBR 650R": {
+    engine: "649cc inline-four",
+    horsepower: "94 hp",
+    weight: "463 lbs",
+    zeroSixty: "3.9 seconds",
+    topSpeed: "149 mph"
+  },
+  "Honda CBR 600RR": {
+    engine: "599cc inline-four",
+    horsepower: "121 hp",
+    weight: "410 lbs",
+    zeroSixty: "3.2 seconds",
+    topSpeed: "160 mph"
+  },
+  "Honda CBR 1000RR": {
+    engine: "999cc inline-four",
+    horsepower: "189 hp",
+    weight: "430 lbs",
+    zeroSixty: "2.9 seconds",
+    topSpeed: "186 mph"
+  },
+  "Indian Chief": {
+    engine: "1890cc V-twin",
+    horsepower: "89 hp",
+    weight: "670 lbs",
+    zeroSixty: "4.2 seconds",
+    topSpeed: "115 mph"
+  },
+  "Indian Scout": {
+    engine: "1133cc V-twin",
+    horsepower: "100 hp",
+    weight: "561 lbs",
+    zeroSixty: "3.9 seconds",
+    topSpeed: "124 mph"
+  },
+  "Kawasaki Ninja 500R": {
+    engine: "451cc parallel-twin",
+    horsepower: "51 hp",
+    weight: "377 lbs",
+    zeroSixty: "4.5 seconds",
+    topSpeed: "118 mph"
+  },
+  "Kawasaki Ninja 650R": {
+    engine: "649cc parallel-twin",
+    horsepower: "67 hp",
+    weight: "426 lbs",
+    zeroSixty: "3.8 seconds",
+    topSpeed: "130 mph"
+  },
+  "Kawasaki Ninja ZX6R": {
+    engine: "636cc inline-four",
+    horsepower: "127 hp",
+    weight: "434 lbs",
+    zeroSixty: "3.2 seconds",
+    topSpeed: "164 mph"
+  },
+  "Kawasaki Ninja ZX 10R": {
+    engine: "998cc inline-four",
+    horsepower: "203 hp",
+    weight: "456 lbs",
+    zeroSixty: "3.0 seconds",
+    topSpeed: "186 mph"
+  },
+  "Kawasaki-Ninja ZX14R": {
+    engine: "1441cc inline-four",
+    horsepower: "197 hp",
+    weight: "593 lbs",
+    zeroSixty: "2.8 seconds",
+    topSpeed: "186 mph"
+  },
+  "Kawasaki Ninja H2": {
+    engine: "998cc supercharged inline-four",
+    horsepower: "228 hp",
+    weight: "526 lbs",
+    zeroSixty: "2.7 seconds",
+    topSpeed: "209 mph"
+  },
+  "Kawasaki Ninja H2R": {
+    engine: "998cc supercharged inline-four",
+    horsepower: "310 hp",
+    weight: "476 lbs",
+    zeroSixty: "2.5 seconds",
+    topSpeed: "240 mph"
+  },
+  "KTM RC390": {
+    engine: "373cc single-cylinder",
+    horsepower: "43 hp",
+    weight: "379 lbs",
+    zeroSixty: "5.1 seconds",
+    topSpeed: "105 mph"
+  },
+  "KTM RC8C": {
+    engine: "889cc parallel-twin",
+    horsepower: "135 hp",
+    weight: "311 lbs",
+    zeroSixty: "3.0 seconds",
+    topSpeed: "170 mph"
+  },
+  "Suzuki GSX 250R": {
+    engine: "248cc parallel-twin",
+    horsepower: "24 hp",
+    weight: "392 lbs",
+    zeroSixty: "7.8 seconds",
+    topSpeed: "90 mph"
+  },
+  "Suzuki GSX 8R": {
+    engine: "776cc parallel-twin",
+    horsepower: "82 hp",
+    weight: "452 lbs",
+    zeroSixty: "3.9 seconds",
+    topSpeed: "140 mph"
+  },
+  "Suzuki GSX 600R": {
+    engine: "599cc inline-four",
+    horsepower: "124 hp",
+    weight: "412 lbs",
+    zeroSixty: "3.3 seconds",
+    topSpeed: "160 mph"
+  },
+  "Suzuki GSX 750R": {
+    engine: "750cc inline-four",
+    horsepower: "148 hp",
+    weight: "419 lbs",
+    zeroSixty: "3.0 seconds",
+    topSpeed: "168 mph"
+  },
+  "Suzuki GSX 1000R": {
+    engine: "999cc inline-four",
+    horsepower: "199 hp",
+    weight: "443 lbs",
+    zeroSixty: "2.9 seconds",
+    topSpeed: "186 mph"
+  },
+  "Suzuki GSX Hayabusa": {
+    engine: "1340cc inline-four",
+    horsepower: "187 hp",
+    weight: "582 lbs",
+    zeroSixty: "3.0 seconds",
+    topSpeed: "186 mph"
+  },
+  "Triumph Daytona 660": {
+    engine: "660cc inline-three",
+    horsepower: "95 hp",
+    weight: "443 lbs",
+    zeroSixty: "3.9 seconds",
+    topSpeed: "143 mph"
+  },
+  "Triumph Speed Triple_RR": {
+    engine: "1160cc inline-three",
+    horsepower: "177 hp",
+    weight: "438 lbs",
+    zeroSixty: "3.1 seconds",
+    topSpeed: "170 mph"
+  },
+  "Triumph Daytona 765": {
+    engine: "765cc inline-three",
+    horsepower: "128 hp",
+    weight: "410 lbs",
+    zeroSixty: "3.4 seconds",
+    topSpeed: "160 mph"
+  },
+  "Triumph Speed Triple 1200 RS": {
+    engine: "1160cc inline-three",
+    horsepower: "177 hp",
+    weight: "437 lbs",
+    zeroSixty: "3.1 seconds",
+    topSpeed: "170 mph"
+  },
+  "Yamaha R3": {
+    engine: "321cc parallel-twin",
+    horsepower: "42 hp",
+    weight: "375 lbs",
+    zeroSixty: "5.0 seconds",
+    topSpeed: "112 mph"
+  },
+  "Yamaha R7": {
+    engine: "689cc parallel-twin",
+    horsepower: "73 hp",
+    weight: "414 lbs",
+    zeroSixty: "3.9 seconds",
+    topSpeed: "145 mph"
+  },
+  "Yamaha R6": {
+    engine: "599cc inline-four",
+    horsepower: "117 hp",
+    weight: "419 lbs",
+    zeroSixty: "3.3 seconds",
+    topSpeed: "160 mph"
+  },
+  "Yamaha R1": {
+    engine: "998cc inline-four",
+    horsepower: "198 hp",
+    weight: "448 lbs",
+    zeroSixty: "2.9 seconds",
+    topSpeed: "186 mph"
+  }
+};
+
+
 const staticServicePreview = [
   { date: "May 1, 2024", title: "Oil Change", description: "Shell Advance 15W-50", mileage: "4,200 mi", cost: "$120.00", status: "DONE" },
   { date: "Feb 10, 2024", title: "Chain Adjustment", description: "Adjusted and lubricated", mileage: "3,800 mi", cost: "$80.00", status: "DONE" },
@@ -101,6 +406,7 @@ const state = {
   selectedCatalogBikeId: null,
   selectedGarageId: null,
   selectedMaintenanceGarageId: null,
+  compareIds: { a: null, b: null },
   maintenanceStatusFilter: "upcoming",
   detailTab: "Overview",
   brandQuery: "",
@@ -146,6 +452,7 @@ const icons = {
   calendar: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v4"></path><path d="M17 3v4"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M4 10h16"></path></svg>`,
   plus: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>`,
   chevron: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>`,
+  scales: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"></path><path d="M5 7h14"></path><path d="M7 7 4 14h6L7 7Z"></path><path d="M17 7l-3 7h6l-3-7Z"></path><path d="M8 20h8"></path></svg>`,
 };
 
 function buildPreviewGarageItem(id, model, brand, category, year, mileage, price, image) {
@@ -1178,6 +1485,319 @@ function renderTaskRow(task, selectedItem = null) {
   `;
 }
 
+
+function parseCompareNumber(value) {
+  if (value === null || value === undefined || value === "") return null;
+  if (typeof value === "number") return Number.isFinite(value) ? value : null;
+  const match = String(value).replace(/,/g, "").match(/-?\d+(\.\d+)?/);
+  return match ? Number(match[0]) : null;
+}
+
+function getMobileCompareSpecs(model) {
+  return mobileCompareSpecsMap[model] || {};
+}
+
+function escapeRegExp(value) {
+  return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getCompareDisplayModel(bike) {
+  const model = String(bike?.model || "Motorcycle").trim();
+  const brand = String(bike?.brand || "").trim();
+  if (!brand) return model;
+  const brandPrefix = new RegExp(`^${escapeRegExp(brand)}[\\s_-]*`, "i");
+  return model.replace(brandPrefix, "").trim() || model;
+}
+
+function getCompareFullModelLabel(bike) {
+  return String(bike?.model || "Motorcycle").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+const mobileCompareExtraSpecsMap = {
+  "Yamaha R6": { fuelCapacity: "3.7 gal", abs: "Yes" },
+  "Suzuki GSX 750R": { fuelCapacity: "4.0 gal", abs: "Yes" },
+  "Yamaha R7": { fuelCapacity: "3.4 gal", abs: "Yes" },
+  "Yamaha R1": { fuelCapacity: "4.5 gal", abs: "Yes" },
+  "Suzuki GSX 600R": { fuelCapacity: "4.5 gal", abs: "Yes" },
+  "Suzuki GSX 1000R": { fuelCapacity: "4.2 gal", abs: "Yes" },
+  "Kawasaki Ninja ZX6R": { fuelCapacity: "4.5 gal", abs: "Yes" },
+  "Kawasaki Ninja ZX 10R": { fuelCapacity: "4.5 gal", abs: "Yes" },
+  "Honda CBR 600RR": { fuelCapacity: "4.8 gal", abs: "Yes" },
+  "Honda CBR 1000RR": { fuelCapacity: "4.3 gal", abs: "Yes" },
+};
+
+function getMobileCompareExtraSpecs(bike) {
+  const direct = mobileCompareExtraSpecsMap[bike?.model] || {};
+  const category = String(bike?.category || "").toLowerCase();
+  let fallbackFuel = "4.0 gal";
+  if (category.includes("cruiser")) fallbackFuel = "3.8 gal";
+  if (category.includes("sport")) fallbackFuel = "3.7 gal";
+  if (category.includes("supersport")) fallbackFuel = "4.5 gal";
+  if (category.includes("hyper")) fallbackFuel = "4.5 gal";
+  return {
+    fuelCapacity: bike?.fuelCapacity || direct.fuelCapacity || fallbackFuel,
+    abs: bike?.abs || direct.abs || "Yes",
+  };
+}
+
+function normalizeCompareBike(bike) {
+  if (!bike) return null;
+  const fallbackSpecs = getMobileCompareSpecs(bike.model);
+  const extraSpecs = getMobileCompareExtraSpecs(bike);
+  const directHorsepowerValue = parseCompareNumber(bike.horsepower);
+  const horsepowerValue = parseCompareNumber(bike.horsepower ?? fallbackSpecs.horsepower);
+  const zeroToSixtySeconds = parseCompareNumber(bike.zeroSixty ?? fallbackSpecs.zeroSixty);
+  const topSpeed = bike.topSpeed || fallbackSpecs.topSpeed || "Not added yet";
+  const weight = bike.weight || fallbackSpecs.weight || "Not added yet";
+  const fuelCapacity = extraSpecs.fuelCapacity || "Not added yet";
+  const engine = bike.engine || fallbackSpecs.engine || "Not added yet";
+  const priceValue = parseCompareNumber(bike.price);
+  return {
+    ...bike,
+    priceValue,
+    displayModel: getCompareDisplayModel(bike),
+    fullModelLabel: getCompareFullModelLabel(bike),
+    engine,
+    engineDisplacementValue: parseCompareNumber(engine),
+    horsepower: bike.horsepower ? (Number.isFinite(directHorsepowerValue) ? `${directHorsepowerValue} hp` : String(bike.horsepower)) : fallbackSpecs.horsepower || "Not added yet",
+    horsepowerValue,
+    zeroSixty: bike.zeroSixty || fallbackSpecs.zeroSixty || "Not added yet",
+    zeroToSixtySeconds,
+    topSpeed,
+    topSpeedValue: parseCompareNumber(topSpeed),
+    weight,
+    weightValue: parseCompareNumber(weight),
+    fuelCapacity,
+    fuelCapacityValue: parseCompareNumber(fuelCapacity),
+    abs: extraSpecs.abs || "Yes",
+  };
+}
+
+function getDefaultCompareBike(side, excludeId = null) {
+  const preferredModel = side === "a" ? "Yamaha R6" : "Suzuki GSX 750R";
+  return state.catalog.find((bike) => bike.model === preferredModel && String(bike.id) !== String(excludeId))
+    || state.catalog.find((bike) => String(bike.id) !== String(excludeId))
+    || state.catalog[0]
+    || null;
+}
+
+function ensureCompareDefaults() {
+  if (!state.catalog.length) return;
+  const yamaha = getDefaultCompareBike("a");
+  const suzuki = getDefaultCompareBike("b", yamaha?.id);
+  if (!state.compareIds.a && yamaha) state.compareIds.a = String(yamaha.id);
+  if (!state.compareIds.b && suzuki) state.compareIds.b = String(suzuki.id);
+}
+
+function getCompareBike(side) {
+  ensureCompareDefaults();
+  const id = state.compareIds[side];
+  const bike = state.catalog.find((entry) => String(entry.id) === String(id)) || getDefaultCompareBike(side) || state.catalog[0];
+  return normalizeCompareBike(bike);
+}
+
+function getCompareModelsForBrand(brand) {
+  return [...new Set(state.catalog.filter((bike) => bike.brand === brand).map((bike) => bike.model))].sort((a, b) => a.localeCompare(b));
+}
+
+function getCompareYearsForModel(brand, model) {
+  return [...new Set(state.catalog.filter((bike) => bike.brand === brand && bike.model === model).map((bike) => bike.year))].sort((a, b) => Number(b) - Number(a));
+}
+
+function findCompareCandidate({ brand, model, year, excludeId }) {
+  let candidates = state.catalog.filter((bike) => (!brand || bike.brand === brand) && (!model || bike.model === model) && (!year || String(bike.year) === String(year)));
+  if (!candidates.length && brand && model) candidates = state.catalog.filter((bike) => bike.brand === brand && bike.model === model);
+  if (!candidates.length && brand) candidates = state.catalog.filter((bike) => bike.brand === brand);
+  if (!candidates.length) candidates = state.catalog;
+  return candidates.find((bike) => String(bike.id) !== String(excludeId)) || candidates[0] || null;
+}
+
+function updateCompareSelection(side, field, value) {
+  const current = getCompareBike(side);
+  const otherSide = side === "a" ? "b" : "a";
+  let brand = current?.brand || getBrands()[0] || "";
+  let model = current?.model || "";
+  let year = current?.year || "";
+
+  if (field === "brand") {
+    brand = value;
+    model = getCompareModelsForBrand(brand)[0] || "";
+    year = getCompareYearsForModel(brand, model)[0] || "";
+  }
+
+  if (field === "model") {
+    model = value;
+    year = getCompareYearsForModel(brand, model)[0] || "";
+  }
+
+  if (field === "year") {
+    year = value;
+  }
+
+  const candidate = findCompareCandidate({ brand, model, year, excludeId: state.compareIds[otherSide] });
+  if (candidate) state.compareIds[side] = String(candidate.id);
+  render();
+}
+
+function swapCompareBikes() {
+  const oldA = state.compareIds.a;
+  state.compareIds.a = state.compareIds.b;
+  state.compareIds.b = oldA;
+  render();
+}
+
+function resetCompareBike(side) {
+  const otherSide = side === "a" ? "b" : "a";
+  const replacement = getDefaultCompareBike(side, state.compareIds[otherSide]);
+  if (replacement) state.compareIds[side] = String(replacement.id);
+  render();
+}
+
+function compareSelectOptions(values, selectedValue) {
+  return values.map((value) => `<option value="${escapeHtml(String(value))}" ${String(value) === String(selectedValue) ? "selected" : ""}>${escapeHtml(String(value))}</option>`).join("");
+}
+
+function formatCompareAcceleration(value) {
+  const number = parseCompareNumber(value);
+  return Number.isFinite(number) ? `${number.toFixed(number % 1 === 0 ? 0 : 1)} sec` : value ?? "--";
+}
+
+function compareStoreCard(side, bike) {
+  return `
+    <article class="compare-store-bike-card compare-store-bike-${side}">
+      <div class="compare-store-card-top">
+        <span>Bike ${side.toUpperCase()}</span>
+        <button class="compare-store-close" type="button" data-action="compare-reset-${side}" aria-label="Reset Bike ${side.toUpperCase()}">×</button>
+      </div>
+      <div class="compare-store-bike-stage">
+        <img src="${bike.image}" alt="${escapeHtml(bike.model)}" />
+      </div>
+      <div class="compare-store-bike-copy">
+        <small>${escapeHtml(bike.brand)}</small>
+        <strong>${escapeHtml(bike.displayModel)}</strong>
+        <em>${escapeHtml(String(bike.year))}</em>
+        <b>${formatMoney(bike.price)} <span>USD</span></b>
+      </div>
+      <div class="compare-store-spec-chips">
+        <span>${icons.gauge}${escapeHtml(bike.horsepower)}</span>
+        <span>${icons.calendar}${escapeHtml(bike.topSpeed)}</span>
+      </div>
+    </article>
+  `;
+}
+
+function compareStoreSelectGroup(side, bike) {
+  const brands = getBrands();
+  const models = getCompareModelsForBrand(bike.brand);
+  const years = getCompareYearsForModel(bike.brand, bike.model);
+  return `
+    <div class="compare-store-select-group">
+      <div class="compare-store-select-title"><span>Bike ${side.toUpperCase()}</span></div>
+      <label><span>Brand</span><select data-compare-side="${side}" data-compare-field="brand" aria-label="Bike ${side.toUpperCase()} brand">${compareSelectOptions(brands, bike.brand)}</select></label>
+      <label><span>Model</span><select data-compare-side="${side}" data-compare-field="model" aria-label="Bike ${side.toUpperCase()} model">${compareSelectOptions(models, bike.model)}</select></label>
+      <label><span>Year</span><select data-compare-side="${side}" data-compare-field="year" aria-label="Bike ${side.toUpperCase()} year">${compareSelectOptions(years, bike.year)}</select></label>
+    </div>
+  `;
+}
+
+function getCompareStoreWinner(row, bikeA, bikeB) {
+  if (row.type === "text") return String(bikeA[row.key]) === String(bikeB[row.key]) ? "tie" : "none";
+  const a = Number(bikeA[row.key]);
+  const b = Number(bikeB[row.key]);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) {
+    const displayA = row.displayKey ? bikeA[row.displayKey] : bikeA[row.key];
+    const displayB = row.displayKey ? bikeB[row.displayKey] : bikeB[row.key];
+    return String(displayA) === String(displayB) ? "tie" : "none";
+  }
+  if (a === b) return "tie";
+  if (row.lowerWins) return a < b ? "a" : "b";
+  return a > b ? "a" : "b";
+}
+
+function formatCompareStoreValue(row, bike) {
+  const rawValue = row.displayKey ? bike[row.displayKey] : bike[row.key];
+  if (row.formatter) return row.formatter(rawValue);
+  return rawValue ?? "--";
+}
+
+function renderCompareStoreRows(bikeA, bikeB) {
+  const rows = [
+    { label: "Year", key: "year", type: "text" },
+    { label: "Price", key: "priceValue", type: "number", lowerWins: true, formatter: (value) => formatMoney(value) },
+    { label: "Power", key: "horsepowerValue", displayKey: "horsepower", type: "number" },
+    { label: "Engine", key: "engineDisplacementValue", displayKey: "engine", type: "number" },
+    { label: "0–60 mph", key: "zeroToSixtySeconds", displayKey: "zeroSixty", type: "number", lowerWins: true, formatter: formatCompareAcceleration },
+    { label: "Top Speed", key: "topSpeedValue", displayKey: "topSpeed", type: "number" },
+    { label: "Weight (Wet)", key: "weightValue", displayKey: "weight", type: "number", lowerWins: true },
+    { label: "Fuel Capacity", key: "fuelCapacityValue", displayKey: "fuelCapacity", type: "number" },
+    { label: "ABS", key: "abs", type: "text" },
+  ];
+
+  return rows.map((row) => {
+    const winner = getCompareStoreWinner(row, bikeA, bikeB);
+    const displayA = formatCompareStoreValue(row, bikeA);
+    const displayB = formatCompareStoreValue(row, bikeB);
+    const result = winner === "tie" ? "=" : winner === "a" || winner === "b" ? "✓" : "—";
+    return `
+      <div class="compare-store-row compare-store-winner-${winner}">
+        <div class="compare-store-row-label">${escapeHtml(row.label)}</div>
+        <div class="compare-store-row-value compare-store-value-a">
+          ${winner === "a" ? `<em>Winner</em>` : ""}
+          <span>${escapeHtml(String(displayA ?? "--"))}</span>
+        </div>
+        <div class="compare-store-row-result"><b>${escapeHtml(result)}</b></div>
+        <div class="compare-store-row-value compare-store-value-b">
+          <span>${escapeHtml(String(displayB ?? "--"))}</span>
+          ${winner === "b" ? `<em>Winner</em>` : ""}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderCompare() {
+  if (!state.catalogReady) return renderLoadingScreen("Loading compare catalog");
+  ensureCompareDefaults();
+  const bikeA = getCompareBike("a");
+  const bikeB = getCompareBike("b");
+
+  return `
+    <section class="screen compare-store-screen">
+      <div class="compare-store-intro">
+        <p class="kicker">Compare</p>
+        <h1>Compare Motorcycles</h1>
+        <p>Side-by-side specs and key details to find your perfect ride.</p>
+      </div>
+
+      <section class="compare-store-product-panel" aria-label="Selected motorcycle comparison">
+        <div class="compare-store-product-grid">
+          ${compareStoreCard("a", bikeA)}
+          ${compareStoreCard("b", bikeB)}
+        </div>
+        <button class="compare-store-swap" type="button" data-action="compare-swap"><span aria-hidden="true">↔</span><strong>Swap</strong></button>
+      </section>
+
+      <section class="compare-store-select-panel" aria-label="Motorcycle selectors">
+        ${compareStoreSelectGroup("a", bikeA)}
+        ${compareStoreSelectGroup("b", bikeB)}
+      </section>
+
+      <section class="compare-store-table-card" aria-label="Spec comparison">
+        <div class="compare-store-section-title">Spec Comparison</div>
+        <div class="compare-store-table-head">
+          <span>Category</span>
+          <span>Bike A<small>${escapeHtml(bikeA.fullModelLabel)}</small></span>
+          <span></span>
+          <span>Bike B<small>${escapeHtml(bikeB.fullModelLabel)}</small></span>
+        </div>
+        <div class="compare-store-table-body">
+          ${renderCompareStoreRows(bikeA, bikeB)}
+        </div>
+      </section>
+    </section>
+  `;
+}
+
 function renderMore() {
   const userName = state.user?.username || "Guest Rider";
   return `
@@ -1343,6 +1963,7 @@ function renderMain() {
     case "garage": return renderGarage();
     case "detail": return renderDetail();
     case "maintenance": return renderMaintenance();
+    case "compare": return renderCompare();
     case "more": return renderMore();
     case "learn": return renderLearn();
     case "about": return renderAbout();
@@ -1607,7 +2228,7 @@ function renderProfilePanel() {
 }
 
 function updateBottomNav() {
-  const navViews = ["home", "garage", "maintenance", "more"];
+  const navViews = ["home", "garage", "maintenance", "compare", "more"];
   const activeView = navViews.includes(state.view) ? state.view : "";
   bottomNav.querySelectorAll(".nav-item").forEach((button) => {
     button.classList.toggle("active", button.dataset.route === activeView);
@@ -1636,6 +2257,16 @@ function bindDynamicEvents() {
     bikeInput.focus({ preventScroll: true });
     bikeInput.setSelectionRange(bikeInput.value.length, bikeInput.value.length);
   }
+
+
+
+  document.querySelectorAll("[data-compare-field]").forEach((select) => {
+    if (select.dataset.bound) return;
+    select.dataset.bound = "true";
+    select.addEventListener("change", (event) => {
+      updateCompareSelection(event.target.dataset.compareSide, event.target.dataset.compareField, event.target.value);
+    });
+  });
 
   const mobileContactForm = document.getElementById("mobile-contact-form");
   if (mobileContactForm && !mobileContactForm.dataset.bound) {
@@ -1995,6 +2626,15 @@ function handleSelectionClick(target) {
     return true;
   }
 
+
+
+  const compareViewBike = target.closest("[data-compare-view-bike]");
+  if (compareViewBike) {
+    state.selectedCatalogBikeId = compareViewBike.dataset.compareViewBike;
+    routeTo("bike-preview");
+    return true;
+  }
+
   const updateToggle = target.closest("[data-toggle-update-read]");
   if (updateToggle) {
     toggleUpdateRead(updateToggle.dataset.toggleUpdateRead);
@@ -2008,6 +2648,16 @@ async function handleActionClick(target) {
   const actionButton = target.closest("[data-action]");
   if (!actionButton) return false;
   const action = actionButton.dataset.action;
+
+  if (action === "compare-swap") {
+    swapCompareBikes();
+    return true;
+  }
+
+  if (action === "compare-reset-a" || action === "compare-reset-b") {
+    resetCompareBike(action.endsWith("a") ? "a" : "b");
+    return true;
+  }
 
   if (action === "retry-data") {
     state.catalogReady = false;
