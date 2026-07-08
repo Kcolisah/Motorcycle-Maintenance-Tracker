@@ -1,0 +1,73 @@
+/* Maintenance dashboard shell styles shared from the original main stylesheet */
+/*11. maintenance page*/
+.maintenance-page { height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; background: #030303; color: #fff; }
+.maintenance-page .page-shell, .maintenance-page-shell { width: 100%; height: auto; min-height: 100svh; overflow-x: clip; overflow-y: visible; }
+.maintenance-page-shell { padding: 34px 44px 60px; }
+.maintenance-layout { width: 100%; max-width: 1500px; margin: 54px auto 0; padding-top: 34px; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 34px; align-items: start; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.maintenance-sidebar, .maintenance-loading-state, .maintenance-column, .maintenance-task-form, .maintenance-task-card, .maintenance-bike-card { border: 1px solid var(--line); background: var(--panel); }
+.maintenance-sidebar { min-height: 620px; padding: 32px; }
+.maintenance-sidebar { min-height: 650px; }
+.maintenance-sidebar h1, .maintenance-main-header h2 { margin: 0; font-size: 38px; font-weight: 900; letter-spacing: -1px; }
+.maintenance-sidebar p { margin-top: 18px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.maintenance-bike-card { padding: 20px; background: rgba(255, 255, 255, 0.03); }
+.maintenance-bike-card { margin-top: 34px; padding: 22px; }
+.maintenance-bike-card span, .maintenance-form-row label { display: block; color: var(--muted-soft); font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+.maintenance-bike-card span { margin-bottom: 10px; }
+.maintenance-bike-card strong { display: block; font-size: 22px; font-weight: 900; }
+.maintenance-bike-card p { margin-top: 10px; color: rgba(255, 255, 255, 0.58); font-size: 13px; line-height: 1.6; }
+.maintenance-sidebar-actions { margin-top: 24px; display: grid; gap: 12px; }
+.maintenance-main { min-width: 0; }
+.maintenance-main { min-height: 620px; }
+.maintenance-main-header { justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn, .maintenance-task-action, .maintenance-delete-btn { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.maintenance-back-link, .maintenance-secondary-btn, .maintenance-primary-btn { padding: 14px 18px; }
+.maintenance-primary-btn { border-color: var(--accent); background: var(--accent); color: #050505; }
+.maintenance-primary-btn:disabled, .maintenance-secondary-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.maintenance-message { display: none; margin-bottom: 18px; padding: 14px 16px; border: 1px solid rgba(255, 43, 43, 0.45); background: rgba(255, 43, 43, 0.08); color: #ff6b6b; font-size: 13px; font-weight: 700; }
+.maintenance-message.success { border-color: rgba(39, 255, 132, 0.45); background: rgba(39, 255, 132, 0.08); color: #7cffae; }
+.maintenance-loading-state { padding: 42px; color: rgba(255, 255, 255, 0.7); }
+.maintenance-task-list { display: grid; gap: 18px; }
+.maintenance-task-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; color: rgba(255, 255, 255, 0.62); font-size: 13px; font-weight: 700; }
+.maintenance-task-action, .maintenance-delete-btn { padding: 13px 14px; }
+.maintenance-delete-btn:hover { border-color: var(--accent); background: var(--accent); color: #050505; }
+.maintenance-task-form { margin-bottom: 28px; padding: 22px; display: grid; grid-template-columns: 1fr 220px; gap: 16px; }
+.maintenance-form-row { display: grid; gap: 8px; }
+.maintenance-form-row-full { grid-column: 1 / -1; }
+.maintenance-form-row input, .maintenance-form-row textarea { width: 100%; padding: 13px 14px; border: 1px solid rgba(255, 255, 255, 0.12); outline: 0; background: rgba(0, 0, 0, 0.35); color: #fff; font-size: 14px; }
+.maintenance-form-row input:focus, .maintenance-form-row textarea:focus { border-color: var(--accent); }
+.maintenance-status-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.maintenance-column { min-height: 360px; padding: 18px; }
+.maintenance-column-header { justify-content: space-between; margin-bottom: 14px; }
+.maintenance-column-header h3 { font-size: 15px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+.maintenance-column-header span { min-width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: var(--accent-soft); color: #ff6b6b; font-size: 12px; font-weight: 900; }
+.maintenance-task-card { padding: 16px; background: rgba(0, 0, 0, 0.26); }
+.maintenance-task-card h4 { margin-bottom: 8px; font-size: 16px; font-weight: 900; }
+.maintenance-task-card p { margin-bottom: 12px; color: rgba(255, 255, 255, 0.62); font-size: 13px; line-height: 1.6; }
+.maintenance-task-meta span { padding: 6px 8px; border: 1px solid rgba(255, 255, 255, 0.09); color: rgba(255, 255, 255, 0.62); font-size: 10px; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase; }
+.maintenance-task-actions { display: grid; gap: 8px; }
+.maintenance-empty-note { padding: 18px; border: 1px dashed rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.5); font-size: 13px; line-height: 1.6; }
+/*29. maintenance mobile compact navbar fix*/
+@media (max-width: 780px) {
+  .maintenance-page, .maintenance-page-shell { width: 100% !important; max-width: 100% !important; min-width: 0 !important; overflow-x: hidden !important; }
+  .maintenance-page .navbar, .maintenance-page-shell .navbar { width: 100% !important; max-width: 100% !important; display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "logo account" "links links" "garage garage" !important; align-items: center !important; gap: 14px 12px !important; padding: calc(20px + env(safe-area-inset-top)) 16px 18px !important; overflow: visible !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; }
+  .maintenance-page .navbar .logo-block, .maintenance-page-shell .navbar .logo-block { grid-area: logo !important; justify-self: start !important; min-width: 0 !important; gap: 12px !important; }
+  .maintenance-page .navbar .account-menu, .maintenance-page-shell .navbar .account-menu { grid-area: account !important; justify-self: end !important; margin: 0 !important; }
+  .maintenance-page .navbar .account-menu-trigger, .maintenance-page-shell .navbar .account-menu-trigger { width: 52px !important; height: 52px !important; min-width: 52px !important; padding: 0 !important; border-radius: 18px !important; justify-content: center !important; transform: none !important; }
+  .maintenance-page .navbar .account-label, .maintenance-page-shell .navbar .account-label { display: none !important; }
+  .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links { grid-area: links !important; width: 100% !important; max-width: 100% !important; display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; margin: 2px 0 0 !important; padding: 0 !important; overflow: hidden !important; }
+  .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { min-width: 0 !important; height: 36px !important; padding: 0 6px !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 14px !important; background: rgba(255, 255, 255, 0.018) !important; color: rgba(255, 255, 255, 0.74) !important; font-size: 12px !important; font-weight: 800 !important; line-height: 1 !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+  .maintenance-page .navbar .nav-links a.active, .maintenance-page-shell .navbar .nav-links a.active { border-color: rgba(255, 43, 43, 0.5) !important; color: #fff !important; background: rgba(255, 43, 43, 0.08) !important; }
+  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover { grid-area: garage !important; width: min(100%, 380px) !important; height: 56px !important; justify-self: center !important; justify-content: center !important; gap: 12px !important; padding: 0 22px !important; border-radius: 20px !important; transform: none !important; overflow: visible !important; }
+  .maintenance-page .navbar .nav-garage-btn > span:last-child, .maintenance-page-shell .navbar .nav-garage-btn > span:last-child { opacity: 1 !important; transform: none !important; font-size: 14px !important; letter-spacing: 1.8px !important; }
+  .maintenance-page .navbar .garage-count-badge, .maintenance-page-shell .navbar .garage-count-badge { top: 8px !important; right: 18px !important; min-width: 22px !important; height: 22px !important; font-size: 11px !important; }
+}
+
+@media (max-width: 430px) {
+  .maintenance-page .navbar, .maintenance-page-shell .navbar { padding-left: 14px !important; padding-right: 14px !important; gap: 12px 10px !important; }
+  .maintenance-page .navbar .logo-mark, .maintenance-page-shell .navbar .logo-mark { width: 50px !important; height: 50px !important; border-radius: 15px !important; }
+  .maintenance-page .navbar .logo-text span:first-child, .maintenance-page-shell .navbar .logo-text span:first-child { font-size: 12px !important; letter-spacing: 1.7px !important; }
+  .maintenance-page .navbar .logo-text span:last-child, .maintenance-page-shell .navbar .logo-text span:last-child { font-size: 12px !important; }
+  .maintenance-page .navbar .nav-links, .maintenance-page-shell .navbar .nav-links { gap: 7px !important; }
+  .maintenance-page .navbar .nav-links a, .maintenance-page-shell .navbar .nav-links a { height: 34px !important; border-radius: 13px !important; font-size: 11px !important; padding: 0 4px !important; }
+  .maintenance-page .navbar .nav-garage-btn, .maintenance-page .navbar .nav-garage-btn:hover, .maintenance-page-shell .navbar .nav-garage-btn, .maintenance-page-shell .navbar .nav-garage-btn:hover { height: 54px !important; max-width: 340px !important; }
+}

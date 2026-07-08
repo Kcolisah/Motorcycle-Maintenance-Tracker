@@ -1,4 +1,4 @@
-const ASSET_BASE = "..";
+const ASSET_BASE = "../assets";
 const API_ORIGIN =
   window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://localhost:8082"
@@ -2144,7 +2144,7 @@ function renderEditTaskPlaceholderSheet() {
   if (!task) return "";
   return `
     <div class="sheet-backdrop" data-action="close-sheet"></div>
-    <section class="bottom-sheet form-sheet" data-floating-panel role="dialog" aria-label="Edit task placeholder">
+    <section class="bottom-sheet form-sheet" data-floating-panel role="dialog" aria-label="Edit task details">
       <div class="sheet-handle" aria-hidden="true"></div>
       <div class="sheet-head">
         <span>Edit Task</span>
@@ -2500,7 +2500,7 @@ async function removeGarageBike(garageId) {
   } catch (error) {
     console.error("Failed to remove bike:", error);
     state.isSubmittingForm = false;
-    showToast("Remove endpoint is not wired yet.");
+    showToast("Remove is not available in the mobile preview yet.");
     render();
   }
 }
@@ -2773,7 +2773,7 @@ async function handleActionClick(target) {
 
   const messages = {
     "request-brand": "Request Brand is planned for a later backend pass.",
-    "bike-menu": "Bike options are placeholders for now.",
+    "bike-menu": "Bike options are not available in the mobile preview yet.",
     share: "Share action can be wired later.",
     future: "This section is planned for a later pass.",
   };

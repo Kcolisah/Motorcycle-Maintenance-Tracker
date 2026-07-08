@@ -46,6 +46,9 @@ let selectedGarageId = urlParams.get("garageId");
 let garageItemsCache = [];
 let draggedTask = null;
 
+const formatters = window.MTFormatters || {};
+const maintenanceStatus = window.MTMaintenanceStatus || {};
+
 function showMaintenanceMessage(message, type = "error") {
   maintenanceMessage.textContent = message;
   maintenanceMessage.className = "maintenance-message";
@@ -71,22 +74,9 @@ async function getBackendErrorText(response) {
   }
 }
 
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
+const escapeHtml = formatters.escapeHtml || ((value) => String(value ?? ""));
 
-function formatDate(dateValue) {
-  if (!dateValue) {
-    return "N/A";
-  }
-
-  return new Date(`${dateValue}T00:00:00`).toLocaleDateString();
-}
+const formatDate = formatters.formatDateOnly || ((dateValue) => (dateValue ? new Date(`${dateValue}T00:00:00`).toLocaleDateString() : "N/A"));
 
 function getDueDateInfo(dateValue) {
   if (!dateValue) {
@@ -131,10 +121,7 @@ function getDueDateInfo(dateValue) {
   };
 }
 
-function formatMileage(value) {
-  const number = Number(value || 0);
-  return `${number.toLocaleString()} mi`;
-}
+const formatMileage = formatters.formatMileage || ((value) => `${Number(value || 0).toLocaleString()} mi`);
 
 function getMotorcycleFromGarageItem(item) {
   return item.motorcycle || item.bike || item;
@@ -145,7 +132,7 @@ function getGarageId(item) {
 }
 
 function getMotorcycleImage(motorcycle) {
-  return motorcycle.imageUrl || motorcycle.image || motorcycle.imagePath || "images/LOGO.png";
+  return motorcycle.imageUrl || motorcycle.image || motorcycle.imagePath || "assets/images/LOGO.png";
 }
 
 function getGarageMileage(item) {
@@ -510,27 +497,11 @@ async function selectGarageBikeInPlace(garageIdToSelect) {
 }
 
 function getNextStatus(status) {
-  if (status === "PENDING") {
-    return "IN_PROGRESS";
-  }
-
-  if (status === "IN_PROGRESS") {
-    return "DONE";
-  }
-
-  return null;
+  return maintenanceStatus.getNextStatus ? maintenanceStatus.getNextStatus(status) : null;
 }
 
 function getStatusLabel(status) {
-  if (status === "IN_PROGRESS") {
-    return "In Progress";
-  }
-
-  if (status === "DONE") {
-    return "Done";
-  }
-
-  return "Pending";
+  return maintenanceStatus.getStatusLabel ? maintenanceStatus.getStatusLabel(status) : "Pending";
 }
 
 function createEmptyNote(text) {

@@ -1,0 +1,2 @@
+/* Design tokens */
+:root { --bg: #000; --bg-soft: #050505; --panel: rgba(255, 255, 255, 0.025); --panel-strong: rgba(255, 255, 255, 0.04); --line: rgba(255, 255, 255, 0.09); --line-strong: rgba(255, 255, 255, 0.18); --text: #fff; --muted: rgba(255, 255, 255, 0.68); --muted-soft: rgba(255, 255, 255, 0.52); --accent: #ff2b2b; --accent-soft: rgba(255, 43, 43, 0.12); }

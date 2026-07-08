@@ -1,6 +1,6 @@
 /* Home Mobile Rebuild v1
    Mobile-only rebuild for index.html.
-   Keeps desktop controlled by CSS/style.css and existing JavaScript.
+   Keeps desktop controlled by base and page CSS plus existing JavaScript.
 */
 
 .mobile-hero-bike,

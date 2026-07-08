@@ -19,7 +19,7 @@
     shortText:
       "Added a top-right user profile menu across the app.",
     fullText:
-      "Added a compact account/profile button to the navigation area. The menu includes placeholder options for Account Information, Manage Billing, Product Settings, and Sign Out, preparing the interface for real user account features later."
+      "Added a compact account/profile button to the navigation area. The menu includes planned account options for Account Information, Manage Billing, Product Settings, and Sign Out, preparing the interface for real user account features later."
   },
   {
     id: "navbar-layout-cleanup",
@@ -79,7 +79,7 @@
     shortText:
       "Created an authentication login frontend page.",
     fullText:
-      "Created a frontend login page scheduled for May 26. While the backend is being prepared for launch, only the demo user option will be available. The authentication shell also introduces a top-right account menu with placeholder options for account information, billing, product settings, and sign out."
+      "Created a frontend login page scheduled for May 26. While the backend is being prepared for launch, only the demo user option will be available. The authentication shell also introduces a top-right account menu with planned options for account information, billing, product settings, and sign out."
   },
   {
     id: "homepage-color-polish-update-popover",
