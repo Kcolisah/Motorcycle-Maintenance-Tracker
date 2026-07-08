@@ -160,6 +160,39 @@ const brandLogoMap = {
 let allBrands = [...new Set(motorcycles.map((bike) => bike.brand))];
 
 
+function resolveMotorcycleImagePath(path) {
+  if (!path) {
+    return "assets/images/LOGO.png";
+  }
+
+  const value = String(path).trim();
+
+  if (
+    value.startsWith("http://") ||
+    value.startsWith("https://") ||
+    value.startsWith("data:") ||
+    value.startsWith("assets/") ||
+    value.startsWith("/assets/") ||
+    value.startsWith("../assets/")
+  ) {
+    return value;
+  }
+
+  if (value.startsWith("/images/")) {
+    return `/assets${value}`;
+  }
+
+  if (value.startsWith("images/")) {
+    return `assets/${value}`;
+  }
+
+  if (value.startsWith("./images/")) {
+    return `assets/${value.slice(2)}`;
+  }
+
+  return value;
+}
+
 function normalizeMotorcycleFromApi(bike) {
   return {
     id: bike.id,
@@ -168,7 +201,7 @@ function normalizeMotorcycleFromApi(bike) {
     model: bike.model,
     year: bike.year,
     price: bike.price,
-    image: bike.imageUrl || bike.image_url || bike.image
+    image: resolveMotorcycleImagePath(bike.imageUrl || bike.image_url || bike.image || bike.imagePath)
   };
 }
 
