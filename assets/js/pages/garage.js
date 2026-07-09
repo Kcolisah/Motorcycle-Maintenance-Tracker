@@ -204,7 +204,7 @@ function renderGarageCard(item) {
     <div class="garage-card-actions">
       <a class="garage-card-action" href="maintenance.html?garageId=${garageId}">
         ${garageIcon("wrench")}
-        <span>Open Service Board</span>
+        <span>Start Service Board</span>
         ${garageIcon("arrow")}
       </a>
 

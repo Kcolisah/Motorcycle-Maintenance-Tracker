@@ -20,6 +20,7 @@ const previewList = document.getElementById("previewList");
 const maintainBtn = document.getElementById("maintainBtn");
 const backToHomeBtn = document.getElementById("backToHomeBtn");
 const bikePageDots = document.getElementById("bike-page-dots");
+const bikeNextActionPanel = document.getElementById("bikeNextActionPanel");
 
 const brandAccentMap = window.MT_BRAND_ACCENT_MAP || {};
 
@@ -46,6 +47,59 @@ function formatPrice(price) {
 function setAccentColor(color) {
   document.documentElement.style.setProperty("--brand-accent", color);
 }
+
+
+function hideBikeNextActions() {
+  if (!bikeNextActionPanel) {
+    return;
+  }
+
+  bikeNextActionPanel.hidden = true;
+  bikeNextActionPanel.innerHTML = "";
+}
+
+function showBikeNextActions(status = "saved") {
+  if (!bikeNextActionPanel || !currentBike) {
+    return;
+  }
+
+  const alreadySaved = status === "already-saved";
+  const title = alreadySaved ? "This bike is already in your garage" : "Bike saved to your garage";
+  const copy = alreadySaved
+    ? "Open your garage to manage it, start a maintenance board, or compare it against another motorcycle."
+    : "Next, turn this selection into something useful: open your garage, start service tracking, or compare your next bike.";
+
+  bikeNextActionPanel.hidden = false;
+  bikeNextActionPanel.innerHTML = `
+    <div class="bike-next-action-copy">
+      <span>${alreadySaved ? "Garage Ready" : "Saved"}</span>
+      <strong>${title}</strong>
+      <p>${copy}</p>
+    </div>
+    <div class="bike-next-action-buttons">
+      <button type="button" data-bike-next="garage">View Garage</button>
+      <button type="button" data-bike-next="maintenance">Start Maintenance</button>
+      <button type="button" data-bike-next="compare">Compare</button>
+    </div>
+  `;
+}
+
+function handleBikeNextAction(action) {
+  if (action === "garage") {
+    window.location.href = "garage.html";
+    return;
+  }
+
+  if (action === "maintenance") {
+    window.location.href = "maintenance.html";
+    return;
+  }
+
+  if (action === "compare") {
+    window.location.href = "compare.html";
+  }
+}
+
 
 function getSelectedBike() {
   const storedBikeModel = localStorage.getItem("selectedBikeModel");
@@ -174,6 +228,7 @@ function renderBike() {
   summaryPrice.textContent = formatPrice(currentBike.price);
 
   renderPreviews();
+  hideBikeNextActions();
 }
 
 async function addCurrentBikeToGarage(showSuccessMessage = true) {
@@ -210,7 +265,7 @@ async function addCurrentBikeToGarage(showSuccessMessage = true) {
 
     if (response.status === 409) {
       if (showSuccessMessage) {
-        alert("This motorcycle is already in your garage, or your garage is full.");
+        showBikeNextActions("already-saved");
       }
 
       return true;
@@ -221,7 +276,7 @@ async function addCurrentBikeToGarage(showSuccessMessage = true) {
     }
 
     if (showSuccessMessage) {
-      alert(`${currentBike.model} added to garage.`);
+      showBikeNextActions("saved");
     }
 
     if (typeof window.loadGarageBadgeCount === "function") {
@@ -236,7 +291,7 @@ async function addCurrentBikeToGarage(showSuccessMessage = true) {
   } finally {
     if (addToGarageBtn) {
       addToGarageBtn.disabled = false;
-      addToGarageBtn.textContent = "ADD TO GARAGE +";
+      addToGarageBtn.textContent = "SAVE TO GARAGE +";
     }
   }
 }
@@ -246,7 +301,7 @@ if (maintainBtn) {
     const bikeWasSaved = await addCurrentBikeToGarage(false);
 
     if (bikeWasSaved) {
-      window.location.href = "garage.html";
+      window.location.href = "maintenance.html";
     }
   });
 }

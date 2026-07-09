@@ -269,3 +269,54 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Step 6: garage onboarding refinement */
+.garage-core-preview {
+  margin: 0 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.garage-core-preview article {
+  min-height: 124px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.012)),
+    rgba(0, 0, 0, 0.16);
+}
+
+.garage-core-preview span {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 1.7px;
+}
+
+.garage-core-preview strong {
+  display: block;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 920;
+}
+
+.garage-core-preview p {
+  margin: 7px 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.garage-empty-state h3 {
+  letter-spacing: -0.35px;
+}
+
+@media (max-width: 920px) {
+  .garage-core-preview {
+    grid-template-columns: 1fr;
+  }
+}

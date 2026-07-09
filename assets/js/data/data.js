@@ -474,13 +474,13 @@ function showPrevHeroBrands() {
 
 function updateRightPanelForBrandMode() {
   heroStageTitle.innerHTML = "SELECT YOUR<br>BRAND";
-  heroStageDescription.textContent = "Browse all motorcycle brands directly from the homepage. Move through the list without scrolling, then continue into categories and motorcycles.";
+  heroStageDescription.textContent = "Pick a brand first, then narrow it into the bike you own, want, or plan to compare next.";
 
-  specTitle.textContent = "Brand Selection";
-  specText.textContent = "Browse all available motorcycle brands directly from the homepage. Use the arrows to move through the full list without leaving the hero section.";
-  specLink.textContent = "OPEN TRACKER";
+  specTitle.textContent = "Pick a Starting Point";
+  specText.textContent = "Start with a brand, then choose a category and open a bike profile to save or compare.";
+  specLink.textContent = "START FLOW";
   specLink.setAttribute("href", "#tracker-preview");
-  heroOpenTrackerLink.textContent = "Open Full Tracker";
+  heroOpenTrackerLink.textContent = "Open Tracker Flow";
 }
 
 function enterHeroBrandMode() {
@@ -527,13 +527,13 @@ function enterHeroCategoryMode(brand) {
     heroCategoryStage.classList.add("hero-fade-in");
 
     heroStageTitle.innerHTML = `${brand.toUpperCase()}<br>CATEGORIES`;
-    heroStageDescription.textContent = `Choose one of the available categories for ${brand}. Only valid categories for this brand are shown.`;
+    heroStageDescription.textContent = `Choose the ${brand} category that fits how you ride, what you own, or what you want next.`;
 
-    specTitle.textContent = `${brand} Selected`;
-    specText.textContent = `Choose one of the available categories for ${brand}. Only valid categories for this brand are shown.`;
-    specLink.textContent = `CONTINUE WITH ${brand.toUpperCase()}`;
+    specTitle.textContent = `${brand} Garage Path`;
+    specText.textContent = `Pick a category, then open a bike profile to save it, maintain it, or compare it against another option.`;
+    specLink.textContent = `CHOOSE ${brand.toUpperCase()} CATEGORY`;
     specLink.setAttribute("href", "#tracker-preview");
-    heroOpenTrackerLink.textContent = "Open Full Tracker";
+    heroOpenTrackerLink.textContent = "Open Tracker Flow";
   }, 220);
 }
 
@@ -551,13 +551,13 @@ function enterHeroMotorcycleMode(brand, category) {
     heroMotorcycleStage.classList.add("hero-fade-in");
 
     heroStageTitle.innerHTML = `${brand.toUpperCase()}<br>${category.toUpperCase()}`;
-    heroStageDescription.textContent = `Select one of the available ${category} motorcycles for ${brand}. Click any bike to open its full showcase page.`;
+    heroStageDescription.textContent = `Choose a ${brand} ${category} bike to view specs, save it to your garage, or compare it later.`;
 
     specTitle.textContent = `${brand} ${category}`;
-    specText.textContent = `Select one of the available ${category} motorcycles for ${brand}. Click any bike to open its full showcase page.`;
-    specLink.textContent = `VIEW ${brand.toUpperCase()} ${category.toUpperCase()}`;
+    specText.textContent = `Open a bike profile next. From there you can save it to garage, start maintenance, or return to compare.`;
+    specLink.textContent = `VIEW ${brand.toUpperCase()} BIKES`;
     specLink.setAttribute("href", "#tracker-preview");
-    heroOpenTrackerLink.textContent = "Open Full Tracker";
+    heroOpenTrackerLink.textContent = "Open Tracker Flow";
   }, 220);
 }
 
@@ -582,14 +582,14 @@ function resetToHomeState() {
 
   hideHeroNavigationUI();
 
-  specTitle.textContent = "Start Your Tracker";
-  specText.textContent = "Choose a brand, narrow by category, and open a motorcycle profile with specs, pricing, and maintenance tools.";
-  specLink.textContent = "ENTER TRACKER";
+  specTitle.textContent = "Garage + Maintenance";
+  specText.textContent = "Choose a bike, save it to your garage, then manage service tasks and compare future upgrades from one place.";
+  specLink.textContent = "START TRACKING";
   specLink.setAttribute("href", "#tracker-preview");
 
   heroStageTitle.innerHTML = "SELECT YOUR<br>BRAND";
-  heroStageDescription.textContent = "Browse all motorcycle brands directly from the homepage. Move through the list without scrolling, then continue into categories and motorcycles.";
-  heroOpenTrackerLink.textContent = "Open Full Tracker";
+  heroStageDescription.textContent = "Pick a brand first, then narrow it into the bike you own, want, or plan to compare next.";
+  heroOpenTrackerLink.textContent = "Open Tracker Flow";
 
   if (trackerSection) {
     trackerSection.hidden = false;
@@ -630,11 +630,11 @@ function handleBackAction() {
       heroCategoryStage.classList.add("hero-fade-in");
 
       heroStageTitle.innerHTML = `${selectedBrand.toUpperCase()}<br>CATEGORIES`;
-      heroStageDescription.textContent = `Choose one of the available categories for ${selectedBrand}. Only valid categories for this brand are shown.`;
+      heroStageDescription.textContent = `Choose the ${selectedBrand} category that fits how you ride, what you own, or what you want next.`;
 
       specTitle.textContent = `${selectedBrand} Selected`;
-      specText.textContent = `Choose one of the available categories for ${selectedBrand}. Only valid categories for this brand are shown.`;
-      specLink.textContent = `CONTINUE WITH ${selectedBrand.toUpperCase()}`;
+      specText.textContent = `Pick a category, then open a bike profile to save it, maintain it, or compare it against another option.`;
+      specLink.textContent = `CHOOSE ${selectedBrand.toUpperCase()} CATEGORY`;
     }, 220);
 
     return;
@@ -686,7 +686,7 @@ function selectBrand(brand) {
   renderTrackerCategories(brand);
 
   if (bikeResults) {
-    bikeResults.innerHTML = `<p class="result-empty">Select a category for ${brand}.</p>`;
+    bikeResults.innerHTML = `<p class="result-empty">Next: choose a category for ${brand}. Then open a bike profile and save it to your garage.</p>`;
   }
 
   setTimeout(() => {
@@ -698,7 +698,7 @@ function selectBrand(brand) {
 
 function selectCategory(category) {
   if (!selectedBrand) {
-    bikeResults.innerHTML = `<p class="result-empty">Select a brand first.</p>`;
+    bikeResults.innerHTML = `<p class="result-empty">Select a brand first, then choose a category to continue the garage flow.</p>`;
     return;
   }
 
@@ -721,7 +721,7 @@ function renderBikes(bikes) {
   bikeResults.innerHTML = "";
 
   if (bikes.length === 0) {
-    bikeResults.innerHTML = `<p class="result-empty">No bikes found for ${selectedBrand} ${selectedCategory}.</p>`;
+    bikeResults.innerHTML = `<p class="result-empty">No bikes found for ${selectedBrand} ${selectedCategory}. Try another category or brand.</p>`;
     return;
   }
 
@@ -745,7 +745,7 @@ function renderFeaturedBike(bikes, index) {
       <div class="feature-main">
         <div class="feature-text-left">
           <h2>${bike.model}</h2>
-          <p>${bike.brand} ${bike.category} selection with a focused display layout inspired by your original concept.</p>
+          <p>${bike.brand} ${bike.category} selected. Open the full profile next to save it, maintain it, or compare it against another bike.</p>
         </div>
 
         <div class="feature-bike-center">
@@ -753,12 +753,24 @@ function renderFeaturedBike(bikes, index) {
         </div>
 
         <div class="feature-spec-right">
-          <h3>Specification</h3>
+          <h3>Next Step</h3>
           <p><strong>Brand:</strong> ${bike.brand}</p>
           <p><strong>Category:</strong> ${bike.category}</p>
           <p><strong>Year:</strong> ${bike.year}</p>
           <p><strong>Price:</strong> ${formatPrice(bike.price)}</p>
-          <button class="feature-link-button" type="button" onclick="openSelectedBikeByIndex(${index})">VIEW MORE</button>
+
+          <div class="feature-next-steps feature-next-steps-review">
+            <span>1. Open the profile</span>
+            <span>2. Save it to your garage</span>
+            <span>3. Start maintenance or compare next</span>
+          </div>
+
+          <div class="feature-review-hint">
+            <strong>Tester path:</strong>
+            <small>Open this bike, save it, then use the next-action panel on the profile page.</small>
+          </div>
+
+          <button class="feature-link-button" type="button" onclick="openSelectedBikeByIndex(${index})">OPEN BIKE</button>
         </div>
       </div>
 

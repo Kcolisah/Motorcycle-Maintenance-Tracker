@@ -250,9 +250,22 @@
           </div>
         </div>
 
-        <a href="account.html" class="account-dropdown-link is-disabled" aria-disabled="true">Account Information</a>
-        <a href="billing.html" class="account-dropdown-link is-disabled" aria-disabled="true">Manage Billing</a>
-        <a href="settings.html" class="account-dropdown-link is-disabled" aria-disabled="true">Product Settings</a>
+        <button class="account-dropdown-link account-dropdown-preview" type="button" data-desktop-preview="account">
+          <span>Account Information</span>
+          <em>Preview</em>
+        </button>
+        <button class="account-dropdown-link account-dropdown-preview" type="button" data-desktop-preview="billing">
+          <span>Manage Billing</span>
+          <em>Not active</em>
+        </button>
+        <button class="account-dropdown-link account-dropdown-preview" type="button" data-desktop-preview="settings">
+          <span>Product Settings</span>
+          <em>Soon</em>
+        </button>
+        <button class="account-dropdown-link account-dropdown-preview" type="button" data-desktop-preview="request-brand">
+          <span>Request Brand / Motorcycle</span>
+          <em>Staged</em>
+        </button>
         <button class="account-dropdown-link account-signout-btn" type="button" data-account-action>Sign in</button>
       </div>
     `;
@@ -318,9 +331,13 @@
         trigger.setAttribute("aria-expanded", String(!isOpen));
       });
 
-      menu.querySelectorAll(".account-dropdown-link.is-disabled").forEach((link) => {
-        link.addEventListener("click", (event) => {
+      menu.querySelectorAll("[data-desktop-preview]").forEach((button) => {
+        button.addEventListener("click", (event) => {
           event.preventDefault();
+          event.stopPropagation();
+          dropdown.hidden = true;
+          trigger.setAttribute("aria-expanded", "false");
+          openDesktopFeaturePreview(button.dataset.desktopPreview);
         });
       });
 
@@ -345,6 +362,139 @@
       });
     });
   }
+
+  const DESKTOP_FEATURE_PREVIEWS = {
+    account: {
+      eyebrow: "Account Preview",
+      title: "Rider account controls are planned",
+      copy: "This area will manage rider profile details, garage preferences, account security, and ownership settings once account screens are connected.",
+      items: ["Rider profile", "Garage preferences", "Account security"],
+      action: "Use the live sign-in/demo flow for now."
+    },
+    billing: {
+      eyebrow: "Billing Preview",
+      title: "Billing is not active yet",
+      copy: "Subscriptions and premium tools are intentionally disabled until the product has real users, clear value, and backend billing support.",
+      items: ["Premium garage tools", "Maintenance reminders", "Future subscription controls"],
+      action: "No payment flow is connected."
+    },
+    settings: {
+      eyebrow: "Settings Preview",
+      title: "Product settings are planned",
+      copy: "Settings will control units, reminders, notifications, and dashboard behavior after the core product loop is stable.",
+      items: ["Miles / kilometers", "Reminder preferences", "Display options"],
+      action: "The current build keeps settings read-only."
+    },
+    "request-brand": {
+      eyebrow: "Catalog Request Preview",
+      title: "Brand and motorcycle requests are planned",
+      copy: "Riders will be able to suggest missing brands, models, years, corrections, and maintenance data once request storage and admin review are connected.",
+      items: ["Missing brand request", "Missing motorcycle request", "Spec correction queue"],
+      action: "Requests will go through admin review before publishing."
+    },
+    "request-motorcycle": {
+      eyebrow: "Motorcycle Request Preview",
+      title: "Missing motorcycle requests are planned",
+      copy: "This will let riders ask for specific models, years, trims, and corrections without needing direct admin access.",
+      items: ["Model and year intake", "Spec correction notes", "Admin approval later"],
+      action: "Preview only until backend intake is connected."
+    },
+    feedback: {
+      eyebrow: "Feedback Guide",
+      title: "Review the product loop, not just the visuals",
+      copy: "The most useful feedback is whether a rider understands the flow: choose a bike, save it, open the garage, track service, and compare a future upgrade.",
+      items: ["What felt confusing?", "What felt useful?", "What would make you return?"],
+      action: "Use this build to judge clarity and rider value."
+    },
+    roadmap: {
+      eyebrow: "Product Roadmap",
+      title: "The roadmap is intentional",
+      copy: "This frontend build previews the product direction before the backend sprint. Garage history, reminders, ownership costs, and mod tracking become real once persistence and admin control are wired.",
+      items: ["Backend garage history", "Maintenance reminders", "Cost and mod tracking"],
+      action: "Preview only — no backend submission yet."
+    }
+  };
+
+  function getDesktopFeaturePreviewConfig(feature) {
+    return DESKTOP_FEATURE_PREVIEWS[feature] || DESKTOP_FEATURE_PREVIEWS.settings;
+  }
+
+  function ensureDesktopPreviewRoot() {
+    let root = document.querySelector("[data-desktop-preview-root]");
+
+    if (!root) {
+      root = document.createElement("div");
+      root.className = "desktop-preview-root";
+      root.dataset.desktopPreviewRoot = "true";
+      document.body.appendChild(root);
+    }
+
+    return root;
+  }
+
+  function closeDesktopFeaturePreview() {
+    const root = document.querySelector("[data-desktop-preview-root]");
+
+    if (root) {
+      root.innerHTML = "";
+      root.classList.remove("is-open");
+    }
+
+    document.body.classList.remove("desktop-preview-open");
+  }
+
+  function openDesktopFeaturePreview(feature) {
+    const config = getDesktopFeaturePreviewConfig(feature);
+    const root = ensureDesktopPreviewRoot();
+
+    root.innerHTML = `
+      <div class="desktop-preview-backdrop" data-close-desktop-preview></div>
+      <section class="desktop-preview-modal" role="dialog" aria-modal="true" aria-label="${config.eyebrow}">
+        <button class="desktop-preview-close" type="button" data-close-desktop-preview aria-label="Close preview">×</button>
+        <span class="desktop-preview-eyebrow">${config.eyebrow}</span>
+        <h2>${config.title}</h2>
+        <p>${config.copy}</p>
+        <div class="desktop-preview-grid">
+          ${config.items.map((item) => `<span>${item}</span>`).join("")}
+        </div>
+        <div class="desktop-preview-note">
+          <strong>Current build</strong>
+          <span>${config.action}</span>
+        </div>
+        <div class="desktop-preview-actions">
+          <button class="desktop-preview-primary" type="button" data-close-desktop-preview>Got it</button>
+          <a class="desktop-preview-secondary" href="garage.html">Open Garage</a>
+        </div>
+      </section>
+    `;
+
+    root.classList.add("is-open");
+    document.body.classList.add("desktop-preview-open");
+
+    root.querySelectorAll("[data-close-desktop-preview]").forEach((element) => {
+      element.addEventListener("click", closeDesktopFeaturePreview);
+    });
+  }
+
+  function initDesktopPreviewActions() {
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-desktop-preview]");
+
+      if (!trigger) {
+        return;
+      }
+
+      event.preventDefault();
+      openDesktopFeaturePreview(trigger.dataset.desktopPreview);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeDesktopFeaturePreview();
+      }
+    });
+  }
+
 
   async function guardPrivatePages() {
     const currentPage = getCurrentPage();
@@ -446,6 +596,7 @@ if (!email || !password) {
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    initDesktopPreviewActions();
     initAccountMenus();
     initLoginPage();
     guardPrivatePages();

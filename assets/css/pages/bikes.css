@@ -45,3 +45,78 @@
 .bikes-preview-card img { width: 100%; height: 100%; object-fit: contain; }
 .bikes-preview-card span { position: absolute; left: 8px; right: 8px; bottom: 6px; color: rgba(255, 255, 255, 0.88); font-size: 11px; font-weight: 700; text-align: center; }
 .bikes-gallery-label { left: 12px; bottom: 24px; color: rgba(255, 255, 255, 0.9); font-size: 15px; }
+
+
+/* v0.1 bike next actions */
+.bike-next-action-panel {
+  margin-top: 14px;
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(240, 20, 34, 0.14), transparent 38%),
+    rgba(255, 255, 255, 0.035);
+}
+
+.bike-next-action-panel[hidden] {
+  display: none;
+}
+
+.bike-next-action-copy {
+  display: grid;
+  gap: 5px;
+}
+
+.bike-next-action-copy span {
+  color: #ff555d;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bike-next-action-copy strong {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.bike-next-action-copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.bike-next-action-buttons {
+  display: grid;
+  gap: 8px;
+}
+
+.bike-next-action-buttons button {
+  min-height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.045);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.bike-next-action-buttons button:hover {
+  border-color: rgba(255, 64, 64, 0.35);
+  background: rgba(255, 45, 45, 0.11);
+}
+
+@media (max-width: 900px) {
+  .bike-next-action-panel {
+    margin: 14px 0;
+  }
+}

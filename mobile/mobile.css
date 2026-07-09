@@ -3817,3 +3817,374 @@ body,
     grid-template-columns: 1fr;
   }
 }
+
+/* Mobile preview actions for staged backend features */
+.request-preview-card {
+  align-items: center;
+  justify-items: center;
+}
+
+.request-preview-card small {
+  max-width: 270px;
+  color: var(--soft);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.mini-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border: 1px solid rgba(240, 20, 34, 0.28);
+  border-radius: 999px;
+  background: rgba(240, 20, 34, 0.12);
+  color: #ff4b55;
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.account-link-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.76);
+  cursor: pointer;
+}
+
+.account-link-preview span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-link-preview em {
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.account-link-preview:hover em,
+.account-link-preview:focus-visible em {
+  color: #ff4b55;
+}
+
+.feature-preview-sheet {
+  display: grid;
+  gap: 10px;
+}
+
+.feature-preview-sheet .mini-status-pill {
+  justify-self: start;
+}
+
+.feature-preview-list {
+  display: grid;
+  gap: 8px;
+  margin: 4px 0 8px;
+}
+
+.feature-preview-list span {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 13px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.preview-field-stack {
+  display: grid;
+  gap: 9px;
+  margin: 2px 0 4px;
+}
+
+.preview-field-stack label {
+  display: grid;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.preview-field-stack input,
+.preview-field-stack textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 13px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.62);
+  resize: none;
+}
+
+
+/* v0.1 mobile review guide and saved next actions */
+.mobile-review-guide,
+.mobile-saved-next-card {
+  margin-top: 14px;
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(240, 20, 34, 0.14), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.058), rgba(255, 255, 255, 0.026));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.mobile-review-head,
+.mobile-saved-next-card {
+  color: #fff;
+}
+
+.mobile-review-head {
+  display: grid;
+  gap: 3px;
+}
+
+.mobile-review-head span,
+.mobile-saved-next-card > span {
+  color: var(--red-2);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mobile-review-head strong,
+.mobile-saved-next-card > strong {
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.mobile-review-steps,
+.mobile-saved-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.mobile-review-steps {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mobile-review-steps button,
+.mobile-saved-actions button {
+  min-height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 13px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+}
+
+.mobile-review-steps button {
+  padding: 10px;
+  display: grid;
+  gap: 3px;
+  text-align: left;
+}
+
+.mobile-review-steps b {
+  color: var(--red-2);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.mobile-review-steps span,
+.mobile-saved-actions button {
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.mobile-saved-next-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.mobile-saved-actions {
+  grid-template-columns: 1fr;
+}
+
+.mobile-saved-actions button:first-child {
+  border-color: rgba(240, 20, 34, 0.32);
+  background: rgba(240, 20, 34, 0.12);
+}
+
+
+/* Step 6: mobile garage and maintenance onboarding */
+.mobile-ownership-guide,
+.mobile-maintenance-guide {
+  margin: 12px 0 14px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.105);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(240, 20, 34, 0.13), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.021));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.052);
+}
+
+.mobile-ownership-guide span,
+.mobile-maintenance-guide span,
+.mobile-empty-garage-v2 > span {
+  color: var(--red-2);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mobile-ownership-guide strong,
+.mobile-maintenance-guide strong,
+.mobile-empty-garage-v2 > strong {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 950;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.mobile-ownership-guide p,
+.mobile-maintenance-guide p,
+.mobile-empty-garage-v2 p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.mobile-ownership-points,
+.mobile-maintenance-guide div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.mobile-maintenance-guide div {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.mobile-ownership-points em,
+.mobile-maintenance-guide em {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: 11px;
+  background: rgba(0, 0, 0, 0.18);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.mobile-empty-garage-v2 {
+  gap: 9px;
+  align-items: start;
+  text-align: left;
+}
+
+.mobile-maintenance-empty-v2 {
+  gap: 8px;
+}
+
+.mobile-maintenance-empty-v2 button {
+  min-height: 42px;
+  margin-top: 4px;
+  border: 1px solid rgba(240, 20, 34, 0.32);
+  border-radius: 13px;
+  background: rgba(240, 20, 34, 0.11);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+/* Step 8 feedback and roadmap preview */
+.mobile-feedback-card {
+  margin-top: 14px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(240, 20, 34, 0.16), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.058), rgba(255, 255, 255, 0.026));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.mobile-feedback-card > span {
+  color: var(--red-2);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mobile-feedback-card > strong {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.mobile-feedback-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.mobile-feedback-card div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mobile-feedback-card button {
+  min-height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.105);
+  border-radius: 13px;
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.mobile-feedback-card button:first-child {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: #fff;
+  color: #050505;
+}
+
+.v1-screen .v1-card:first-child {
+  border-color: rgba(240, 20, 34, 0.32);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(240, 20, 34, 0.14), transparent 42%),
+    rgba(255, 255, 255, 0.052);
+}
