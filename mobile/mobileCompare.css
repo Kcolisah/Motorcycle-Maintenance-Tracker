@@ -557,3 +557,196 @@
     height: 21px;
   }
 }
+
+
+/* Step 5.5: compare store polish */
+.compare-store-card-top span {
+  letter-spacing: 0.22em;
+}
+
+.compare-store-spec-chips span:first-child svg {
+  stroke: #ff4b55;
+  fill: rgba(255, 75, 85, 0.08);
+}
+
+.compare-store-spec-chips span:last-child svg {
+  stroke: #ff4b55;
+}
+
+.compare-store-select-panel {
+  gap: 10px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 52, 66, 0.11), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.044), rgba(255, 255, 255, 0.014)),
+    var(--compare-panel);
+}
+
+.compare-store-select-group {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 13px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.compare-store-select-group + .compare-store-select-group {
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.compare-store-select-b {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 52, 66, 0.13), transparent 42%),
+    rgba(255, 52, 66, 0.035);
+}
+
+.compare-store-select-title {
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.compare-store-select-title small {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.compare-store-select-group select {
+  min-height: 40px;
+  border-radius: 10px;
+}
+
+@media (max-width: 430px) {
+  .compare-store-select-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-store-select-group + .compare-store-select-group {
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+  }
+}
+
+
+/* Step 7: mobile compare insights */
+.compare-store-insight-card {
+  border: 1px solid var(--compare-line);
+  border-radius: 14px;
+  padding: 13px;
+  background:
+    radial-gradient(circle at 82% 0%, rgba(255, 52, 66, 0.12), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.048), rgba(255, 255, 255, 0.014)),
+    var(--compare-panel);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.052),
+    0 18px 44px rgba(0, 0, 0, 0.24);
+}
+
+.compare-store-verdict {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.compare-store-verdict span {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 52, 66, 0.32);
+  background: rgba(255, 52, 66, 0.1);
+}
+
+.compare-store-verdict svg {
+  width: 18px;
+  height: 18px;
+  stroke: #ff4b55;
+  fill: none;
+}
+
+.compare-store-verdict p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.compare-store-best-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.compare-store-best-grid > div {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.082);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.028);
+}
+
+.compare-store-best-grid small,
+.compare-store-insight-grid b {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--compare-red);
+  font-size: 8px;
+  font-weight: 1000;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.compare-store-best-grid strong {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 1000;
+  line-height: 1.1;
+}
+
+.compare-store-best-grid p {
+  margin: 7px 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.compare-store-insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.compare-store-insight-grid span {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.024);
+}
+
+.compare-store-insight-grid em {
+  display: block;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+@media (max-width: 390px) {
+  .compare-store-best-grid,
+  .compare-store-insight-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -41,6 +41,13 @@
     formatter: getComparisonFormatter(row.formatter)
   }));
 
+  const compareIconSvg = {
+    engine: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h3l2-3h5l2 3h4v7h-3l-2 3H9l-2-3H4z"></path><path d="M9 10v7"></path><path d="M15 10v7"></path></svg>`,
+    lightning: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 10-13h-7z"></path></svg>`,
+    speed: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 1 1 16 0"></path><path d="m12 14 4-4"></path><path d="M7 18h10"></path></svg>`,
+    launch: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18h14"></path><path d="M7 14l4-4 3 3 4-7"></path></svg>`
+  };
+
   function getStaticMotorcycles() {
     try {
       return Array.isArray(motorcycles) ? motorcycles : [];
@@ -501,9 +508,10 @@ function normalizeBike(rawBike) {
           </div>
 
           <div class="compare-bike-spec-tags">
-            <span>${bike.engine}</span>
-            <span>${bike.horsepower}</span>
-            <span>${bike.zeroSixty}</span>
+            <span>${compareIconSvg.engine}${bike.engine}</span>
+            <span>${compareIconSvg.lightning}${bike.horsepower}</span>
+            <span>${compareIconSvg.speed}${bike.topSpeed}</span>
+            <span>${compareIconSvg.launch}${bike.zeroSixty}</span>
           </div>
 
           <button class="compare-view-btn" type="button" data-view-bike="${bike.id}">View Details</button>
@@ -565,53 +573,178 @@ function normalizeBike(rawBike) {
     return "Both bikes";
   }
 
-  function renderInsights(bikeA, bikeB) {
-    const powerWinner = getWinnerSide(bikeA, bikeB, comparisonRows.find((row) => row.key === "horsepowerValue"));
-    const weightWinner = getWinnerSide(bikeA, bikeB, comparisonRows.find((row) => row.key === "weightLbs"));
-    const accelerationWinner = getWinnerSide(bikeA, bikeB, comparisonRows.find((row) => row.key === "zeroToSixtySeconds"));
-    const valueWinner = getWinnerSide(bikeA, bikeB, comparisonRows.find((row) => row.key === "price"));
+  function getBikeUseCase(bike) {
+    const category = String(bike.category || "").toLowerCase();
+    const power = Number(bike.horsepowerValue) || 0;
+    const speed = Number(bike.topSpeedMph) || 0;
+    const weight = Number(bike.weightLbs) || 0;
+    const price = Number(bike.price) || 0;
 
-    const powerDelta = getDeltaPercent(bikeA.horsepowerValue, bikeB.horsepowerValue);
-    const weightDelta = bikeA.weightLbs && bikeB.weightLbs ? Math.abs(bikeA.weightLbs - bikeB.weightLbs) : null;
+    if (category.includes("cruiser")) {
+      return "Best for relaxed street riding, ownership comfort, and longer rides.";
+    }
 
-    elements.insights.innerHTML = `
-      <div class="compare-insight-card compare-insight-intro">
-        <span class="compare-insight-icon">▦</span>
+    if (category.includes("hyper") || power >= 180 || speed >= 185) {
+      return "Best for max performance, experienced riders, and high-speed goals.";
+    }
+
+    if (category.includes("super") || power >= 120) {
+      return "Best for aggressive sport riding, track focus, and riders who want room to grow.";
+    }
+
+    if (weight && weight <= 390 && price && price <= 8000) {
+      return "Best for lighter daily use, easier ownership, and learning the platform.";
+    }
+
+    if (price && price <= 9000) {
+      return "Best for value-focused riders who want a capable bike without overspending.";
+    }
+
+    return "Best for riders who want a balanced motorcycle for regular use and ownership tracking.";
+  }
+
+  function getComparisonVerdict(bikeA, bikeB) {
+    const performanceRows = ["horsepowerValue", "topSpeedMph", "zeroToSixtySeconds", "powerToWeight"];
+    const ownershipRows = ["price", "weightLbs"];
+    let performanceA = 0;
+    let performanceB = 0;
+    let ownershipA = 0;
+    let ownershipB = 0;
+
+    comparisonRows.forEach((row) => {
+      const winner = getWinnerSide(bikeA, bikeB, row);
+
+      if (performanceRows.includes(row.key)) {
+        if (winner === "a") performanceA += 1;
+        if (winner === "b") performanceB += 1;
+      }
+
+      if (ownershipRows.includes(row.key)) {
+        if (winner === "a") ownershipA += 1;
+        if (winner === "b") ownershipB += 1;
+      }
+    });
+
+    const performanceWinner = performanceA === performanceB ? "tie" : performanceA > performanceB ? "a" : "b";
+    const ownershipWinner = ownershipA === ownershipB ? "tie" : ownershipA > ownershipB ? "a" : "b";
+
+    return { performanceWinner, ownershipWinner, performanceA, performanceB, ownershipA, ownershipB };
+  }
+
+  function getVerdictSentence(verdict, bikeA, bikeB) {
+    if (verdict.performanceWinner === "tie" && verdict.ownershipWinner === "tie") {
+      return "This is a close matchup. Use the garage and maintenance flow to decide which one fits your ownership plan better.";
+    }
+
+    const performanceName = getWinnerName(verdict.performanceWinner, bikeA, bikeB);
+    const ownershipName = getWinnerName(verdict.ownershipWinner, bikeA, bikeB);
+
+    if (verdict.performanceWinner !== "tie" && verdict.ownershipWinner !== "tie" && verdict.performanceWinner !== verdict.ownershipWinner) {
+      return `${performanceName} leans stronger for performance, while ${ownershipName} looks easier to justify from an ownership/value angle.`;
+    }
+
+    if (verdict.performanceWinner !== "tie") {
+      return `${performanceName} is the stronger performance pick in this matchup. Check price, weight, and maintenance needs before calling it the better ownership choice.`;
+    }
+
+    return `${ownershipName} looks like the cleaner ownership pick, especially if price and weight matter more than pure output.`;
+  }
+
+  function getPlainWinnerText(label, winnerSide, bikeA, bikeB, tieText) {
+    if (winnerSide === "same" || winnerSide === "tie") {
+      return tieText;
+    }
+
+    return `${getWinnerName(winnerSide, bikeA, bikeB)} leads on ${label}.`;
+  }
+
+  function renderBikeBestForCard(bike, sideLabel) {
+    return `
+      <div class="compare-insight-card compare-insight-best-for">
+        <span class="compare-insight-icon">${sideLabel === "A" ? "A" : "B"}</span>
         <div>
-          <strong>Comparison Insights</strong>
-          <p>Quick read before opening the full bike detail page.</p>
+          <small>${sideLabel === "A" ? "First Pick" : "Second Pick"}</small>
+          <strong>Best For: ${bike.model}</strong>
+          <p>${getBikeUseCase(bike)}</p>
         </div>
       </div>
+    `;
+  }
+
+  function renderInsights(bikeA, bikeB) {
+    const powerRow = comparisonRows.find((row) => row.key === "horsepowerValue");
+    const speedRow = comparisonRows.find((row) => row.key === "topSpeedMph");
+    const weightRow = comparisonRows.find((row) => row.key === "weightLbs");
+    const accelerationRow = comparisonRows.find((row) => row.key === "zeroToSixtySeconds");
+    const valueRow = comparisonRows.find((row) => row.key === "price");
+
+    const powerWinner = getWinnerSide(bikeA, bikeB, powerRow);
+    const speedWinner = getWinnerSide(bikeA, bikeB, speedRow);
+    const weightWinner = getWinnerSide(bikeA, bikeB, weightRow);
+    const accelerationWinner = getWinnerSide(bikeA, bikeB, accelerationRow);
+    const valueWinner = getWinnerSide(bikeA, bikeB, valueRow);
+
+    const powerDelta = getDeltaPercent(bikeA.horsepowerValue, bikeB.horsepowerValue);
+    const speedDelta = bikeA.topSpeedMph && bikeB.topSpeedMph ? Math.abs(bikeA.topSpeedMph - bikeB.topSpeedMph) : null;
+    const weightDelta = bikeA.weightLbs && bikeB.weightLbs ? Math.abs(bikeA.weightLbs - bikeB.weightLbs) : null;
+    const priceDelta = bikeA.price && bikeB.price ? Math.abs(bikeA.price - bikeB.price) : null;
+    const verdict = getComparisonVerdict(bikeA, bikeB);
+
+    elements.insights.innerHTML = `
+      <div class="compare-insight-card compare-insight-intro compare-insight-verdict">
+        <span class="compare-insight-icon">▦</span>
+        <div>
+          <small>Plain-English Verdict</small>
+          <strong>How to read this matchup</strong>
+          <p>${getVerdictSentence(verdict, bikeA, bikeB)}</p>
+        </div>
+      </div>
+
+      ${renderBikeBestForCard(bikeA, "A")}
+      ${renderBikeBestForCard(bikeB, "B")}
 
       <div class="compare-insight-card">
         <span class="compare-insight-icon">⚡</span>
         <div>
-          <strong>Power</strong>
-          <p>${getWinnerName(powerWinner, bikeA, bikeB)} has the stronger horsepower number${powerDelta ? ` by about ${Math.abs(powerDelta)}%` : ""}.</p>
+          <small>Power</small>
+          <strong>${getPlainWinnerText("horsepower", powerWinner, bikeA, bikeB, "Both bikes are close on horsepower.")}</strong>
+          <p>${powerDelta ? `${Math.abs(powerDelta)}% separates the two horsepower numbers.` : "Use this when you care about pull, passing power, and long-term performance headroom."}</p>
+        </div>
+      </div>
+
+      <div class="compare-insight-card">
+        <span class="compare-insight-icon">⌁</span>
+        <div>
+          <small>Speed</small>
+          <strong>${getPlainWinnerText("top speed", speedWinner, bikeA, bikeB, "Both bikes are close on top speed.")}</strong>
+          <p>${speedDelta ? `${speedDelta} mph separates the current top-speed estimates.` : "Top speed matters less than comfort and maintenance for most ownership use."}</p>
         </div>
       </div>
 
       <div class="compare-insight-card">
         <span class="compare-insight-icon">◈</span>
         <div>
-          <strong>Weight</strong>
-          <p>${getWinnerName(weightWinner, bikeA, bikeB)} is lighter${weightDelta ? ` by ${weightDelta} lbs` : ""}.</p>
-        </div>
-      </div>
-
-      <div class="compare-insight-card">
-        <span class="compare-insight-icon">⏱</span>
-        <div>
-          <strong>Acceleration</strong>
-          <p>${getWinnerName(accelerationWinner, bikeA, bikeB)} has the better 0–60 estimate.</p>
+          <small>Daily Use</small>
+          <strong>${getPlainWinnerText("lighter weight", weightWinner, bikeA, bikeB, "Both bikes are close on weight.")}</strong>
+          <p>${weightDelta ? `${weightDelta} lbs separates the two bikes. Lower weight usually helps low-speed control and daily usability.` : "Weight is one of the easiest specs to feel in parking lots, traffic, and city riding."}</p>
         </div>
       </div>
 
       <div class="compare-insight-card">
         <span class="compare-insight-icon">$</span>
         <div>
-          <strong>Value</strong>
-          <p>${getWinnerName(valueWinner, bikeA, bikeB)} is the lower-priced option in the current catalog.</p>
+          <small>Value</small>
+          <strong>${getPlainWinnerText("price", valueWinner, bikeA, bikeB, "Both bikes are close on price.")}</strong>
+          <p>${priceDelta ? `${formatCurrency(priceDelta)} separates the current catalog prices.` : "Price is only the starting point. Maintenance, tires, insurance, and mods decide the real ownership cost."}</p>
+        </div>
+      </div>
+
+      <div class="compare-insight-card">
+        <span class="compare-insight-icon">⏱</span>
+        <div>
+          <small>Launch</small>
+          <strong>${getPlainWinnerText("0–60 mph", accelerationWinner, bikeA, bikeB, "Both bikes are close on 0–60.")}</strong>
+          <p>Acceleration is useful for quick performance context, but garage fit and service history matter more for long-term ownership.</p>
         </div>
       </div>
     `;

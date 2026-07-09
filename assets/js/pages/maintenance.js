@@ -351,7 +351,7 @@ function updateSelectedBikeCard(selectedGarageItem) {
   const motorcycle = getMotorcycleFromGarageItem(selectedGarageItem);
 
   selectedGarageBikeName.textContent = motorcycle.model || "Saved Motorcycle";
-  selectedGarageBikeMeta.textContent = `${motorcycle.brand || "Unknown Brand"} • ${motorcycle.category || "Unknown Category"} • ${motorcycle.year || "N/A"} • Ready for service tasks`;
+  selectedGarageBikeMeta.textContent = `${motorcycle.brand || "Unknown Brand"} • ${motorcycle.category || "Unknown Category"} • ${motorcycle.year || "N/A"} • Service board ready`;
 }
 
 function updateSelectorCardState() {
@@ -383,7 +383,7 @@ function renderMaintenanceBikeSelector(garageItems) {
     maintenanceBikeSelectorGrid.innerHTML = `
       <article class="maintenance-selector-empty">
         <h4>No garage motorcycles yet</h4>
-        <p>Save a motorcycle first. Then this board becomes the place for oil changes, chain service, tires, brakes, inspections, and future service history.</p>
+        <p>Save a motorcycle first. Then this becomes the place for oil changes, chain service, tires, brakes, inspections, and future service history.</p>
         <a href="index.html#tracker-preview">Find a Bike</a>
       </article>
     `;

@@ -910,3 +910,193 @@
     width: min(230px, 26vw);
   }
 }
+
+
+/* Step 5.5: compare builder polish */
+.compare-selector-intro {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: end;
+  padding: 6px 6px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compare-selector-intro .section-tag {
+  margin: 0 0 7px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+
+.compare-selector-intro h2 {
+  margin: 0;
+  color: #f6f3e8;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -0.8px;
+}
+
+.compare-selector-intro span,
+.compare-selector-intro small {
+  display: block;
+  margin-top: 8px;
+  color: rgba(224, 224, 206, 0.58);
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 760;
+}
+
+.compare-selector-intro small {
+  max-width: 290px;
+  margin-top: 0;
+  padding: 11px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.026);
+  color: rgba(255, 255, 255, 0.72);
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+}
+
+.compare-selector-group {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 43, 43, 0.08), transparent 38%),
+    rgba(255, 255, 255, 0.014);
+}
+
+.compare-selector-group[data-compare-side="b"] {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 43, 43, 0.12), transparent 40%),
+    linear-gradient(90deg, rgba(255, 43, 43, 0.055), transparent 45%),
+    rgba(255, 255, 255, 0.014);
+}
+
+.compare-selector-heading {
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.compare-field select {
+  min-height: 52px;
+  border-radius: 6px;
+}
+
+.compare-swap-btn {
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.compare-bike-spec-tags span {
+  gap: 7px;
+}
+
+.compare-bike-spec-tags svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  fill: none;
+  stroke: var(--compare-brand-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 1200px) {
+  .compare-selector-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-selector-intro small {
+    max-width: none;
+  }
+}
+
+
+/* Step 7: compare insight cards */
+.compare-insights {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.compare-insight-card {
+  min-height: 148px;
+  align-items: flex-start;
+  border: 1px solid rgba(224, 224, 206, 0.09);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 84% 0%, rgba(255, 43, 43, 0.09), transparent 42%),
+    linear-gradient(180deg, rgba(224, 224, 206, 0.044), rgba(224, 224, 206, 0.015));
+}
+
+.compare-insight-card:last-child {
+  border-right: 1px solid rgba(224, 224, 206, 0.09);
+}
+
+.compare-insight-verdict {
+  grid-column: span 2;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255, 43, 43, 0.16), transparent 44%),
+    linear-gradient(135deg, rgba(255, 43, 43, 0.08), rgba(224, 224, 206, 0.018));
+}
+
+.compare-insight-best-for {
+  grid-column: span 1;
+}
+
+.compare-insight-card small {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255, 43, 43, 0.82);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.compare-insight-card strong {
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.compare-insight-card p {
+  margin-top: 8px;
+}
+
+.compare-insight-best-for .compare-insight-icon {
+  border-color: rgba(255, 43, 43, 0.36);
+  background: rgba(255, 43, 43, 0.1);
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 1200px) {
+  .compare-insights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compare-insight-verdict {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 760px) {
+  .compare-insights {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-insight-verdict,
+  .compare-insight-best-for {
+    grid-column: auto;
+  }
+}

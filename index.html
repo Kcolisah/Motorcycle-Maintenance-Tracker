@@ -154,14 +154,14 @@
         <div class="hero-main">
           <div class="hero-left">
             <div id="hero-default-left">
-              <h2>FIND YOUR<br>MOTORCYCLE</h2>
+              <h2>BUILD YOUR<br>GARAGE</h2>
               <p>
-                Explore motorcycles by brand and category. Start with a clean selection
-                flow and build your garage later.
+                Find a motorcycle, save it to your garage, and turn that bike into
+                maintenance history you can actually manage.
               </p>
 
               <div class="hero-actions">
-                <button id="select-motorcycle-btn" class="primary-btn" type="button">Select Motorcycle</button>
+                <button id="select-motorcycle-btn" class="primary-btn" type="button">Start Tracking</button>
                 <a href="#tracker-flow" class="secondary-btn">Learn More</a>
               </div>
             </div>
@@ -169,12 +169,12 @@
             <div id="hero-brand-left" hidden>
               <h2 id="hero-stage-title">SELECT YOUR<br>BRAND</h2>
               <p id="hero-stage-description">
-                Browse all motorcycle brands directly from the homepage. Move through the
-                list without scrolling, then continue into categories and motorcycles.
+                Pick a brand first, then narrow it into the bike you own, want,
+                or plan to compare next.
               </p>
 
               <div class="hero-actions">
-                <a href="#tracker-preview" class="primary-btn" id="hero-open-tracker-link">Open Full Tracker</a>
+                <a href="#tracker-preview" class="primary-btn" id="hero-open-tracker-link">Open Tracker Flow</a>
                 <button id="back-home-btn" class="secondary-btn" type="button">Back</button>
               </div>
             </div>
@@ -233,9 +233,9 @@
             </div>
 
             <div class="spec-box">
-              <h3 id="spec-title">Start Your Tracker</h3>
+              <h3 id="spec-title">Garage + Maintenance</h3>
               <p id="spec-text">
-                Choose a brand, narrow by category, and open a motorcycle profile with specs, pricing, and maintenance tools.
+                Choose a bike, save it to your garage, then manage service tasks and compare future upgrades from one place.
               </p>
               <a id="spec-link" href="#tracker-preview" class="spec-link">ENTER TRACKER</a>
             </div>
@@ -252,105 +252,151 @@
       </div>
     </main>
 
+    <section class="review-guide-section reveal-section" id="review-guide">
+      <div class="review-guide-copy">
+        <p class="section-tag">REVIEW BUILD</p>
+        <h2>Try this first</h2>
+        <p>
+          This version is built for quick feedback. Start with a motorcycle, save it to your garage,
+          then open maintenance or compare another bike to see the product loop.
+        </p>
+      </div>
+
+      <div class="review-guide-steps">
+        <a href="#tracker-preview" class="review-guide-step">
+          <span>01</span>
+          <strong>Pick a bike</strong>
+          <small>Choose a brand, category, and motorcycle profile.</small>
+        </a>
+        <a href="garage.html" class="review-guide-step">
+          <span>02</span>
+          <strong>Open garage</strong>
+          <small>See where saved bikes become ownership records.</small>
+        </a>
+        <a href="maintenance.html" class="review-guide-step">
+          <span>03</span>
+          <strong>Start service</strong>
+          <small>Add oil, chain, tire, or brake tasks to a saved bike.</small>
+        </a>
+        <a href="compare.html" class="review-guide-step">
+          <span>04</span>
+          <strong>Compare next</strong>
+          <small>Use specs to compare a future upgrade or second bike.</small>
+        </a>
+      </div>
+    </section>
+
     <section class="tracker-steps-section reveal-section" id="tracker-flow">
       <div class="tracker-steps-header">
         <p class="section-tag">TRACKER FLOW</p>
-        <h2>How it works</h2>
+        <h2>Build your motorcycle hub</h2>
       </div>
 
       <div class="tracker-steps-grid">
         <div class="tracker-step-card">
           <span class="tracker-step-number">01</span>
-          <h3>Select your brand</h3>
-          <p>Choose the motorcycle brand you want to explore first.</p>
+          <h3>Pick your bike</h3>
+          <p>Start with the motorcycle you own, want, or are researching next.</p>
         </div>
 
         <div class="tracker-step-card">
           <span class="tracker-step-number">02</span>
-          <h3>Pick a category</h3>
-          <p>Only valid categories for that brand will be shown.</p>
+          <h3>Save it to garage</h3>
+          <p>Your garage becomes the home base for mileage, service, and ownership history.</p>
         </div>
 
         <div class="tracker-step-card">
           <span class="tracker-step-number">03</span>
-          <h3>View motorcycles</h3>
-          <p>See the motorcycles available for that brand and category.</p>
+          <h3>Track and compare</h3>
+          <p>Manage maintenance tasks and compare future bikes before your next move.</p>
         </div>
       </div>
     </section>
 
     <section class="tracker-section reveal-section" id="tracker-preview">
       <div class="tracker-header">
-        <p class="section-tag">SELECT MOTORCYCLE</p>
-        <h2>Choose Your Brand</h2>
-        <p class="tracker-intro">Start with a brand. Categories unlock after selection.</p>
+        <p class="section-tag">START YOUR GARAGE</p>
+        <h2>Choose Your Motorcycle</h2>
+        <p class="tracker-intro">Start with a brand, pick a category, then open a bike profile to save it to your garage.</p>
       </div>
 
       <div id="brand-container" class="brand-container">
         <div class="brand-card" onclick="selectBrand('Aprilia')">
           <img src="assets/images/Aprilia/Aprilia_Logo.png" alt="Aprilia">
           <span>Aprilia</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('BMW')">
           <img src="assets/images/BMW/BMW_Logo.png" alt="BMW">
           <span>BMW</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Ducati')">
           <img src="assets/images/Ducati/Ducati_Logo.png" alt="Ducati">
           <span>Ducati</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Harley')">
           <img src="assets/images/Harley/Harley_Logo.png" alt="Harley">
           <span>Harley</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Honda')">
           <img src="assets/images/Honda/Honda_Logo.png" alt="Honda">
           <span>Honda</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Indian')">
           <img src="assets/images/Indian/Indian_Logo.png" alt="Indian">
           <span>Indian</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Kawasaki')">
           <img src="assets/images/Kawasaki/Kawasaki_Logo.png" alt="Kawasaki">
           <span>Kawasaki</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('KTM')">
           <img src="assets/images/KTM/KTM_Logo.png" alt="KTM">
           <span>KTM</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Suzuki')">
           <img src="assets/images/Suzuki/Suzuki_logo.png" alt="Suzuki">
           <span>Suzuki</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Triumph')">
           <img src="assets/images/Triumph/Triumph_Logo.png" alt="Triumph">
           <span>Triumph</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
         </div>
 
         <div class="brand-card" onclick="selectBrand('Yamaha')">
           <img src="assets/images/Yamaha/Yamaha_Logo.png" alt="Yamaha">
           <span>Yamaha</span>
-          <small class="brand-card-subtitle">View available categories</small>
+          <small class="brand-card-subtitle">Start ownership flow</small>
+        </div>
+      </div>
+
+      <div class="desktop-request-strip" aria-label="Catalog request preview">
+        <div>
+          <span class="desktop-request-kicker">Catalog Feedback</span>
+          <h3>Don’t see your brand or motorcycle?</h3>
+          <p>Requests are preview-only for this frontend build. This shows how riders will submit missing brands, models, and spec corrections once the backend intake is connected.</p>
+        </div>
+        <div class="desktop-request-actions">
+          <button type="button" class="desktop-request-btn primary" data-desktop-preview="request-brand">Request Brand</button>
+          <button type="button" class="desktop-request-btn" data-desktop-preview="request-motorcycle">Request Motorcycle</button>
         </div>
       </div>
 
@@ -362,10 +408,50 @@
       <div id="bike-results" class="bike-results"></div>
     </section>
 
-    <section class="info-section reveal-section" id="updates-preview">
-      <div class="info-box">
-        <p class="section-tag">UPDATES</p>
-        <h2>Keep the experience fresh</h2>
+    <section class="product-roadmap-section reveal-section" id="roadmap-preview" aria-label="Product roadmap and feedback">
+      <div class="product-roadmap-header">
+        <p class="section-tag">ROADMAP</p>
+        <h2>Built to grow with riders</h2>
+        <p>
+          This review build focuses on the core rider loop: save a motorcycle, organize service,
+          compare future bikes, and make the garage useful enough to return to.
+        </p>
+      </div>
+
+      <div class="product-roadmap-grid">
+        <article class="product-roadmap-card active">
+          <span>Now</span>
+          <h3>Garage + maintenance loop</h3>
+          <p>Make saved bikes, service boards, and compare insights clear enough for rider feedback.</p>
+        </article>
+
+        <article class="product-roadmap-card">
+          <span>Next</span>
+          <h3>Backend-powered history</h3>
+          <p>Move garage records, maintenance logs, and demo limits into Spring Boot and PostgreSQL.</p>
+        </article>
+
+        <article class="product-roadmap-card">
+          <span>Later</span>
+          <h3>Reminders, costs, and mods</h3>
+          <p>Add reminders, ownership costs, and motorcycle build/mod history after the core loop is stable.</p>
+        </article>
+      </div>
+
+      <div class="desktop-feedback-panel">
+        <div>
+          <span class="desktop-request-kicker">Reviewer Feedback</span>
+          <h3>What feedback helps most?</h3>
+          <p>
+            The best feedback is simple: what felt confusing, what felt useful, what you would track,
+            and what would make you come back.
+          </p>
+        </div>
+        <div class="desktop-request-actions">
+          <button type="button" class="desktop-request-btn primary" data-desktop-preview="feedback">Review Guide</button>
+          <button type="button" class="desktop-request-btn" data-desktop-preview="roadmap">Roadmap Preview</button>
+          <a class="desktop-request-btn" href="contact.html">Contact</a>
+        </div>
       </div>
     </section>
   </div>

@@ -429,6 +429,8 @@ const state = {
   activeAddCatalogBikeId: null,
   activeRemoveGarageId: null,
   activeEditTaskId: null,
+  activeFeaturePreview: null,
+  lastSavedGarageId: null,
   isSubmittingForm: false,
 };
 
@@ -446,6 +448,7 @@ const icons = {
   dots: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg>`,
   search: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.8-3.8"></path></svg>`,
   gauge: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 1 1 16 0"></path><path d="m12 14 4-4"></path><path d="M8 18h8"></path></svg>`,
+  lightning: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 10-13h-7z"></path></svg>`,
   bike: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="17" r="3"></circle><circle cx="17" cy="17" r="3"></circle><path d="M7 17h4l3-7h2l1 7"></path><path d="M9 10h5"></path></svg>`,
   wrench: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0 4.9 4.9L11 19.8a2.2 2.2 0 1 1-3.1-3.1l8.4-8.4a4 4 0 0 0-1.8-1.8Z"></path></svg>`,
   wallet: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h15a1 1 0 0 1 1 1v11H5a2 2 0 0 1-2-2V7.8A2.8 2.8 0 0 1 5.8 5H18"></path><path d="M16 13h4"></path></svg>`,
@@ -579,6 +582,7 @@ function closeAllSheets() {
   state.activeAddCatalogBikeId = null;
   state.activeRemoveGarageId = null;
   state.activeEditTaskId = null;
+  state.activeFeaturePreview = null;
   state.isSubmittingForm = false;
 }
 
@@ -1068,6 +1072,24 @@ function renderPlaceholderCard(title, copy, actionLabel = "Coming soon") {
   `;
 }
 
+
+function renderMobileReviewGuide() {
+  return `
+    <div class="mobile-review-guide">
+      <div class="mobile-review-head">
+        <span>Review Build</span>
+        <strong>Try this first</strong>
+      </div>
+      <div class="mobile-review-steps">
+        <button type="button" data-route="brand"><b>01</b><span>Pick a bike</span></button>
+        <button type="button" data-route="garage"><b>02</b><span>Open garage</span></button>
+        <button type="button" data-route="maintenance"><b>03</b><span>Add service</span></button>
+        <button type="button" data-route="compare"><b>04</b><span>Compare next</span></button>
+      </div>
+    </div>
+  `;
+}
+
 function renderHome() {
   const popular = ["Ducati", "BMW", "Kawasaki", "KTM"];
 
@@ -1084,6 +1106,7 @@ function renderHome() {
       <button class="primary-btn" type="button" data-route="brand">Select Motorcycle <span>→</span></button>
       <button class="secondary-btn" type="button" data-route="learn">Learn More</button>
       ${renderBackendNotice("home")}
+      ${renderMobileReviewGuide()}
 
       <div class="section-head">
         <h2>Popular Brands</h2>
@@ -1145,9 +1168,11 @@ function renderBrand() {
 
       ${filteredBrands.length ? "" : `<div class="empty-state">No brand matched that search.</div>`}
 
-      <div class="request-card">
-        <p>Don't see your brand?</p>
-        <button class="tiny-btn" type="button" data-action="request-brand">Request a Brand</button>
+      <div class="request-card request-preview-card">
+        <span class="mini-status-pill">Catalog feedback</span>
+        <p>Don’t see your brand or motorcycle?</p>
+        <small>Requests are preview-only for this build. This shows how rider feedback will work once backend intake is connected.</small>
+        <button class="tiny-btn" type="button" data-action="request-brand">Preview Request Flow</button>
       </div>
     </section>
   `;
@@ -1239,6 +1264,42 @@ function renderBikePreview() {
   `;
 }
 
+
+function renderMobileSavedNextActions() {
+  const item = getGarageItemById(state.lastSavedGarageId);
+  if (!item) return "";
+  const bike = item.motorcycle;
+
+  return `
+    <div class="mobile-saved-next-card">
+      <span>Saved to Garage</span>
+      <strong>${escapeHtml(bike.model)}</strong>
+      <p>Next, open the garage record, start a maintenance task, or compare this bike against another model.</p>
+      <div class="mobile-saved-actions">
+        <button type="button" data-garage-detail="${escapeHtml(String(item.id))}">View Garage</button>
+        <button type="button" data-action="start-maintenance-after-save" data-garage-id="${escapeHtml(String(item.id))}">Start Maintenance</button>
+        <button type="button" data-route="compare">Compare</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderMobileGarageOnboarding() {
+  const hasBikes = state.garageItems.length > 0;
+  return `
+    <div class="mobile-ownership-guide ${hasBikes ? "has-bikes" : "is-empty"}">
+      <span>${hasBikes ? "Ownership Hub" : "Start Here"}</span>
+      <strong>${hasBikes ? "Your saved bikes become service records." : "Your garage is the heart of the tracker."}</strong>
+      <p>${hasBikes ? "Open a bike to view details, start maintenance, or keep building history over time." : "Save a motorcycle first. Then you can track mileage, service work, reminders, and ownership notes."}</p>
+      <div class="mobile-ownership-points">
+        <em>Garage</em>
+        <em>Service</em>
+        <em>History</em>
+      </div>
+    </div>
+  `;
+}
+
 function renderGarage() {
   if (!state.garageReady) return renderLoadingScreen("Loading garage");
   const totalMileage = state.garageItems.reduce((sum, item) => sum + Number(item.currentMileage || 0), 0);
@@ -1255,6 +1316,8 @@ function renderGarage() {
       </div>
 
       ${renderBackendNotice("garage")}
+      ${renderMobileGarageOnboarding()}
+      ${renderMobileSavedNextActions()}
 
       <div class="garage-list">
         ${state.garageItems.length ? state.garageItems.map(renderGarageCard).join("") : renderEmptyGarage()}
@@ -1272,8 +1335,10 @@ function renderGarage() {
 
 function renderEmptyGarage() {
   return `
-    <div class="empty-state stacked-empty">
-      <p>No motorcycles saved yet.</p>
+    <div class="empty-state stacked-empty mobile-empty-garage-v2">
+      <span>Garage empty</span>
+      <strong>Save your first motorcycle.</strong>
+      <p>Once a bike is saved, this becomes your ownership dashboard for mileage, service work, records, and future reminders.</p>
       <button class="primary-btn" type="button" data-action="add-bike">Add Your First Bike</button>
     </div>
   `;
@@ -1401,6 +1466,23 @@ function renderDetailTab(item) {
   `;
 }
 
+function renderMobileMaintenanceGuide(selectedItem) {
+  const hasBike = Boolean(selectedItem);
+  return `
+    <div class="mobile-maintenance-guide ${hasBike ? "has-bike" : "needs-bike"}">
+      <span>${hasBike ? "Service Board" : "Pick a Bike"}</span>
+      <strong>${hasBike ? "Track the work that keeps this bike ready." : "Maintenance starts from a saved garage bike."}</strong>
+      <p>${hasBike ? "Use quick records for oil, chain, tires, brakes, or custom issues. Completed work becomes history later." : "Save a motorcycle to your garage, then open its board to create service records."}</p>
+      <div>
+        <em>Oil</em>
+        <em>Chain</em>
+        <em>Tires</em>
+        <em>Brakes</em>
+      </div>
+    </div>
+  `;
+}
+
 function renderMaintenance() {
   if (!state.garageReady) return renderLoadingScreen("Loading maintenance");
   const selectedItem = getGarageItemById(state.selectedMaintenanceGarageId) || state.garageItems[0] || null;
@@ -1426,6 +1508,7 @@ function renderMaintenance() {
       </div>
 
       ${renderBackendNotice("maintenance")}
+      ${renderMobileMaintenanceGuide(selectedItem)}
 
       <div class="bike-filter-strip maintenance-bike-strip" aria-label="Garage motorcycle filter">
         ${state.garageItems.map((item) => `
@@ -1458,10 +1541,15 @@ function renderMaintenance() {
 }
 
 function renderMaintenanceEmptyState(group) {
+  const title = `No ${getTaskGroupLabel(group).toLowerCase()} tasks`;
+  const helper = group === "completed"
+    ? "Finished service will become this bike's history."
+    : "Add oil, chain, tire, brake, or custom service work when this bike needs attention.";
   return `
-    <div class="maintenance-empty-v2">
-      <strong>No ${escapeHtml(getTaskGroupLabel(group).toLowerCase())} tasks</strong>
-      <span>${group === "completed" ? "Completed work will show here." : "Add a record when this bike needs service."}</span>
+    <div class="maintenance-empty-v2 mobile-maintenance-empty-v2">
+      <strong>${escapeHtml(title)}</strong>
+      <span>${escapeHtml(helper)}</span>
+      ${group !== "completed" ? `<button type="button" data-action="add-record">Add First Record</button>` : ""}
     </div>
   `;
 }
@@ -1679,8 +1767,8 @@ function compareStoreCard(side, bike) {
         <b>${formatMoney(bike.price)} <span>USD</span></b>
       </div>
       <div class="compare-store-spec-chips">
-        <span>${icons.gauge}${escapeHtml(bike.horsepower)}</span>
-        <span>${icons.calendar}${escapeHtml(bike.topSpeed)}</span>
+        <span>${icons.lightning}${escapeHtml(bike.horsepower)}</span>
+        <span>${icons.gauge}${escapeHtml(bike.topSpeed)}</span>
       </div>
     </article>
   `;
@@ -1691,8 +1779,8 @@ function compareStoreSelectGroup(side, bike) {
   const models = getCompareModelsForBrand(bike.brand);
   const years = getCompareYearsForModel(bike.brand, bike.model);
   return `
-    <div class="compare-store-select-group">
-      <div class="compare-store-select-title"><span>Bike ${side.toUpperCase()}</span></div>
+    <div class="compare-store-select-group compare-store-select-${side}">
+      <div class="compare-store-select-title"><span>${side === "a" ? "First Pick" : "Second Pick"}</span><small>${side === "a" ? "Baseline" : "Challenger"}</small></div>
       <label><span>Brand</span><select data-compare-side="${side}" data-compare-field="brand" aria-label="Bike ${side.toUpperCase()} brand">${compareSelectOptions(brands, bike.brand)}</select></label>
       <label><span>Model</span><select data-compare-side="${side}" data-compare-field="model" aria-label="Bike ${side.toUpperCase()} model">${compareSelectOptions(models, bike.model)}</select></label>
       <label><span>Year</span><select data-compare-side="${side}" data-compare-field="year" aria-label="Bike ${side.toUpperCase()} year">${compareSelectOptions(years, bike.year)}</select></label>
@@ -1755,6 +1843,91 @@ function renderCompareStoreRows(bikeA, bikeB) {
   }).join("");
 }
 
+function getCompareInsightWinner(row, bikeA, bikeB) {
+  return getCompareStoreWinner(row, bikeA, bikeB);
+}
+
+function getCompareInsightName(winner, bikeA, bikeB) {
+  if (winner === "a") return bikeA.displayModel;
+  if (winner === "b") return bikeB.displayModel;
+  return "Both bikes";
+}
+
+function getMobileBikeUseCase(bike) {
+  const category = String(bike.category || "").toLowerCase();
+  const power = Number(bike.horsepowerValue) || 0;
+  const speed = Number(bike.topSpeedValue) || 0;
+  const weight = Number(bike.weightValue) || 0;
+  const price = Number(bike.priceValue) || 0;
+
+  if (category.includes("cruiser")) return "Relaxed street riding and longer ownership comfort.";
+  if (category.includes("hyper") || power >= 180 || speed >= 185) return "Maximum performance and experienced-rider goals.";
+  if (category.includes("super") || power >= 120) return "Sport riding, track focus, and long-term growth.";
+  if (weight && weight <= 390 && price && price <= 8000) return "Lightweight daily riding and easier ownership.";
+  if (price && price <= 9000) return "Value-focused ownership without overspending.";
+  return "Balanced riding with room for garage and maintenance tracking.";
+}
+
+function getMobileCompareVerdict(bikeA, bikeB) {
+  const rows = [
+    { key: "horsepowerValue", type: "number" },
+    { key: "topSpeedValue", type: "number" },
+    { key: "zeroToSixtySeconds", type: "number", lowerWins: true },
+    { key: "priceValue", type: "number", lowerWins: true },
+    { key: "weightValue", type: "number", lowerWins: true },
+  ];
+
+  let aWins = 0;
+  let bWins = 0;
+
+  rows.forEach((row) => {
+    const winner = getCompareInsightWinner(row, bikeA, bikeB);
+    if (winner === "a") aWins += 1;
+    if (winner === "b") bWins += 1;
+  });
+
+  if (aWins === bWins) return "This is a balanced matchup. Pick based on the ownership style you want to track.";
+  const winner = aWins > bWins ? bikeA.displayModel : bikeB.displayModel;
+  return `${winner} leads more categories, but garage fit and maintenance plans still decide the better ownership choice.`;
+}
+
+function renderCompareStoreInsights(bikeA, bikeB) {
+  const powerWinner = getCompareInsightWinner({ key: "horsepowerValue", type: "number" }, bikeA, bikeB);
+  const speedWinner = getCompareInsightWinner({ key: "topSpeedValue", type: "number" }, bikeA, bikeB);
+  const priceWinner = getCompareInsightWinner({ key: "priceValue", type: "number", lowerWins: true }, bikeA, bikeB);
+  const weightWinner = getCompareInsightWinner({ key: "weightValue", type: "number", lowerWins: true }, bikeA, bikeB);
+
+  return `
+    <section class="compare-store-insight-card" aria-label="Comparison insights">
+      <div class="compare-store-section-title">Quick Read</div>
+      <div class="compare-store-verdict">
+        <span>${icons.gauge}</span>
+        <p>${escapeHtml(getMobileCompareVerdict(bikeA, bikeB))}</p>
+      </div>
+
+      <div class="compare-store-best-grid">
+        <div>
+          <small>First Pick</small>
+          <strong>${escapeHtml(bikeA.displayModel)}</strong>
+          <p>${escapeHtml(getMobileBikeUseCase(bikeA))}</p>
+        </div>
+        <div>
+          <small>Second Pick</small>
+          <strong>${escapeHtml(bikeB.displayModel)}</strong>
+          <p>${escapeHtml(getMobileBikeUseCase(bikeB))}</p>
+        </div>
+      </div>
+
+      <div class="compare-store-insight-grid">
+        <span><b>Power</b><em>${escapeHtml(getCompareInsightName(powerWinner, bikeA, bikeB))}</em></span>
+        <span><b>Speed</b><em>${escapeHtml(getCompareInsightName(speedWinner, bikeA, bikeB))}</em></span>
+        <span><b>Value</b><em>${escapeHtml(getCompareInsightName(priceWinner, bikeA, bikeB))}</em></span>
+        <span><b>Daily Use</b><em>${escapeHtml(getCompareInsightName(weightWinner, bikeA, bikeB))}</em></span>
+      </div>
+    </section>
+  `;
+}
+
 function renderCompare() {
   if (!state.catalogReady) return renderLoadingScreen("Loading compare catalog");
   ensureCompareDefaults();
@@ -1781,6 +1954,8 @@ function renderCompare() {
         ${compareStoreSelectGroup("a", bikeA)}
         ${compareStoreSelectGroup("b", bikeB)}
       </section>
+
+      ${renderCompareStoreInsights(bikeA, bikeB)}
 
       <section class="compare-store-table-card" aria-label="Spec comparison">
         <div class="compare-store-section-title">Spec Comparison</div>
@@ -1828,9 +2003,19 @@ function renderMore() {
         <div class="more-section-label">Tracker</div>
         <div class="more-list-v3">
           <button class="more-row-v3" type="button" data-route="brand"><span><strong>Choose Brand</strong><small>Open motorcycle selection.</small></span><em>→</em></button>
-          <button class="more-row-v3" type="button" data-route="v1"><span><strong>V1 Ready Checklist</strong><small>Done, next, and later list.</small></span><em>→</em></button>
-          <button class="more-row-v3" type="button" data-action="request-brand"><span><strong>Request a Brand</strong><small>Future feedback feature.</small></span><em>→</em></button>
-          <button class="more-row-v3" type="button" data-action="future"><span><strong>Settings</strong><small>Profile and preferences later.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-route="v1"><span><strong>Roadmap</strong><small>Now, next, and later product direction.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-action="request-brand"><span><strong>Request Catalog</strong><small>Preview brand, model, and spec requests.</small></span><em>→</em></button>
+          <button class="more-row-v3" type="button" data-action="preview-feature" data-feature="settings"><span><strong>Settings</strong><small>Preview profile and app preferences.</small></span><em>→</em></button>
+        </div>
+      </div>
+
+      <div class="mobile-feedback-card">
+        <span>Reviewer Mode</span>
+        <strong>Tell me what would make this useful.</strong>
+        <p>Best feedback: what felt confusing, what felt valuable, and what you would track for your own bike.</p>
+        <div>
+          <button type="button" data-action="preview-feature" data-feature="feedback">Feedback Guide</button>
+          <button type="button" data-action="preview-feature" data-feature="roadmap">Roadmap</button>
         </div>
       </div>
     </section>
@@ -1885,16 +2070,16 @@ function renderContact() {
 
 function renderV1Checklist() {
   const sections = [
-    { label: "Done", items: ["Mobile app shell", "Login redirect", "Garage loading", "Maintenance cards", "About and Contact screens"] },
-    { label: "Next", items: ["Task status sheet", "Garage bike actions", "Empty states", "More/Profile cleanup", "Phone QA pass"] },
-    { label: "Later", items: ["VIN lookup", "Recall API", "Docs uploads", "Native PWA install", "Premium features"] },
+    { label: "Now", items: ["Garage and maintenance loop", "Compare insights", "Reviewer feedback prompts", "Desktop/mobile product parity"] },
+    { label: "Next", items: ["Backend-powered garage history", "Persistent maintenance records", "Catalog/admin request review", "Demo limits enforced by API"] },
+    { label: "Later", items: ["Reminder engine", "Ownership cost tracking", "Mod/build history", "VIN/recall integrations"] },
   ];
 
   return `
     <section class="screen info-screen v1-screen">
-      <p class="kicker">Internship Demo</p>
-      <h1 class="page-title compact-page-title">V1 Ready Checklist</h1>
-      <p class="page-copy compact-page-copy">Quick product-readiness list for the mobile experience.</p>
+      <p class="kicker">Product Roadmap</p>
+      <h1 class="page-title compact-page-title">What comes next</h1>
+      <p class="page-copy compact-page-copy">The current build shows the frontend product shell. The next major sprint makes the garage and maintenance history real through the backend.</p>
       <div class="v1-checklist">
         ${sections.map((section) => `
           <article class="v1-card">
@@ -2168,11 +2353,109 @@ function renderEditTaskPlaceholderSheet() {
   `;
 }
 
+function getPreviewFeatureConfig(feature) {
+  const configs = {
+    account: {
+      eyebrow: "Account Preview",
+      title: "Account information is coming soon",
+      copy: "This will show rider profile details, saved garage count, account status, and login/security information once the backend account screen is finalized.",
+      items: ["Profile details", "Garage summary", "Login and security status"],
+    },
+    billing: {
+      eyebrow: "Billing Preview",
+      title: "Billing is not active yet",
+      copy: "Motorcycle Tracker is not charging users right now. This area is reserved for future premium features after the core garage and maintenance product is real.",
+      items: ["No active subscription", "No payment required", "Future premium tools"],
+    },
+    settings: {
+      eyebrow: "Settings Preview",
+      title: "Product settings are planned",
+      copy: "This will eventually control app preferences, motorcycle units, notification rules, and account-level product settings.",
+      items: ["Units and display", "Reminder preferences", "Notification controls"],
+    },
+    share: {
+      eyebrow: "Share Preview",
+      title: "Share cards will come later",
+      copy: "This will eventually let riders share a bike profile, garage summary, or maintenance record with a clean public card.",
+      items: ["Bike profile share", "Garage snapshot", "Maintenance proof"],
+    },
+    feedback: {
+      eyebrow: "Feedback Guide",
+      title: "Review the rider loop",
+      copy: "Useful feedback is not just whether it looks good. I need to know if the flow makes sense: pick a bike, save it, track service, compare a future upgrade, and understand why you would return.",
+      items: ["What confused you?", "What felt useful?", "What would make you come back?"],
+    },
+    roadmap: {
+      eyebrow: "Roadmap Preview",
+      title: "The next product layers are planned",
+      copy: "The mobile app previews the future direction before backend persistence is wired: history, reminders, cost tracking, mods, and admin-reviewed catalog requests.",
+      items: ["Backend garage history", "Maintenance reminders", "Costs and mods later"],
+    },
+    future: {
+      eyebrow: "Coming Soon",
+      title: "This feature is planned for later",
+      copy: "The mobile shell is ready, but this action needs backend support or a later product pass before it becomes active.",
+      items: ["Preview UI ready", "Backend wiring later", "No broken dead-end"],
+    },
+  };
+
+  return configs[feature] || configs.future;
+}
+
+function renderRequestBrandSheet() {
+  return `
+    <div class="sheet-backdrop" data-action="close-sheet"></div>
+    <section class="bottom-sheet form-sheet feature-preview-sheet" data-floating-panel role="dialog" aria-label="Request brand or motorcycle preview">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <span>Request Catalog</span>
+        <button type="button" data-action="close-sheet" aria-label="Close">×</button>
+      </div>
+      <span class="mini-status-pill">Backend pass soon</span>
+      <h2>Brand and motorcycle requests are planned</h2>
+      <p>Riders will be able to suggest missing brands, models, years, corrections, and maintenance data once feedback storage is connected.</p>
+      <div class="preview-field-stack" aria-hidden="true">
+        <label>Brand or motorcycle<input type="text" value="Example: CFMoto 450SS" disabled /></label>
+        <label>What should be added?<textarea disabled>Missing model, specs correction, or maintenance data request.</textarea></label>
+      </div>
+      <div class="feature-preview-list">
+        <span>Missing brand requests</span>
+        <span>Missing motorcycle requests</span>
+        <span>Admin review before publish</span>
+      </div>
+      <button class="primary-btn compact-btn" type="button" data-action="close-sheet">Got it</button>
+    </section>
+  `;
+}
+
+function renderFeaturePreviewSheet() {
+  const config = getPreviewFeatureConfig(state.activeFeaturePreview);
+  return `
+    <div class="sheet-backdrop" data-action="close-sheet"></div>
+    <section class="bottom-sheet form-sheet feature-preview-sheet" data-floating-panel role="dialog" aria-label="${escapeHtml(config.eyebrow)}">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-head">
+        <span>${escapeHtml(config.eyebrow)}</span>
+        <button type="button" data-action="close-sheet" aria-label="Close">×</button>
+      </div>
+      <span class="mini-status-pill">Coming soon</span>
+      <h2>${escapeHtml(config.title)}</h2>
+      <p>${escapeHtml(config.copy)}</p>
+      <div class="feature-preview-list">
+        ${config.items.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+      </div>
+      <button class="primary-btn compact-btn" type="button" data-action="close-sheet">Back to app</button>
+    </section>
+  `;
+}
+
 function renderFormSheet() {
   if (state.activeFormSheet === "add-bike") return renderAddBikeFormSheet();
   if (state.activeFormSheet === "maintenance-form") return renderMaintenanceFormSheet();
   if (state.activeFormSheet === "remove-bike") return renderRemoveBikeConfirmSheet();
   if (state.activeFormSheet === "edit-task") return renderEditTaskPlaceholderSheet();
+  if (state.activeFormSheet === "request-brand") return renderRequestBrandSheet();
+  if (state.activeFormSheet === "feature-preview") return renderFeaturePreviewSheet();
   return "";
 }
 
@@ -2219,9 +2502,9 @@ function renderProfilePanel() {
           <small>${escapeHtml(signedIn ? user.email || "Demo Account" : "Choose an account to continue")}</small>
         </div>
       </div>
-      <button class="account-link disabled" type="button">Account Information</button>
-      <button class="account-link disabled" type="button">Manage Billing</button>
-      <button class="account-link disabled" type="button">Product Settings</button>
+      <button class="account-link account-link-preview" type="button" data-action="preview-feature" data-feature="account"><span>Account Information</span><em>Preview</em></button>
+      <button class="account-link account-link-preview" type="button" data-action="preview-feature" data-feature="billing"><span>Manage Billing</span><em>Not active</em></button>
+      <button class="account-link account-link-preview" type="button" data-action="preview-feature" data-feature="settings"><span>Product Settings</span><em>Soon</em></button>
       <button class="account-link danger" type="button" data-action="${actionName}">${actionLabel}</button>
     </div>
   `;
@@ -2363,6 +2646,7 @@ async function addCatalogBikeToGarage(bikeId, currentMileage) {
     state.taskMap.set(String(localItem.id), []);
     state.selectedGarageId = String(localItem.id);
     state.selectedMaintenanceGarageId = String(localItem.id);
+    state.lastSavedGarageId = String(localItem.id);
     closeAllSheets();
     showToast(`${bike.model} added in preview mode.`);
     routeTo("garage");
@@ -2374,6 +2658,12 @@ async function addCatalogBikeToGarage(bikeId, currentMileage) {
     closeAllSheets();
     showToast(`${bike.model} added to garage.`);
     await loadGarage();
+    const savedItem = state.garageItems.find((item) => String(item.motorcycle?.id) === String(bike.id)) || state.garageItems[0];
+    if (savedItem) {
+      state.selectedGarageId = String(savedItem.id);
+      state.selectedMaintenanceGarageId = String(savedItem.id);
+      state.lastSavedGarageId = String(savedItem.id);
+    }
     routeTo("garage");
   } catch (error) {
     console.error("Failed to add bike:", error);
@@ -2721,6 +3011,23 @@ async function handleActionClick(target) {
     return true;
   }
 
+  if (action === "request-brand") {
+    state.activeFormSheet = "request-brand";
+    state.profileOpen = false;
+    state.updatesOpen = false;
+    render();
+    return true;
+  }
+
+  if (action === "preview-feature") {
+    state.activeFeaturePreview = actionButton.dataset.feature || "future";
+    state.activeFormSheet = "feature-preview";
+    state.profileOpen = false;
+    state.updatesOpen = false;
+    render();
+    return true;
+  }
+
   if (action === "toggle-all-updates-read") {
     toggleAllUpdatesRead();
     return true;
@@ -2761,6 +3068,16 @@ async function handleActionClick(target) {
     return true;
   }
 
+  if (action === "start-maintenance-after-save") {
+    const garageId = actionButton.dataset.garageId || state.lastSavedGarageId || state.selectedGarageId;
+    if (garageId) {
+      state.selectedMaintenanceGarageId = String(garageId);
+      state.selectedGarageId = String(garageId);
+    }
+    routeTo("maintenance");
+    return true;
+  }
+
   if (action === "bike-menu") {
     const item = selectedGarageItem();
     if (item) {
@@ -2772,7 +3089,6 @@ async function handleActionClick(target) {
   }
 
   const messages = {
-    "request-brand": "Request Brand is planned for a later backend pass.",
     "bike-menu": "Bike options are not available in the mobile preview yet.",
     share: "Share action can be wired later.",
     future: "This section is planned for a later pass.",

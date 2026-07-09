@@ -405,3 +405,228 @@
 .contact-page-shell .account-signout-btn {
   color: #ff6b6b !important;
 }
+
+
+/* Desktop staged feature previews */
+.account-dropdown-preview {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.account-dropdown-preview span {
+  min-width: 0;
+}
+
+.account-dropdown-preview em {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.desktop-preview-open {
+  overflow: hidden;
+}
+
+.desktop-preview-root {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: none;
+}
+
+.desktop-preview-root.is-open {
+  display: block;
+}
+
+.desktop-preview-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.desktop-preview-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  transform: translate(-50%, -50%);
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 88% 10%, rgba(240, 20, 34, 0.17), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
+    #070708;
+  color: #fff;
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.6);
+}
+
+.desktop-preview-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.desktop-preview-eyebrow {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 7px 10px;
+  border: 1px solid rgba(240, 20, 34, 0.34);
+  border-radius: 999px;
+  background: rgba(240, 20, 34, 0.12);
+  color: #ff7077;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.desktop-preview-modal h2 {
+  max-width: 440px;
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 950;
+  line-height: 1.02;
+  letter-spacing: -1px;
+}
+
+.desktop-preview-modal p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.desktop-preview-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.desktop-preview-grid span {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.7px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.desktop-preview-note {
+  margin-top: 18px;
+  padding: 16px;
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.26);
+}
+
+.desktop-preview-note strong {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.desktop-preview-note span {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.desktop-preview-actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.desktop-preview-primary,
+.desktop-preview-secondary {
+  min-height: 46px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.desktop-preview-primary {
+  border: 1px solid #fff;
+  background: #fff;
+  color: #050505;
+}
+
+.desktop-preview-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+.contact-page-shell .account-dropdown-preview em {
+  border-color: rgba(9, 12, 2, 0.13);
+  color: rgba(9, 12, 2, 0.46);
+}
+
+@media (max-width: 680px) {
+  .desktop-preview-modal {
+    padding: 28px 20px;
+    border-radius: 22px;
+  }
+
+  .desktop-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .desktop-preview-grid span {
+    min-height: 58px;
+  }
+
+  .desktop-preview-actions {
+    display: grid;
+  }
+
+  .desktop-preview-primary,
+  .desktop-preview-secondary {
+    width: 100%;
+  }
+}

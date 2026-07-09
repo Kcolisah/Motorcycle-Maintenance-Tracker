@@ -539,3 +539,75 @@
     margin: 0 !important;
   }
 }
+
+
+/*27. contact desktop centered composition
+  Center the contact copy + form as one balanced block on desktop. */
+@media (min-width: 901px) {
+  .contact-page-shell .contact-hero {
+    display: grid !important;
+    place-items: center !important;
+    min-height: calc(100svh - 100px) !important;
+    padding: clamp(42px, 5vh, 66px) clamp(28px, 4vw, 56px) !important;
+  }
+
+  .contact-page-shell .contact-hero-inner {
+    width: 100% !important;
+    max-width: min(1060px, calc(100vw - 96px)) !important;
+    margin-inline: auto !important;
+  }
+
+  .contact-page-shell .contact-hero .hero-label {
+    text-align: center !important;
+    margin: 0 0 26px !important;
+  }
+
+  .contact-page-shell .contact-hero-grid {
+    width: fit-content !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    display: grid !important;
+    grid-template-columns: minmax(390px, 520px) minmax(330px, 390px) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(26px, 3vw, 38px) !important;
+  }
+
+  .contact-page-shell .contact-copy {
+    width: 100% !important;
+    max-width: 520px !important;
+    justify-self: end !important;
+  }
+
+  .contact-page-shell .contact-copy h1,
+  .contact-page-shell .contact-lead {
+    max-width: 520px !important;
+  }
+
+  .contact-page-shell .contact-copy h1 {
+    font-size: clamp(50px, 4.7vw, 76px) !important;
+  }
+
+  .contact-page-shell .contact-form-wrap {
+    width: 100% !important;
+    max-width: 390px !important;
+    justify-self: start !important;
+  }
+
+  .contact-page-shell .contact-form {
+    width: 100% !important;
+    max-width: 390px !important;
+    margin: 0 !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .contact-page-shell .contact-hero-grid {
+    grid-template-columns: minmax(360px, 480px) minmax(320px, 370px) !important;
+    gap: 28px !important;
+  }
+
+  .contact-page-shell .contact-copy h1 {
+    font-size: clamp(46px, 4.4vw, 64px) !important;
+  }
+}
