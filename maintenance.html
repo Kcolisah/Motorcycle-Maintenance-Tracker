@@ -66,8 +66,8 @@
         <h1>Maintenance</h1>
 
         <p>
-          Track maintenance tasks for a motorcycle saved in your garage.
-          Add work items, update progress, and keep service history organized.
+          Turn each saved motorcycle into a service board. Add work items,
+          move them through progress, and keep your maintenance history organized.
         </p>
 
         <div class="maintenance-bike-card">
@@ -76,20 +76,20 @@
           <strong id="selectedGarageBikeName">No bike selected</strong>
 
           <p id="selectedGarageBikeMeta">
-            Open a motorcycle from the garage to manage its maintenance tasks.
+            Choose a saved motorcycle to start tracking service tasks.
           </p>
         </div>
 
         <div class="maintenance-sidebar-actions">
           <a href="garage.html" class="maintenance-back-link">Back to Garage</a>
-          <a href="index.html#tracker-preview" class="maintenance-back-link">Browse Bikes</a>
+          <a href="index.html#tracker-preview" class="maintenance-back-link">Find Bike</a>
         </div>
       </aside>
 
       <section class="maintenance-main">
         <div class="maintenance-main-header">
           <div>
-            <p class="maintenance-kicker">Task Board</p>
+            <p class="maintenance-kicker">Maintenance Board</p>
             <h2>Service Tasks</h2>
           </div>
 
@@ -100,14 +100,21 @@
 
         <div id="maintenanceMessage" class="maintenance-message"></div>
 
+        <div id="maintenanceFlowStrip" class="maintenance-flow-strip">
+          <span>1. Select saved bike</span>
+          <span>2. Add service task</span>
+          <span>3. Move work across the board</span>
+          <span>4. Done becomes history</span>
+        </div>
+
         <section id="maintenanceBikeSelector" class="maintenance-bike-selector" hidden>
           <div class="maintenance-selector-header">
             <p class="maintenance-kicker">Choose Motorcycle</p>
 
-            <h3>Select a saved motorcycle</h3>
+            <h3>Select a garage motorcycle</h3>
 
             <p>
-              Pick one of your garage motorcycles to view and manage its maintenance tasks.
+              Pick a saved bike to open its board. From there you can add service work, move tasks through progress, and build history for that motorcycle.
             </p>
           </div>
 
@@ -115,6 +122,24 @@
         </section>
 
         <form id="maintenanceTaskForm" class="maintenance-task-form">
+          <div class="maintenance-form-intro">
+            <div>
+              <p class="maintenance-kicker">New Service Item</p>
+              <h3>Add work to this motorcycle</h3>
+              <p>
+                Start with a common task or write your own. Keep it simple now;
+                the board becomes useful as the bike builds service history.
+              </p>
+            </div>
+
+            <div class="maintenance-preset-row" aria-label="Common maintenance task shortcuts">
+              <button type="button" data-task-preset="oil">Oil Change</button>
+              <button type="button" data-task-preset="chain">Chain Service</button>
+              <button type="button" data-task-preset="tires">Tire Check</button>
+              <button type="button" data-task-preset="brakes">Brake Inspection</button>
+            </div>
+          </div>
+
           <div class="maintenance-form-row">
             <label for="taskTitle">Task Title</label>
 
@@ -122,7 +147,7 @@
               id="taskTitle"
               name="title"
               type="text"
-              placeholder="Oil change"
+              placeholder="Oil change, chain service, tire check..."
               required
             />
           </div>
@@ -144,17 +169,24 @@
               id="taskDescription"
               name="description"
               rows="4"
-              placeholder="Change oil and filter, inspect chain tension..."
+              placeholder="What needs to be done, what parts are needed, or what you noticed..."
             ></textarea>
           </div>
 
           <button id="createTaskBtn" class="maintenance-primary-btn" type="submit">
-            Add Task
+            Add Maintenance Task
           </button>
         </form>
 
         <div id="maintenanceLoadingState" class="maintenance-loading-state">
           Loading maintenance tasks...
+        </div>
+
+        <div id="maintenanceBoardGuide" class="maintenance-board-guide" hidden>
+          <strong>Board guide</strong>
+          <span>Add tasks into Pending.</span>
+          <span>Move active work into In Progress.</span>
+          <span>Done becomes the bike's service history.</span>
         </div>
 
         <div class="maintenance-status-grid">

@@ -44,6 +44,7 @@ const createTaskBtn = document.getElementById("createTaskBtn");
 
 const maintenanceMain = document.querySelector(".maintenance-main");
 const maintenanceStatusGrid = document.querySelector(".maintenance-status-grid");
+const maintenanceBoardGuide = document.getElementById("maintenanceBoardGuide");
 
 const maintenanceBikeSelector = document.getElementById("maintenanceBikeSelector");
 const maintenanceBikeSelectorGrid = document.getElementById("maintenanceBikeSelectorGrid");
@@ -55,6 +56,29 @@ const doneTasks = document.getElementById("doneTasks");
 const pendingCount = document.getElementById("pendingCount");
 const inProgressCount = document.getElementById("inProgressCount");
 const doneCount = document.getElementById("doneCount");
+
+const taskTitleInput = document.getElementById("taskTitle");
+const taskDueDateInput = document.getElementById("taskDueDate");
+const taskDescriptionInput = document.getElementById("taskDescription");
+
+const maintenanceTaskPresets = {
+  oil: {
+    title: "Oil change",
+    description: "Change engine oil, replace filter if needed, and note mileage after service."
+  },
+  chain: {
+    title: "Chain service",
+    description: "Clean, lubricate, and inspect chain slack, sprockets, and wear."
+  },
+  tires: {
+    title: "Tire check",
+    description: "Check tire pressure, tread depth, sidewalls, and wear pattern."
+  },
+  brakes: {
+    title: "Brake inspection",
+    description: "Inspect pads, rotors, brake fluid level, and lever feel."
+  }
+};
 
 const statusColumns = {
   PENDING: pendingTasks,
@@ -213,6 +237,11 @@ function setTaskBoardVisible(isVisible, shouldAnimate = false) {
     maintenanceStatusGrid.style.display = isVisible ? "" : "none";
   }
 
+  if (maintenanceBoardGuide) {
+    maintenanceBoardGuide.hidden = !isVisible;
+    maintenanceBoardGuide.style.display = isVisible ? "" : "none";
+  }
+
   refreshTasksBtn.hidden = !isVisible;
   refreshTasksBtn.style.display = isVisible ? "" : "none";
 
@@ -322,7 +351,7 @@ function updateSelectedBikeCard(selectedGarageItem) {
   const motorcycle = getMotorcycleFromGarageItem(selectedGarageItem);
 
   selectedGarageBikeName.textContent = motorcycle.model || "Saved Motorcycle";
-  selectedGarageBikeMeta.textContent = `${motorcycle.brand || "Unknown Brand"} • ${motorcycle.category || "Unknown Category"} • ${motorcycle.year || "N/A"}`;
+  selectedGarageBikeMeta.textContent = `${motorcycle.brand || "Unknown Brand"} • ${motorcycle.category || "Unknown Category"} • ${motorcycle.year || "N/A"} • Ready for service tasks`;
 }
 
 function updateSelectorCardState() {
@@ -336,7 +365,7 @@ function updateSelectorCardState() {
     card.classList.toggle("is-selected", Boolean(isSelected));
 
     if (cardButton) {
-      cardButton.textContent = isSelected ? "Selected" : "View Maintenance";
+      cardButton.textContent = isSelected ? "Selected Board" : "Open Service Board";
       cardButton.setAttribute("aria-pressed", isSelected ? "true" : "false");
     }
   });
@@ -353,9 +382,9 @@ function renderMaintenanceBikeSelector(garageItems) {
   if (!garageItems || garageItems.length === 0) {
     maintenanceBikeSelectorGrid.innerHTML = `
       <article class="maintenance-selector-empty">
-        <h4>No motorcycles saved yet</h4>
-        <p>Add a motorcycle to your garage before creating maintenance tasks.</p>
-        <a href="index.html#tracker-preview">Browse Bikes</a>
+        <h4>No garage motorcycles yet</h4>
+        <p>Save a motorcycle first. Then this board becomes the place for oil changes, chain service, tires, brakes, inspections, and future service history.</p>
+        <a href="index.html#tracker-preview">Find a Bike</a>
       </article>
     `;
     return;
@@ -405,7 +434,7 @@ function renderMaintenanceBikeSelector(garageItems) {
         data-select-garage-id="${escapeHtml(itemGarageId)}"
         aria-pressed="false"
       >
-        View Maintenance
+        Open Service Board
       </button>
     `;
 
@@ -417,7 +446,7 @@ function renderMaintenanceBikeSelector(garageItems) {
 
 function showNoBikeSelectedState() {
   selectedGarageBikeName.textContent = "Choose a motorcycle";
-  selectedGarageBikeMeta.textContent = "Select one of your saved bikes to manage its maintenance tasks.";
+  selectedGarageBikeMeta.textContent = "Select a saved bike to add service tasks, move work through progress, and build its history.";
 
   setSelectorVisible(true);
   setFormEnabled(false);
@@ -547,6 +576,22 @@ function createEmptyNote(text) {
   return note;
 }
 
+function getEmptyTaskMessage(status) {
+  if (status === "PENDING") {
+    return "No pending tasks yet. Add the next oil change, chain service, tire check, brake inspection, or repair note.";
+  }
+
+  if (status === "IN_PROGRESS") {
+    return "Nothing in progress. Move a task here when work has started.";
+  }
+
+  if (status === "DONE") {
+    return "No completed service yet. Finished work will become this bike's history.";
+  }
+
+  return `No ${getStatusLabel(status).toLowerCase()} tasks.`;
+}
+
 function renderTaskCard(task) {
   const card = document.createElement("article");
   card.className = "maintenance-task-card";
@@ -620,7 +665,7 @@ function renderTasks(tasks) {
     count.textContent = taskGroup.length;
 
     if (taskGroup.length === 0) {
-      column.appendChild(createEmptyNote(`No ${getStatusLabel(status).toLowerCase()} tasks.`));
+      column.appendChild(createEmptyNote(getEmptyTaskMessage(status)));
       return;
     }
 
@@ -661,11 +706,31 @@ async function loadTasks() {
   }
 }
 
+function applyMaintenancePreset(presetKey) {
+  const preset = maintenanceTaskPresets[presetKey];
+
+  if (!preset || !taskTitleInput || !taskDescriptionInput) {
+    return;
+  }
+
+  taskTitleInput.value = preset.title;
+  taskDescriptionInput.value = preset.description;
+
+  if (taskDueDateInput && !taskDueDateInput.value) {
+    const suggestedDate = new Date();
+    suggestedDate.setDate(suggestedDate.getDate() + 7);
+    taskDueDateInput.value = suggestedDate.toISOString().slice(0, 10);
+  }
+
+  taskTitleInput.focus();
+  showMaintenanceMessage("Task shortcut filled in. Adjust the details, then add it to the board.", "success");
+}
+
 async function createTask(event) {
   event.preventDefault();
 
   if (!selectedGarageId) {
-    showMaintenanceMessage("Choose a motorcycle before adding tasks.");
+    showMaintenanceMessage("Choose a garage motorcycle before adding maintenance tasks.");
     return;
   }
 
@@ -700,14 +765,14 @@ async function createTask(event) {
     }
 
     maintenanceTaskForm.reset();
-    showMaintenanceMessage("Maintenance task added.", "success");
+    showMaintenanceMessage("Maintenance task added to the service board.", "success");
     await loadTasks();
   } catch (error) {
     showMaintenanceMessage("Could not add maintenance task.");
     console.error("Failed to create maintenance task:", error);
   } finally {
     createTaskBtn.disabled = false;
-    createTaskBtn.textContent = "Add Task";
+    createTaskBtn.textContent = "Add Maintenance Task";
   }
 }
 
@@ -828,9 +893,15 @@ document.addEventListener("dragend", (event) => {
 });
 
 document.addEventListener("click", (event) => {
+  const presetButton = event.target.closest("[data-task-preset]");
   const selectorButton = event.target.closest("[data-select-garage-id]");
   const statusButton = event.target.closest("[data-next-status]");
   const deleteButton = event.target.closest(".maintenance-delete-btn");
+
+  if (presetButton) {
+    applyMaintenancePreset(presetButton.dataset.taskPreset);
+    return;
+  }
 
   if (selectorButton) {
     const garageIdToSelect = selectorButton.dataset.selectGarageId;

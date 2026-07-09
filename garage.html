@@ -38,7 +38,7 @@
         <a href="maintenance.html">Maintenance</a>
       </nav>
 
-      <a href="index.html#tracker-preview" class="nav-button garage-add-motorcycle-btn">Add Motorcycle</a>
+      <a href="index.html#tracker-preview" class="nav-button garage-add-motorcycle-btn">Find Motorcycle</a>
     </header>
 
     <main class="garage-layout">
@@ -46,8 +46,8 @@
         <p class="garage-kicker garage-kicker-with-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5"></path><path d="M6 10v9h12v-9"></path><path d="M9 19v-5h6v5"></path></svg>Your Collection</p>
         <h1>My Garage</h1>
         <p>
-          Motorcycles saved from the tracker appear here. Use this garage as the base
-          for future maintenance records and service history.
+          Save the bikes you own, want, or are researching. Your garage is the base
+          for mileage, maintenance tasks, and long-term service history.
         </p>
 
         <div class="garage-stat-stack">
@@ -85,7 +85,7 @@
 
         <a href="maintenance.html" class="garage-sidebar-link">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3"></path><path d="M17 3v3"></path><path d="M4 8h16"></path><path d="M5 5h14v15H5z"></path></svg>
-          <span>View Maintenance</span>
+          <span>Open Maintenance Board</span>
           <span aria-hidden="true">›</span>
         </a>
       </aside>
@@ -93,8 +93,8 @@
       <section class="garage-main">
         <div class="garage-main-header">
           <div>
-            <p class="garage-kicker">Backend Garage</p>
-            <h2>Saved Motorcycles</h2>
+            <p class="garage-kicker">Garage Hub</p>
+            <h2>Your Saved Bikes</h2>
           </div>
 
           <button id="refreshGarageBtn" class="garage-secondary-btn" type="button">
@@ -104,18 +104,46 @@
 
         <div id="garageMessage" class="garage-message"></div>
 
+        <div id="garageFlowPanel" class="garage-flow-panel" hidden>
+          <div class="garage-flow-copy">
+            <p class="garage-kicker">Next Step</p>
+            <h3>Turn a saved bike into a service board.</h3>
+            <p>
+              Your garage is the starting point. Open maintenance for any saved bike,
+              create service tasks, and move work from pending to completed.
+            </p>
+          </div>
+
+          <div class="garage-flow-steps" aria-label="Garage to maintenance flow">
+            <span>1. Pick a saved motorcycle</span>
+            <span>2. Open its service board</span>
+            <span>3. Build maintenance history</span>
+          </div>
+
+          <a id="garageFlowPrimaryAction" href="maintenance.html" class="garage-flow-action">
+            Start Maintenance
+          </a>
+        </div>
+
         <div id="garageLoadingState" class="garage-loading-state">
           Loading garage...
         </div>
 
         <div id="garageEmptyState" class="garage-empty-state">
-          <h3>No motorcycles saved yet.</h3>
+          <h3>Your garage is empty.</h3>
           <p>
-            Go back to the tracker, open a bike page, and click
-            <strong>Add to Garage</strong>.
+            Start by saving a motorcycle from the tracker. Once a bike is here, you can
+            manage mileage, service tasks, and ownership history from one place.
           </p>
+
+          <div class="garage-empty-benefits" aria-label="Garage benefits">
+            <span>Save owned or future bikes</span>
+            <span>Track maintenance by motorcycle</span>
+            <span>Build a service history over time</span>
+          </div>
+
           <a href="index.html#tracker-preview" class="garage-primary-link">
-            Browse Motorcycles
+            Find a Motorcycle
           </a>
         </div>
 

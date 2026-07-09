@@ -36,6 +36,8 @@ const garageMessage = document.getElementById("garageMessage");
 const garageLoadingState = document.getElementById("garageLoadingState");
 const garageEmptyState = document.getElementById("garageEmptyState");
 const refreshGarageBtn = document.getElementById("refreshGarageBtn");
+const garageFlowPanel = document.getElementById("garageFlowPanel");
+const garageFlowPrimaryAction = document.getElementById("garageFlowPrimaryAction");
 
 const totalBikesCount = document.getElementById("totalBikesCount");
 const totalMileageCount = document.getElementById("totalMileageCount");
@@ -114,7 +116,31 @@ function getGarageStatusMarkup(garageId) {
   if (summary.overdue > 0) { return `<span class="garage-status-pill garage-status-danger">${garageIcon("wrench")} Service Due</span>`; }
   if (summary.soon > 0) { return `<span class="garage-status-pill garage-status-warning">${garageIcon("mileage")} Due Soon</span>`; }
   if (summary.active > 0) { return `<span class="garage-status-pill garage-status-neutral">${garageIcon("wrench")} ${summary.active} Open</span>`; }
-  return "";
+  return `<span class="garage-status-pill garage-status-ready">${garageIcon("wrench")} Ready to Track</span>`;
+}
+
+function updateGarageFlowPanel(garageItems) {
+  if (!garageFlowPanel || !garageFlowPrimaryAction) {
+    return;
+  }
+
+  if (!Array.isArray(garageItems) || garageItems.length === 0) {
+    garageFlowPanel.hidden = true;
+    garageFlowPanel.style.display = "none";
+    garageFlowPrimaryAction.href = "maintenance.html";
+    return;
+  }
+
+  const firstGarageId = getGarageId(garageItems[0]);
+
+  garageFlowPanel.hidden = false;
+  garageFlowPanel.style.display = "";
+
+  if (firstGarageId) {
+    garageFlowPrimaryAction.href = `maintenance.html?garageId=${encodeURIComponent(firstGarageId)}`;
+  } else {
+    garageFlowPrimaryAction.href = "maintenance.html";
+  }
 }
 
 function updateGarageStats(garageItems) {
@@ -169,7 +195,7 @@ function renderGarageCard(item) {
         </div>
 
         <div class="garage-card-detail">
-          <span>${garageIcon("calendar")} Added</span>
+          <span>${garageIcon("calendar")} Saved</span>
           <strong>${formatAddedDate(item.addedAt)}</strong>
         </div>
       </div>
@@ -178,7 +204,7 @@ function renderGarageCard(item) {
     <div class="garage-card-actions">
       <a class="garage-card-action" href="maintenance.html?garageId=${garageId}">
         ${garageIcon("wrench")}
-        <span>Maintenance</span>
+        <span>Open Service Board</span>
         ${garageIcon("arrow")}
       </a>
 
@@ -196,6 +222,7 @@ function renderGarage(garageItems) {
   garageList.innerHTML = "";
   garageLoadingState.style.display = "none";
   updateGarageStats(garageItems);
+  updateGarageFlowPanel(garageItems);
 
   if (garageItems.length === 0) {
     garageEmptyState.style.display = "block";
