@@ -748,3 +748,53 @@
     bottom: 34px;
   }
 }
+
+/* desktop OLED cleanup: square content panels and remove red washes */
+@media (min-width: 901px) {
+  body.home-page .desktop-request-strip,
+  body.home-page .review-guide-section,
+  body.home-page .review-guide-step,
+  body.home-page .product-roadmap-header,
+  body.home-page .product-roadmap-card,
+  body.home-page .desktop-feedback-panel {
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.018) !important;
+    box-shadow: none !important;
+  }
+
+  body.home-page .desktop-request-strip,
+  body.home-page .review-guide-section,
+  body.home-page .product-roadmap-header,
+  body.home-page .desktop-feedback-panel {
+    border-color: rgba(255, 255, 255, 0.10) !important;
+  }
+
+  body.home-page .review-guide-step,
+  body.home-page .product-roadmap-card {
+    border-color: rgba(255, 255, 255, 0.09) !important;
+  }
+
+  body.home-page .product-roadmap-card.active {
+    background: rgba(255, 255, 255, 0.022) !important;
+    border-color: rgba(255, 255, 255, 0.11) !important;
+  }
+
+  body.home-page .desktop-request-strip::before,
+  body.home-page .desktop-request-strip::after,
+  body.home-page .review-guide-section::before,
+  body.home-page .review-guide-section::after,
+  body.home-page .product-roadmap-header::before,
+  body.home-page .product-roadmap-header::after,
+  body.home-page .product-roadmap-card::before,
+  body.home-page .product-roadmap-card::after,
+  body.home-page .desktop-feedback-panel::before,
+  body.home-page .desktop-feedback-panel::after {
+    display: none !important;
+  }
+
+  body.home-page .review-guide-step:hover,
+  body.home-page .product-roadmap-card:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.16) !important;
+  }
+}
