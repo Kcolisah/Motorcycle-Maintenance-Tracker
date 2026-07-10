@@ -612,3 +612,34 @@ if (!email || !password) {
     signOut
   };
 })();
+
+(function restoreHiddenAdminShortcut() {
+  if (window.__mtHiddenAdminShortcutReady) return;
+  window.__mtHiddenAdminShortcutReady = true;
+
+  let mtLogoClicks = 0;
+  let mtLogoTimer = null;
+
+  function resetMtLogoClicks() {
+    mtLogoClicks = 0;
+    if (mtLogoTimer) {
+      clearTimeout(mtLogoTimer);
+      mtLogoTimer = null;
+    }
+  }
+
+  document.addEventListener("click", function (event) {
+    const logo = event.target.closest(".logo-block, .logo-mark, .logo-text, [data-mt-logo]");
+    if (!logo) return;
+
+    mtLogoClicks += 1;
+    if (mtLogoTimer) clearTimeout(mtLogoTimer);
+
+    mtLogoTimer = setTimeout(resetMtLogoClicks, 1800);
+
+    if (mtLogoClicks >= 5) {
+      resetMtLogoClicks();
+      window.location.href = window.MT_ADMIN_URL || "updates.html";
+    }
+  });
+})();

@@ -320,3 +320,51 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* desktop OLED cleanup: square panels, remove red washes, simple service label */
+@media (min-width: 901px) {
+  body.garage-page .garage-sidebar,
+  body.garage-page .garage-stat-card,
+  body.garage-page .garage-card,
+  body.garage-page .garage-card-image-wrap,
+  body.garage-page .garage-flow-panel,
+  body.garage-page .garage-core-preview article,
+  body.garage-page .garage-loading-state,
+  body.garage-page .garage-empty-state {
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.018) !important;
+    box-shadow: none !important;
+  }
+
+  body.garage-page .garage-flow-panel {
+    border-color: rgba(255, 255, 255, 0.10) !important;
+  }
+
+  body.garage-page .garage-card,
+  body.garage-page .garage-sidebar,
+  body.garage-page .garage-stat-card,
+  body.garage-page .garage-core-preview article {
+    border-color: rgba(255, 255, 255, 0.10) !important;
+  }
+
+  body.garage-page .garage-flow-panel::before,
+  body.garage-page .garage-flow-panel::after,
+  body.garage-page .garage-core-preview article::before,
+  body.garage-page .garage-core-preview article::after,
+  body.garage-page .garage-card::before,
+  body.garage-page .garage-card::after,
+  body.garage-page .garage-sidebar::before,
+  body.garage-page .garage-sidebar::after {
+    display: none !important;
+  }
+
+  body.garage-page .garage-flow-steps span {
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.018) !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+  }
+
+  body.garage-page .garage-card:hover {
+    background: rgba(255, 255, 255, 0.024) !important;
+  }
+}

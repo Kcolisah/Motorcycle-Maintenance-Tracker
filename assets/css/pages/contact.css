@@ -611,3 +611,131 @@
     font-size: clamp(46px, 4.4vw, 64px) !important;
   }
 }
+
+/* desktop contact OLED centralization and glow cleanup */
+@media (min-width: 901px) {
+  body.contact-page,
+  body.contact-page .page-shell,
+  body.contact-page .contact-page-shell,
+  body.contact-page .contact-main,
+  body.contact-page .navbar {
+    background: #030303 !important;
+    color: #e0e0ce !important;
+  }
+
+  body.contact-page .navbar {
+    border-bottom-color: rgba(224, 224, 206, 0.10) !important;
+  }
+
+  body.contact-page .logo-mark,
+  body.contact-page .nav-garage-btn {
+    background: rgba(224, 224, 206, 0.018) !important;
+    border-color: rgba(224, 224, 206, 0.18) !important;
+    color: #e0e0ce !important;
+  }
+
+  body.contact-page .logo-text span:first-child,
+  body.contact-page .nav-links a,
+  body.contact-page .contact-form-title,
+  body.contact-page .contact-field label {
+    color: #e0e0ce !important;
+  }
+
+  body.contact-page .logo-text span:last-child,
+  body.contact-page .contact-lead,
+  body.contact-page .contact-form-intro,
+  body.contact-page .contact-info-card p {
+    color: rgba(224, 224, 206, 0.66) !important;
+  }
+
+  body.contact-page .nav-links a.active,
+  body.contact-page .nav-links a:hover,
+  body.contact-page .contact-copy .eyebrow,
+  body.contact-page .contact-copy .section-kicker,
+  body.contact-page .contact-page-shell .section-tag,
+  body.contact-page .contact-page-shell .hero-label,
+  body.contact-page .contact-copy h1,
+  body.contact-page .contact-info-card h3 {
+    color: #ff3030 !important;
+  }
+
+  body.contact-page .contact-hero {
+    min-height: calc(100svh - 82px) !important;
+    padding: 54px clamp(40px, 5vw, 76px) !important;
+    display: grid !important;
+    place-items: center !important;
+    border-block-color: rgba(224, 224, 206, 0.08) !important;
+    background:
+      linear-gradient(rgba(224, 224, 206, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(224, 224, 206, 0.045) 1px, transparent 1px),
+      #030303 !important;
+    background-size: 44px 44px, 44px 44px, auto !important;
+  }
+
+  body.contact-page .contact-hero::before,
+  body.contact-page .contact-hero::after {
+    display: none !important;
+  }
+
+  body.contact-page .contact-hero-bg {
+    left: 50% !important;
+    top: 48% !important;
+    transform: translate(-50%, -50%) !important;
+    color: rgba(224, 224, 206, 0.025) !important;
+  }
+
+  body.contact-page .contact-hero-inner {
+    width: min(1080px, calc(100vw - 96px)) !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+  }
+
+  body.contact-page .contact-hero-grid {
+    width: fit-content !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: minmax(390px, 520px) minmax(340px, 410px) !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: clamp(34px, 4vw, 58px) !important;
+  }
+
+  body.contact-page .contact-copy {
+    max-width: 520px !important;
+    justify-self: end !important;
+  }
+
+  body.contact-page .contact-copy h1 {
+    max-width: 520px !important;
+    text-shadow: none !important;
+  }
+
+  body.contact-page .contact-form-wrap {
+    max-width: 410px !important;
+    justify-self: start !important;
+  }
+
+  body.contact-page .contact-form,
+  body.contact-page .contact-info-card {
+    border-radius: 0 !important;
+    background: rgba(224, 224, 206, 0.045) !important;
+    border-color: rgba(224, 224, 206, 0.12) !important;
+    box-shadow: none !important;
+  }
+
+  body.contact-page .contact-field input,
+  body.contact-page .contact-field textarea,
+  body.contact-page .contact-form input,
+  body.contact-page .contact-form textarea {
+    background: rgba(224, 224, 206, 0.055) !important;
+    border-color: rgba(224, 224, 206, 0.12) !important;
+    color: #e0e0ce !important;
+  }
+
+  body.contact-page .contact-field input::placeholder,
+  body.contact-page .contact-field textarea::placeholder,
+  body.contact-page .contact-form input::placeholder,
+  body.contact-page .contact-form textarea::placeholder {
+    color: rgba(224, 224, 206, 0.42) !important;
+  }
+}

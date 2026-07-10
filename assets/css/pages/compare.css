@@ -1100,3 +1100,67 @@
     grid-column: auto;
   }
 }
+
+/* desktop OLED cleanup: remove red panel washes and square content holders */
+@media (min-width: 901px) {
+  body.compare-page .compare-selector-panel,
+  body.compare-page .compare-selector-group,
+  body.compare-page .compare-bike-card,
+  body.compare-page .compare-table-wrap,
+  body.compare-page .compare-insights,
+  body.compare-page .compare-insight-card,
+  body.compare-page .compare-status {
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.018) !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    box-shadow: none !important;
+  }
+
+  body.compare-page .compare-selector-group[data-compare-side="b"],
+  body.compare-page .compare-insight-verdict,
+  body.compare-page .compare-insight-best-for,
+  body.compare-page .compare-bike-card {
+    background: rgba(255, 255, 255, 0.018) !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+  }
+
+  body.compare-page .compare-hero,
+  body.compare-page .compare-hero-showcase,
+  body.compare-page .compare-hero-visual,
+  body.compare-page .compare-hero-summary {
+    background: #030303 !important;
+    box-shadow: none !important;
+  }
+
+  body.compare-page .compare-hero,
+  body.compare-page .compare-selector-panel,
+  body.compare-page .compare-bike-card,
+  body.compare-page .compare-table-wrap,
+  body.compare-page .compare-insight-card,
+  body.compare-page .compare-status {
+    border-radius: 0 !important;
+  }
+
+  body.compare-page .compare-hero::before,
+  body.compare-page .compare-hero::after,
+  body.compare-page .compare-hero-visual::before,
+  body.compare-page .compare-hero-visual::after,
+  body.compare-page .compare-selector-group::before,
+  body.compare-page .compare-selector-group::after,
+  body.compare-page .compare-bike-card::before,
+  body.compare-page .compare-bike-card::after,
+  body.compare-page .compare-insight-card::before,
+  body.compare-page .compare-insight-card::after {
+    display: none !important;
+  }
+
+  body.compare-page .compare-field select {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+  }
+
+  body.compare-page .compare-field select:hover,
+  body.compare-page .compare-field select:focus {
+    background-color: rgba(255, 255, 255, 0.045) !important;
+    border-color: rgba(224, 224, 206, 0.28) !important;
+  }
+}
